@@ -16,6 +16,12 @@
 			"bucket_name": "afaqtafsir-website","preview_bucket_name": "afaqtafsir-website",
 		}
 	],
+	"kv_namespaces": [
+		{
+			"binding": "SESSION",
+			"id": "8212949e681f4832b302e384af46274c"
+		}
+	],
 	// Drives scheduled publishing, plugin cron, and maintenance (see src/worker.ts)
 	"triggers": {
 		"crons": ["* * * * *"],
