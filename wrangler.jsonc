@@ -8,19 +8,13 @@
 		{
 			"binding": "DB",
 			"database_name": "afaqtafsir-website","database_id": "d78c46b7-3657-4108-babb-80ad6d9c04d9",
-		},
+		}
 	],
 	"r2_buckets": [
 		{
 			"binding": "MEDIA",
 			"bucket_name": "afaqtafsir-website","preview_bucket_name": "afaqtafsir-website",
-		},
-	],
-	// Worker Loader for plugin sandboxing
-	"worker_loaders": [
-		{
-			"binding": "LOADER",
-		},
+		}
 	],
 	// Drives scheduled publishing, plugin cron, and maintenance (see src/worker.ts)
 	"triggers": {
