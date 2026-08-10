@@ -5,6 +5,7 @@ import { formsPlugin } from "@emdash-cms/plugin-forms";
 import webhookNotifier from "@emdash-cms/plugin-webhook-notifier";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
+import { google } from "emdash/auth/providers/google";
 
 export default defineConfig({
 	output: "server",
@@ -16,6 +17,7 @@ export default defineConfig({
 	integrations: [
 		react(),
 		emdash({
+			authProviders: [google()],
 			database: d1({ binding: "DB", session: "auto" }),
 			storage: r2({ binding: "MEDIA" }),
 			plugins: [formsPlugin()],
