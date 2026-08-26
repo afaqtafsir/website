@@ -1,6 +1,6 @@
 # Product Requirement Document (PRD)
 ## Project: Afaq Tafsir (afaqtafsir.id)
-**Document Version:** 1.1  
+**Document Version:** 1.2  
 **Target Platform:** Web (Desktop & Mobile Responsive)  
 **Tech Stack:** Astro v7 (SSR/SSG Edge-Ready), Cloudflare Workers / Pages, Cloudflare Emdash CMS (v0.35), Cloudflare R2, Cloudflare D1  
 **Author / Engineering Lead:** Farhan & Tim Redaksi Afaq Tafsir  
@@ -197,6 +197,27 @@ The visual identity is a hybrid combining the **modern whitespace, sleek cards, 
 
 *(Note for Phase 2: A dropdown labeled `Kategori ▾` will be inserted between `Beranda` and `Tentang` once taxonomy is fully populated).*
 
+### 5.2 URL Routing & Information Architecture
+
+Afaq Tafsir adopts a clean flat URL architecture (`/[slug]`) for primary editorial content, backed by explicit namespace boundaries and telemetry decoupling.
+
+| Route Pattern | Target View | Content Collection / Source | Priority & Matching Rule |
+| :--- | :--- | :--- | :--- |
+| `/` | Homepage | Curated Bento Hero + Pattern A/B feeds | Root index (`src/pages/index.astro`) |
+| `/[slug]` | Article Detail | `articles` collection (single entry) | Dynamic fallback (`src/pages/[slug].astro`) |
+| `/kategori/[slug]` | Category Archive | `category` taxonomy term entries | Dedicated route (`src/pages/kategori/[slug].astro`) |
+| `/tag/[slug]` | Tag Archive | `tag` taxonomy term entries | Dedicated route (`src/pages/tag/[slug].astro`) |
+| `/tentang` | Manifesto, Ethics & Authors | Static Page (`pages` / custom template) | Explicit file match (`src/pages/tentang.astro`) |
+| `/kontak` | Official Inquiries & Directory | Static Page (`pages` / custom template) | Explicit file match (`src/pages/kontak.astro`) |
+| `/kirim-tulisan` | Contributor Guidelines | Static Page (`pages` / custom template) | Explicit file match (`src/pages/kirim-tulisan.astro`) |
+| `/search` | Full-Text Search Interface | Emdash Search / Client-side index | Explicit file match (`src/pages/search.astro`) |
+| `/_emdash/*` | CMS Admin Panel & API | Emdash Engine internal router | Reserved system routes |
+
+#### Namespace Rules:
+1. **Primary Editorial Monopoly**: The root `/[slug]` path is reserved exclusively for the `articles` collection.
+2. **Explicit Secondary Prefixes**: All taxonomy archives, author archives, and tags use dedicated prefixes (`/kategori/`, `/tag/`, `/penulis/`).
+3. **Static File Precedence**: In Astro, explicit files (`/tentang.astro`, `/kontak.astro`) take precedence over dynamic `[slug].astro`, preventing slug collisions with system pages.
+
 ---
 
 ## 6. Page Specifications & Layout Wireframes
@@ -288,7 +309,7 @@ The homepage uses a balanced magazine layout: **Main Feed (~70% width)** on the 
 
 ---
 
-### 6.2 Article Detail Page (`/artikel/[slug]`)
+### 6.2 Article Detail Page (`/[slug]`)
 
 A reading experience optimized for intellectual contemplation, distraction-free longform reading, and Quranic typography support.
 
@@ -500,6 +521,25 @@ const { entry: article, isPreview } = await getEmDashEntry("articles", Astro.par
   * Client-side fast filtering across cached article collection fields (`title`, `author`, `category`, `excerpt`) for sub-10ms response times.
   * In production, connects seamlessly with Emdash Search / Cloudflare AI Search index across searchable collection fields.
 * **UX:** Live search results displaying category badge, serif title, author name, and date with instant keyboard navigation (`Esc` to dismiss).
+
+### 9.3 Publisher Data Layer & Telemetry Specification
+
+To decouple URL aesthetics from analytics and observability, the layout layer (`src/layouts/Base.astro`) injects a standardized editorial `window.dataLayer` object on all page loads:
+
+```javascript
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  page_type: 'article', // 'article' | 'page' | 'taxonomy' | 'home'
+  article_title: article.data.title,
+  author_name: article.data.author?.name || article.data.byline?.displayName,
+  category: primaryCategoryTerm?.name,
+  tags: tagTerms?.map(t => t.name) || [],
+  published_date: article.data.published_at,
+  reading_time_mins: article.data.reading_time || 6
+});
+```
+
+* **Platform-Agnostic Observability**: Connects seamlessly to Cloudflare Zaraz, Google Analytics 4 (Custom Dimensions / Content Grouping), Plausible, PostHog, or Google Tag Manager without coupling telemetry to URL strings.
 
 ---
 
