@@ -13,6 +13,7 @@
     "deploy": "astro build && wrangler deploy",
     "typecheck": "astro check",
     "cf-typegen": "wrangler types",
+    "d1:reset:remote": "wrangler d1 execute afaqtafsir-website --remote --file=scripts/reset-d1.sql",
     "seed:r2": "bun scripts/seed-r2.js --local",
     "seed:r2:remote": "bun scripts/seed-r2.js --remote"
   },
