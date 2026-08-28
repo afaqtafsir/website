@@ -26,16 +26,6 @@ export default defineConfig({
 			marketplace: "https://marketplace.emdashcms.com",
 		}),
 	],
-	vite: {
-		optimizeDeps: {
-			exclude: [
-				"emdash",
-				"@emdash-cms/cloudflare",
-				"@emdash-cms/plugin-forms",
-				"@emdash-cms/plugin-webhook-notifier",
-			],
-		},
-	},
 	fonts: [
 		{
 			provider: fontProviders.google(),
