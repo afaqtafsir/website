@@ -28,7 +28,12 @@ export default defineConfig({
 	],
 	vite: {
 		optimizeDeps: {
-			exclude: ["emdash", "@emdash-cms/cloudflare"],
+			exclude: [
+				"emdash",
+				"@emdash-cms/cloudflare",
+				"@emdash-cms/plugin-forms",
+				"@emdash-cms/plugin-webhook-notifier",
+			],
 		},
 	},
 	fonts: [
