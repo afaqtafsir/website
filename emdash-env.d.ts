@@ -18,14 +18,23 @@ export interface Page {
   terms?: Record<string, TaxonomyTerm[]>;
 }
 
-export interface Post {
+export interface Article {
   id: string;
   slug: string | null;
   status: string;
   title: string;
+  subheadline?: string;
+  excerpt: string;
   featured_image?: { id: string; src?: string; alt?: string; width?: number; height?: number };
-  content?: PortableTextBlock[];
-  excerpt?: string;
+  content: PortableTextBlock[];
+  reading_time?: string;
+  is_lead_hero?: boolean;
+  is_secondary_hero?: boolean;
+  is_featured?: boolean;
+  is_popular?: boolean;
+  popular_rank?: number;
+  popular_reads?: string;
+  published_at?: Date | string;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date | null;
@@ -36,6 +45,7 @@ export interface Post {
 declare module "emdash" {
   interface EmDashCollections {
     pages: Page;
-    posts: Post;
+    articles: Article;
+    posts: Article;
   }
 }

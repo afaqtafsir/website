@@ -2,44 +2,98 @@
 	"$schema": "https://emdashcms.com/seed.schema.json",
 	"version": "1",
 	"meta": {
-		"name": "Blog Starter",
-		"description": "A blog with posts and pages",
-		"author": "EmDash"
+		"name": "Afaq Tafsir",
+		"description": "Jurnal & Pemikiran Qur'ani - Diinisiasi oleh Kader Ulama Perempuan PKUMI",
+		"author": "Tim Redaksi Afaq Tafsir"
 	},
 	"settings": {
-		"title": "My Blog",
-		"tagline": "Thoughts on building for the web"
+		"title": "Afaq Tafsir",
+		"tagline": "Membaca Al-Qur'an, Melihat Lebih Luas",
+		"subtagline": "Jurnal & Pemikiran Qur'ani"
 	},
 	"collections": [
 		{
-			"slug": "posts",
-			"label": "Posts",
-			"labelSingular": "Post",
-			"supports": ["drafts", "revisions", "search", "seo"],
-			"commentsEnabled": true,
+			"slug": "articles",
+			"label": "Articles",
+			"labelSingular": "Article",
+			"supports": [
+				"drafts",
+				"revisions",
+				"search",
+				"seo"
+			],
+			"commentsEnabled": false,
 			"fields": [
 				{
 					"slug": "title",
-					"label": "Title",
+					"label": "Judul Artikel",
 					"type": "string",
 					"required": true,
 					"searchable": true
 				},
 				{
+					"slug": "subheadline",
+					"label": "Subjudul",
+					"type": "string"
+				},
+				{
+					"slug": "excerpt",
+					"label": "Ringkasan / Excerpt",
+					"type": "text",
+					"required": true,
+					"searchable": true
+				},
+				{
 					"slug": "featured_image",
-					"label": "Featured Image",
+					"label": "Gambar Sampul",
 					"type": "image"
 				},
 				{
 					"slug": "content",
-					"label": "Content",
+					"label": "Isi Artikel & Kajian",
 					"type": "portableText",
+					"required": true,
 					"searchable": true
 				},
 				{
-					"slug": "excerpt",
-					"label": "Excerpt",
-					"type": "text"
+					"slug": "reading_time",
+					"label": "Estimasi Waktu Baca",
+					"type": "string"
+				},
+				{
+					"slug": "is_lead_hero",
+					"label": "Tampilkan di Lead Hero Bento",
+					"type": "boolean"
+				},
+				{
+					"slug": "is_secondary_hero",
+					"label": "Tampilkan di Secondary Hero Bento",
+					"type": "boolean"
+				},
+				{
+					"slug": "is_featured",
+					"label": "Artikel Pilihan (Pattern A/B)",
+					"type": "boolean"
+				},
+				{
+					"slug": "is_popular",
+					"label": "Tampilkan di Widget Terbanyak Dibaca",
+					"type": "boolean"
+				},
+				{
+					"slug": "popular_rank",
+					"label": "Urutan Populer (1-5)",
+					"type": "integer"
+				},
+				{
+					"slug": "popular_reads",
+					"label": "Metrik Pembaca",
+					"type": "string"
+				},
+				{
+					"slug": "published_at",
+					"label": "Waktu Publikasi",
+					"type": "datetime"
 				}
 			]
 		},
@@ -47,19 +101,24 @@
 			"slug": "pages",
 			"label": "Pages",
 			"labelSingular": "Page",
-			"supports": ["drafts", "revisions", "search"],
+			"supports": [
+				"drafts",
+				"revisions",
+				"search"
+			],
 			"fields": [
 				{
 					"slug": "title",
-					"label": "Title",
+					"label": "Judul Halaman",
 					"type": "string",
 					"required": true,
 					"searchable": true
 				},
 				{
 					"slug": "content",
-					"label": "Content",
+					"label": "Isi Halaman",
 					"type": "portableText",
+					"required": true,
 					"searchable": true
 				}
 			]
@@ -68,83 +127,224 @@
 	"taxonomies": [
 		{
 			"name": "category",
-			"label": "Categories",
-			"labelSingular": "Category",
+			"label": "Kategori",
+			"labelSingular": "Kategori",
 			"hierarchical": true,
-			"collections": ["posts"],
+			"collections": [
+				"articles"
+			],
 			"terms": [
 				{
-					"slug": "development",
-					"label": "Development"
+					"slug": "tafsir-tematik",
+					"label": "Tafsir Tematik"
 				},
 				{
-					"slug": "design",
-					"label": "Design"
+					"slug": "kosmologi-qurani",
+					"label": "Kosmologi Qur'ani"
 				},
 				{
-					"slug": "notes",
-					"label": "Notes"
+					"slug": "studi-naskah",
+					"label": "Studi Naskah"
+				},
+				{
+					"slug": "filsafat-islam",
+					"label": "Filsafat Islam"
+				},
+				{
+					"slug": "balaghah",
+					"label": "Balaghah & I'jaz"
+				},
+				{
+					"slug": "manuskrip",
+					"label": "Manuskrip Kuno"
+				},
+				{
+					"slug": "sosio-historis",
+					"label": "Sosio-Historis"
+				},
+				{
+					"slug": "resensi-buku",
+					"label": "Resensi Buku"
+				},
+				{
+					"slug": "hermeneutika",
+					"label": "Hermeneutika"
+				},
+				{
+					"slug": "siyasah",
+					"label": "Siyasah & Etika Publik"
+				},
+				{
+					"slug": "tasawuf",
+					"label": "Tasawuf & Spiritualitas"
+				},
+				{
+					"slug": "gender-islam",
+					"label": "Gender & Keadilan"
+				},
+				{
+					"slug": "filologi",
+					"label": "Filologi Nusantara"
 				}
 			]
 		},
 		{
 			"name": "tag",
-			"label": "Tags",
+			"label": "Tag",
 			"labelSingular": "Tag",
 			"hierarchical": false,
-			"collections": ["posts"],
+			"collections": [
+				"articles"
+			],
 			"terms": [
 				{
-					"slug": "webdev",
-					"label": "Web Development"
+					"slug": "istiqlal",
+					"label": "Masjid Istiqlal"
 				},
 				{
-					"slug": "opinion",
-					"label": "Opinion"
+					"slug": "pkumi",
+					"label": "PKUMI"
 				},
 				{
-					"slug": "tools",
-					"label": "Tools"
+					"slug": "hermeneutika-feminis",
+					"label": "Hermeneutika Feminis"
 				},
 				{
-					"slug": "creativity",
-					"label": "Creativity"
+					"slug": "tafsir-nusantara",
+					"label": "Tafsir Nusantara"
+				},
+				{
+					"slug": "ibn-kathir",
+					"label": "Ibnu Katsir"
+				},
+				{
+					"slug": "muhammad-asad",
+					"label": "Muhammad Asad"
+				},
+				{
+					"slug": "alam-semesta",
+					"label": "Alam Semesta"
+				},
+				{
+					"slug": "retorika-arab",
+					"label": "Retorika Arab"
+				},
+				{
+					"slug": "pesantren",
+					"label": "Tradisi Pesantren"
 				}
 			]
 		}
 	],
 	"bylines": [
 		{
-			"id": "byline-editorial",
-			"slug": "emdash-editorial",
-			"displayName": "EmDash Editorial"
+			"id": "byline-arofah",
+			"slug": "arofah-nur",
+			"displayName": "Arofah Nur, M.Ag.",
+			"isGuest": false
 		},
 		{
-			"id": "byline-guest",
-			"slug": "guest-contributor",
-			"displayName": "Guest Contributor",
-			"isGuest": true
+			"id": "byline-hamdan",
+			"slug": "dr-hamdan-syukri",
+			"displayName": "Dr. Hamdan Syukri, M.Ud.",
+			"isGuest": false
+		},
+		{
+			"id": "byline-refian",
+			"slug": "mochamad-refian-prasetyo",
+			"displayName": "Mochamad Refian Prasetyo, S.Ag.",
+			"isGuest": false
+		},
+		{
+			"id": "byline-fikri",
+			"slug": "fikri-anshari",
+			"displayName": "Fikri Anshari, M.Hum.",
+			"isGuest": false
+		},
+		{
+			"id": "byline-iqbal",
+			"slug": "muhammad-iqbal",
+			"displayName": "Muhammad Iqbal, S.Ag.",
+			"isGuest": false
+		},
+		{
+			"id": "byline-nurul",
+			"slug": "nurul-izzah",
+			"displayName": "Nurul Izzah, M.Ag.",
+			"isGuest": false
 		}
 	],
 	"menus": [
 		{
 			"name": "primary",
-			"label": "Primary Navigation",
+			"label": "Navigasi Utama",
 			"items": [
 				{
 					"type": "custom",
-					"label": "Home",
+					"label": "Beranda",
 					"url": "/"
 				},
 				{
 					"type": "custom",
-					"label": "About",
-					"url": "/pages/about"
+					"label": "Tentang",
+					"url": "/tentang"
 				},
 				{
 					"type": "custom",
-					"label": "Posts",
-					"url": "/posts"
+					"label": "Kontak",
+					"url": "/kontak"
+				},
+				{
+					"type": "custom",
+					"label": "Kirim Tulisan",
+					"url": "/kirim-tulisan"
+				}
+			]
+		},
+		{
+			"name": "footer-nav",
+			"label": "Navigasi Footer",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Beranda Utama",
+					"url": "/"
+				},
+				{
+					"type": "custom",
+					"label": "Kajian Pilihan Terkini",
+					"url": "/#kajian-pilihan"
+				},
+				{
+					"type": "custom",
+					"label": "Pedoman Kirim Naskah",
+					"url": "/kirim-tulisan"
+				},
+				{
+					"type": "custom",
+					"label": "Tentang Redaksi & Visi",
+					"url": "/tentang"
+				}
+			]
+		},
+		{
+			"name": "footer-editorial",
+			"label": "Editorial & Kontak",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Kontak Redaksi",
+					"url": "/kontak"
+				},
+				{
+					"type": "custom",
+					"label": "Dewan Redaksi & Kebijakan",
+					"url": "/tentang#editorial"
+				},
+				{
+					"type": "custom",
+					"label": "Panduan Transliterasi",
+					"url": "/kirim-tulisan#transliterasi"
 				}
 			]
 		}
@@ -152,52 +352,12 @@
 	"widgetAreas": [
 		{
 			"name": "sidebar",
-			"label": "Sidebar",
-			"description": "Widget area displayed on single post pages",
-			"widgets": [
-				{
-					"type": "component",
-					"componentId": "core:search",
-					"title": "Search"
-				},
-				{
-					"type": "component",
-					"componentId": "core:categories",
-					"title": "Categories"
-				},
-				{
-					"type": "component",
-					"componentId": "core:tags",
-					"title": "Tags"
-				},
-				{
-					"type": "component",
-					"componentId": "core:recent-posts",
-					"title": "Recent Posts",
-					"settings": {
-						"count": 5,
-						"showDate": true
-					}
-				},
-				{
-					"type": "component",
-					"componentId": "core:archives",
-					"title": "Archives",
-					"settings": {
-						"type": "monthly",
-						"limit": 6
-					}
-				}
-			]
-		},
-		{
-			"name": "footer",
-			"label": "Footer",
-			"description": "Widget area displayed in the site footer",
+			"label": "Sidebar Utama",
+			"description": "Widget area displayed on homepage and archive sidebars",
 			"widgets": [
 				{
 					"type": "content",
-					"title": "About",
+					"title": "Tentang Afaq Tafsir",
 					"content": [
 						{
 							"_type": "block",
@@ -205,81 +365,67 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "A blog about software, design, and the occasional stray thought.",
-									"_key": "k1"
+									"text": "Afaq Tafsir adalah jurnal digital pemikiran Al-Qur'an dan studi keislaman yang diinisiasi oleh mahasiswi Kader Ulama Perempuan PKUMI Masjid Istiqlal untuk menghadirkan tafsir berbobot ilmiah dan berwawasan kontemporer."
 								}
-							],
-							"_key": "k0"
+							]
 						}
 					]
-				}
-			]
-		}
-	],
-	"sections": [
-		{
-			"slug": "newsletter-signup",
-			"title": "Newsletter Signup",
-			"description": "A call-to-action block for newsletter subscriptions",
-			"keywords": ["newsletter", "subscribe", "email", "cta"],
-			"source": "theme",
-			"content": [
-				{
-					"_type": "block",
-					"style": "h3",
-					"children": [
-						{
-							"_type": "span",
-							"text": "Stay in the loop",
-							"_key": "k1"
-						}
-					],
-					"_key": "k0"
 				},
 				{
-					"_type": "block",
-					"style": "normal",
-					"children": [
-						{
-							"_type": "span",
-							"text": "Get notified when new posts are published. No spam, unsubscribe anytime.",
-							"_key": "k3"
-						}
-					],
-					"_key": "k2"
-				}
-			]
-		},
-		{
-			"slug": "about-author",
-			"title": "About the Author",
-			"description": "Brief author bio for use in posts or pages",
-			"keywords": ["author", "bio", "about"],
-			"source": "theme",
-			"content": [
+					"type": "component",
+					"componentId": "core:categories",
+					"title": "Kategori Kajian"
+				},
 				{
-					"_type": "block",
-					"style": "normal",
-					"children": [
-						{
-							"_type": "span",
-							"text": "A software developer who writes about building things on the web. Based somewhere with good coffee and reliable internet.",
-							"_key": "k1"
-						}
-					],
-					"_key": "k0"
+					"type": "component",
+					"componentId": "core:tags",
+					"title": "Topik Populer"
 				}
 			]
 		}
 	],
 	"content": {
-		"pages": [
+		"articles": [
 			{
-				"id": "about",
-				"slug": "about",
+				"id": "art-01",
+				"slug": "benarkah-hawa-penyebab-manusia-turun-dari-surga",
 				"status": "published",
+				"bylines": [
+					{
+						"byline": "byline-refian"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"gender-islam",
+						"tafsir-tematik"
+					],
+					"tag": [
+						"pkumi",
+						"hermeneutika-feminis",
+						"ibn-kathir",
+						"muhammad-asad"
+					]
+				},
 				"data": {
-					"title": "About",
+					"title": "Benarkah Hawa Penyebab Manusia Turun dari Surga? Meninjau Ulang Narasi Penciptaan dalam Literatur Tafsir",
+					"subheadline": "Meninjau Ulang Narasi Penciptaan dan Bias Isra'iliyyat dalam Khazanah Tafsir Klasik hingga Kontemporer",
+					"excerpt": "Selama berabad-abad, narasi populis menempatkan Hawa sebagai sosok penggoda Adam yang berujung pada terusirnya manusia dari surga. Padahal Al-Qur'an secara konsisten menggunakan bentuk dual (mutsanna) yang menegaskan tanggung jawab moral bersama.",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1544717305-2782549b5136?w=1200&h=675&fit=crop",
+							"alt": "Kitab tafsir dan pencahayaan hangat melambangkan diskursus keilmuan Al-Qur'an",
+							"filename": "hawa-penciptaan-tafsir.jpg"
+						}
+					},
+					"reading_time": "7 mnt baca",
+					"is_lead_hero": true,
+					"is_secondary_hero": false,
+					"is_featured": true,
+					"is_popular": true,
+					"popular_rank": 1,
+					"popular_reads": "18.4k dibaca",
+					"published_at": "2026-08-18T08:30:00.000Z",
 					"content": [
 						{
 							"_type": "block",
@@ -287,11 +433,19 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "A place for writing about software, design, and the occasional stray thought. No posting schedule, no newsletter funnel. Just things I wanted to write down.",
-									"_key": "k1"
+									"text": "Dalam memori kolektif sebagian besar masyarakat Muslim, sebuah mitos gender telah mengendap begitu kuat: bahwa Hawa adalah biang keladi yang membujuk Adam memakan buah terlarang sehingga keduanya terusir dari surga. Pandangan reduksionis ini tidak hanya melahirkan stigma teologis terhadap perempuan, tetapi juga membentuk subordinasi epistemologis yang telah diwariskan dari generasi ke generasi."
 								}
-							],
-							"_key": "k0"
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Struktur Bahasa Al-Qur'an: Penegasan Subjek Ganda (Mutsanna)"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -299,43 +453,650 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Built with Astro and EmDash. The source is open if you want to see how it works.",
-									"_key": "k3"
+									"text": "Jika kita merujuk langsung kepada teks wahyu (nash al-Qur'an), tidak ditemukan satupun ayat yang menimpakan kesalahan secara eksklusif kepada perempuan. Sebaliknya, Al-Qur'an secara konsisten menggunakan pronomina dual (dhamir mutsanna) untuk menggambarkan godaan Iblis dan perbuatan keduanya:"
 								}
-							],
-							"_key": "k2"
+							]
+						},
+						{
+							"_type": "block",
+							"style": "blockquote",
+							"children": [
+								{
+									"_type": "span",
+									"text": "فَوَسْوَسَ لَهُمَا الشَّيْطَانُ لِيُبْدِيَ لَهُمَا مَا وُورِيَ عَنْهُمَا مِنْ سَوْآتِهِمَا وَقَالَ مَا نَهَاكُمَا رَبُّكُمَا عَنْ هَٰذِهِ الشَّجَرَةِ إِلَّا أَنْ تَكُونَا مَلَكَيْنِ أَوْ تَكُونَا مِنَ الْخَالِدِينَ\n\n",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "\"Lalu setan membisikkan pikiran jahat kepada keduanya untuk menampakkan kepada mereka apa yang tertutup dari aurat keduanya dan berkata: 'Tuhanmu tidak melarangmu dari mendekati pohon ini, melainkan supaya kamu berdua tidak menjadi malaikat atau tidak menjadi orang-orang yang kekal.'\"\n\n",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "۞ — QS. Al-A'raf [7]: 20"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Bahkan dalam Surah Thaha [20]: 120, rayuan Iblis secara eksplisit diarahkan kepada Adam secara personal (fa-waswasa ilaihi asy-syaithan), dan pada ayat 121 ditegaskan: 'wa 'asha Adamu rabbahu fa-ghawa' (dan durhakalah Adam kepada Tuhannya, lalu sesatlah ia). Ini membuktikan bahwa premis 'Hawa penggoda' merupakan pengaruh eksternal tafsir (isra'iliyyat) yang menyusup ke dalam tradisi penafsiran abad pertengahan."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Dekonstruksi Narasi Isra'iliyyat dalam Tafsir Kontemporer"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Mufasir modern seperti Muhammad 'Abduh dan Rasyid Ridha dalam Tafsir Al-Manar telah memperingatkan bahaya infiltrasi riwayat-riwayat Perjanjian Lama yang menyudutkan perempuan sebagai pintu masuk dosa primordial (original sin). Dalam teologi Islam yang murni, setiap jiwa memikul tanggung jawab moralnya masing-masing, dan pertobatan Adam serta Hawa diterima Allah secara bersamaan tanpa kutukan biologis abadi atas tubuh perempuan."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Catatan Kaki & Rujukan Ilmiah"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "[1] ",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "Muhammad Rasyid Ridha, Tafsir Al-Qur'an Al-Hakim (Tafsir Al-Manar), Kairo: Al-Hai'ah Al-Mishriyyah Al-'Ammah li Al-Kitab, 1990, Jilid VIII, hlm. 327-331."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "[2] ",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "Ibnu Katsir, Tafsir Al-Qur'an Al-'Azhim, Beirut: Dar Al-Kutub Al-'Ilmiyyah, 1998, Jilid 3, hlm. 142."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "[3] ",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "Muhammad Asad, The Message of the Qur'an, Gibraltar: Dar Al-Andalus, 1980, penjelasan QS Thaha [20]: 120-121."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "art-02",
+				"slug": "kosmologi-big-bang-dan-konsep-ratqan-fataqnah",
+				"status": "published",
+				"bylines": [
+					{
+						"byline": "byline-hamdan"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"kosmologi-qurani"
+					],
+					"tag": [
+						"alam-semesta",
+						"pkumi"
+					]
+				},
+				"data": {
+					"title": "Kosmologi Big Bang dan Konsep Ratqan-Fataqnah: Perspektif Hermeneutika Saintifik",
+					"subheadline": "Membaca Ayat-Ayat Kosmik Tanpa Terjebak Pencocok-cokan Sembrono (Ayatologi Pseudo-Science)",
+					"excerpt": "Bagaimana relasi antara fisika kuantum modern dengan diktum 'keduanya dahulunya menyatu lalu Kami pisahkan' (ratqan fa-fataqnahuma)? Kajian kritis atas epistemologi tafsir saintifik kontemporer.",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=1200&h=675&fit=crop",
+							"alt": "Galaksi dan panorama bintang kosmos yang megah",
+							"filename": "kosmologi-ratqan-fataqnah.jpg"
+						}
+					},
+					"reading_time": "5 mnt baca",
+					"is_lead_hero": false,
+					"is_secondary_hero": true,
+					"is_featured": true,
+					"is_popular": true,
+					"popular_rank": 2,
+					"popular_reads": "14.2k dibaca",
+					"published_at": "2026-08-20T10:15:00.000Z",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Diskursus perjumpaan antara sains dan wahyu seringkali terjebak dalam dua kutub ekstrem: penolakan positivistik di satu sisi, atau 'cocokologi' sembrono (i'jaz ilmi yang gegabah) di sisi lain. Padahal Al-Qur'an mengajak manusia berfikir reflektif melalui ayat-ayat kauniyah tanpa kehilangan dimensi transendentalnya."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "blockquote",
+							"children": [
+								{
+									"_type": "span",
+									"text": "أَوَلَمْ يَرَ الَّذِينَ كَفَرُوا أَنَّ السَّمَاوَاتِ وَالْأَرْضَ كَانَتَا رَتْقًا فَفَتَقْنَاهُمَا وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ أَفَلَا يُؤْمِنُونَ\n\n",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "\"Dan apakah orang-orang kafir tidak mengetahui bahwa langit dan bumi keduanya dahulunya menyatu, kemudian Kami pisahkan antara keduanya; dan Kami jadikan dari air segala sesuatu yang hidup. Maka mengapakah mereka tidak juga beriman?\"\n\n",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "۞ — QS. Al-Anbiya [21]: 30"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Secara kebahasaan, kata 'ratq' merujuk pada materi yang terpadu dan solid tanpa celah, sementara 'fatq' adalah proses pemisahan dan ekspansi. Penafsiran ilmiah tidak boleh dipaksakan untuk membuktikan teori relativitas umum secara kaku, melainkan mengarahkan kesadaran kosmologis bahwa alam semesta ini bermula dari rancangan yang Esa."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "art-03",
+				"slug": "genealogi-manuskrip-tafsir-nusantara-tarjuman-mustafid-marah-labid",
+				"status": "published",
+				"bylines": [
+					{
+						"byline": "byline-iqbal"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"studi-naskah",
+						"filologi"
+					],
+					"tag": [
+						"tafsir-nusantara",
+						"pesantren"
+					]
+				},
+				"data": {
+					"title": "Menelusuri Genealogi Manuskrip Tafsir Nusantara: Dari Tarjuman Al-Mustafid hingga Marah Labid",
+					"subheadline": "Jejak Epistemik dan Dinamika Inkulturasi Tafsir Al-Qur'an di Kawasan Melayu-Nusantara Abad 17-19",
+					"excerpt": "Bagaimana para ulama Nusantara mengadaptasi metodologi tafsir Timur Tengah ke dalam konteks sosial-budaya lokal? Menelusuri manuskrip Abdur Rauf As-Singkili hingga Syekh Nawawi Al-Bantani.",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&h=675&fit=crop",
+							"alt": "Manuskrip kuno dan lembaran naskah beraksara pegon",
+							"filename": "manuskrip-tafsir-nusantara.jpg"
+						}
+					},
+					"reading_time": "6 mnt baca",
+					"is_lead_hero": false,
+					"is_secondary_hero": true,
+					"is_featured": true,
+					"is_popular": false,
+					"published_at": "2026-08-21T14:00:00.000Z",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Studi tafsir di Nusantara bukanlah reproduksi pasif atas literatur Arab klasik, melainkan proses dialektika hermeneutis yang kaya. Kitab Tarjuman al-Mustafid karya Syekh Abdur Rauf as-Singkili (w. 1693 M) di Aceh merepresentasikan karya tafsir lengkap 30 juz pertama dalam bahasa Melayu-Jawi yang menggunakan rujukan utama Tafsir Al-Baidhawi dan Al-Jalalayn."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Kearifan Lokal dalam Glosarium Makna Gandul Pegon"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Metode utawi-ikui (makna gandul) dalam tradisi pesantren Jawa tidak sekadar metode gramatika, melainkan instrumen semantik canggih yang mempertahankan akurasi i'rab sekaligus kontekstualisasi nilai lokal."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "art-04",
+				"slug": "hermeneutika-emansipatoris-reinterpretasi-ayat-relasi-gender",
+				"status": "published",
+				"bylines": [
+					{
+						"byline": "byline-nurul"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"gender-islam",
+						"hermeneutika"
+					],
+					"tag": [
+						"pkumi",
+						"hermeneutika-feminis"
+					]
+				},
+				"data": {
+					"title": "Hermeneutika Emansipatoris: Reinterpretasi Ayat-Ayat Relasi Gender di Era Digital",
+					"subheadline": "Membongkar Konstruksi Patriarkis Menuju Keadilan Hakiki dalam Bingkai Maqashid Asy-Syari'ah",
+					"excerpt": "Tafsir atas ayat-ayat qiwamah dan waris kerap dipahami secara harfiah-statis. Pendekatan hermeneutika emansipatoris membedakan antara nilai universal dan ekspresi kultural temporal.",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1200&h=675&fit=crop",
+							"alt": "Buku-buku studi keilmuan dan perpustakaan modern",
+							"filename": "hermeneutika-gender-kontemporer.jpg"
+						}
+					},
+					"reading_time": "8 mnt baca",
+					"is_lead_hero": false,
+					"is_secondary_hero": true,
+					"is_featured": true,
+					"is_popular": true,
+					"popular_rank": 3,
+					"popular_reads": "11.8k dibaca",
+					"published_at": "2026-08-22T09:45:00.000Z",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tantangan terbesar dalam kajian gender dan Al-Qur'an adalah membedakan antara norma ideal transendental dengan instrumen hukum yang dipengaruhi oleh sosiologi Arab abad ke-7. Ketika Al-Qur'an berbicara mengenai kepemimpinan keluarga, orientasinya adalah perlindungan dan keadilan relasional, bukan dominasi hierarkis."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "art-05",
+				"slug": "estetika-ijaz-lughawi-retorika-iltifat-surah-al-kautsar",
+				"status": "published",
+				"bylines": [
+					{
+						"byline": "byline-fikri"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"balaghah"
+					],
+					"tag": [
+						"retorika-arab"
+					]
+				},
+				"data": {
+					"title": "Estetika I'jaz Lughawi: Rahasia Retorika Iltifat dalam Surah Al-Kautsar",
+					"subheadline": "Menyelami Kedalaman Perpindahan Pronomina dan Keajaiban Ritme dalam Surah Terpendek Al-Qur'an",
+					"excerpt": "Hanya terdiri dari 3 ayat dan 10 kata, Surah Al-Kautsar memuat dinamika retorika iltifat yang menakjubkan para pakar balaghah dari masa ke masa.",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&h=675&fit=crop",
+							"alt": "Arsitektur islami dengan kubah dan ornamen geometris yang presisi",
+							"filename": "balaghah-iltifat-alkautsar.jpg"
+						}
+					},
+					"reading_time": "4 mnt baca",
+					"is_lead_hero": false,
+					"is_secondary_hero": true,
+					"is_featured": true,
+					"is_popular": false,
+					"published_at": "2026-08-23T11:20:00.000Z",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Ilmu Balaghah menempatkan konsep iltifat (peralihan sudut pandang gramatikal) sebagai salah satu puncak keindahan sastra Arab. Dalam Surah Al-Kautsar, terjadi pergeseran dramatis dari penggunaan kata ganti orang pertama jamak (inna a'thainaka) menuju perintah kepada pihak ketiga/nama Tuhan (fa-shalli li-rabbika), menciptakan nuansa keagungan sekaligus kedekatan personal."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "art-06",
+				"slug": "kritik-epistemologi-tafsir-tekstualis-menghidupkan-maqashid",
+				"status": "published",
+				"bylines": [
+					{
+						"byline": "byline-arofah"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"filsafat-islam",
+						"hermeneutika"
+					],
+					"tag": [
+						"pkumi"
+					]
+				},
+				"data": {
+					"title": "Kritik Epistemologi Tafsir Tekstualis: Menghidupkan Maqashid Al-Qur'an dalam Realitas Sosial",
+					"subheadline": "Melampaui Literalisme Rigid Menuju Keberagamaan yang Membebaskan dan Berkeadilan Sosial",
+					"excerpt": "Pendekatan tekstualis-harfiah kerap kali mengorbankan jiwa kemaslahatan Al-Qur'an demi mempertahankan cangkang formalitas hukum. Diperlukan revitalisasi nalar maqashidi.",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=1200&h=675&fit=crop",
+							"alt": "Pelataran masjid dengan pilar megah dan sinar mentari",
+							"filename": "epistemologi-maqashid-quran.jpg"
+						}
+					},
+					"reading_time": "7 mnt baca",
+					"is_lead_hero": false,
+					"is_secondary_hero": false,
+					"is_featured": true,
+					"is_popular": true,
+					"popular_rank": 4,
+					"popular_reads": "9.6k dibaca",
+					"published_at": "2026-08-24T07:30:00.000Z",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Al-Qur'an diturunkan sebagai huda li an-nas (petunjuk bagi umat manusia), bukan sekadar kompilasi teks beku yang terputus dari denyut nadi peradaban. Pendekatan maqashidi menegaskan bahwa setiap hukum wahyu memiliki 'illat dan maqshad: yaitu terwujudnya keadilan, kemaslahatan, dan martabat kemanusiaan."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "art-07",
+				"slug": "etika-lingkungan-hidup-berbasis-tafsir-ekologis",
+				"status": "published",
+				"bylines": [
+					{
+						"byline": "byline-hamdan"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"sosio-historis",
+						"tafsir-tematik"
+					],
+					"tag": [
+						"alam-semesta"
+					]
+				},
+				"data": {
+					"title": "Etika Lingkungan Hidup Berbasis Tafsir Ekologis: Memaknai Amanah Khilafah di Tengah Krisis Iklim",
+					"subheadline": "Menggali Teologi Lingkungan Al-Qur'an untuk Melawan Eksploitasi Antroposentris",
+					"excerpt": "Konsep khilafah fil ardh bukanlah lisensi untuk mengeksploitasi bumi tanpa batas, melainkan mandat penjagaan ekologis yang akan dimintai pertanggungjawaban.",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=1200&h=675&fit=crop",
+							"alt": "Hutan hijau subur dan sinar matahari menembus dedaunan",
+							"filename": "ekologi-tafsir-lingkungan.jpg"
+						}
+					},
+					"reading_time": "6 mnt baca",
+					"is_lead_hero": false,
+					"is_secondary_hero": false,
+					"is_featured": true,
+					"is_popular": false,
+					"published_at": "2026-08-24T13:00:00.000Z",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Krisis iklim global saat ini berakar pada etika antroposentrisme yang memandang alam semesta semata sebagai komoditas. Al-Qur'an secara radikal mendefinisikan seluruh makhluk—termasuk hewan dan tumbuhan—sebagai 'umamun amtsalukum' (umat-umat yang setara dengan kamu sekalian)."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "art-08",
+				"slug": "resensi-buku-membongkar-nalar-oposisi-biner-tafsir-kontemporer",
+				"status": "published",
+				"bylines": [
+					{
+						"byline": "byline-refian"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"resensi-buku",
+						"hermeneutika"
+					],
+					"tag": [
+						"muhammad-asad"
+					]
+				},
+				"data": {
+					"title": "Resensi Buku: Membongkar Nalar Oposisi Biner dalam Tafsir Kontemporer Karya Nasr Hamid",
+					"subheadline": "Tinjauan Kritis atas Mafhum an-Nash dan Signifikansi Analisis Wacana Kritis dalam Studi Al-Qur'an",
+					"excerpt": "Bagaimana Nasr Hamid Abu Zayd meletakkan teks Al-Qur'an sebagai produk kebudayaan (muntaj tsaqafi) yang kemudian bertransformasi menjadi pembentuk kebudayaan (muntij li ats-tsaqafah)?",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200&h=675&fit=crop",
+							"alt": "Tumpukan buku-buku referensi ilmiah dan kacamata baca",
+							"filename": "resensi-buku-nasr-hamid.jpg"
+						}
+					},
+					"reading_time": "5 mnt baca",
+					"is_lead_hero": false,
+					"is_secondary_hero": false,
+					"is_featured": true,
+					"is_popular": true,
+					"popular_rank": 5,
+					"popular_reads": "8.1k dibaca",
+					"published_at": "2026-08-25T08:00:00.000Z",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Buku Mafhum an-Nash karya mendiang Profesor Nasr Hamid Abu Zayd tetap menjadi salah satu monumen penting dalam studi Al-Qur'an kontemporer. Buku ini menantang kemapanan metodologis dengan menawarkan pendekatan linguistik-semiotik yang ketat."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "art-09",
+				"slug": "tafsir-maqashidi-dalam-dialektika-siyasah-dan-demokrasi",
+				"status": "published",
+				"bylines": [
+					{
+						"byline": "byline-arofah"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"siyasah",
+						"sosio-historis"
+					],
+					"tag": [
+						"pkumi"
+					]
+				},
+				"data": {
+					"title": "Tafsir Maqashidi dalam Dialektika Siyasah Syar'iyyah dan Demokrasi Konstitusional",
+					"subheadline": "Prinsip Syura, Musyawarah, dan Keadilan Sosial sebagai Fondasi Etika Bernegara",
+					"excerpt": "Menelaah titik temu antara prinsip deliberasi Al-Qur'an (wa amruhum syura bainahum) dengan supremasi hukum dalam negara bangsa modern.",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=1200&h=675&fit=crop",
+							"alt": "Gedung megah dengan arsitektur pilar klasik dan cahaya senja",
+							"filename": "siyasah-syura-demokrasi.jpg"
+						}
+					},
+					"reading_time": "7 mnt baca",
+					"is_lead_hero": false,
+					"is_secondary_hero": false,
+					"is_featured": true,
+					"is_popular": false,
+					"published_at": "2026-08-25T15:30:00.000Z",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Islam tidak membatasi format negara pada satu bentuk teokrasi tunggal. Inti dari siyasah syar'iyyah adalah tasarruf al-imam 'ala ar-ra'iyyah manutun bi al-maslahah—kebijakan pemimpin atas rakyatnya sepenuhnya terikat pada kemaslahatan publik."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "art-10",
+				"slug": "dimensi-tasawuf-falsafi-dalam-isyarat-batin-surah-an-nur",
+				"status": "published",
+				"bylines": [
+					{
+						"byline": "byline-hamdan"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"tasawuf",
+						"filsafat-islam"
+					],
+					"tag": [
+						"pkumi"
+					]
+				},
+				"data": {
+					"title": "Dimensi Tasawuf Falsafi dalam Isyarat Batin Surah An-Nur: Antara Nur Ilahi dan Kesadaran Manusia",
+					"subheadline": "Kajian Komparatif atas Penafsiran Al-Ghazali dalam Misykat Al-Anwar dan Ibn 'Arabi",
+					"excerpt": "Perumpamaan cahaya (matsalu nurihi ka-misykatin) memantik penafsiran mistik mendalam mengenai hierarki wujud, epistemologi kasyf, dan pencerahan batin.",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1519817650390-64a93db51149?w=1200&h=675&fit=crop",
+							"alt": "Sinar cahaya keemasan masuk melalui jendela ornamen artistik",
+							"filename": "tasawuf-surah-annur.jpg"
+						}
+					},
+					"reading_time": "6 mnt baca",
+					"is_lead_hero": false,
+					"is_secondary_hero": false,
+					"is_featured": true,
+					"is_popular": false,
+					"published_at": "2026-08-26T06:00:00.000Z",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Ayat Cahaya (Ayat An-Nur: 35) adalah salah satu ayat paling memukau dalam Al-Qur'an. Imam Al-Ghazali dalam kitab legendarisnya Misykat Al-Anwar memaparkan bahwa cahaya hakiki hanyalah Allah Subhanahu wa Ta'ala, sedangkan cahaya fisik dan pancaindra hanyalah bayang-bayang metaforis."
+								}
+							]
 						}
 					]
 				}
 			}
 		],
-		"posts": [
+		"pages": [
 			{
-				"id": "post-1",
-				"slug": "building-for-the-long-term",
+				"id": "page-tentang",
+				"slug": "tentang",
 				"status": "published",
 				"data": {
-					"title": "Building for the Long Term",
-					"excerpt": "The frameworks will change. The databases will change. What survives is the clarity of your thinking.",
-					"featured_image": {
-						"$media": {
-							"url": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=800&fit=crop",
-							"alt": "Code on a monitor in a dark room",
-							"filename": "building-long-term.jpg"
-						}
-					},
+					"title": "Tentang Afaq Tafsir",
 					"content": [
 						{
 							"_type": "block",
-							"style": "normal",
+							"style": "h2",
 							"children": [
 								{
 									"_type": "span",
-									"text": "Every few years the industry collectively decides that everything we've been doing is wrong and there's a better way. New frameworks, new paradigms, new build tools. The churn is relentless, and if you're not careful, you spend more time migrating than building.",
-									"_key": "k1"
+									"text": "Manifesto & Visi Platform"
 								}
-							],
-							"_key": "k0"
+							]
 						},
 						{
 							"_type": "block",
@@ -343,11 +1104,9 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "I've been writing software long enough to have seen several of these cycles. jQuery to Backbone to Angular to React to whatever comes next. Each transition felt urgent at the time. Looking back, the things that actually mattered were rarely about the framework.",
-									"_key": "k3"
+									"text": "Afaq Tafsir diinisiasi pada tahun 2026 oleh mahasiswi Pendidikan Kader Ulama Masjid Istiqlal (PKUMI) — Program Kader Ulama Perempuan. Platform ini didirikan atas kesadaran mendalam akan pentingnya ruang publik intelektual yang mempertemukan ketelitian metodologis tafsir klasik dengan diskursus keilmuan kontemporer."
 								}
-							],
-							"_key": "k2"
+							]
 						},
 						{
 							"_type": "block",
@@ -355,11 +1114,9 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "What survives",
-									"_key": "k5"
+									"text": "Kode Etik Publikasi"
 								}
-							],
-							"_key": "k4"
+							]
 						},
 						{
 							"_type": "block",
@@ -367,66 +1124,19 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Clean data models survive. Clear boundaries between systems survive. Good naming survives. The decision to keep things simple when you could have made them clever - that definitely survives.",
-									"_key": "k7"
+									"text": "1. Integritas Akademik & Orisinalitas: Setiap naskah bebas dari plagiarisme dan didasarkan pada rujukan ilmiah yang teruji.\n2. Kebebasan Berpendapat yang Bertanggung Jawab: Diskusi disajikan secara argumentatif, santun, dan menjunjung tinggi martabat kemanusiaan."
 								}
-							],
-							"_key": "k6"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "What doesn't survive is code that was written to impress, abstractions built for problems that never materialized, and architectures designed around a framework's opinions rather than the domain's reality.",
-									"_key": "k9"
-								}
-							],
-							"_key": "k8"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The best code I've written is boring. It reads like prose, does one thing well, and doesn't require a PhD in category theory to understand. The worst code I've written was technically impressive at the time.",
-									"_key": "k11"
-								}
-							],
-							"_key": "k10"
+							]
 						}
 					]
-				},
-				"bylines": [
-					{
-						"byline": "byline-editorial"
-					},
-					{
-						"byline": "byline-guest",
-						"roleLabel": "Guest essay"
-					}
-				],
-				"taxonomies": {
-					"category": ["development"],
-					"tag": ["opinion"]
 				}
 			},
 			{
-				"id": "post-2",
-				"slug": "the-case-for-static",
+				"id": "page-kontak",
+				"slug": "kontak",
 				"status": "published",
 				"data": {
-					"title": "The Case for Static",
-					"excerpt": "Static sites aren't a step backwards. They're what you get when you take performance and simplicity seriously.",
-					"featured_image": {
-						"$media": {
-							"url": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=800&fit=crop",
-							"alt": "Laptop and coffee on a wooden table",
-							"filename": "case-for-static.jpg"
-						}
-					},
+					"title": "Kontak & Saluran Resmi",
 					"content": [
 						{
 							"_type": "block",
@@ -434,86 +1144,19 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "There's a certain irony in the fact that the web started static, went dynamic, and is now swinging back toward static again. But the static sites of today aren't the hand-coded HTML pages of 1998. They're generated, optimized, and deployed to edge networks that serve them in milliseconds.",
-									"_key": "k1"
+									"text": "Untuk korespondensi editorial, pengiriman naskah, atau kerjasama kemitraan akademik, silakan hubungi redaksi melalui surel resmi kami: afaqtafsir.id@gmail.com"
 								}
-							],
-							"_key": "k0"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The pitch for server-rendered everything was compelling: dynamic content, personalization, real-time data. But most sites don't need most of that most of the time. A blog post doesn't need to be rendered on every request. A product page doesn't change every second.",
-									"_key": "k3"
-								}
-							],
-							"_key": "k2"
-						},
-						{
-							"_type": "block",
-							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The performance argument",
-									"_key": "k5"
-								}
-							],
-							"_key": "k4"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "A static file served from a CDN is as fast as the web gets. No cold starts, no database queries, no server-side rendering overhead. The Time to First Byte is essentially the network latency to your nearest edge node. You can't beat physics.",
-									"_key": "k7"
-								}
-							],
-							"_key": "k6"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "And when you do need dynamic behavior, you can add it surgically. An island of interactivity in a sea of static HTML. The best of both worlds, without paying the cost of either at all times.",
-									"_key": "k9"
-								}
-							],
-							"_key": "k8"
+							]
 						}
 					]
-				},
-				"bylines": [
-					{
-						"byline": "byline-editorial"
-					}
-				],
-				"taxonomies": {
-					"category": ["development"],
-					"tag": ["webdev", "opinion"]
 				}
 			},
 			{
-				"id": "post-3",
-				"slug": "learning-in-public",
+				"id": "page-kirim-tulisan",
+				"slug": "kirim-tulisan",
 				"status": "published",
 				"data": {
-					"title": "Learning in Public",
-					"excerpt": "Writing about what you're learning is the fastest way to find out what you don't actually understand.",
-					"featured_image": {
-						"$media": {
-							"url": "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?w=1200&h=800&fit=crop",
-							"alt": "Notebook and pen on a desk",
-							"filename": "learning-in-public.jpg"
-						}
-					},
+					"title": "Panduan Pengiriman Naskah",
 					"content": [
 						{
 							"_type": "block",
@@ -521,414 +1164,9 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "I started writing about things I was learning not because I had anything original to say, but because I kept forgetting what I'd figured out. The blog posts were notes to my future self, published publicly more out of laziness than courage.",
-									"_key": "k1"
+									"text": "Afaq Tafsir membuka ruang bagi akademisi, santri, dan peneliti untuk mengirimkan naskah esai tafsir tematik (800-1.000 kata) via surel: afaqtafsir.id@gmail.com dengan subjek Tema_NamaPenulis_JudulTulisan."
 								}
-							],
-							"_key": "k0"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "What I didn't expect was how much the writing itself would accelerate the learning. There's a particular kind of clarity that comes from trying to explain something to someone else. The gaps in your understanding, which you can happily ignore when the knowledge lives only in your head, become painfully obvious when you try to put it into sentences.",
-									"_key": "k3"
-								}
-							],
-							"_key": "k2"
-						},
-						{
-							"_type": "block",
-							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The fear of being wrong",
-									"_key": "k5"
-								}
-							],
-							"_key": "k4"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The biggest barrier isn't time or writing skill. It's the fear of publishing something that turns out to be wrong. But here's the thing: being wrong publicly is one of the most efficient ways to learn. Someone will correct you, often kindly, and you'll remember that correction forever.",
-									"_key": "k7"
-								}
-							],
-							"_key": "k6"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The posts that helped me most weren't written by experts. They were written by people one step ahead of me on the same path, in language that hadn't yet been polished into abstraction. There's a place for that kind of writing, and it's more valuable than most people realize.",
-									"_key": "k9"
-								}
-							],
-							"_key": "k8"
-						}
-					]
-				},
-				"taxonomies": {
-					"category": ["notes"],
-					"tag": ["opinion"]
-				}
-			},
-			{
-				"id": "post-4",
-				"slug": "small-tools-big-impact",
-				"status": "published",
-				"data": {
-					"title": "Small Tools, Big Impact",
-					"excerpt": "The best developer tools do one thing well and get out of your way. A love letter to focused software.",
-					"featured_image": {
-						"$media": {
-							"url": "https://images.unsplash.com/photo-1575026615908-666710ae5e47?w=1200&h=800&fit=crop",
-							"alt": "Wrenches and hand tools hanging on a workshop wall",
-							"filename": "small-tools.jpg"
-						}
-					},
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "There's a class of software that doesn't get enough appreciation. Not the frameworks or the platforms or the IDEs, but the small, sharp tools that solve one problem so well you stop thinking about them. They become invisible, which is the highest compliment you can pay a tool.",
-									"_key": "k1"
-								}
-							],
-							"_key": "k0"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "I'm talking about things like ripgrep, which searches code so fast it changed how I think about searching. Or jq, which makes JSON feel like a first-class data format in the terminal. Or curl, which has been quietly powering the internet's plumbing for decades.",
-									"_key": "k3"
-								}
-							],
-							"_key": "k2"
-						},
-						{
-							"_type": "block",
-							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The Unix philosophy, revisited",
-									"_key": "k5"
-								}
-							],
-							"_key": "k4"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Do one thing well. The advice is old enough to be a cliche, but the best modern tools still follow it. They don't try to be platforms. They don't have plugin ecosystems or configuration languages or startup wizards. They do their job and they compose with other tools that do theirs.",
-									"_key": "k7"
-								}
-							],
-							"_key": "k6"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The temptation is always to add more. One more feature, one more option, one more integration. But every addition is a decision someone has to make, a path through the code that has to be maintained, a thing that can break. The best tools resist this. They stay small, and in staying small, they stay reliable.",
-									"_key": "k9"
-								}
-							],
-							"_key": "k8"
-						}
-					]
-				},
-				"taxonomies": {
-					"category": ["development"],
-					"tag": ["tools"]
-				}
-			},
-			{
-				"id": "post-5",
-				"slug": "designing-with-constraints",
-				"status": "published",
-				"data": {
-					"title": "Designing with Constraints",
-					"excerpt": "Limitations aren't obstacles to creativity. They're the structure that makes creativity possible.",
-					"featured_image": {
-						"$media": {
-							"url": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=1200&h=800&fit=crop",
-							"alt": "Pencils and design tools on a desk",
-							"filename": "designing-with-constraints.jpg"
-						}
-					},
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Give a designer a blank canvas and unlimited time, and they'll often produce something mediocre. Give them a tight brief, a small screen, and a deadline, and they'll surprise you. This isn't a paradox - it's how creativity actually works.",
-									"_key": "k1"
-								}
-							],
-							"_key": "k0"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Constraints force decisions. When you can't use more than two typefaces, you have to choose carefully. When the page has to load in under a second, every element earns its place. When the interface has to work on a 320px screen, you discover what's truly essential.",
-									"_key": "k3"
-								}
-							],
-							"_key": "k2"
-						},
-						{
-							"_type": "block",
-							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Embracing the box",
-									"_key": "k5"
-								}
-							],
-							"_key": "k4"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The web itself is a constraint. HTML flows in one direction. CSS has a box model. Browsers have viewport sizes and font rendering quirks. You can fight these constraints or you can work with them, and the results are dramatically different.",
-									"_key": "k7"
-								}
-							],
-							"_key": "k6"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The designs I admire most don't look like they were forced through a framework. They look like they grew naturally from the medium, respecting its grain rather than working against it. That only happens when you treat constraints as creative partners rather than enemies.",
-									"_key": "k9"
-								}
-							],
-							"_key": "k8"
-						}
-					]
-				},
-				"taxonomies": {
-					"category": ["design"],
-					"tag": ["creativity"]
-				}
-			},
-			{
-				"id": "post-6",
-				"slug": "a-weekend-with-a-side-project",
-				"status": "published",
-				"data": {
-					"title": "A Weekend with a Side Project",
-					"excerpt": "No stakeholders, no deadlines, no Jira tickets. Just you and a dumb idea that might turn into something.",
-					"featured_image": {
-						"$media": {
-							"url": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&h=800&fit=crop",
-							"alt": "Code on a screen with a dark theme",
-							"filename": "weekend-side-project.jpg"
-						}
-					},
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Saturday morning. Coffee's made, the house is quiet, and I've got an idea that's been nagging at me all week. Not a good idea, necessarily - just a persistent one. A small tool that does a thing I keep doing manually. How hard could it be?",
-									"_key": "k1"
-								}
-							],
-							"_key": "k0"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "This is the best kind of programming. No requirements document, no sprint planning, no pull request reviews. Just a text editor and a problem. The freedom to make terrible architectural decisions, rewrite everything twice, and follow tangents that turn out to be dead ends.",
-									"_key": "k3"
-								}
-							],
-							"_key": "k2"
-						},
-						{
-							"_type": "block",
-							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Why side projects matter",
-									"_key": "k5"
-								}
-							],
-							"_key": "k4"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Side projects are where you learn things your day job would never teach you. Not because the problems are harder, but because you're free to take risks. Try a language you've never used. Build something without a framework. Deploy to a platform you've only read about. The stakes are zero, which makes the learning maximum.",
-									"_key": "k7"
-								}
-							],
-							"_key": "k6"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "By Sunday evening, the thing sort of works. It's rough, the error handling is nonexistent, and the README is a single sentence. But it solves the problem I set out to solve, and I learned three things I didn't know on Friday. Not a bad weekend.",
-									"_key": "k9"
-								}
-							],
-							"_key": "k8"
-						}
-					]
-				},
-				"taxonomies": {
-					"category": ["development"],
-					"tag": ["creativity"]
-				}
-			},
-			{
-				"id": "post-7",
-				"slug": "notes-on-simplicity",
-				"status": "published",
-				"data": {
-					"title": "Notes on Simplicity",
-					"excerpt": "Simplicity isn't the absence of complexity. It's the result of understanding a problem well enough to solve it cleanly.",
-					"featured_image": {
-						"$media": {
-							"url": "https://images.unsplash.com/photo-1559051668-e1fa58f25786?w=1200&h=800&fit=crop",
-							"alt": "Geometric pattern carved into white paper",
-							"filename": "notes-on-simplicity.jpg"
-						}
-					},
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Every piece of software starts simple. A few files, a clear purpose, a small surface area. Then features get added, edge cases get handled, and before long you're looking at something that requires a diagram to understand. This isn't inevitable, but it takes discipline to prevent.",
-									"_key": "k1"
-								}
-							],
-							"_key": "k0"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The hard part of simplicity isn't the initial design. It's the ongoing resistance to complication. Every feature request, every bug fix, every refactor is an opportunity to add complexity. Saying no is the most important design skill, and the least celebrated.",
-									"_key": "k3"
-								}
-							],
-							"_key": "k2"
-						},
-						{
-							"_type": "block",
-							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Removing as a feature",
-									"_key": "k5"
-								}
-							],
-							"_key": "k4"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "The best version of a product often has fewer features than the previous one. Not because features were missing, but because someone had the courage to remove things that weren't earning their keep. Every feature has a cost - in maintenance, in cognitive load, in the weight of the interface.",
-									"_key": "k7"
-								}
-							],
-							"_key": "k6"
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Simplicity is a practice, not a destination. You never arrive at simple. You just keep asking: is this necessary? Could this be clearer? Is there a way to solve this problem by removing something instead of adding something? The answer is yes more often than you'd expect.",
-									"_key": "k9"
-								}
-							],
-							"_key": "k8"
-						}
-					]
-				},
-				"taxonomies": {
-					"category": ["notes"],
-					"tag": ["opinion"]
-				}
-			},
-			{
-				"id": "post-draft",
-				"slug": "work-in-progress",
-				"status": "draft",
-				"data": {
-					"title": "Work in Progress",
-					"excerpt": "This post is still being written.",
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "This is a draft post that won't appear in the public listing.",
-									"_key": "k1"
-								}
-							],
-							"_key": "k0"
+							]
 						}
 					]
 				}
