@@ -5,9 +5,8 @@ import {
 	getTermsForEntries,
 	decodeSlug,
 } from "emdash";
+import { Image } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
-import PostCard from "../../components/PostCard.astro";
-import { getReadingTime } from "../../utils/reading-time";
 
 const slug = decodeSlug(Astro.params.slug);
 const term = slug ? await getTerm("category", slug) : null;
@@ -16,54 +15,78 @@ if (!term) {
 	return Astro.redirect("/404");
 }
 
-const { entries: posts, cacheHint } = await getEmDashCollection("posts", {
+const { entries: articles, cacheHint } = await getEmDashCollection("articles", {
 	where: { category: term.slug },
 	orderBy: { published_at: "desc" },
 });
 
 if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 
-// Single batched query for tags on every post in this category, rather
-// than calling getEntryTerms() per post (which would be one round-trip
-// per post).
-const tagsByEntry = await getTermsForEntries(
-	"posts",
-	posts.map((p) => p.data.id),
-	"tag",
-);
-const filteredPosts = posts.map((post) => ({
-	post,
-	tags: tagsByEntry.get(post.data.id) ?? [],
-}));
+const tagIds = articles.map((p) => p.data.id);
+const tagsByEntry = await getTermsForEntries("articles", tagIds, "tag");
+
+function formatIndonesianDate(date: Date | string | null | undefined) {
+	if (!date) return "18 Agustus 2026";
+	const d = typeof date === "string" ? new Date(date) : date;
+	return d.toLocaleDateString("id-ID", {
+		day: "numeric",
+		month: "long",
+		year: "numeric",
+	});
+}
 ---
 
-<Base title={`${term.label} posts`} description={`All posts in ${term.label}`}>
+<Base title={`Kajian Kategori: ${term.label}`} description={`Kumpulan artikel dan kajian tafsir dalam kategori ${term.label} di Afaq Tafsir.`}>
 	<section class="archive-section">
 		<header class="archive-header">
-			<span class="archive-label">Category</span>
+			<div class="archive-badge-wrap">
+				<span class="badge-gold">KATEGORI KAJIAN</span>
+			</div>
 			<h1 class="archive-title">{term.label}</h1>
 			<p class="archive-count">
-				{filteredPosts.length}
-				{filteredPosts.length === 1 ? "post" : "posts"}
+				Menampilkan {articles.length} kajian ilmiah
 			</p>
+			<span class="amber-bar"></span>
 		</header>
 
 		{
-			filteredPosts.length === 0 ? (
-				<p class="no-posts">No posts in this category yet.</p>
+			articles.length === 0 ? (
+				<p class="no-posts">Belum ada artikel dalam kategori ini.</p>
 			) : (
-				<div class="posts-grid">
-					{filteredPosts.map(({ post, tags }) => (
-						<PostCard
-							title={post.data.title}
-							excerpt={post.data.excerpt}
-							featuredImage={post.data.featured_image}
-							href={`/posts/${post.id}`}
-							date={post.data.publishedAt ?? undefined}
-							readingTime={getReadingTime(post.data.content)}
-							tags={tags.map((t) => ({ slug: t.slug, label: t.label }))}
-						/>
-					))}
+				<div class="archive-grid">
+					{articles.map((article) => {
+						const tags = tagsByEntry.get(article.data.id) ?? [];
+						const authorName = article.data.byline?.displayName || article.data.bylines?.[0]?.byline?.displayName || "Redaksi";
+						return (
+							<article class="archive-card">
+								<a href={`/${article.id}`} class="card-img-link">
+									<div class="card-img-wrapper">
+										{article.data.featured_image ? (
+											<Image image={article.data.featured_image} />
+										) : (
+											<div class="card-fallback">AFAQ TAFSIR</div>
+										)}
+									</div>
+								</a>
+								<div class="card-body">
+									<div class="card-tags-row">
+										{tags.slice(0, 2).map((t) => (
+											<span class="tag-mini">#{t.label}</span>
+										))}
+									</div>
+									<h2 class="card-title">
+										<a href={`/${article.id}`}>{article.data.title}</a>
+									</h2>
+									<p class="card-excerpt">{article.data.excerpt}</p>
+									<div class="card-meta">
+										<span class="meta-author">{authorName}</span>
+										<span class="meta-sep">•</span>
+										<time class="meta-date">{formatIndonesianDate(article.data.published_at)}</time>
+									</div>
+								</div>
+							</article>
+						);
+					})}
 				</div>
 			)
 		}
@@ -74,55 +97,182 @@ const filteredPosts = posts.map((post) => ({
 	.archive-section {
 		max-width: var(--wide-width);
 		margin: 0 auto;
-		padding: var(--spacing-12) var(--spacing-6);
+		padding: var(--spacing-10) var(--spacing-6) var(--spacing-16);
 	}
 
 	.archive-header {
-		margin-bottom: var(--spacing-12);
-		padding-bottom: var(--spacing-8);
-		border-bottom: 1px solid var(--color-border-subtle);
+		margin-bottom: var(--spacing-10);
 	}
 
-	.archive-label {
-		display: block;
-		font-size: var(--font-size-xs);
-		font-weight: 500;
-		color: var(--color-brand);
-		text-transform: uppercase;
-		letter-spacing: var(--tracking-wider);
-		margin-bottom: var(--spacing-2);
+	.archive-badge-wrap {
+		margin-bottom: var(--spacing-3);
 	}
 
 	.archive-title {
-		font-size: var(--font-size-4xl);
-		font-weight: var(--font-weight-display);
-		letter-spacing: var(--tracking-tight);
-		margin-bottom: var(--spacing-2);
+		font-size: 2.4rem;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-2);
+	}
+
+	:global(.dark) .archive-title {
+		color: var(--white);
 	}
 
 	.archive-count {
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
+		font-size: 0.95rem;
+		color: var(--slate-600);
+		margin: 0;
 	}
 
-	.posts-grid {
+	:global(.dark) .archive-count {
+		color: var(--slate-400);
+	}
+
+	.archive-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: var(--spacing-12) var(--spacing-8);
+		gap: var(--spacing-8);
+	}
+
+	.archive-card {
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-md);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		box-shadow: var(--shadow-sm);
+		transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	:global(.dark) .archive-card {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.archive-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
+
+	.card-img-link {
+		display: block;
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+	}
+
+	.card-img-wrapper {
+		width: 100%;
+		height: 100%;
+	}
+
+	.card-img-wrapper :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.card-fallback {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--blue-900);
+		color: var(--sky-300);
+		font-weight: 700;
+		font-size: 0.85rem;
+	}
+
+	.card-body {
+		padding: var(--spacing-5);
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.card-tags-row {
+		display: flex;
+		gap: 6px;
+		margin-bottom: var(--spacing-2);
+	}
+
+	.tag-mini {
+		font-size: 0.72rem;
+		font-weight: 600;
+		color: var(--text-brand);
+	}
+
+	.card-title {
+		font-size: 1.18rem;
+		line-height: 1.35;
+		margin: 0 0 var(--spacing-2);
+	}
+
+	.card-title a {
+		color: var(--blue-950);
+		text-decoration: none;
+	}
+
+	:global(.dark) .card-title a {
+		color: var(--white);
+	}
+
+	.card-title a:hover {
+		color: var(--text-brand);
+	}
+
+	.card-excerpt {
+		font-size: 0.88rem;
+		line-height: 1.6;
+		color: var(--slate-700);
+		margin-bottom: var(--spacing-4);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	:global(.dark) .card-excerpt {
+		color: var(--slate-300);
+	}
+
+	.card-meta {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 0.8rem;
+		color: var(--slate-600);
+		margin-top: auto;
+	}
+
+	.meta-author {
+		font-weight: 600;
+		color: var(--slate-800);
+	}
+
+	:global(.dark) .meta-author {
+		color: var(--slate-200);
+	}
+
+	.meta-sep {
+		opacity: 0.5;
 	}
 
 	.no-posts {
-		color: var(--color-muted);
+		color: var(--slate-600);
+		font-size: 1rem;
+		padding: var(--spacing-8) 0;
 	}
 
 	@media (max-width: 900px) {
-		.posts-grid {
+		.archive-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
 	@media (max-width: 600px) {
-		.posts-grid {
+		.archive-grid {
 			grid-template-columns: 1fr;
 		}
 	}

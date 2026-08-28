@@ -1,0 +1,268 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+	title="Panduan Pengiriman Naskah — Afaq Tafsir"
+	description="Petunjuk teknis dan standar penulisan artikel kajian tafsir tematik dan pemikiran Qur'ani untuk kontributor."
+>
+	<div class="submission-page-container">
+		
+		<header class="submission-header">
+			<div class="badge-wrap">
+				<span class="badge-gold">PANGGILAN KONTRIBUTOR</span>
+			</div>
+			<h1 class="submission-title">Panduan & Standar Pengiriman Naskah</h1>
+			<p class="submission-lead">
+				Dewan Redaksi Afaq Tafsir membuka penerimaan artikel tematik tafsir, kajian manuskrip, telaah hermeneutika, dan pemikiran Qur'ani kontemporer dari akademisi, mahasantri, dan peneliti independen.
+			</p>
+			<span class="amber-bar"></span>
+		</header>
+
+		{/* GUIDELINES ACCORDION / SECTIONS */}
+		<div class="guidelines-stack">
+			
+			<section class="guide-card">
+				<h2 class="guide-card-title">1. Kriteria & Karakteristik Naskah</h2>
+				<ul class="guide-list">
+					<li><strong>Fokus Kajian:</strong> Naskah berfokus pada analisis tafsir ayat Al-Qur'an (tematik/tahlili), perjumpaan sains dan wahyu, isu gender & keadilan sosial, kajian manuskrip tafsir Melayu-Nusantara, atau kritik metodologi tafsir.</li>
+					<li><strong>Panjang Artikel:</strong> Berkisar antara <strong>800 hingga 1.500 kata</strong>, ditulis dengan gaya editorial ilmiah populer yang renyah namun sarat bobot akademik.</li>
+					<li><strong>Orisinalitas:</strong> Naskah belum pernah dipublikasikan di media cetak maupun daring lainnya dan bebas dari unsur plagiarisme.</li>
+				</ul>
+			</section>
+
+			<section class="guide-card">
+				<h2 class="guide-card-title">2. Ketentuan Teknis & Sitasi</h2>
+				<ul class="guide-list">
+					<li><strong>Transliterasi Arab-Latin:</strong> Mengikuti pedoman transliterasi Arab-Latin SKB Menteri Agama dan Menteri Pendidikan dan Kebudayaan RI (atau EYD V transliterasi baku).</li>
+					<li><strong>Kutipan Ayat:</strong> Teks Arab ayat Al-Qur'an wajib dicantumkan dengan syakal/harakat yang tepat, disertai nama surat dan nomor ayat (contoh: <em>[QS. An-Nur: 35]</em>).</li>
+					<li><strong>Sistem Catatan Kaki:</strong> Rujukan kitab atau jurnal ilmiah dicantumkan dalam bentuk catatan kaki (footnotes) atau daftar referensi ringkas di akhir naskah.</li>
+				</ul>
+			</section>
+
+			<section class="guide-card">
+				<h2 class="guide-card-title">3. Alur Pengiriman & Seleksi Redaksi</h2>
+				<div class="workflow-steps">
+					<div class="step-item">
+						<span class="step-num">01</span>
+						<div class="step-body">
+							<h4>Kirim Naskah via Surel</h4>
+							<p>Kirimkan file dokumen (.docx) ke <strong>afaqtafsir.id@gmail.com</strong> dengan subjek: <code>Naskah_[Tema]_[Nama Penulis]_[Judul Singkat]</code>.</p>
+						</div>
+					</div>
+					<div class="step-item">
+						<span class="step-num">02</span>
+						<div class="step-body">
+							<h4>Review Dewan Redaksi</h4>
+							<p>Redaksi akan melakukan review substansi dan penyelarasan gaya selingkung dalam kurun waktu <strong>3–7 hari kerja</strong>.</p>
+						</div>
+					</div>
+					<div class="step-item">
+						<span class="step-num">03</span>
+						<div class="step-body">
+							<h4>Penerbitan & Publikasi</h4>
+							<p>Naskah yang lolos seleksi akan diterbitkan di platform resmi Afaq Tafsir lengkap dengan profil byline penulis dan disebarluaskan di jejaring akademik.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* CTA BOX */}
+			<div class="submission-cta-box">
+				<h3 class="cta-box-title">Siap Mengirimkan Gagasan Qur'ani Anda?</h3>
+				<p class="cta-box-desc">Sertakan biodata naratif singkat (3–4 kalimat) beserta foto profil beresolusi baik di dalam lampiran surel Anda.</p>
+				<a href="mailto:afaqtafsir.id@gmail.com?subject=Naskah_AfaqTafsir" class="btn-submit-email">
+					<span>Kirim Naskah ke afaqtafsir.id@gmail.com →</span>
+				</a>
+			</div>
+
+		</div>
+
+	</div>
+</Base>
+
+<style>
+	.submission-page-container {
+		max-width: 860px;
+		margin: 0 auto;
+		padding: var(--spacing-10) var(--spacing-6) var(--spacing-16);
+	}
+
+	.submission-header {
+		margin-bottom: var(--spacing-10);
+	}
+
+	.badge-wrap {
+		margin-bottom: var(--spacing-3);
+	}
+
+	.submission-title {
+		font-size: 2.3rem;
+		line-height: 1.25;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-3);
+	}
+
+	:global(.dark) .submission-title {
+		color: var(--white);
+	}
+
+	.submission-lead {
+		font-size: 1.1rem;
+		line-height: 1.75;
+		color: var(--slate-700);
+		margin-bottom: var(--spacing-4);
+	}
+
+	:global(.dark) .submission-lead {
+		color: var(--slate-300);
+	}
+
+	.guidelines-stack {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-8);
+	}
+
+	.guide-card {
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-8);
+		box-shadow: var(--shadow-sm);
+	}
+
+	:global(.dark) .guide-card {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.guide-card-title {
+		font-size: 1.35rem;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-5);
+	}
+
+	:global(.dark) .guide-card-title {
+		color: var(--white);
+	}
+
+	.guide-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-4);
+	}
+
+	.guide-list li {
+		font-size: 0.98rem;
+		line-height: 1.75;
+		color: var(--slate-700);
+		padding-left: var(--spacing-4);
+		border-left: 3px solid var(--sky-400);
+	}
+
+	:global(.dark) .guide-list li {
+		color: var(--slate-300);
+	}
+
+	/* Workflow Steps */
+	.workflow-steps {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-5);
+	}
+
+	.step-item {
+		display: flex;
+		gap: var(--spacing-4);
+		align-items: flex-start;
+	}
+
+	.step-num {
+		font-family: var(--font-serif);
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: var(--gold-500);
+		width: 36px;
+		flex-shrink: 0;
+	}
+
+	.step-body h4 {
+		font-size: 1.05rem;
+		color: var(--blue-950);
+		margin: 0 0 4px;
+	}
+
+	:global(.dark) .step-body h4 {
+		color: var(--white);
+	}
+
+	.step-body p {
+		font-size: 0.9rem;
+		line-height: 1.6;
+		color: var(--slate-700);
+		margin: 0;
+	}
+
+	:global(.dark) .step-body p {
+		color: var(--slate-300);
+	}
+
+	.step-body code {
+		background: var(--sky-100);
+		padding: 2px 6px;
+		border-radius: var(--radius-sm);
+		font-size: 0.85rem;
+		color: var(--blue-950);
+	}
+
+	:global(.dark) .step-body code {
+		background: rgba(52, 198, 244, 0.15);
+		color: var(--sky-300);
+	}
+
+	/* Submission CTA Box */
+	.submission-cta-box {
+		background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-950) 100%);
+		border: 1px solid rgba(52, 198, 244, 0.3);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-8);
+		color: var(--white);
+		text-align: center;
+		margin-top: var(--spacing-4);
+	}
+
+	.cta-box-title {
+		font-size: 1.4rem;
+		margin: 0 0 var(--spacing-2);
+		color: var(--white);
+	}
+
+	.cta-box-desc {
+		font-size: 0.92rem;
+		color: var(--sky-100);
+		margin-bottom: var(--spacing-6);
+	}
+
+	.btn-submit-email {
+		display: inline-block;
+		padding: 12px 28px;
+		background: var(--gold-500);
+		color: var(--white);
+		font-weight: 700;
+		font-size: 0.95rem;
+		border-radius: var(--radius-full);
+		text-decoration: none;
+		box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+		transition: background var(--transition-fast), transform var(--transition-fast);
+	}
+
+	.btn-submit-email:hover {
+		background: var(--gold-600);
+		color: var(--white);
+		transform: translateY(-2px);
+	}
+</style>

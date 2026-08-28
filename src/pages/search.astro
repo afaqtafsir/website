@@ -6,177 +6,291 @@ import Base from "../layouts/Base.astro";
 
 const query = Astro.url.searchParams.get("q")?.trim() || "";
 
-// Use the FTS-backed search() API instead of loading every post and
-// filtering in JS. FTS scales as the post count grows, returns ranked
-// results, and handles tokenization/stemming. Templates that grep all
-// post bodies in JS quickly become unusable past a few hundred posts.
 const { items: results } = query
-	? await search(query, { collections: ["posts"], limit: 30 })
+	? await search(query, { collections: ["articles", "pages"], limit: 30 })
 	: { items: [] };
 ---
 
 <Base
-	title={query ? `Search: ${query}` : "Search"}
-	description="Search blog posts"
+	title={query ? `Pencarian: "${query}"` : "Pencarian Kajian"}
+	description="Pencarian kajian tafsir, ayat, dan artikel pemikiran Qur'ani di Afaq Tafsir."
 >
-	<section class="search-page">
-		<h1 class="search-title">Search</h1>
+	<section class="search-page-container">
+		<header class="search-header">
+			<div class="search-badge-wrap">
+				<span class="badge-gold">INDICES PENCARIAN</span>
+			</div>
+			<h1 class="search-title">Cari Kajian & Pemikiran</h1>
+			<p class="search-desc">
+				Telusuri ribuan kata kunci kajian tematik, tafsir ayat, manuskrip, dan gagasan keislaman.
+			</p>
+			<span class="amber-bar"></span>
+		</header>
 
-		<form method="get" action="/search" class="search-form">
-			<input
-				type="search"
-				name="q"
-				value={query}
-				placeholder="Search posts..."
-				class="search-input"
-				autofocus
-			/>
-			<button type="submit" class="search-button">Search</button>
+		<form method="get" action="/search" class="search-form-card">
+			<div class="search-input-wrap">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon">
+					<circle cx="11" cy="11" r="8"></circle>
+					<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+				</svg>
+				<input
+					type="search"
+					name="q"
+					value={query}
+					placeholder="Ketik topik, judul, atau kata kunci kajian..."
+					class="search-input-field"
+					autofocus
+				/>
+			</div>
+			<button type="submit" class="btn-search-submit">Cari Kajian</button>
 		</form>
 
 		{
 			query && (
 				<p class="search-summary">
 					{results.length === 0
-						? `No results for "${query}"`
-						: `${results.length} result${results.length === 1 ? "" : "s"} for "${query}"`}
+						? `Tidak ditemukan hasil untuk "${query}". Coba kata kunci lainnya.`
+						: `Menemukan ${results.length} kajian untuk "${query}":`}
 				</p>
 			)
 		}
 
 		{
 			results.length > 0 && (
-				<ol class="search-results">
+				<div class="search-results-list">
 					{results.map((result) => (
-						<li class="search-result">
+						<article class="search-result-item">
 							<a
-								href={`/posts/${result.slug ?? result.id}`}
-								class="result-link"
+								href={`/${result.slug ?? result.id}`}
+								class="result-card-link"
 							>
-								<h2 class="result-title">
+								<div class="result-badge-row">
+									<span class="result-collection-badge">
+										{result.collection === "pages" ? "HALAMAN" : "ARTIKEL KAJIAN"}
+									</span>
+								</div>
+								<h2 class="result-item-title">
 									{result.title ?? "Untitled"}
 								</h2>
 								{result.snippet && (
-									<p class="result-snippet" set:html={result.snippet} />
+									<p class="result-snippet-text" set:html={result.snippet} />
 								)}
 							</a>
-						</li>
+						</article>
 					))}
-				</ol>
+				</div>
 			)
 		}
 
-		{!query && <p class="search-hint">Enter a search term to find posts.</p>}
+		{!query && (
+			<div class="search-empty-prompt">
+				<p>💡 Tip: Anda dapat mencari berdasarkan tema seperti <em>"kosmologi"</em>, <em>"gender"</em>, <em>"maqashid"</em>, atau nama ulama seperti <em>"Ibn Asyur"</em>.</p>
+			</div>
+		)}
 	</section>
 </Base>
 
 <style>
-	.search-page {
-		max-width: var(--max-width);
+	.search-page-container {
+		max-width: 840px;
 		margin: 0 auto;
-		padding: var(--spacing-8) var(--spacing-6) var(--spacing-16);
+		padding: var(--spacing-10) var(--spacing-6) var(--spacing-16);
 	}
 
-	.search-title {
-		font-size: var(--font-size-2xl);
-		margin-bottom: var(--spacing-6);
-	}
-
-	.search-form {
-		display: flex;
-		gap: var(--spacing-2);
+	.search-header {
 		margin-bottom: var(--spacing-8);
 	}
 
-	.search-input {
-		flex: 1;
-		padding: var(--spacing-2) var(--spacing-4);
-		font-size: var(--font-size-base);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
-		background: var(--color-bg);
-		color: var(--color-text);
+	.search-badge-wrap {
+		margin-bottom: var(--spacing-3);
 	}
 
-	.search-input:focus {
+	.search-title {
+		font-size: 2.2rem;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-2);
+	}
+
+	:global(.dark) .search-title {
+		color: var(--white);
+	}
+
+	.search-desc {
+		font-size: 0.95rem;
+		color: var(--slate-600);
+		margin: 0;
+	}
+
+	:global(.dark) .search-desc {
+		color: var(--slate-400);
+	}
+
+	.search-form-card {
+		display: flex;
+		gap: var(--spacing-3);
+		margin-bottom: var(--spacing-8);
+	}
+
+	.search-input-wrap {
+		position: relative;
+		flex-grow: 1;
+		display: flex;
+		align-items: center;
+	}
+
+	.search-icon {
+		position: absolute;
+		left: 14px;
+		color: var(--slate-400);
+		pointer-events: none;
+	}
+
+	.search-input-field {
+		width: 100%;
+		padding: 12px 14px 12px 44px;
+		font-family: var(--font-sans);
+		font-size: 1rem;
+		border: 1.5px solid var(--sky-200);
+		border-radius: var(--radius-md);
+		background: var(--white);
+		color: var(--slate-800);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	:global(.dark) .search-input-field {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.25);
+		color: var(--white);
+	}
+
+	.search-input-field:focus {
 		outline: none;
-		border-color: var(--color-brand);
+		border-color: var(--text-brand);
+		box-shadow: 0 0 0 3px var(--sky-200);
 	}
 
-	.search-button {
-		padding: var(--spacing-2) var(--spacing-6);
-		font-size: var(--font-size-base);
-		background: var(--color-brand);
-		color: var(--color-on-brand);
+	.btn-search-submit {
+		padding: 12px 24px;
+		background: var(--blue-900);
+		color: var(--white);
+		font-family: var(--font-sans);
+		font-size: 0.92rem;
+		font-weight: 700;
 		border: none;
-		border-radius: var(--radius);
+		border-radius: var(--radius-md);
 		cursor: pointer;
-		font-weight: 500;
+		transition: background var(--transition-fast);
+		white-space: nowrap;
 	}
 
-	.search-button:hover {
-		opacity: 0.9;
+	.btn-search-submit:hover {
+		background: var(--blue-800);
 	}
 
 	.search-summary {
-		color: var(--color-muted);
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: var(--slate-700);
 		margin-bottom: var(--spacing-6);
 	}
 
-	.search-hint {
-		color: var(--color-muted);
+	:global(.dark) .search-summary {
+		color: var(--slate-300);
 	}
 
-	.search-results {
-		list-style: none;
-		padding: 0;
-		margin: 0;
+	.search-results-list {
 		display: flex;
 		flex-direction: column;
+		gap: var(--spacing-4);
 	}
 
-	.search-result {
-		padding: var(--spacing-6) 0;
-		border-bottom: 1px solid var(--color-border-subtle);
+	.search-result-item {
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-md);
+		padding: var(--spacing-5);
+		box-shadow: var(--shadow-sm);
+		transition: transform var(--transition-fast), border-color var(--transition-fast);
 	}
 
-	.search-result:first-child {
-		padding-top: 0;
+	:global(.dark) .search-result-item {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.2);
 	}
 
-	.search-result:last-child {
-		border-bottom: none;
+	.search-result-item:hover {
+		transform: translateY(-2px);
+		border-color: var(--sky-400);
 	}
 
-	.result-link {
-		display: block;
+	.result-card-link {
 		text-decoration: none;
 		color: inherit;
+		display: block;
 	}
 
-	.result-title {
-		font-size: var(--font-size-xl);
-		font-weight: var(--font-weight-heading);
-		line-height: var(--leading-snug);
+	.result-badge-row {
 		margin-bottom: var(--spacing-2);
-		transition: color var(--transition-fast);
 	}
 
-	.result-link:hover .result-title {
-		color: var(--color-brand);
+	.result-collection-badge {
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		color: var(--gold-600);
+		background: var(--gold-50);
+		padding: 2px 8px;
+		border-radius: var(--radius-full);
 	}
 
-	.result-snippet {
-		font-size: var(--font-size-base);
-		line-height: var(--leading-relaxed);
-		color: var(--color-text-secondary);
+	:global(.dark) .result-collection-badge {
+		background: rgba(217, 119, 6, 0.15);
+		color: var(--gold-400);
 	}
 
-	/* FTS returns <mark> wrapping the matched terms */
-	.result-snippet :global(mark) {
-		background: var(--color-brand-ring);
-		color: inherit;
-		padding: 0 0.1em;
+	.result-item-title {
+		font-size: 1.2rem;
+		line-height: 1.35;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-2);
+	}
+
+	:global(.dark) .result-item-title {
+		color: var(--white);
+	}
+
+	.result-snippet-text {
+		font-size: 0.9rem;
+		line-height: 1.6;
+		color: var(--slate-700);
+		margin: 0;
+	}
+
+	:global(.dark) .result-snippet-text {
+		color: var(--slate-300);
+	}
+
+	.result-snippet-text :global(mark) {
+		background: var(--gold-200);
+		color: var(--blue-950);
+		font-weight: 600;
+		padding: 0 2px;
 		border-radius: 2px;
+	}
+
+	.search-empty-prompt {
+		padding: var(--spacing-8);
+		background: var(--sky-50);
+		border: 1px dashed var(--sky-300);
+		border-radius: var(--radius-md);
+		font-size: 0.9rem;
+		color: var(--slate-700);
+		line-height: 1.6;
+	}
+
+	:global(.dark) .search-empty-prompt {
+		background: rgba(52, 198, 244, 0.05);
+		border-color: rgba(52, 198, 244, 0.2);
+		color: var(--slate-300);
 	}
 </style>

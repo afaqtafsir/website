@@ -7,24 +7,24 @@ export const GET: APIRoute = async ({ site, url }) => {
 	const siteUrl = site?.toString() || url.origin;
 	const { siteTitle, siteTagline } = resolveBlogSiteIdentity(await getSiteSettings());
 
-	const { entries: posts } = await getEmDashCollection("posts", {
+	const { entries: articles } = await getEmDashCollection("articles", {
 		orderBy: { published_at: "desc" },
 		limit: 20,
 	});
 
-	const items = posts
-		.map((post) => {
-			if (!post.data.publishedAt) return null;
-			const pubDate = post.data.publishedAt.toUTCString();
+	const items = articles
+		.map((article) => {
+			const pubDateRaw = article.data.published_at || article.data.publishedAt;
+			const pubDate = pubDateRaw ? new Date(pubDateRaw).toUTCString() : new Date().toUTCString();
 
-			const postUrl = `${siteUrl}/posts/${post.id}`;
-			const title = escapeXml(post.data.title || "Untitled");
-			const description = escapeXml(post.data.excerpt || "");
+			const articleUrl = `${siteUrl}/${article.id}`;
+			const title = escapeXml(article.data.title || "Untitled");
+			const description = escapeXml(article.data.excerpt || "");
 
 			return `    <item>
       <title>${title}</title>
-      <link>${postUrl}</link>
-      <guid isPermaLink="true">${postUrl}</guid>
+      <link>${articleUrl}</link>
+      <guid isPermaLink="true">${articleUrl}</guid>
       <pubDate>${pubDate}</pubDate>
       <description>${description}</description>
     </item>`;
@@ -39,7 +39,7 @@ export const GET: APIRoute = async ({ site, url }) => {
     <description>${escapeXml(siteTagline)}</description>
     <link>${siteUrl}</link>
     <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml"/>
-    <language>en-us</language>
+    <language>id</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${items}
   </channel>
