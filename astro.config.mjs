@@ -23,10 +23,10 @@ export default defineConfig({
 	vite: {
 		optimizeDeps: {
 			exclude: [
+				"astro/app/manifest",
+				"@astrojs/cloudflare",
 				"emdash",
 				"@emdash-cms/cloudflare",
-				"@emdash-cms/plugin-forms",
-				"@emdash-cms/plugin-webhook-notifier",
 			],
 		},
 	},
