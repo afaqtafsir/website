@@ -106,10 +106,10 @@ const popularArticles = allArticles
 							<p class="hero-lead-excerpt">{leadHero.data.excerpt}</p>
 							<div class="card-meta">
 								<span class="meta-author">
-									{leadHero.data.byline?.displayName || leadHero.data.bylines?.[0]?.byline?.displayName || "Mochamad Refian Prasetyo, S.Ag."}
+									{leadHero.data.bylines?.[0]?.byline?.displayName || "Mochamad Refian Prasetyo, S.Ag."}
 								</span>
 								<span class="meta-sep">•</span>
-								<time class="meta-date">{formatDate(leadHero.data.published_at)}</time>
+								<time class="meta-date">{formatDate(leadHero.data.publishedAt)}</time>
 								<span class="meta-sep">•</span>
 								<span class="meta-reading-time">⏱ {leadHero.data.reading_time || "7 mnt baca"}</span>
 							</div>
@@ -140,7 +140,7 @@ const popularArticles = allArticles
 									</h2>
 									<div class="card-meta-mini">
 										<span class="meta-author">
-											{item.data.byline?.displayName || item.data.bylines?.[0]?.byline?.displayName || "Redaksi"}
+											{item.data.bylines?.[0]?.byline?.displayName || "Redaksi"}
 										</span>
 										<span class="meta-sep">•</span>
 										<span class="meta-time">{item.data.reading_time || "5 mnt"}</span>
@@ -229,9 +229,9 @@ const popularArticles = allArticles
 									</h3>
 									<p class="pattern-lead-excerpt">{patternALead.data.excerpt}</p>
 									<div class="card-meta">
-										<span class="meta-author">{patternALead.data.byline?.displayName || patternALead.data.bylines?.[0]?.byline?.displayName || "Redaksi"}</span>
+										<span class="meta-author">{patternALead.data.bylines?.[0]?.byline?.displayName || "Redaksi"}</span>
 										<span class="meta-sep">•</span>
-										<time class="meta-date">{formatDate(patternALead.data.published_at)}</time>
+										<time class="meta-date">{formatDate(patternALead.data.publishedAt)}</time>
 									</div>
 								</div>
 							</article>
@@ -257,7 +257,7 @@ const popularArticles = allArticles
 										<h4 class="mini-item-title">
 											<a href={`/${item.id}`}>{item.data.title}</a>
 										</h4>
-										<time class="mini-item-date">{formatDate(item.data.published_at)}</time>
+										<time class="mini-item-date">{formatDate(item.data.publishedAt)}</time>
 									</div>
 								</article>
 							))}
@@ -294,9 +294,9 @@ const popularArticles = allArticles
 									</h3>
 									<p class="pattern-b-excerpt">{item.data.excerpt}</p>
 									<div class="card-meta">
-										<span class="meta-author">{item.data.byline?.displayName || item.data.bylines?.[0]?.byline?.displayName || "Redaksi"}</span>
+										<span class="meta-author">{item.data.bylines?.[0]?.byline?.displayName || "Redaksi"}</span>
 										<span class="meta-sep">•</span>
-										<time class="meta-date">{formatDate(item.data.published_at)}</time>
+										<time class="meta-date">{formatDate(item.data.publishedAt)}</time>
 									</div>
 								</div>
 							</article>
@@ -321,7 +321,7 @@ const popularArticles = allArticles
 										<a href={`/${item.id}`}>{item.data.title}</a>
 									</h4>
 									<div class="subgrid-meta">
-										<time>{formatDate(item.data.published_at)}</time>
+										<time>{formatDate(item.data.publishedAt)}</time>
 									</div>
 								</div>
 							</article>

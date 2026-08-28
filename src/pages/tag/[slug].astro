@@ -59,7 +59,7 @@ function formatIndonesianDate(date: Date | string | null | undefined) {
 				<div class="archive-grid">
 					{articles.map((article) => {
 						const tags = tagsByEntry.get(article.data.id) ?? [];
-						const authorName = article.data.byline?.displayName || article.data.bylines?.[0]?.byline?.displayName || "Redaksi";
+						const authorName = article.data.bylines?.[0]?.byline?.displayName || "Redaksi";
 						return (
 							<article class="archive-card">
 								<a href={`/${article.id}`} class="card-img-link">
@@ -84,7 +84,7 @@ function formatIndonesianDate(date: Date | string | null | undefined) {
 									<div class="card-meta">
 										<span class="meta-author">{authorName}</span>
 										<span class="meta-sep">•</span>
-										<time class="meta-date">{formatIndonesianDate(article.data.published_at)}</time>
+										<time class="meta-date">{formatIndonesianDate(article.data.publishedAt)}</time>
 									</div>
 								</div>
 							</article>

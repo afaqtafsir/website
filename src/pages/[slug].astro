@@ -65,7 +65,7 @@ const primaryCategory = categories[0] || { label: "Tafsir Tematik", slug: "tafsi
 const tags = article.data.terms?.tag ?? [];
 
 // Author / Bylines
-const authorByline = article.data.byline || article.data.bylines?.[0]?.byline;
+const authorByline = article.data.bylines?.[0]?.byline;
 const authorName = authorByline?.displayName || "Mochamad Refian Prasetyo, S.Ag.";
 const authorRole = "Peneliti Tafsir & Hermeneutika Al-Qur'an";
 const authorAffiliation = "Pendidikan Kader Ulama Masjid Istiqlal (PKUMI)";
@@ -99,7 +99,7 @@ const relatedCategories = await getTermsForEntries("articles", relatedIds, "cate
 	image={featuredImageUrl}
 	canonical={seo.canonical}
 	type="article"
-	publishedTime={article.data.published_at ? new Date(article.data.published_at).toISOString() : null}
+	publishedTime={article.data.publishedAt ? new Date(article.data.publishedAt).toISOString() : null}
 	modifiedTime={article.data.updatedAt?.toISOString() || null}
 	author={authorName}
 	content={{ collection: "articles", id: article.data.id, slug }}
@@ -136,7 +136,7 @@ const relatedCategories = await getTermsForEntries("articles", relatedIds, "cate
 					</a>
 				</div>
 				<span class="byline-dot">•</span>
-				<time class="byline-date">{formatIndonesianDate(article.data.published_at)}</time>
+				<time class="byline-date">{formatIndonesianDate(article.data.publishedAt)}</time>
 				<span class="byline-dot">•</span>
 				<span class="byline-read-time">⏱ {article.data.reading_time || "6 mnt baca"}</span>
 			</div>
@@ -263,7 +263,7 @@ const relatedCategories = await getTermsForEntries("articles", relatedIds, "cate
 										<h4 class="related-title">
 											<a href={`/${rel.id}`}>{rel.data.title}</a>
 										</h4>
-										<time class="related-date">{formatIndonesianDate(rel.data.published_at)}</time>
+										<time class="related-date">{formatIndonesianDate(rel.data.publishedAt)}</time>
 									</div>
 								</article>
 							);

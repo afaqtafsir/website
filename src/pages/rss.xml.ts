@@ -14,7 +14,7 @@ export const GET: APIRoute = async ({ site, url }) => {
 
 	const items = articles
 		.map((article) => {
-			const pubDateRaw = article.data.published_at || article.data.publishedAt;
+			const pubDateRaw = article.data.publishedAt;
 			const pubDate = pubDateRaw ? new Date(pubDateRaw).toUTCString() : new Date().toUTCString();
 
 			const articleUrl = `${siteUrl}/${article.id}`;
