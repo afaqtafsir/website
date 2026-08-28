@@ -1,55 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
-
-const scholars = [
-	{
-		name: "Mochamad Refian Prasetyo, S.Ag.",
-		role: "Pemimpin Redaksi & Peneliti Hermeneutika",
-		affiliation: "Pendidikan Kader Ulama Masjid Istiqlal (PKUMI)",
-		bio: "Fokus riset pada integrasi hermeneutika modern dan kaidah ushuliyyah tafsir tematik.",
-		slug: "refian"
-	},
-	{
-		name: "Dr. Hamdan Syukri, M.Ud.",
-		role: "Dewan Pakar & Peneliti Kosmologi Qur'ani",
-		affiliation: "Pendidikan Kader Ulama Masjid Istiqlal (PKUMI)",
-		bio: "Mengkaji epistemologi saintifik Al-Qur'an dan dialog agama-sains dalam peradaban kontemporer.",
-		slug: "hamdan"
-	},
-	{
-		name: "Ahmad Zainuri, M.Ag.",
-		role: "Redaktur Senior Kajian Manuskrip",
-		affiliation: "Pusat Filologi & Manuskrip Keislaman Nusantara",
-		bio: "Meneliti sejarah penyalinan mushaf kuno dan transmisi sanad qira'at di Asia Tenggara.",
-		slug: "zainuri"
-	},
-	{
-		name: "Fathimah Az-Zahra, S.Ag.",
-		role: "Redaktur Kajian Gender & Maqashid",
-		affiliation: "PKUMI — Kader Ulama Perempuan",
-		bio: "Meneliti hermeneutika pembebasan perempuan, maqashid syariah keluarga, dan tafsir sosiologis.",
-		slug: "fathimah"
-	},
-	{
-		name: "Nurul Hidayati, M.Hum.",
-		role: "Redaktur Linguistik & Balaghah",
-		affiliation: "Pusat Studi Arab & Semiotika Qur'ani",
-		bio: "Mengkaji keindahan retorika I'jaz Al-Qur'an, uslub majaz, dan stilistika bahasa wahyu.",
-		slug: "nurul"
-	},
-	{
-		name: "Muhammad Ihsan Fauzi, S.Th.I.",
-		role: "Redaktur Kajian Sosial & Etika Publik",
-		affiliation: "Institut Studi Islam & Kebijakan Publik",
-		bio: "Fokus pada etika Al-Qur'an dalam memandu keadilan ekonomi, tata kelola lingkungan, dan relasi antarumat.",
-		slug: "ihsan"
-	}
-];
 ---
 
 <Base
 	title="Tentang Afaq Tafsir — Jurnal & Pemikiran Qur'ani"
-	description="Mengenal visi, manifesto, institusi PKUMI Masjid Istiqlal, dan dewan redaksi Afaq Tafsir."
+	description="Mengenal profil dan kode etik publikasi afaqtafsir.id — platform kajian tafsir Al-Qur'an."
 >
 	<div class="about-page-container">
 		
@@ -62,43 +17,7 @@ const scholars = [
 			<span class="amber-bar"></span>
 		</header>
 
-		{/* SECTION 1: MANIFESTO */}
-		<section class="about-section">
-			<div class="section-card">
-				<h2 class="section-heading">Manifesto & Visi Platform</h2>
-				<p class="prose-text">
-					Al-Qur'an adalah teks yang senantiasa berdialog dengan zaman. Kehadiran Afaq Tafsir lahir dari ikhtiar intelektual untuk menjembatani kekayaan khazanah turats klasik dengan dinamika keilmuan kontemporer, seperti sains modern, keadilan gender, filsafat epistemologi, dan etika ekologi.
-				</p>
-				<p class="prose-text">
-					Sebagai wadah publikasi kader ulama perempuan dan akademisi tafsir, kami berkomitmen merawat tradisi tahqiq (verifikasi ilmiah mendalam), keterbukaan nalar kritis, dan orientasi maqashidiyah demi kemaslahatan umat manusia semesta alam (rahmatan lil-'alamin).
-				</p>
-			</div>
-		</section>
-
-		{/* SECTION 2: DEWAN REDAKSI & PENELITI */}
-		<section class="about-section">
-			<h2 class="section-heading">Dewan Redaksi & Peneliti</h2>
-			<div class="scholars-grid">
-				{scholars.map((s) => (
-					<div class="scholar-card" id={`author-${s.slug}`}>
-						<div class="scholar-avatar">
-							<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0e2746" stroke-width="1.5">
-								<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-								<circle cx="12" cy="7" r="4"></circle>
-							</svg>
-						</div>
-						<div class="scholar-info">
-							<h3 class="scholar-name">{s.name}</h3>
-							<span class="scholar-role">{s.role}</span>
-							<span class="scholar-affil">{s.affiliation}</span>
-							<p class="scholar-bio">{s.bio}</p>
-						</div>
-					</div>
-				))}
-			</div>
-		</section>
-
-		{/* SECTION 3: KODE ETIK PUBLIKASI */}
+		{/* KODE ETIK PUBLIKASI */}
 		<section class="about-section">
 			<div class="section-card ethics-card">
 				<h2 class="section-heading">Kode Etik afaqtafsir.id</h2>
@@ -208,85 +127,6 @@ const scholars = [
 		color: var(--slate-300);
 	}
 
-	/* Scholars Grid */
-	.scholars-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--spacing-6);
-		margin-top: var(--spacing-6);
-	}
-
-	.scholar-card {
-		background: var(--white);
-		border: 1px solid var(--sky-200);
-		border-radius: var(--radius-md);
-		padding: var(--spacing-5);
-		display: flex;
-		gap: var(--spacing-4);
-		box-shadow: var(--shadow-sm);
-	}
-
-	:global(.dark) .scholar-card {
-		background: var(--blue-950);
-		border-color: rgba(52, 198, 244, 0.15);
-	}
-
-	.scholar-avatar {
-		width: 54px;
-		height: 54px;
-		border-radius: var(--radius-full);
-		background: var(--sky-100);
-		border: 1.5px solid var(--sky-300);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-shrink: 0;
-	}
-
-	.scholar-info {
-		min-width: 0;
-	}
-
-	.scholar-name {
-		font-size: 1.05rem;
-		color: var(--blue-950);
-		margin: 0 0 2px;
-	}
-
-	:global(.dark) .scholar-name {
-		color: var(--white);
-	}
-
-	.scholar-role {
-		display: block;
-		font-size: 0.8rem;
-		font-weight: 700;
-		color: var(--gold-600);
-		margin-bottom: 2px;
-	}
-
-	:global(.dark) .scholar-role {
-		color: var(--gold-400);
-	}
-
-	.scholar-affil {
-		display: block;
-		font-size: 0.75rem;
-		color: var(--slate-500);
-		margin-bottom: var(--spacing-2);
-	}
-
-	.scholar-bio {
-		font-size: 0.84rem;
-		line-height: 1.5;
-		color: var(--slate-700);
-		margin: 0;
-	}
-
-	:global(.dark) .scholar-bio {
-		color: var(--slate-300);
-	}
-
 	/* Ethics List */
 	.ethics-list {
 		list-style: none;
@@ -310,10 +150,6 @@ const scholars = [
 	}
 
 	@media (max-width: 768px) {
-		.scholars-grid {
-			grid-template-columns: 1fr;
-		}
-
 		.about-title {
 			font-size: 1.8rem;
 		}
