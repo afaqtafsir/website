@@ -1,0 +1,817 @@
+---
+import {
+	getEmDashEntry,
+	getEmDashCollection,
+	getTermsForEntries,
+	getSeoMeta,
+	decodeSlug,
+	getSiteSettings,
+} from "emdash";
+import {
+	Image,
+	PortableText,
+} from "emdash/ui";
+import Base from "../layouts/Base.astro";
+import { resolveBlogSiteIdentity } from "../utils/site-identity";
+
+const slug = decodeSlug(Astro.params.slug);
+
+if (!slug) {
+	return Astro.redirect("/404");
+}
+
+// Query single article from "articles" collection
+const { entry: article, cacheHint } = await getEmDashEntry("articles", slug);
+
+if (!article) {
+	return Astro.redirect("/404");
+}
+
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+// Helper for image URLs
+function getImageUrl(img: unknown): string | undefined {
+	if (!img || typeof img !== "object") return undefined;
+	const image = img as Record<string, unknown>;
+	if (typeof image.src === "string" && image.src) {
+		return image.src.startsWith("http")
+			? image.src
+			: `${Astro.url.origin}${image.src}`;
+	}
+	const meta = image.meta as Record<string, unknown> | undefined;
+	const storageKey =
+		(typeof meta?.storageKey === "string" ? meta.storageKey : undefined) ||
+		(typeof image.id === "string" ? image.id : undefined);
+	if (storageKey) {
+		return `${Astro.url.origin}/_emdash/api/media/file/${storageKey}`;
+	}
+	return undefined;
+}
+
+const featuredImageUrl = getImageUrl(article.data.featured_image);
+const { siteTitle } = resolveBlogSiteIdentity(await getSiteSettings());
+
+// Generate SEO meta
+const seo = getSeoMeta(article, {
+	siteTitle,
+	siteUrl: Astro.url.origin,
+	path: `/${slug}`,
+	defaultOgImage: featuredImageUrl,
+});
+
+// Category and Tags
+const categories = article.data.terms?.category ?? [];
+const primaryCategory = categories[0] || { label: "Tafsir Tematik", slug: "tafsir-tematik" };
+const tags = article.data.terms?.tag ?? [];
+
+// Author / Bylines
+const authorByline = article.data.byline || article.data.bylines?.[0]?.byline;
+const authorName = authorByline?.displayName || "Mochamad Refian Prasetyo, S.Ag.";
+const authorRole = "Peneliti Tafsir & Hermeneutika Al-Qur'an";
+const authorAffiliation = "Pendidikan Kader Ulama Masjid Istiqlal (PKUMI)";
+const authorBio = "Peneliti studi Al-Qur'an dan hermeneutika kontemporer. Menaruh minat mendalam pada studi gender, manuskrip tafsir Melayu-Nusantara, dan epistemologi maqashid.";
+
+// Indonesian Date Formatting
+function formatIndonesianDate(date: Date | string | null | undefined) {
+	if (!date) return "18 Agustus 2026";
+	const d = typeof date === "string" ? new Date(date) : date;
+	return d.toLocaleDateString("id-ID", {
+		day: "numeric",
+		month: "long",
+		year: "numeric",
+	});
+}
+
+// Fetch Related Articles (3 other articles)
+const { entries: relatedEntries } = await getEmDashCollection("articles", {
+	orderBy: { published_at: "desc" },
+	limit: 4,
+});
+const relatedArticles = relatedEntries.filter((a) => a.id !== article.id).slice(0, 3);
+const relatedIds = relatedArticles.map((a) => a.data.id);
+const relatedCategories = await getTermsForEntries("articles", relatedIds, "category");
+---
+
+<Base
+	title={seo.title}
+	pageTitle={article.data.title}
+	description={seo.description || article.data.excerpt}
+	image={featuredImageUrl}
+	canonical={seo.canonical}
+	type="article"
+	publishedTime={article.data.published_at ? new Date(article.data.published_at).toISOString() : null}
+	modifiedTime={article.data.updatedAt?.toISOString() || null}
+	author={authorName}
+	content={{ collection: "articles", id: article.data.id, slug }}
+>
+	<article class="article-page-container">
+		
+		{/* 1. ARTICLE HEADER & BREADCRUMB */}
+		<header class="article-header">
+			<nav class="article-breadcrumb" aria-label="Breadcrumb">
+				<a href="/">Beranda</a>
+				<span class="bc-sep">›</span>
+				<a href={`/kategori/${primaryCategory.slug}`}>{primaryCategory.label.toUpperCase()}</a>
+				<span class="bc-sep">›</span>
+				<span class="bc-current">{article.data.title}</span>
+			</nav>
+
+			<div class="header-badge-row">
+				<a href={`/kategori/${primaryCategory.slug}`} class="badge-category">
+					{primaryCategory.label}
+				</a>
+			</div>
+
+			<h1 class="article-headline">{article.data.title}</h1>
+			
+			{article.data.subheadline && (
+				<p class="article-subheadline">{article.data.subheadline}</p>
+			)}
+
+			<div class="article-byline-bar">
+				<div class="byline-left">
+					<span class="byline-written">Ditulis oleh</span>
+					<a href={`/tentang#author-${authorByline?.slug || "refian"}`} class="byline-name">
+						{authorName}
+					</a>
+				</div>
+				<span class="byline-dot">•</span>
+				<time class="byline-date">{formatIndonesianDate(article.data.published_at)}</time>
+				<span class="byline-dot">•</span>
+				<span class="byline-read-time">⏱ {article.data.reading_time || "6 mnt baca"}</span>
+			</div>
+		</header>
+
+		{/* 2. FEATURED IMAGE BANNER */}
+		{article.data.featured_image && (
+			<figure class="article-featured-banner">
+				<div class="banner-image-wrapper">
+					<Image image={article.data.featured_image} />
+				</div>
+				{article.data.featured_image.alt && (
+					<figcaption class="banner-caption">{article.data.featured_image.alt}</figcaption>
+				)}
+			</figure>
+		)}
+
+		{/* 3. PROSE CONTAINER (MAX-WIDTH 720PX) */}
+		<div class="article-body-wrapper">
+			<div class="article-prose">
+				{/* Lead Excerpt */}
+				{article.data.excerpt && (
+					<p class="article-lead-paragraph">
+						{article.data.excerpt}
+					</p>
+				)}
+
+				{/* Rich Body Content (Portable Text) */}
+				{article.data.content && (
+					<div class="portable-text-container">
+						<PortableText value={article.data.content} />
+					</div>
+				)}
+			</div>
+
+			{/* TAGS ROW */}
+			{tags.length > 0 && (
+				<div class="article-tags-section">
+					<span class="tags-label">Topik Terkait:</span>
+					<div class="tags-list">
+						{tags.map((tag) => (
+							<a href={`/tag/${tag.slug}`} class="tag-chip">
+								#{tag.label}
+							</a>
+						))}
+					</div>
+				</div>
+			)}
+
+			{/* 4. AUTHOR PROFILE CARD */}
+			<section class="author-profile-card" aria-label="Profil Penulis">
+				<div class="author-avatar-col">
+					<div class="author-avatar-img">
+						<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0e2746" stroke-width="1.5">
+							<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+							<circle cx="12" cy="7" r="4"></circle>
+						</svg>
+					</div>
+				</div>
+				<div class="author-bio-col">
+					<span class="author-card-label">PROFIL PENULIS</span>
+					<h3 class="author-card-name">{authorName}</h3>
+					<p class="author-card-affiliation">{authorRole} • {authorAffiliation}</p>
+					<p class="author-card-bio">{authorBio}</p>
+					<a href={`/tentang#author-${authorByline?.slug || "refian"}`} class="author-archive-link">
+						<span>Lihat Profil Lengkap & Arsip Kajian →</span>
+					</a>
+				</div>
+			</section>
+
+			{/* 5. MODERATED DISCUSSION BOX */}
+			<section class="discussion-box-section" aria-label="Ruang Diskusi Ilmiah">
+				<div class="discussion-header">
+					<div class="discussion-title-row">
+						<h3 class="discussion-title">Ruang Diskusi Ilmiah</h3>
+						<span class="badge-gold">TERMODERASI</span>
+					</div>
+					<p class="discussion-desc">
+						Sampaikan tanggapan, elaborasi metodologis, atau kritik ilmiah secara santun dan bertanggung jawab.
+					</p>
+				</div>
+				<div class="discussion-card">
+					<textarea
+						placeholder="Tuliskan pandangan atau tanggapan ilmiah Anda atas kajian ini..."
+						rows="4"
+						class="discussion-textarea"
+					></textarea>
+					<div class="discussion-actions">
+						<span class="discussion-guideline-note">
+							*Diskusi dikurasi oleh Dewan Redaksi Afaq Tafsir sesuai Kode Etik Publikasi.
+						</span>
+						<button type="button" class="btn-submit-discussion" onclick="alert('Terima kasih. Tanggapan Anda telah diterima dan akan ditinjau oleh Dewan Redaksi.')">
+							Kirim Tanggapan
+						</button>
+					</div>
+				</div>
+			</section>
+
+			{/* 6. KAJIAN TERKAIT (3-CARD GRID) */}
+			{relatedArticles.length > 0 && (
+				<section class="related-articles-section" aria-label="Kajian Terkait">
+					<div class="section-header">
+						<h3 class="section-title">Kajian Terkait</h3>
+						<span class="amber-bar"></span>
+					</div>
+					<div class="related-grid">
+						{relatedArticles.map((rel) => {
+							const relCat = relatedCategories.get(rel.data.id)?.[0] || { label: "Tafsir Tematik", slug: "tafsir-tematik" };
+							return (
+								<article class="related-card">
+									<a href={`/${rel.id}`} class="related-img-link">
+										<div class="related-img">
+											{rel.data.featured_image ? (
+												<Image image={rel.data.featured_image} />
+											) : (
+												<div class="related-fallback">AFAQ TAFSIR</div>
+											)}
+										</div>
+									</a>
+									<div class="related-body">
+										<a href={`/kategori/${relCat.slug}`} class="badge-category-mini">
+											{relCat.label}
+										</a>
+										<h4 class="related-title">
+											<a href={`/${rel.id}`}>{rel.data.title}</a>
+										</h4>
+										<time class="related-date">{formatIndonesianDate(rel.data.published_at)}</time>
+									</div>
+								</article>
+							);
+						})}
+					</div>
+				</section>
+			)}
+
+		</div>
+	</article>
+</Base>
+
+<style>
+	.article-page-container {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: var(--spacing-8) var(--spacing-6) var(--spacing-16);
+	}
+
+	/* ==========================================================================
+	   1. ARTICLE HEADER
+	   ========================================================================== */
+	.article-header {
+		max-width: 820px;
+		margin: 0 auto var(--spacing-8);
+		text-align: left;
+	}
+
+	.article-breadcrumb {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 8px;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--slate-600);
+		margin-bottom: var(--spacing-4);
+	}
+
+	.article-breadcrumb a {
+		color: var(--slate-700);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+
+	.article-breadcrumb a:hover {
+		color: var(--text-brand);
+	}
+
+	.bc-sep {
+		color: var(--slate-400);
+	}
+
+	.bc-current {
+		color: var(--text-brand);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 320px;
+	}
+
+	.header-badge-row {
+		margin-bottom: var(--spacing-4);
+	}
+
+	.article-headline {
+		font-size: 2.25rem;
+		line-height: 1.25;
+		color: var(--blue-950);
+		margin-bottom: var(--spacing-3);
+		letter-spacing: -0.02em;
+	}
+
+	:global(.dark) .article-headline {
+		color: var(--white);
+	}
+
+	.article-subheadline {
+		font-family: var(--font-sans);
+		font-size: 1.15rem;
+		line-height: 1.6;
+		color: var(--slate-700);
+		font-style: italic;
+		margin-bottom: var(--spacing-6);
+	}
+
+	:global(.dark) .article-subheadline {
+		color: var(--slate-300);
+	}
+
+	.article-byline-bar {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 8px;
+		font-size: 0.88rem;
+		color: var(--slate-600);
+		padding-top: var(--spacing-4);
+		border-top: 1px solid var(--sky-200);
+	}
+
+	:global(.dark) .article-byline-bar {
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.byline-name {
+		font-weight: 700;
+		color: var(--blue-950);
+		text-decoration: none;
+	}
+
+	:global(.dark) .byline-name {
+		color: var(--white);
+	}
+
+	.byline-name:hover {
+		color: var(--text-brand);
+	}
+
+	.byline-dot {
+		opacity: 0.5;
+	}
+
+	/* ==========================================================================
+	   2. FEATURED IMAGE BANNER
+	   ========================================================================== */
+	.article-featured-banner {
+		max-width: 960px;
+		margin: 0 auto var(--spacing-10);
+	}
+
+	.banner-image-wrapper {
+		aspect-ratio: 16 / 9;
+		width: 100%;
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+		border: 1px solid var(--sky-200);
+		box-shadow: var(--shadow-md);
+		background: var(--sky-100);
+	}
+
+	.banner-image-wrapper :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.banner-caption {
+		font-size: 0.8rem;
+		color: var(--slate-600);
+		text-align: center;
+		margin-top: var(--spacing-2);
+		font-style: italic;
+	}
+
+	/* ==========================================================================
+	   3. PROSE CONTAINER (720PX)
+	   ========================================================================== */
+	.article-body-wrapper {
+		max-width: 720px;
+		margin: 0 auto;
+	}
+
+	.article-lead-paragraph {
+		font-size: 1.18rem;
+		line-height: 1.8;
+		font-weight: 500;
+		color: var(--blue-950);
+		margin-bottom: var(--spacing-6);
+		padding-bottom: var(--spacing-6);
+		border-bottom: 1px solid var(--sky-200);
+	}
+
+	:global(.dark) .article-lead-paragraph {
+		color: var(--slate-100);
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+
+	.portable-text-container {
+		font-size: 1.08rem;
+		line-height: 1.85;
+		color: var(--slate-800);
+	}
+
+	:global(.dark) .portable-text-container {
+		color: var(--slate-200);
+	}
+
+	.portable-text-container :global(p) {
+		margin-bottom: var(--spacing-5);
+	}
+
+	.portable-text-container :global(h2) {
+		font-size: 1.55rem;
+		line-height: 1.35;
+		color: var(--blue-950);
+		margin: var(--spacing-8) 0 var(--spacing-4);
+	}
+
+	:global(.dark) .portable-text-container :global(h2) {
+		color: var(--white);
+	}
+
+	.portable-text-container :global(h3) {
+		font-size: 1.25rem;
+		line-height: 1.4;
+		color: var(--blue-950);
+		margin: var(--spacing-6) 0 var(--spacing-3);
+	}
+
+	:global(.dark) .portable-text-container :global(h3) {
+		color: var(--white);
+	}
+
+	.portable-text-container :global(blockquote) {
+		background: #f4faff;
+		border-right: 4px solid var(--sky-500);
+		border-radius: var(--radius-md);
+		padding: var(--spacing-6);
+		margin: var(--spacing-6) 0;
+		box-shadow: var(--shadow-sm);
+	}
+
+	:global(.dark) .portable-text-container :global(blockquote) {
+		background: rgba(8, 26, 47, 0.6);
+		border-right-color: var(--sky-400);
+	}
+
+	/* Tags Section */
+	.article-tags-section {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin: var(--spacing-8) 0;
+		padding: var(--spacing-4) 0;
+		border-top: 1px solid var(--sky-200);
+		border-bottom: 1px solid var(--sky-200);
+	}
+
+	.tags-label {
+		font-size: 0.82rem;
+		font-weight: 700;
+		color: var(--slate-700);
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	.tags-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+	}
+
+	.tag-chip {
+		display: inline-block;
+		padding: 3px 10px;
+		background: var(--sky-100);
+		color: var(--text-brand);
+		font-size: 0.78rem;
+		font-weight: 600;
+		border-radius: var(--radius-full);
+		text-decoration: none;
+		transition: background var(--transition-fast);
+	}
+
+	.tag-chip:hover {
+		background: var(--sky-200);
+	}
+
+	/* ==========================================================================
+	   4. AUTHOR PROFILE CARD
+	   ========================================================================== */
+	.author-profile-card {
+		display: flex;
+		gap: var(--spacing-6);
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-6);
+		margin: var(--spacing-10) 0;
+		box-shadow: var(--shadow-sm);
+	}
+
+	:global(.dark) .author-profile-card {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.author-avatar-img {
+		width: 72px;
+		height: 72px;
+		border-radius: var(--radius-full);
+		background: var(--sky-100);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 2px solid var(--sky-300);
+		flex-shrink: 0;
+	}
+
+	.author-card-label {
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		color: var(--gold-600);
+		margin-bottom: 2px;
+		display: block;
+	}
+
+	.author-card-name {
+		font-size: 1.25rem;
+		color: var(--blue-950);
+		margin: 0 0 2px;
+	}
+
+	:global(.dark) .author-card-name {
+		color: var(--white);
+	}
+
+	.author-card-affiliation {
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: var(--text-brand);
+		margin-bottom: var(--spacing-3);
+	}
+
+	.author-card-bio {
+		font-size: 0.88rem;
+		line-height: 1.6;
+		color: var(--slate-700);
+		margin-bottom: var(--spacing-4);
+	}
+
+	:global(.dark) .author-card-bio {
+		color: var(--slate-300);
+	}
+
+	.author-archive-link {
+		font-size: 0.85rem;
+		font-weight: 700;
+		color: var(--text-brand);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+
+	.author-archive-link:hover {
+		color: var(--blue-900);
+		text-decoration: underline;
+	}
+
+	/* ==========================================================================
+	   5. MODERATED DISCUSSION BOX
+	   ========================================================================== */
+	.discussion-box-section {
+		margin: var(--spacing-12) 0;
+		background: #fbfdff;
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-6);
+	}
+
+	:global(.dark) .discussion-box-section {
+		background: rgba(8, 26, 47, 0.4);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.discussion-title-row {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: var(--spacing-2);
+	}
+
+	.discussion-title {
+		font-size: 1.2rem;
+		color: var(--blue-950);
+		margin: 0;
+	}
+
+	:global(.dark) .discussion-title {
+		color: var(--white);
+	}
+
+	.discussion-desc {
+		font-size: 0.85rem;
+		color: var(--slate-600);
+		margin-bottom: var(--spacing-4);
+	}
+
+	.discussion-textarea {
+		width: 100%;
+		padding: var(--spacing-3);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-md);
+		font-family: var(--font-sans);
+		font-size: 0.9rem;
+		color: var(--slate-800);
+		background: var(--white);
+		margin-bottom: var(--spacing-3);
+		resize: vertical;
+	}
+
+	:global(.dark) .discussion-textarea {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.3);
+		color: var(--white);
+	}
+
+	.discussion-actions {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: var(--spacing-3);
+	}
+
+	.discussion-guideline-note {
+		font-size: 0.75rem;
+		color: var(--slate-500);
+		font-style: italic;
+	}
+
+	.btn-submit-discussion {
+		padding: 8px 18px;
+		background: var(--blue-900);
+		color: var(--white);
+		font-family: var(--font-sans);
+		font-size: 0.85rem;
+		font-weight: 700;
+		border: none;
+		border-radius: var(--radius-full);
+		cursor: pointer;
+		transition: background var(--transition-fast);
+	}
+
+	.btn-submit-discussion:hover {
+		background: var(--blue-800);
+	}
+
+	/* ==========================================================================
+	   6. KAJIAN TERKAIT (3-CARD GRID)
+	   ========================================================================== */
+	.related-articles-section {
+		margin-top: var(--spacing-16);
+		padding-top: var(--spacing-8);
+		border-top: 1px solid var(--sky-200);
+	}
+
+	.related-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--spacing-4);
+	}
+
+	.related-card {
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-md);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+
+	:global(.dark) .related-card {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.related-img-link {
+		display: block;
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+	}
+
+	.related-img {
+		width: 100%;
+		height: 100%;
+	}
+
+	.related-img :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.related-fallback {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--blue-900);
+		color: var(--sky-300);
+		font-size: 0.8rem;
+		font-weight: 700;
+	}
+
+	.related-body {
+		padding: var(--spacing-4);
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.related-title {
+		font-size: 0.95rem;
+		line-height: 1.35;
+		margin: var(--spacing-1) 0 var(--spacing-2);
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.related-title a {
+		color: var(--blue-950);
+		text-decoration: none;
+	}
+
+	:global(.dark) .related-title a {
+		color: var(--white);
+	}
+
+	.related-title a:hover {
+		color: var(--text-brand);
+	}
+
+	.related-date {
+		font-size: 0.75rem;
+		color: var(--slate-600);
+		margin-top: auto;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.article-headline {
+			font-size: 1.65rem;
+		}
+
+		.author-profile-card {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+
+		.related-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
