@@ -30,7 +30,7 @@ import Base from "../layouts/Base.astro";
 					<li><strong>6. Referensi dan Pengutipan:</strong> Setiap sumber yang digunakan wajib dicantumkan dalam tulisan menggunakan sistem <em>bodynote</em>, dengan format <code>(Nama Penulis, Tahun Terbit: Halaman)</code>, misalnya <em>(Sirry, 2017: 20)</em>. Seluruh sumber yang dirujuk juga wajib dicantumkan dalam Daftar Pustaka/Referensi di bagian akhir artikel.</li>
 					<li>
 						<strong>7. Identitas Penulis:</strong> Setiap artikel wajib disertai informasi penulis pada bagian akhir artikel yang meliputi:
-						<ul style="margin-top: 6px; padding-left: 20px; list-style-type: disc;">
+						<ul class="guide-sublist">
 							<li>Nama lengkap (tidak menggunakan nama samaran);</li>
 							<li>Foto profil;</li>
 							<li>Email aktif;</li>
@@ -141,7 +141,7 @@ import Base from "../layouts/Base.astro";
 		gap: var(--spacing-4);
 	}
 
-	.guide-list li {
+	.guide-list > li {
 		font-size: 0.98rem;
 		line-height: 1.75;
 		color: var(--slate-700);
@@ -149,8 +149,31 @@ import Base from "../layouts/Base.astro";
 		border-left: 3px solid var(--sky-400);
 	}
 
-	:global(.dark) .guide-list li {
+	:global(.dark) .guide-list > li {
 		color: var(--slate-300);
+	}
+
+	.guide-sublist {
+		list-style-type: disc;
+		margin: var(--spacing-2) 0 0;
+		padding-left: 1.25rem;
+	}
+
+	.guide-sublist li {
+		font-size: 0.95rem;
+		line-height: 1.65;
+		color: var(--slate-600);
+		border-left: none;
+		padding-left: 0;
+		margin-bottom: var(--spacing-1);
+	}
+
+	.guide-sublist li:last-child {
+		margin-bottom: 0;
+	}
+
+	:global(.dark) .guide-sublist li {
+		color: var(--slate-400);
 	}
 
 	/* Workflow Steps */
