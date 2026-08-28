@@ -39,9 +39,6 @@ function formatIndonesianDate(date: Date | string | null | undefined) {
 <Base title={`Kajian Kategori: ${term.label}`} description={`Kumpulan artikel dan kajian tafsir dalam kategori ${term.label} di Afaq Tafsir.`}>
 	<section class="archive-section">
 		<header class="archive-header">
-			<div class="archive-badge-wrap">
-				<span class="badge-gold">KATEGORI KAJIAN</span>
-			</div>
 			<h1 class="archive-title">{term.label}</h1>
 			<p class="archive-count">
 				Menampilkan {articles.length} kajian ilmiah
@@ -102,10 +99,6 @@ function formatIndonesianDate(date: Date | string | null | undefined) {
 
 	.archive-header {
 		margin-bottom: var(--spacing-10);
-	}
-
-	.archive-badge-wrap {
-		margin-bottom: var(--spacing-3);
 	}
 
 	.archive-title {

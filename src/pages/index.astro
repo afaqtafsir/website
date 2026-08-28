@@ -157,10 +157,6 @@ const popularArticles = allArticles
 		<section class="video-showcase-section" id="kajian-pilihan" aria-label="Kajian Visual & Multimedia">
 			<div class="video-showcase-box">
 				<div class="video-player-container">
-					<div class="video-badge-pill">
-						<span class="pulse-dot"></span>
-						<span>Cloudflare R2 Stream</span>
-					</div>
 					<video
 						controls
 						playsinline
@@ -173,9 +169,6 @@ const popularArticles = allArticles
 					</video>
 				</div>
 				<div class="video-info-container">
-					<div class="video-badge-wrap">
-						<span class="badge-gold">KAJIAN PILIHAN</span>
-					</div>
 					<h2 class="video-title">Kosmologi Al-Qur'an dan Dimensi Penciptaan Alam Semesta</h2>
 					<div class="video-speaker-byline">
 						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -372,9 +365,6 @@ const popularArticles = allArticles
 
 				{/* WIDGET 3: CTA PANGGILAN KONTRIBUTOR */}
 				<div class="sidebar-widget widget-contributor-cta">
-					<div class="contributor-badge-wrap">
-						<span class="badge-gold">PANGGILAN KONTRIBUTOR</span>
-					</div>
 					<h3 class="contributor-title">Kirimkan Naskah Esai & Kajian Tafsir Anda</h3>
 					<p class="contributor-desc">
 						Redaksi Afaq Tafsir membuka penerimaan artikel tematik tafsir, manuskrip, dan pemikiran Islam untuk dipublikasikan secara berkala.
@@ -680,32 +670,6 @@ const popularArticles = allArticles
 		background: #000;
 	}
 
-	.video-badge-pill {
-		position: absolute;
-		top: 12px;
-		left: 12px;
-		z-index: 10;
-		display: flex;
-		align-items: center;
-		gap: 6px;
-		padding: 4px 10px;
-		background: rgba(8, 26, 47, 0.85);
-		border: 1px solid rgba(52, 198, 244, 0.4);
-		border-radius: var(--radius-full);
-		font-size: 0.72rem;
-		font-weight: 700;
-		color: var(--sky-300);
-		backdrop-filter: blur(8px);
-	}
-
-	.pulse-dot {
-		width: 6px;
-		height: 6px;
-		background: #10b981;
-		border-radius: 50%;
-		box-shadow: 0 0 8px #10b981;
-	}
-
 	.native-video-player {
 		width: 100%;
 		height: 100%;
@@ -715,10 +679,6 @@ const popularArticles = allArticles
 	.video-info-container {
 		display: flex;
 		flex-direction: column;
-	}
-
-	.video-badge-wrap {
-		margin-bottom: var(--spacing-3);
 	}
 
 	.video-title {
@@ -1205,10 +1165,6 @@ const popularArticles = allArticles
 	:global(.dark) .widget-contributor-cta {
 		background: linear-gradient(180deg, rgba(217, 119, 6, 0.15) 0%, var(--blue-950) 100%);
 		border-color: var(--gold-500);
-	}
-
-	.contributor-badge-wrap {
-		margin-bottom: var(--spacing-3);
 	}
 
 	.contributor-title {
