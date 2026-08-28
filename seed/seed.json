@@ -1085,21 +1085,11 @@
 					"content": [
 						{
 							"_type": "block",
-							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Manifesto & Visi Platform"
-								}
-							]
-						},
-						{
-							"_type": "block",
 							"style": "normal",
 							"children": [
 								{
 									"_type": "span",
-									"text": "Afaq Tafsir diinisiasi pada tahun 2026 oleh mahasiswi Pendidikan Kader Ulama Masjid Istiqlal (PKUMI) — Program Kader Ulama Perempuan. Platform ini didirikan atas kesadaran mendalam akan pentingnya ruang publik intelektual yang mempertemukan ketelitian metodologis tafsir klasik dengan diskursus keilmuan kontemporer."
+									"text": "afaqtafsir.id adalah platform digital yang didedikasikan untuk pengembangan kajian tafsir Al-Qur’an dan menjadi wadah bagi para penulis untuk belajar, berkarya, serta berbagi gagasan. Diinisiasi pada tahun 2026 oleh sejumlah mahasiswi Pendidikan Kader Ulama Masjid Istiqlal (PKUMI) dari Program Kader Ulama Perempuan, afaqtafsir.id menghadirkan ruang untuk memperluas akses terhadap pengetahuan tafsir yang kritis, kontekstual, dan relevan, sekaligus mendorong kolaborasi dan lahirnya karya-karya yang dapat memberikan dampak bagi masyarakat."
 								}
 							]
 						},
@@ -1109,7 +1099,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Kode Etik Publikasi"
+									"text": "Kode Etik afaqtafsir.id"
 								}
 							]
 						},
@@ -1119,7 +1109,87 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "1. Integritas Akademik & Orisinalitas: Setiap naskah bebas dari plagiarisme dan didasarkan pada rujukan ilmiah yang teruji.\n2. Kebebasan Berpendapat yang Bertanggung Jawab: Diskusi disajikan secara argumentatif, santun, dan menjunjung tinggi martabat kemanusiaan."
+									"text": "afaqtafsir.id berkomitmen untuk menjadi ruang pembelajaran, kepenulisan, dan pertukaran gagasan mengenai tafsir Al-Qur’an yang terbuka, kritis, dan bertanggung jawab. Setiap penulis dan kontributor diharapkan menjunjung tinggi etika akademik, integritas, serta penghormatan terhadap keberagaman dalam menyampaikan gagasan."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "1. Integritas Akademik: Setiap tulisan harus merupakan karya asli penulis dan tidak mengandung plagiarisme. Setiap gagasan, data, kutipan, atau sumber yang berasal dari pihak lain wajib dicantumkan secara layak dan dapat dipertanggungjawabkan."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "2. Kebebasan Berpendapat: afaqtafsir.id menghargai kebebasan berpikir, berpendapat, dan berekspresi dalam kajian Al-Qur’an dan tafsir, selama disampaikan secara argumentatif, bertanggung jawab, dan tidak melanggar hak orang lain."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "3. Penghormatan terhadap Keberagaman: Perbedaan pandangan dalam memahami Al-Qur’an dan tafsir merupakan bagian dari dinamika keilmuan. Setiap penulis wajib menghormati perbedaan perspektif, latar belakang, dan keyakinan serta menghindari tulisan yang bersifat diskriminatif, merendahkan, atau mengandung kebencian."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "4. Akurasi dan Tanggung Jawab: Penulis bertanggung jawab atas isi, argumentasi, dan sumber yang digunakan dalam tulisannya. Informasi yang disampaikan diupayakan berdasarkan sumber yang dapat dipertanggungjawabkan dan tidak dimaksudkan sebagai satu-satunya kebenaran dalam memahami suatu persoalan."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "5. Etika Pengutipan dan Hak Cipta: Penggunaan karya, gagasan, atau kutipan dari pihak lain wajib mencantumkan nama penulis, judul karya, dan sumber atau tautan yang relevan. Publikasi di afaqtafsir.id tidak menghilangkan hak kepemilikan intelektual penulis atas karyanya."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "6. Bahasa yang Berkeadaban: Setiap tulisan dan interaksi di afaqtafsir.id diharapkan menggunakan bahasa yang santun, inklusif, dan konstruktif. Kritik terhadap gagasan hendaknya disampaikan dengan argumentasi yang baik tanpa menyerang pribadi, kelompok, atau identitas tertentu."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "7. Tanggung Jawab Publikasi: afaqtafsir.id berhak melakukan penyuntingan, peninjauan, atau tidak menerbitkan tulisan yang dinilai tidak sesuai dengan nilai dan ketentuan publikasi. Setiap penulis tetap bertanggung jawab atas pandangan dan konsekuensi yang timbul dari isi tulisannya."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Kode etik ini menjadi pedoman bersama bagi afaqtafsir.id, penulis, dan kontributor dalam membangun ruang kajian tafsir Al-Qur’an yang berintegritas, terbuka, dan memberikan manfaat bagi masyarakat."
 								}
 							]
 						}
@@ -1131,7 +1201,7 @@
 				"slug": "kontak",
 				"status": "published",
 				"data": {
-					"title": "Kontak & Saluran Resmi",
+					"title": "Kontak & Saluran Resmi Redaksi",
 					"content": [
 						{
 							"_type": "block",
@@ -1139,7 +1209,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Untuk korespondensi editorial, pengiriman naskah, atau kerjasama kemitraan akademik, silakan hubungi redaksi melalui surel resmi kami: afaqtafsir.id@gmail.com"
+									"text": "Silakan hubungi kami untuk keperluan korespondensi artikel, kerjasama kemitraan akademik, undangan forum ilmiah, atau pertanyaan umum melalui surel resmi afaqtafsir.id@gmail.com."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Sekretariat Redaksi"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Pendidikan Kader Ulama Masjid Istiqlal (PKUMI), Masjid Istiqlal, Jl. Taman Wijaya Kusuma, Ps. Baru, Sawah Besar, Jakarta Pusat, DKI Jakarta 10710."
 								}
 							]
 						}
@@ -1151,15 +1241,175 @@
 				"slug": "kirim-tulisan",
 				"status": "published",
 				"data": {
-					"title": "Panduan Pengiriman Naskah",
+					"title": "Panduan & Standar Pengiriman Naskah",
 					"content": [
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Syarat dan Ketentuan Artikel Esai"
+								}
+							]
+						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"children": [
 								{
 									"_type": "span",
-									"text": "Afaq Tafsir membuka ruang bagi akademisi, santri, dan peneliti untuk mengirimkan naskah esai tafsir tematik (800-1.000 kata) via surel: afaqtafsir.id@gmail.com dengan subjek Tema_NamaPenulis_JudulTulisan."
+									"text": "1. Panjang Tulisan: Artikel esai terdiri atas 800–1.000 kata. Setiap paragraf disarankan tidak lebih dari 4–5 baris untuk menyesuaikan karakteristik dan kebutuhan media digital yang informatif sekaligus menarik untuk dibaca."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "2. Orisinalitas Karya: Artikel yang dikirimkan merupakan karya orisinal penulis dan belum pernah dipublikasikan di media lain."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "3. Kesesuaian Tema: Artikel harus berada dalam cakupan kajian Al-Qur’an dan tafsir, baik berupa kajian, refleksi, analisis, maupun isu-isu aktual yang relevan dengan bidang tersebut."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "4. Plagiarisme: Tingkat kemiripan (similarity) artikel maksimal 25%. Artikel dengan tingkat kemiripan di atas batas tersebut tidak dapat diterbitkan di afaqtafsir.id."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "5. Gaya Penulisan: Artikel ditulis dengan gaya ilmiah populer yang komunikatif, mudah dipahami, dan tetap memiliki dasar akademik. Penulisan mengikuti kaidah bahasa Indonesia yang berlaku serta memperhatikan ketepatan penggunaan transliterasi istilah Arab."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "6. Referensi dan Pengutipan: Setiap sumber yang digunakan wajib dicantumkan dalam tulisan menggunakan sistem bodynote, dengan format (Nama Penulis, Tahun Terbit: Halaman), misalnya (Sirry, 2017: 20). Seluruh sumber yang dirujuk juga wajib dicantumkan dalam Daftar Pustaka/Referensi di bagian akhir artikel."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "7. Identitas Penulis: Setiap artikel wajib disertai informasi penulis yang meliputi: Nama lengkap (tidak menggunakan nama samaran), Foto profil, Email aktif, Nomor WhatsApp, Biodata singkat, dan Akun Instagram (apabila bersedia untuk di-tag atau diajak collaboration post). Identitas dicantumkan pada bagian akhir artikel."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "8. Mekanisme Pengiriman: Artikel dikirimkan melalui email afaqtafsir.id@gmail.com dengan subjek: “Tema_Nama Penulis_Judul Tulisan”. Tema dapat ditentukan secara bebas oleh penulis selama tetap sesuai dengan cakupan kajian afaqtafsir.id. Email yang tidak mencantumkan subjek sesuai format tidak akan diproses."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Catatan Redaksi"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "1. Pengiriman Tulisan: Penulis diperbolehkan mengirimkan lebih dari satu tulisan dalam satu hari. Namun, setiap tulisan wajib dikirim melalui email yang terpisah."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "2. Apresiasi Penulis: Setiap tulisan yang berhasil dipublikasikan akan mendapatkan fee sebesar Rp25.000 per tulisan. Fee dapat diklaim setelah penulis mencapai empat tulisan yang telah dipublikasikan di website afaqtafsir.id, dengan total Rp100.000 untuk setiap satu kali klaim."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "3. Bonus Pencapaian: Sebagai bentuk apresiasi tambahan, afaqtafsir.id memberikan bonus sebesar Rp10.000 untuk setiap tulisan yang berhasil mencapai 500 views."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "4. Hak Kepemilikan dan Hak Cipta: Setiap karya yang telah diterima dan dinyatakan memenuhi standar editorial menjadi bagian dari konten publikasi afaqtafsir.id. Hak cipta dan hak moral atas karya tetap melekat pada penulis."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "5. Penyuntingan Naskah: Redaksi berhak melakukan penyuntingan terhadap naskah yang telah diterima, termasuk penyesuaian judul maupun redaksi tulisan, dengan tetap mengomunikasikan perubahan tersebut kepada penulis terlebih dahulu."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "6. Publikasi di Media Lain: Penulis diperkenankan untuk mempublikasikan kembali tulisannya di media lain setelah tulisan tersebut tayang selama minimal tiga hari di website afaqtafsir.id. Publikasi ulang wajib mencantumkan tautan sumber asli yang mengarah ke artikel di afaqtafsir.id."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "7. Kritik dan Saran: afaqtafsir.id terbuka terhadap kritik, masukan, dan saran dari penulis maupun pembaca untuk meningkatkan kualitas konten dan pengelolaan platform. Kritik dan saran dapat disampaikan melalui email afaqtafsir.id@gmail.com."
 								}
 							]
 						}
