@@ -1,5 +1,5 @@
 ---
-import { getMenu, getEmDashCollection, getSiteSettings } from "emdash";
+import { getMenu, getSiteSettings } from "emdash";
 import {
 	WidgetArea,
 	EmDashHead,
@@ -41,20 +41,19 @@ const {
 	author,
 	content,
 } = Astro.props;
-const { siteTitle, siteTagline, siteLogo } = resolveBlogSiteIdentity(await getSiteSettings());
+const { siteTitle, siteTagline } = resolveBlogSiteIdentity(await getSiteSettings());
 // If title already includes site title (from getSeoMeta), use as-is
 const fullTitle = title.includes(siteTitle) ? title : `${title} — ${siteTitle}`;
 
-// Fetch primary menu defined in seed
-const menu = await getMenu("primary");
-
-// Optional "social" menu. If a site defines a `social` menu in its seed,
-// it'll render in the footer's "Connect" column. Otherwise that column
-// just shows RSS, avoiding duplication with the "Navigate" column above.
-const socialMenu = await getMenu("social");
-
-// Fetch pages for footer
-const { entries: pages } = await getEmDashCollection("pages");
+// Fetch primary menu defined in seed, with fallback items
+const primaryMenu = await getMenu("primary");
+const navItems: Array<{ label: string; url: string; target?: string | null }> = primaryMenu?.items?.length
+	? primaryMenu.items.filter((item) => item.url !== "/kirim-tulisan")
+	: [
+			{ label: "Beranda", url: "/", target: undefined },
+			{ label: "Tentang", url: "/tentang", target: undefined },
+			{ label: "Kontak", url: "/kontak", target: undefined },
+	  ];
 
 // Build public page context for plugin contributions
 // SEO data is passed here and rendered securely by EmDashHead
@@ -86,6 +85,20 @@ const isLoggedIn = !!Astro.locals.user;
 		<Font cssVariable="--font-mono" />
 		<title>{fullTitle}</title>
 		<EmDashHead page={pageCtx} />
+		<script is:inline define:vars={{
+			pageType: type,
+			articleTitle: title,
+			authorName: author,
+			publishedDate: publishedTime
+		}}>
+			window.dataLayer = window.dataLayer || [];
+			window.dataLayer.push({
+				page_type: pageType || 'website',
+				article_title: articleTitle,
+				author_name: authorName,
+				published_date: publishedDate
+			});
+		</script>
 		<script is:inline>
 			// Apply an explicit theme choice immediately to prevent flash.
 			// With no cookie, color-scheme: light dark follows the OS.
@@ -103,103 +116,141 @@ const isLoggedIn = !!Astro.locals.user;
 		<EmDashBodyStart page={pageCtx} />
 		<header class="site-header">
 			<nav class="nav">
-				<a href="/" class="site-title">
-					{siteLogo
-						? <img src={siteLogo.url} alt={siteLogo.alt || siteTitle} class="site-logo-img" />
-						: siteTitle
-					}
+				<a href="/" class="brand-link" aria-label="Afaq Tafsir Home">
+					<div class="brand-emblem">
+						<svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<rect width="32" height="32" rx="8" fill="url(#brandGrad)" />
+							<path d="M8 10C8 8.89543 8.89543 8 10 8H15C15.5523 8 16 8.44772 16 9V22C16 22.5523 15.5523 23 15 23H10C8.89543 23 8 22.1046 8 21V10Z" fill="white" fill-opacity="0.95"/>
+							<path d="M24 10C24 8.89543 23.1046 8 22 8H17C16.4477 8 16 8.44772 16 9V22C16 22.5523 16.4477 23 17 23H22C23.1046 23 24 22.1046 24 21V10Z" fill="white" fill-opacity="0.95"/>
+							<path d="M16 9V22" stroke="#0e2746" stroke-width="1.5" stroke-linecap="round"/>
+							<defs>
+								<linearGradient id="brandGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+									<stop stop-color="#34c6f4"/>
+									<stop offset="1" stop-color="#0e2746"/>
+								</linearGradient>
+							</defs>
+						</svg>
+					</div>
+					<div class="brand-text">
+						<span class="brand-title">Afaq Tafsir</span>
+						<span class="brand-subtitle">JURNAL & PEMIKIRAN QUR'ANI</span>
+					</div>
 				</a>
-				<div class="nav-right">
-					<LiveSearch
-						placeholder="Search..."
-						class="site-search"
-						inputClass="site-search-input"
-						resultsClass="site-search-results"
-						resultClass="site-search-result"
-						collections={["posts", "pages"]}
-					/>
+
+				<div class="nav-center">
 					<div class="nav-links">
 						{
-							menu?.items.map((item) => (
-								<a href={item.url} target={item.target}>
+							navItems.map((item) => (
+								<a
+									href={item.url}
+									target={item.target}
+									class={Astro.url.pathname === item.url ? "nav-link active" : "nav-link"}
+								>
 									{item.label}
 								</a>
 							))
 						}
 					</div>
 				</div>
-				{
-					isLoggedIn && (
-						<a href="/_emdash/admin" class="nav-admin">
-							Admin
-						</a>
-					)
-				}
+
+				<div class="nav-right">
+					<LiveSearch
+						placeholder="Cari kajian (⌘K)..."
+						class="site-search"
+						inputClass="site-search-input"
+						resultsClass="site-search-results"
+						resultClass="site-search-result"
+						collections={["articles", "pages"]}
+					/>
+					
+					<a href="/kirim-tulisan" class="btn-cta-submit">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M12 20h9"></path>
+							<path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+						</svg>
+						<span>Kirim Tulisan</span>
+					</a>
+
+					{
+						isLoggedIn && (
+							<a href="/_emdash/admin" class="nav-admin" title="Buka CMS Admin">
+								Admin
+							</a>
+						)
+					}
+				</div>
 			</nav>
 		</header>
 
-		<main>
+		<main id="main-content">
 			<slot />
 		</main>
 
 		<footer class="site-footer">
 			<div class="footer-inner">
 				<div class="footer-grid">
-					<div class="footer-brand">
+					<!-- Column 1: Brand & Slogan -->
+					<div class="footer-col footer-brand">
 						<a href="/" class="footer-logo">
-							{siteLogo
-								? <img src={siteLogo.url} alt={siteLogo.alt || siteTitle} class="footer-logo-img" />
-								: siteTitle
-							}
+							<div class="brand-emblem-small">
+								<svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+									<rect width="32" height="32" rx="8" fill="#34c6f4" />
+									<path d="M8 10C8 8.89543 8.89543 8 10 8H15C15.5523 8 16 8.44772 16 9V22C16 22.5523 15.5523 23 15 23H10C8.89543 23 8 22.1046 8 21V10Z" fill="#081a2f"/>
+									<path d="M24 10C24 8.89543 23.1046 8 22 8H17C16.4477 8 16 8.44772 16 9V22C16 22.5523 16.4477 23 17 23H22C23.1046 23 24 22.1046 24 21V10Z" fill="#081a2f"/>
+								</svg>
+							</div>
+							<span class="footer-brand-title">Afaq Tafsir</span>
 						</a>
 						<p class="footer-tagline">{siteTagline}</p>
+						<p class="footer-subtext">Diinisiasi oleh Kader Ulama Perempuan PKUMI Masjid Istiqlal untuk mencerahkan pemikiran Qur'ani kontemporer.</p>
+						
+						<div class="footer-social-icons">
+							<a href="https://instagram.com/afaqtafsir" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon-btn">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+							</a>
+							<a href="https://youtube.com/@afaqtafsir" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon-btn">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+							</a>
+							<a href="https://twitter.com/afaqtafsir" target="_blank" rel="noopener" aria-label="X (Twitter)" class="social-icon-btn">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg>
+							</a>
+							<a href="/rss.xml" aria-label="RSS Feed" class="social-icon-btn">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
+							</a>
+						</div>
 					</div>
-					<div class="footer-nav">
-						<h4 class="footer-heading">Navigate</h4>
+
+					<!-- Column 2: Navigasi Utama -->
+					<div class="footer-col footer-nav">
+						<h4 class="footer-heading">Navigasi Utama</h4>
 						<ul class="footer-links">
-							<li><a href="/">Home</a></li>
-							<li><a href="/posts">All Posts</a></li>
-							{
-								pages.slice(0, 3).map((page) => (
-									<li>
-										<a href={`/pages/${page.data.slug || page.id}`}>
-											{page.data.title}
-										</a>
-									</li>
-								))
-							}
+							<li><a href="/">Beranda Utama</a></li>
+							<li><a href="/#kajian-pilihan">Kajian Pilihan Terkini</a></li>
+							<li><a href="/kirim-tulisan">Pedoman Kirim Naskah</a></li>
+							<li><a href="/tentang">Tentang Redaksi & Visi</a></li>
 						</ul>
 					</div>
-					<div class="footer-nav">
-						<h4 class="footer-heading">Connect</h4>
+
+					<!-- Column 3: Editorial & Kontak -->
+					<div class="footer-col footer-nav">
+						<h4 class="footer-heading">Editorial & Kerjasama</h4>
 						<ul class="footer-links">
-							{
-								socialMenu?.items.map((item) => (
-									<li>
-										<a
-											href={item.url}
-											target={item.target}
-											rel={
-												item.target === "_blank"
-													? "noopener noreferrer"
-													: undefined
-											}
-										>
-											{item.label}
-										</a>
-									</li>
-								))
-							}
-							<li><a href="/rss.xml">RSS Feed</a></li>
+							<li><a href="mailto:afaqtafsir.id@gmail.com">afaqtafsir.id@gmail.com</a></li>
+							<li><a href="/kontak">Hubungi Kerjasama & Kemitraan →</a></li>
+							<li><a href="/tentang#editorial">Dewan Redaksi & Kebijakan</a></li>
+							<li><a href="/kirim-tulisan#transliterasi">Standar Transliterasi Arab</a></li>
 						</ul>
 					</div>
-					<div class="footer-widgets-section">
+
+					<!-- Column 4: Widget Area -->
+					<div class="footer-col footer-widgets-section">
 						<WidgetArea name="footer" />
 					</div>
 				</div>
+
 				<div class="footer-bottom">
 					<p class="footer-copyright">
-						Powered by <a href="https://emdashcms.com">EmDash</a>
+						© {new Date().getFullYear()} <strong>Afaq Tafsir</strong>. Dikelola secara independen oleh Kader Ulama Perempuan PKUMI.
 					</p>
 					<div class="theme-switcher">
 						<button
@@ -208,30 +259,17 @@ const isLoggedIn = !!Astro.locals.user;
 							data-theme="light"
 							aria-label="Light mode"
 						>
-							<svg
-								width="16"
-								height="16"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								><circle cx="12" cy="12" r="5"></circle><line
-									x1="12"
-									y1="1"
-									x2="12"
-									y2="3"></line><line x1="12" y1="21" x2="12" y2="23"
-								></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"
-								></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"
-								></line><line x1="1" y1="12" x2="3" y2="12"></line><line
-									x1="21"
-									y1="12"
-									x2="23"
-									y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"
-								></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"
-								></line></svg
-							>
+							<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<circle cx="12" cy="12" r="5"></circle>
+								<line x1="12" y1="1" x2="12" y2="3"></line>
+								<line x1="12" y1="21" x2="12" y2="23"></line>
+								<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+								<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+								<line x1="1" y1="12" x2="3" y2="12"></line>
+								<line x1="21" y1="12" x2="23" y2="12"></line>
+								<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+								<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+							</svg>
 						</button>
 						<button
 							type="button"
@@ -239,18 +277,9 @@ const isLoggedIn = !!Astro.locals.user;
 							data-theme="dark"
 							aria-label="Dark mode"
 						>
-							<svg
-								width="16"
-								height="16"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-								></path></svg
-							>
+							<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+							</svg>
 						</button>
 						<button
 							type="button"
@@ -258,22 +287,11 @@ const isLoggedIn = !!Astro.locals.user;
 							data-theme="system"
 							aria-label="System theme"
 						>
-							<svg
-								width="16"
-								height="16"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								><rect x="2" y="3" width="20" height="14" rx="2" ry="2"
-								></rect><line x1="8" y1="21" x2="16" y2="21"></line><line
-									x1="12"
-									y1="17"
-									x2="12"
-									y2="21"></line></svg
-							>
+							<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+								<line x1="8" y1="21" x2="16" y2="21"></line>
+								<line x1="12" y1="17" x2="12" y2="21"></line>
+							</svg>
 						</button>
 					</div>
 				</div>
@@ -448,11 +466,17 @@ const isLoggedIn = !!Astro.locals.user;
 			.site-header {
 				position: sticky;
 				top: 0;
-				z-index: 100;
-				background: color-mix(in srgb, var(--color-bg) 65%, transparent);
-				backdrop-filter: blur(12px);
-				-webkit-backdrop-filter: blur(12px);
-				border-bottom: 1px solid var(--color-border-subtle);
+				z-index: 900;
+				background: rgba(255, 255, 255, 0.92);
+				backdrop-filter: blur(16px);
+				-webkit-backdrop-filter: blur(16px);
+				border-bottom: 1px solid var(--sky-200);
+				transition: background var(--transition-fast), border-color var(--transition-fast);
+			}
+
+			:global(.dark) .site-header {
+				background: rgba(8, 26, 47, 0.92);
+				border-bottom: 1px solid rgba(52, 198, 244, 0.2);
 			}
 
 			.nav {
@@ -461,93 +485,190 @@ const isLoggedIn = !!Astro.locals.user;
 				align-items: center;
 				max-width: var(--wide-width);
 				margin: 0 auto;
-				padding: var(--spacing-4) var(--spacing-6);
-				height: var(--nav-height);
+				padding: 0.75rem var(--spacing-6);
+				gap: var(--spacing-6);
 			}
 
-			.site-title {
-				font-size: var(--font-size-lg);
-				font-weight: 600;
-				color: var(--color-text);
-				text-decoration: none;
-				letter-spacing: var(--tracking-snug);
-			}
-
-			.site-title:hover {
-				color: var(--color-brand);
-			}
-
-			.site-logo-img {
-				height: 48px;
-				width: auto;
-				display: block;
-				margin: -8px 0;
-			}
-
-			.nav-right {
+			/* Brand Logo & Title */
+			.brand-link {
 				display: flex;
 				align-items: center;
-				gap: var(--spacing-6);
-				margin-inline-start: auto;
+				gap: 12px;
+				text-decoration: none;
+				flex-shrink: 0;
+			}
+
+			.brand-emblem {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				filter: drop-shadow(0 2px 6px rgba(52, 198, 244, 0.3));
+			}
+
+			.brand-text {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.brand-title {
+				font-family: var(--font-serif);
+				font-size: 1.25rem;
+				font-weight: 700;
+				color: var(--blue-950);
+				line-height: 1.15;
+				letter-spacing: -0.02em;
+			}
+
+			:global(.dark) .brand-title {
+				color: var(--white);
+			}
+
+			.brand-subtitle {
+				font-family: var(--font-sans);
+				font-size: 0.62rem;
+				font-weight: 700;
+				letter-spacing: 0.14em;
+				color: var(--text-brand);
+				text-transform: uppercase;
+				margin-top: 1px;
+			}
+
+			/* Center Nav Links */
+			.nav-center {
+				display: flex;
+				align-items: center;
 			}
 
 			.nav-links {
 				display: flex;
-				gap: var(--spacing-5);
-				font-size: var(--font-size-sm);
+				align-items: center;
+				gap: var(--spacing-6);
 			}
 
-			.nav-links a {
+			.nav-link {
+				position: relative;
+				font-family: var(--font-sans);
+				font-size: 0.92rem;
+				font-weight: 600;
+				color: var(--slate-700);
 				text-decoration: none;
-				color: var(--color-text);
+				padding: 6px 2px;
 				transition: color var(--transition-fast);
 			}
 
-			.nav-links a:hover {
-				color: var(--color-brand);
+			:global(.dark) .nav-link {
+				color: var(--slate-300);
+			}
+
+			.nav-link:hover {
+				color: var(--blue-950);
+			}
+
+			:global(.dark) .nav-link:hover {
+				color: var(--white);
+			}
+
+			.nav-link.active {
+				color: var(--blue-950);
+			}
+
+			:global(.dark) .nav-link.active {
+				color: var(--sky-400);
+			}
+
+			/* Sky Gradient Active Indicator Bar */
+			.nav-link.active::after {
+				content: "";
+				position: absolute;
+				bottom: -2px;
+				left: 0;
+				right: 0;
+				height: 2.5px;
+				background: linear-gradient(90deg, var(--sky-500) 0%, var(--sky-300) 100%);
+				border-radius: var(--radius-full);
+			}
+
+			/* Right Actions */
+			.nav-right {
+				display: flex;
+				align-items: center;
+				gap: var(--spacing-4);
+				margin-inline-start: auto;
+			}
+
+			.btn-cta-submit {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				background: var(--gold-500);
+				color: var(--white);
+				font-family: var(--font-sans);
+				font-size: 0.85rem;
+				font-weight: 700;
+				padding: 7px 14px;
+				border-radius: var(--radius-full);
+				text-decoration: none;
+				box-shadow: 0 2px 8px rgba(217, 119, 6, 0.25);
+				transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+				white-space: nowrap;
+			}
+
+			.btn-cta-submit:hover {
+				background: var(--gold-600);
+				color: var(--white);
+				transform: translateY(-1px);
+				box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
 			}
 
 			.nav-admin {
-				font-size: var(--font-size-sm);
-				color: var(--color-text-secondary);
+				font-size: 0.8rem;
+				font-weight: 600;
+				color: var(--text-brand);
+				background: var(--sky-100);
+				padding: 4px 10px;
+				border-radius: var(--radius-full);
 				text-decoration: none;
-				transition: color var(--transition-fast);
+				transition: background var(--transition-fast);
 			}
 
 			.nav-admin:hover {
-				color: var(--color-text);
+				background: var(--sky-200);
 			}
 
 			/* Search styling */
 			.site-search {
 				position: relative;
-				width: var(--search-input-width);
-				--emdash-search-border-focus: var(--color-brand);
+				width: 220px;
 			}
 
 			:global(.site-search-input) {
-				width: var(--search-input-width);
-				padding: var(--spacing-2) var(--spacing-3);
-				font-family: var(--font-body);
-				font-size: var(--font-size-sm);
-				border: 1px solid var(--color-border);
-				border-radius: var(--radius);
-				background: var(--color-bg);
-				color: var(--color-text);
-				transition:
-					border-color var(--transition-fast),
-					box-shadow var(--transition-fast);
+				width: 100% !important;
+				padding: 7px 12px !important;
+				font-family: var(--font-sans) !important;
+				font-size: 0.85rem !important;
+				border: 1px solid var(--sky-200) !important;
+				border-radius: var(--radius-full) !important;
+				background: var(--white) !important;
+				color: var(--slate-800) !important;
+				box-shadow: var(--shadow-sm);
+				transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+			}
+
+			:global(.dark) :global(.site-search-input) {
+				background: var(--blue-900) !important;
+				border-color: rgba(52, 198, 244, 0.3) !important;
+				color: var(--white) !important;
 			}
 
 			:global(.site-search-input)::placeholder {
-				color: var(--color-muted);
+				color: var(--slate-400);
 			}
 
 			:global(.site-search-input):focus,
 			:global(.site-search-input):focus-visible {
 				outline: none;
-				border-color: var(--color-brand) !important;
-				box-shadow: 0 0 0 3px var(--color-brand-ring);
+				border-color: var(--sky-500) !important;
+				box-shadow: 0 0 0 3px rgba(52, 198, 244, 0.25) !important;
 			}
 
 			:global(.site-search-results) {
@@ -555,80 +676,55 @@ const isLoggedIn = !!Astro.locals.user;
 				top: 100%;
 				left: 0;
 				right: 0;
-				margin-top: var(--spacing-2);
-				background: var(--color-bg);
-				border: 1px solid var(--color-border);
-				border-radius: var(--radius-lg);
+				margin-top: 8px;
+				background: var(--white);
+				border: 1px solid var(--sky-200);
+				border-radius: var(--radius-md);
 				box-shadow: var(--shadow-lg);
 				max-height: 400px;
 				overflow-y: auto;
 				z-index: 1000;
 			}
 
-			:global(.site-search-results .emdash-live-search-loading),
-			:global(.site-search-results .emdash-live-search-no-results) {
-				padding: var(--spacing-4);
-				text-align: center;
-				color: var(--color-muted);
-				font-size: var(--font-size-sm);
+			:global(.dark) :global(.site-search-results) {
+				background: var(--blue-950);
+				border-color: rgba(52, 198, 244, 0.25);
 			}
 
 			:global(.site-search-result) {
 				display: block;
-				padding: var(--spacing-3) var(--spacing-4);
+				padding: 10px 14px;
 				text-decoration: none;
-				color: var(--color-text);
-				border-bottom: 1px solid var(--color-border-subtle);
+				color: var(--slate-800);
+				border-bottom: 1px solid var(--sky-100);
 				transition: background var(--transition-fast);
 			}
 
-			:global(.site-search-result):last-child {
-				border-bottom: none;
+			:global(.dark) :global(.site-search-result) {
+				color: var(--slate-200);
+				border-color: rgba(255, 255, 255, 0.08);
 			}
 
 			:global(.site-search-result):hover,
-			:global(.site-search-result):focus,
 			:global(.site-search-result.focused) {
-				background: var(--color-surface);
-				outline: none;
+				background: var(--sky-50);
 			}
 
-			:global(.site-search-result .emdash-live-search-result-title) {
-				display: block;
-				font-weight: 500;
-				font-size: var(--font-size-sm);
-			}
-
-			:global(.site-search-result .emdash-live-search-result-collection) {
-				display: block;
-				font-size: var(--font-size-xs);
-				color: var(--color-muted);
-				text-transform: uppercase;
-				letter-spacing: var(--tracking-wide);
-				margin-top: 2px;
-			}
-
-			:global(.site-search-result .emdash-live-search-result-snippet) {
-				display: block;
-				font-size: var(--font-size-sm);
-				color: var(--color-muted);
-				margin-top: var(--spacing-1);
-				line-height: var(--leading-snug);
-			}
-
-			:global(.site-search-result .emdash-live-search-result-snippet mark) {
-				font-weight: 600;
-				color: var(--color-text);
+			:global(.dark) :global(.site-search-result):hover,
+			:global(.dark) :global(.site-search-result.focused) {
+				background: var(--blue-900);
 			}
 
 			main {
-				min-height: calc(100vh - var(--nav-height) - 300px);
+				min-height: calc(100vh - 400px);
 			}
 
 			/* Footer */
 			.site-footer {
-				background: var(--color-bg-subtle);
-				border-top: 1px solid var(--color-border-subtle);
+				background: linear-gradient(180deg, var(--blue-900) 0%, var(--blue-950) 100%);
+				color: var(--sky-100);
+				border-top: 1px solid rgba(52, 198, 244, 0.2);
+				margin-top: var(--spacing-16);
 			}
 
 			.footer-inner {
@@ -639,46 +735,78 @@ const isLoggedIn = !!Astro.locals.user;
 
 			.footer-grid {
 				display: grid;
-				grid-template-columns: 2fr 1fr 1fr 1fr;
-				gap: var(--spacing-12);
+				grid-template-columns: 2fr 1fr 1.2fr 1fr;
+				gap: var(--spacing-10);
 				margin-bottom: var(--spacing-12);
 			}
 
 			.footer-brand {
-				max-width: 280px;
+				max-width: 320px;
 			}
 
 			.footer-logo {
-				font-size: var(--font-size-lg);
-				font-weight: 600;
-				color: var(--color-text);
+				display: flex;
+				align-items: center;
+				gap: 10px;
 				text-decoration: none;
-				letter-spacing: var(--tracking-snug);
+				margin-bottom: var(--spacing-3);
 			}
 
-			.footer-logo-img {
-				height: 24px;
-				width: auto;
+			.footer-brand-title {
+				font-family: var(--font-serif);
+				font-size: 1.35rem;
+				font-weight: 700;
+				color: var(--white);
+				letter-spacing: -0.01em;
 			}
 
 			.footer-tagline {
-				margin-top: var(--spacing-3);
-				font-size: var(--font-size-sm);
-				color: var(--color-muted);
-				line-height: var(--leading-relaxed);
+				font-size: 0.95rem;
+				font-weight: 600;
+				color: var(--sky-300);
+				margin-bottom: var(--spacing-2);
 			}
 
-			.footer-nav {
-				min-width: 0;
+			.footer-subtext {
+				font-size: 0.82rem;
+				line-height: 1.6;
+				color: var(--sky-200);
+				opacity: 0.85;
+				margin-bottom: var(--spacing-4);
+			}
+
+			.footer-social-icons {
+				display: flex;
+				gap: 10px;
+			}
+
+			.social-icon-btn {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 34px;
+				height: 34px;
+				background: rgba(255, 255, 255, 0.08);
+				border: 1px solid rgba(52, 198, 244, 0.3);
+				border-radius: var(--radius-full);
+				color: var(--sky-200);
+				transition: all var(--transition-fast);
+			}
+
+			.social-icon-btn:hover {
+				background: var(--sky-500);
+				color: var(--blue-950);
+				transform: translateY(-2px);
+				border-color: var(--sky-400);
 			}
 
 			.footer-heading {
-				font-size: var(--font-size-xs);
-				font-weight: 500;
-				text-transform: uppercase;
-				letter-spacing: var(--tracking-wider);
-				color: var(--color-muted);
+				font-family: var(--font-serif);
+				font-size: 0.95rem;
+				font-weight: 600;
+				color: var(--white);
 				margin-bottom: var(--spacing-4);
+				letter-spacing: 0.01em;
 			}
 
 			.footer-links {
@@ -686,41 +814,21 @@ const isLoggedIn = !!Astro.locals.user;
 			}
 
 			.footer-links li {
-				margin-bottom: var(--spacing-2);
+				margin-bottom: 9px;
 			}
 
 			.footer-links a {
-				color: var(--color-text-secondary);
+				color: var(--sky-100);
+				opacity: 0.85;
 				text-decoration: none;
-				font-size: var(--font-size-sm);
-				transition: color var(--transition-fast);
+				font-size: 0.88rem;
+				transition: opacity var(--transition-fast), color var(--transition-fast);
 			}
 
 			.footer-links a:hover {
-				color: var(--color-text);
-			}
-
-			.footer-widgets-section :global(.widget-area) {
-				display: block;
-			}
-
-			.footer-widgets-section :global(.widget) {
-				color: var(--color-text-secondary);
-			}
-
-			.footer-widgets-section :global(.widget__title) {
-				font-size: var(--font-size-xs);
-				font-weight: 500;
-				text-transform: uppercase;
-				letter-spacing: var(--tracking-wider);
-				color: var(--color-muted);
-				margin-bottom: var(--spacing-4);
-			}
-
-			.footer-widgets-section :global(.widget__content) {
-				color: var(--color-text-secondary);
-				font-size: var(--font-size-sm);
-				line-height: var(--leading-relaxed);
+				opacity: 1;
+				color: var(--sky-400);
+				padding-left: 2px;
 			}
 
 			.footer-bottom {
@@ -728,57 +836,53 @@ const isLoggedIn = !!Astro.locals.user;
 				justify-content: space-between;
 				align-items: center;
 				padding-top: var(--spacing-6);
-				border-top: 1px solid var(--color-border);
+				border-top: 1px solid rgba(255, 255, 255, 0.1);
 			}
 
 			.footer-copyright {
-				font-size: var(--font-size-sm);
-				color: var(--color-muted);
+				font-size: 0.82rem;
+				color: var(--sky-200);
+				opacity: 0.8;
 			}
 
-			.footer-copyright a {
-				color: var(--color-text-secondary);
+			.footer-copyright strong {
+				color: var(--white);
 			}
 
 			/* Theme switcher */
 			.theme-switcher {
 				display: flex;
 				gap: var(--spacing-1);
-				padding: var(--spacing-1);
-				background: var(--color-surface);
-				border-radius: var(--radius);
+				padding: 3px;
+				background: rgba(255, 255, 255, 0.1);
+				border: 1px solid rgba(255, 255, 255, 0.15);
+				border-radius: var(--radius-full);
 			}
 
 			.theme-btn {
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				width: 32px;
-				height: 28px;
+				width: 30px;
+				height: 26px;
 				background: transparent;
 				border: none;
-				color: var(--color-muted);
-				border-radius: var(--radius);
+				color: var(--sky-200);
+				border-radius: var(--radius-full);
 				cursor: pointer;
 				transition: all var(--transition-fast);
 			}
 
 			.theme-btn:hover {
-				color: var(--color-text-secondary);
+				color: var(--white);
 			}
 
 			.theme-btn.active {
-				background: var(--color-bg);
-				color: var(--color-text);
-				box-shadow: var(--shadow-sm);
+				background: var(--sky-500);
+				color: var(--blue-950);
 			}
 
-			.theme-btn svg {
-				width: 16px;
-				height: 16px;
-			}
-
-			@media (max-width: 900px) {
+			@media (max-width: 960px) {
 				.footer-grid {
 					grid-template-columns: 1fr 1fr;
 					gap: var(--spacing-8);
@@ -790,64 +894,30 @@ const isLoggedIn = !!Astro.locals.user;
 				}
 			}
 
-			@media (max-width: 640px) {
-				.site-header {
-					position: relative;
-					border-bottom: none;
-				}
-
+			@media (max-width: 768px) {
 				.nav {
-					display: grid;
-					grid-template-columns: minmax(0, 1fr) auto;
-					align-items: center;
-					height: auto;
-					column-gap: var(--spacing-3);
-					row-gap: var(--spacing-2);
+					flex-wrap: wrap;
 					padding: var(--spacing-3) var(--spacing-4);
 				}
 
-				.site-title {
-					grid-column: 1;
-					grid-row: 1;
-					font-size: var(--font-size-base);
-					min-width: 0;
-				}
-
-				.nav-right {
-					grid-column: 1 / -1;
-					grid-row: 2;
-					display: grid;
-					row-gap: var(--spacing-2);
+				.nav-center {
+					order: 3;
+					width: 100%;
+					justify-content: center;
+					padding-top: var(--spacing-2);
+					border-top: 1px solid var(--sky-100);
 				}
 
 				.site-search {
-					grid-column: 1;
-					width: 100%;
-					max-width: none;
+					width: 140px;
 				}
 
-				:global(.site-search-input) {
-					width: 100% !important;
-					padding: var(--spacing-1) var(--spacing-2) !important;
-					font-size: var(--font-size-sm) !important;
+				.btn-cta-submit span {
+					display: none;
 				}
 
-				.nav-links {
-					grid-column: 1;
-					display: flex;
-					column-gap: var(--spacing-3);
-					row-gap: var(--spacing-1);
-					flex-wrap: wrap;
-					justify-content: flex-start;
-				}
-
-				.nav-admin {
-					grid-column: 2;
-					grid-row: 1;
-					justify-self: end;
-					font-size: var(--font-size-xs);
-					margin-inline-start: 0;
-					white-space: nowrap;
+				.btn-cta-submit {
+					padding: 7px 10px;
 				}
 
 				.footer-grid {
@@ -862,11 +932,6 @@ const isLoggedIn = !!Astro.locals.user;
 					flex-direction: column;
 					gap: var(--spacing-4);
 					text-align: center;
-				}
-
-				.footer-controls {
-					flex-wrap: wrap;
-					justify-content: center;
 				}
 			}
 		</style>
