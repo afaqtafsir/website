@@ -89,11 +89,6 @@
 					"slug": "popular_reads",
 					"label": "Metrik Pembaca",
 					"type": "string"
-				},
-				{
-					"slug": "published_at",
-					"label": "Waktu Publikasi",
-					"type": "datetime"
 				}
 			]
 		},
@@ -425,7 +420,6 @@
 					"is_popular": true,
 					"popular_rank": 1,
 					"popular_reads": "18.4k dibaca",
-					"published_at": "2026-08-18T08:30:00.000Z",
 					"content": [
 						{
 							"_type": "block",
@@ -573,7 +567,8 @@
 							]
 						}
 					]
-				}
+				},
+				"publishedAt": "2026-08-18T08:30:00.000Z"
 			},
 			{
 				"id": "art-02",
@@ -611,7 +606,6 @@
 					"is_popular": true,
 					"popular_rank": 2,
 					"popular_reads": "14.2k dibaca",
-					"published_at": "2026-08-20T10:15:00.000Z",
 					"content": [
 						{
 							"_type": "block",
@@ -658,7 +652,8 @@
 							]
 						}
 					]
-				}
+				},
+				"publishedAt": "2026-08-20T10:15:00.000Z"
 			},
 			{
 				"id": "art-03",
@@ -695,7 +690,6 @@
 					"is_secondary_hero": true,
 					"is_featured": true,
 					"is_popular": false,
-					"published_at": "2026-08-21T14:00:00.000Z",
 					"content": [
 						{
 							"_type": "block",
@@ -728,7 +722,8 @@
 							]
 						}
 					]
-				}
+				},
+				"publishedAt": "2026-08-21T14:00:00.000Z"
 			},
 			{
 				"id": "art-04",
@@ -767,7 +762,6 @@
 					"is_popular": true,
 					"popular_rank": 3,
 					"popular_reads": "11.8k dibaca",
-					"published_at": "2026-08-22T09:45:00.000Z",
 					"content": [
 						{
 							"_type": "block",
@@ -780,7 +774,8 @@
 							]
 						}
 					]
-				}
+				},
+				"publishedAt": "2026-08-22T09:45:00.000Z"
 			},
 			{
 				"id": "art-05",
@@ -815,7 +810,6 @@
 					"is_secondary_hero": true,
 					"is_featured": true,
 					"is_popular": false,
-					"published_at": "2026-08-23T11:20:00.000Z",
 					"content": [
 						{
 							"_type": "block",
@@ -828,7 +822,8 @@
 							]
 						}
 					]
-				}
+				},
+				"publishedAt": "2026-08-23T11:20:00.000Z"
 			},
 			{
 				"id": "art-06",
@@ -866,7 +861,6 @@
 					"is_popular": true,
 					"popular_rank": 4,
 					"popular_reads": "9.6k dibaca",
-					"published_at": "2026-08-24T07:30:00.000Z",
 					"content": [
 						{
 							"_type": "block",
@@ -879,7 +873,8 @@
 							]
 						}
 					]
-				}
+				},
+				"publishedAt": "2026-08-24T07:30:00.000Z"
 			},
 			{
 				"id": "art-07",
@@ -915,7 +910,6 @@
 					"is_secondary_hero": false,
 					"is_featured": true,
 					"is_popular": false,
-					"published_at": "2026-08-24T13:00:00.000Z",
 					"content": [
 						{
 							"_type": "block",
@@ -928,7 +922,8 @@
 							]
 						}
 					]
-				}
+				},
+				"publishedAt": "2026-08-24T13:00:00.000Z"
 			},
 			{
 				"id": "art-08",
@@ -966,7 +961,6 @@
 					"is_popular": true,
 					"popular_rank": 5,
 					"popular_reads": "8.1k dibaca",
-					"published_at": "2026-08-25T08:00:00.000Z",
 					"content": [
 						{
 							"_type": "block",
@@ -979,7 +973,8 @@
 							]
 						}
 					]
-				}
+				},
+				"publishedAt": "2026-08-25T08:00:00.000Z"
 			},
 			{
 				"id": "art-09",
@@ -1015,7 +1010,6 @@
 					"is_secondary_hero": false,
 					"is_featured": true,
 					"is_popular": false,
-					"published_at": "2026-08-25T15:30:00.000Z",
 					"content": [
 						{
 							"_type": "block",
@@ -1028,7 +1022,8 @@
 							]
 						}
 					]
-				}
+				},
+				"publishedAt": "2026-08-25T15:30:00.000Z"
 			},
 			{
 				"id": "art-10",
@@ -1064,7 +1059,6 @@
 					"is_secondary_hero": false,
 					"is_featured": true,
 					"is_popular": false,
-					"published_at": "2026-08-26T06:00:00.000Z",
 					"content": [
 						{
 							"_type": "block",
@@ -1077,7 +1071,8 @@
 							]
 						}
 					]
-				}
+				},
+				"publishedAt": "2026-08-26T06:00:00.000Z"
 			}
 		],
 		"pages": [
