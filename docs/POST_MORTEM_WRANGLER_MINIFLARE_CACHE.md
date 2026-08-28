@@ -26,9 +26,11 @@ error: script "dev" exited with code 1
 
 Despite manual removal of `node_modules/.vite/`, multiple iterations of Vite configuration overrides (`optimizeDeps.exclude`, `noDiscovery: true`), and running `astro dev --force`, the error persisted on every restart.
 
-The root cause was **not** Vite's dependency optimizer or Astro's internal compiler, but Cloudflare Miniflare's persistence layer caching stale worker runner metadata inside `.wrangler/state/v3/cache/miniflare-CacheObject/`. When Vite invalidated and re-hashed SSR chunks, Miniflare was still referencing the deleted chunk filename recorded in its own local persistence store.
+The true root cause was **Vite 6's dynamic SSR dependency optimization of Astro's virtual server route manifest (`astro/app/manifest`)**. 
 
-Purging `.wrangler/state/v3/cache/` completely resolved the issue without requiring any custom configuration patches.
+When `astro dev` launched and handled its initial request, Vite dynamically discovered `astro/app/manifest`, compiled it on the fly, and triggered a `program reload`. This mid-flight reload immediately deleted and replaced the SSR chunk files in `node_modules/.vite/deps_ssr/`. Because Cloudflare's Miniflare / `workerd` runner worker was already actively executing using the initial file descriptor, it suffered an unhandled `ENOENT` failure when the file was replaced on disk.
+
+Excluding `"astro/app/manifest"` and `"@astrojs/cloudflare"` in `astro.config.mjs` under `vite.optimizeDeps.exclude` completely eliminates the mid-flight optimization reload, ensuring Miniflare and Vite remain stable.
 
 ---
 
