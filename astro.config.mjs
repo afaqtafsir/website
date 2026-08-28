@@ -20,6 +20,16 @@ export default defineConfig({
 			storage: r2({ binding: "MEDIA" }),
 		}),
 	],
+	vite: {
+		optimizeDeps: {
+			exclude: [
+				"emdash",
+				"@emdash-cms/cloudflare",
+				"@emdash-cms/plugin-forms",
+				"@emdash-cms/plugin-webhook-notifier",
+			],
+		},
+	},
 	fonts: [
 		{
 			provider: fontProviders.google(),
