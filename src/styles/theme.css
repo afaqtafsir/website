@@ -145,26 +145,38 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom: var(--spacing-4);
 }
 
-/* Badges */
-.badge-category {
-	display: inline-flex;
-	align-items: center;
-	padding: 3px 10px;
+/* Category Labels */
+.badge-category,
+.badge-category-mini,
+.category-label {
+	display: inline-block;
 	font-size: 0.72rem;
 	font-weight: 700;
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
 	color: var(--text-brand);
-	background: var(--sky-100);
-	border: 1px solid var(--sky-200);
-	border-radius: var(--radius-full);
-	transition: var(--transition-fast);
 	text-decoration: none;
+	transition: color var(--transition-fast);
+	margin-bottom: 4px;
 }
 
-.badge-category:hover {
-	background: var(--sky-200);
+.badge-category:hover,
+.badge-category-mini:hover,
+.category-label:hover {
 	color: var(--blue-900);
+	text-decoration: underline;
+}
+
+:global(.dark) .badge-category,
+:global(.dark) .badge-category-mini,
+:global(.dark) .category-label {
+	color: var(--sky-400);
+}
+
+:global(.dark) .badge-category:hover,
+:global(.dark) .badge-category-mini:hover,
+:global(.dark) .category-label:hover {
+	color: var(--sky-300);
 }
 
 /* Arabic Ayat / Quranic Verse Box */

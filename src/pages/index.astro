@@ -95,11 +95,9 @@ const popularArticles = allArticles
 							</div>
 						</a>
 						<div class="hero-lead-content">
-							<div class="card-badge-row">
-								<a href={`/kategori/${getArticleCategory(leadHero.data.id).slug}`} class="badge-category">
-									{getArticleCategory(leadHero.data.id).label}
-								</a>
-							</div>
+							<a href={`/kategori/${getArticleCategory(leadHero.data.id).slug}`} class="badge-category">
+								{getArticleCategory(leadHero.data.id).label}
+							</a>
 							<h1 class="hero-lead-title">
 								<a href={`/${leadHero.id}`}>{leadHero.data.title}</a>
 							</h1>
@@ -465,10 +463,6 @@ const popularArticles = allArticles
 		flex-grow: 1;
 	}
 
-	.card-badge-row {
-		margin-bottom: var(--spacing-3);
-	}
-
 	.hero-lead-title {
 		font-size: 1.65rem;
 		line-height: 1.25;
@@ -594,16 +588,6 @@ const popularArticles = allArticles
 		display: flex;
 		flex-direction: column;
 		min-width: 0;
-	}
-
-	.badge-category-mini {
-		font-size: 0.68rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
-		color: var(--text-brand);
-		text-decoration: none;
-		margin-bottom: 4px;
 	}
 
 	.secondary-card-title {
