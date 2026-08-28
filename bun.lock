@@ -8,8 +8,6 @@
         "@astrojs/cloudflare": "^14.2.5",
         "@astrojs/react": "^6.0.4",
         "@emdash-cms/cloudflare": "^0.35.0",
-        "@emdash-cms/plugin-forms": "^0.2.5",
-        "@emdash-cms/plugin-webhook-notifier": "^0.2.0",
         "astro": "^7.2.7",
         "emdash": "^0.35.0",
         "react": "19.2.8",
@@ -197,11 +195,7 @@
 
     "@emdash-cms/gutenberg-to-portable-text": ["@emdash-cms/gutenberg-to-portable-text@0.35.0", "", { "dependencies": { "@wordpress/block-serialization-default-parser": "^5.13.0", "parse5": "^7.2.1" } }, "sha512-/ZzirFuXWxkBJwGaXvj+Qb+PS6uAgg1ELsU0i0ILXQNAmK7vx79u76ipCHTDrbwHojIJO+3cRX5vlicryuVC5Q=="],
 
-    "@emdash-cms/plugin-forms": ["@emdash-cms/plugin-forms@0.2.5", "", { "dependencies": { "ulidx": "^2.4.1" }, "peerDependencies": { "@cloudflare/kumo": "2.6.0", "@phosphor-icons/react": "^2.1.10", "astro": ">=6.0.0-beta.0", "emdash": ">=0.11.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-2FC7sneKAX7kM7OY/LBeIpu83n9HU4ptw1E3aoSaMWFbY2fjxo4KoMPxl8mn/XocPzSHAzt9OkWA/00L9qY4vw=="],
-
     "@emdash-cms/plugin-types": ["@emdash-cms/plugin-types@0.3.0", "", { "dependencies": { "zod": "^4.4.1" } }, "sha512-2/siADnsr79FIOHbiGtsKpQojNid2Uqpuurhh6vIkhuzQN0jVBLiPDhX/LAK28l4l7UVyEnWpxI6HMImHZEPvg=="],
-
-    "@emdash-cms/plugin-webhook-notifier": ["@emdash-cms/plugin-webhook-notifier@0.2.0", "", { "peerDependencies": { "emdash": ">=0.13.0" } }, "sha512-0qyDWwBAg6LZT/ODAEOiDdsErIwloQ9nNohkYj/y3ZvrUExG/LJeC6XIKY7+5K7jeQ2RlDnuNfSLyEJdDcZxSw=="],
 
     "@emdash-cms/registry-client": ["@emdash-cms/registry-client@0.3.4", "", { "dependencies": { "@atcute/atproto": "^4.0.2", "@atcute/client": "^5.0.0", "@atcute/lexicons": "^2.0.0", "@emdash-cms/registry-lexicons": "0.3.0" } }, "sha512-NWtoAMVE2K5R/57CXxaOMXkRZFZNKsKgu43xcjrmZ9HEeyGHWl6egHn97/Ey4aDPUDao2vb85GSvlYbewCwP9g=="],
 
