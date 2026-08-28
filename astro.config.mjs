@@ -21,16 +21,8 @@ export default defineConfig({
 		}),
 	],
 	vite: {
-		ssr: {
-			optimizeDeps: {
-				include: [
-					"emdash",
-					"@emdash-cms/cloudflare",
-					"emdash/astro",
-					"emdash/ui",
-					"emdash/runtime",
-				],
-			},
+		optimizeDeps: {
+			exclude: ["astro/app/manifest"],
 		},
 	},
 	fonts: [
