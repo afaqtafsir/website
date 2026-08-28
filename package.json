@@ -12,7 +12,9 @@
     "preview": "astro preview",
     "deploy": "astro build && wrangler deploy",
     "typecheck": "astro check",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "seed:r2": "bun scripts/seed-r2.js --local",
+    "seed:r2:remote": "bun scripts/seed-r2.js --remote"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.2.5",
