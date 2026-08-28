@@ -1,0 +1,130 @@
+{
+  "collections": [
+    {
+      "slug": "articles",
+      "label": "Articles",
+      "labelSingular": "Article",
+      "supports": [
+        "drafts",
+        "revisions",
+        "search",
+        "seo"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Judul Artikel",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "subheadline",
+          "label": "Subjudul",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "excerpt",
+          "label": "Ringkasan / Excerpt",
+          "type": "text",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "featured_image",
+          "label": "Gambar Sampul",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "content",
+          "label": "Isi Artikel & Kajian",
+          "type": "portableText",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "reading_time",
+          "label": "Estimasi Waktu Baca",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "is_lead_hero",
+          "label": "Tampilkan di Lead Hero Bento",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "is_secondary_hero",
+          "label": "Tampilkan di Secondary Hero Bento",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "is_featured",
+          "label": "Artikel Pilihan (Pattern A/B)",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "is_popular",
+          "label": "Tampilkan di Widget Terbanyak Dibaca",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "popular_rank",
+          "label": "Urutan Populer (1-5)",
+          "type": "integer",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "popular_reads",
+          "label": "Metrik Pembaca",
+          "type": "string",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "pages",
+      "label": "Pages",
+      "labelSingular": "Page",
+      "supports": [
+        "drafts",
+        "revisions",
+        "search"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Judul Halaman",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "content",
+          "label": "Isi Halaman",
+          "type": "portableText",
+          "required": true,
+          "unique": false
+        }
+      ]
+    }
+  ],
+  "version": "ad0a93f48014d0de"
+}
