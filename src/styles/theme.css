@@ -1,30 +1,244 @@
 /*
-  theme.css -- your theme overrides. This is the file to edit to
-  retheme the site.
-
-  Every design token lives in src/styles/tokens.css (colors, type
-  scale, spacing, layout, shadows) with its default value. Override any
-  of them here: declarations in this file are unlayered, so they always
-  beat the @layer base defaults in tokens.css.
-
-  Colors are defined with light-dark(). Overriding with a plain color
-  changes light and dark mode at once; use light-dark(<light>, <dark>)
-  to set different values per mode.
-
-  Webfonts are loaded in astro.config.mjs (--font-body, --font-mono).
-  Swap the loaded font there; use overrides here for system fonts or a
-  separate heading face.
-
-  Example:
-
-  :root {
-    --color-brand: light-dark(#0f766e, #2dd4bf);
-    --font-heading: "Iowan Old Style", Georgia, serif;
-    --radius: 8px;
-  }
+  theme.css -- Afaq Tafsir Master Design Tokens & Core System
+  PRD v1.2: Celestial Sky Blue, Deep Navy, and Sunrise Amber.
 */
 
 :root {
+	/* --- Primitive Color Palette --- */
+	/* Afaq Sky Blue Palette */
+	--sky-500: #34c6f4; /* Primary Vibrant Sky Blue */
+	--sky-400: #55caf0; /* Bright Sky Blue */
+	--sky-300: #7ed2ef; /* Mid Light Sky Blue */
+	--sky-200: #a7dff3; /* Soft Sky Blue */
+	--sky-100: #d6eff8; /* Lightest Sky Blue Tint */
+	--sky-50:  #f4faff; /* Global Soft Sky Background */
+
+	/* Deep Celestial Navy */
+	--blue-950: #081a2f; /* Deep Midnight Navy (Headings, Navbar, Footer) */
+	--blue-900: #0e2746; /* Deep Celestial Navy (Hero gradients, Container backdrops) */
+	--blue-800: #143861; /* Interactive Navy Hover */
+	--blue-700: #1c4b7f; /* Secondary Navy Accent */
+	--blue-600: #2563a6; /* Brand Navy Blue */
+	--blue-500: #34c6f4; /* Brand Sky Blue */
+
+	/* Sunrise Amber / Gold Accent */
+	--gold-600: #b45309; /* Dark Amber (Active CTA Hover) */
+	--gold-500: #d97706; /* Sunrise Amber / Secondary Accent */
+	--gold-400: #f59e0b; /* Bright Amber */
+	--gold-100: #fef3c7; /* Amber Badge Background */
+	--gold-50:  #fffbeb; /* Light Gold Tint */
+
+	--white:       #ffffff;
+	--slate-900:   #0f172a;
+	--slate-800:   #1e293b; /* High-Legibility Body Text */
+	--slate-700:   #334155;
+	--slate-600:   #475569; /* Muted Metadata / Byline Text */
+	--slate-400:   #94a3b8; /* Placeholder Text */
+	--slate-300:   #cbd5e1;
+	--slate-200:   #e2e8f0; /* Default Divider Lines */
+	--slate-100:   #f1f5f9;
+
+	/* --- Semantic Tokens --- */
+	--brand-primary:       var(--sky-500);
+	--brand-primary-hover: var(--sky-400);
+	--brand-navy:          var(--blue-900);
+	--brand-accent:        var(--gold-500);
+	--brand-accent-hover:  var(--gold-600);
+
+	--bg-body:             var(--sky-50);
+	--bg-surface:          var(--white);
+	--bg-surface-subtle:   var(--sky-100);
+	--bg-dark-section:     linear-gradient(180deg, var(--blue-900) 0%, var(--blue-950) 100%);
+	--bg-sky-gradient:     linear-gradient(135deg, var(--sky-100) 0%, var(--sky-200) 50%, var(--sky-300) 100%);
+
+	--text-heading:        var(--blue-950);
+	--text-body:           var(--slate-800);
+	--text-muted:          var(--slate-600);
+	--text-inverse:        var(--white);
+	--text-brand:          #0b688c;
+	--text-accent:         var(--gold-500);
+
+	--border-subtle:       var(--slate-200);
+	--border-brand:        var(--sky-200);
+	--border-brand-strong: var(--sky-300);
+	--border-accent:       var(--gold-500);
+
+	/* --- EmDash Core Overrides --- */
+	--color-bg:            var(--bg-body);
+	--color-bg-subtle:     var(--bg-surface-subtle);
+	--color-surface:       var(--bg-surface);
+	--color-text:          var(--text-body);
+	--color-text-secondary:var(--text-muted);
+	--color-muted:         var(--slate-600);
+	--color-border:        var(--border-subtle);
+	--color-border-subtle: var(--sky-100);
+	--color-brand:         var(--text-brand);
+	--color-brand-hover:   var(--blue-800);
+	--color-on-brand:      var(--white);
+	--color-brand-ring:    rgba(52, 198, 244, 0.35);
+
+	/* --- Typography Families --- */
+	--font-serif:  var(--font-heading, 'Lora', Georgia, serif);
+	--font-sans:   var(--font-body, 'Plus Jakarta Sans', -apple-system, sans-serif);
+	--font-arabic: var(--font-arabic, 'Amiri', 'Traditional Arabic', serif);
+
+	--font-weight-heading: 600;
+	--font-weight-display: 700;
+
+	/* --- Geometry & Elevation --- */
+	--radius-sm:   6px;
+	--radius-md:   12px;
+	--radius-lg:   20px;
+	--radius-full: 9999px;
+
+	--shadow-sm: 0 1px 3px rgba(14, 39, 70, 0.05);
+	--shadow-md: 0 6px 18px -3px rgba(14, 39, 70, 0.08), 0 2px 6px -1px rgba(14, 39, 70, 0.03);
+	--shadow-lg: 0 16px 32px -4px rgba(14, 39, 70, 0.12), 0 6px 12px -2px rgba(14, 39, 70, 0.05);
+
+	--container-max:     1240px;
+	--wide-width:        1240px;
+	--content-width:     720px;
+	--transition-fast:   0.2s cubic-bezier(0.16, 1, 0.3, 1);
+	--transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Base Global Typography Rules --- */
+body {
+	font-family: var(--font-sans);
+	color: var(--text-body);
+	background-color: var(--bg-body);
+	line-height: var(--leading-normal);
+	-webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--font-serif);
+	color: var(--text-heading);
+	font-weight: var(--font-weight-heading);
+	letter-spacing: -0.015em;
+}
+
+/* --- Shared Utility Classes --- */
+.font-serif {
+	font-family: var(--font-serif);
+}
+
+.font-sans {
+	font-family: var(--font-sans);
+}
+
+.font-arabic {
+	font-family: var(--font-arabic);
+	direction: rtl;
+	text-align: right;
+	line-height: 2.2;
+}
+
+/* The Sunrise Amber Accent Bar */
+.amber-bar {
+	display: block;
+	height: 3px;
+	width: 48px;
+	background: var(--brand-accent);
+	border-radius: var(--radius-full);
+	margin-top: 6px;
+	margin-bottom: var(--spacing-4);
+}
+
+/* Badges */
+.badge-category {
+	display: inline-flex;
+	align-items: center;
+	padding: 3px 10px;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: var(--text-brand);
+	background: var(--sky-100);
+	border: 1px solid var(--sky-200);
+	border-radius: var(--radius-full);
+	transition: var(--transition-fast);
+	text-decoration: none;
+}
+
+.badge-category:hover {
+	background: var(--sky-200);
+	color: var(--blue-900);
+}
+
+.badge-gold {
+	display: inline-flex;
+	align-items: center;
+	padding: 3px 10px;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: var(--gold-600);
+	background: var(--gold-100);
+	border: 1px solid var(--gold-500);
+	border-radius: var(--radius-full);
+}
+
+/* Arabic Ayat / Quranic Verse Box */
+.ayat-quote-box {
+	background: #f8fcff;
+	border: 1px solid var(--sky-200);
+	border-right: 4px solid var(--sky-500);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-6);
+	margin: var(--spacing-6) 0;
+	box-shadow: var(--shadow-sm);
+}
+
+.ayat-quote-box .ayat-arabic {
+	font-family: var(--font-arabic);
+	font-size: 1.65rem;
+	line-height: 2.4;
+	color: var(--blue-950);
+	direction: rtl;
+	text-align: right;
+	margin-bottom: var(--spacing-4);
+}
+
+.ayat-quote-box .ayat-translation {
+	font-family: var(--font-sans);
+	font-size: 0.95rem;
+	line-height: 1.7;
+	color: var(--slate-700);
+	font-style: italic;
+	margin-bottom: var(--spacing-2);
+}
+
+.ayat-quote-box .ayat-reference {
+	font-family: var(--font-sans);
+	font-size: 0.8rem;
+	font-weight: 700;
+	color: var(--text-brand);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+/* Footnotes Styling */
+.footnote-ref {
+	color: var(--brand-accent);
+	font-weight: 700;
+	text-decoration: none;
+	padding: 0 2px;
+	transition: var(--transition-fast);
+}
+
+.footnote-ref:hover {
+	color: var(--gold-600);
+	text-decoration: underline;
+}
+
+.footnote-target:target {
+	background-color: var(--gold-50);
+	border-left: 3px solid var(--gold-500);
+	padding-left: var(--spacing-3);
+	transition: background-color 0.4s ease;
 }
 
 .nav-admin {

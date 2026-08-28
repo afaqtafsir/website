@@ -29,10 +29,24 @@ export default defineConfig({
 	fonts: [
 		{
 			provider: fontProviders.google(),
-			name: "Inter",
+			name: "Plus Jakarta Sans",
 			cssVariable: "--font-body",
 			weights: [400, 500, 600, 700],
 			fallbacks: ["sans-serif"],
+		},
+		{
+			provider: fontProviders.google(),
+			name: "Lora",
+			cssVariable: "--font-heading",
+			weights: [400, 500, 600, 700],
+			fallbacks: ["serif"],
+		},
+		{
+			provider: fontProviders.google(),
+			name: "Amiri",
+			cssVariable: "--font-arabic",
+			weights: [400, 700],
+			fallbacks: ["serif"],
 		},
 		{
 			provider: fontProviders.google(),
