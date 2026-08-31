@@ -236,36 +236,42 @@
 			"id": "byline-arofah",
 			"slug": "arofah-nur",
 			"displayName": "Arofah Nur, M.Ag.",
+			"bio": "Peneliti kajian gender dan tafsir tematik Al-Qur'an di Pendidikan Kader Ulama Masjid Istiqlal (PKUMI).",
 			"isGuest": false
 		},
 		{
 			"id": "byline-hamdan",
 			"slug": "dr-hamdan-syukri",
 			"displayName": "Dr. Hamdan Syukri, M.Ud.",
+			"bio": "Pakar studi Al-Qur'an dan Kosmologi Islam. Mengkaji integrasi sains dan narasi penciptaan alam semesta dalam literatur tafsir.",
 			"isGuest": false
 		},
 		{
 			"id": "byline-refian",
 			"slug": "mochamad-refian-prasetyo",
 			"displayName": "Mochamad Refian Prasetyo, S.Ag.",
+			"bio": "Peneliti studi Al-Qur'an dan hermeneutika kontemporer. Menaruh minat mendalam pada studi gender, manuskrip tafsir Melayu-Nusantara, dan epistemologi maqashid.",
 			"isGuest": false
 		},
 		{
 			"id": "byline-fikri",
 			"slug": "fikri-anshari",
 			"displayName": "Fikri Anshari, M.Hum.",
+			"bio": "Peneliti filologi dan manuskrip Islam Nusantara, menaruh perhatian pada transmisi keilmuan tafsir abad ke-17 hingga ke-19.",
 			"isGuest": false
 		},
 		{
 			"id": "byline-iqbal",
 			"slug": "muhammad-iqbal",
 			"displayName": "Muhammad Iqbal, S.Ag.",
+			"bio": "Peneliti kajian siyasah syar'iyyah dan etika publik dalam perspektif Al-Qur'an.",
 			"isGuest": false
 		},
 		{
 			"id": "byline-nurul",
 			"slug": "nurul-izzah",
 			"displayName": "Nurul Izzah, M.Ag.",
+			"bio": "Peneliti tasawuf, spiritualitas Qur'ani, dan etika lingkungan dalam studi Islam kontemporer.",
 			"isGuest": false
 		}
 	],

@@ -103,9 +103,15 @@ const popularArticles = allArticles
 							</h1>
 							<p class="hero-lead-excerpt">{leadHero.data.excerpt}</p>
 							<div class="card-meta">
-								<span class="meta-author">
-									{leadHero.data.bylines?.[0]?.byline?.displayName || "Mochamad Refian Prasetyo, S.Ag."}
-								</span>
+								{leadHero.data.bylines?.[0]?.byline?.slug ? (
+									<a href={`/penulis/${leadHero.data.bylines[0].byline.slug}`} class="meta-author-link">
+										{leadHero.data.bylines[0].byline.displayName}
+									</a>
+								) : (
+									<span class="meta-author">
+										{leadHero.data.bylines?.[0]?.byline?.displayName || "Mochamad Refian Prasetyo, S.Ag."}
+									</span>
+								)}
 								<span class="meta-sep">•</span>
 								<time class="meta-date">{formatDate(leadHero.data.publishedAt)}</time>
 								<span class="meta-sep">•</span>
@@ -137,9 +143,15 @@ const popularArticles = allArticles
 										<a href={`/${item.id}`}>{item.data.title}</a>
 									</h2>
 									<div class="card-meta-mini">
-										<span class="meta-author">
-											{item.data.bylines?.[0]?.byline?.displayName || "Redaksi"}
-										</span>
+										{item.data.bylines?.[0]?.byline?.slug ? (
+											<a href={`/penulis/${item.data.bylines[0].byline.slug}`} class="meta-author-link">
+												{item.data.bylines[0].byline.displayName}
+											</a>
+										) : (
+											<span class="meta-author">
+												{item.data.bylines?.[0]?.byline?.displayName || "Redaksi"}
+											</span>
+										)}
 										<span class="meta-sep">•</span>
 										<span class="meta-time">{item.data.reading_time || "5 mnt"}</span>
 									</div>
@@ -220,7 +232,13 @@ const popularArticles = allArticles
 									</h3>
 									<p class="pattern-lead-excerpt">{patternALead.data.excerpt}</p>
 									<div class="card-meta">
-										<span class="meta-author">{patternALead.data.bylines?.[0]?.byline?.displayName || "Redaksi"}</span>
+										{patternALead.data.bylines?.[0]?.byline?.slug ? (
+											<a href={`/penulis/${patternALead.data.bylines[0].byline.slug}`} class="meta-author-link">
+												{patternALead.data.bylines[0].byline.displayName}
+											</a>
+										) : (
+											<span class="meta-author">{patternALead.data.bylines?.[0]?.byline?.displayName || "Redaksi"}</span>
+										)}
 										<span class="meta-sep">•</span>
 										<time class="meta-date">{formatDate(patternALead.data.publishedAt)}</time>
 									</div>
@@ -285,7 +303,13 @@ const popularArticles = allArticles
 									</h3>
 									<p class="pattern-b-excerpt">{item.data.excerpt}</p>
 									<div class="card-meta">
-										<span class="meta-author">{item.data.bylines?.[0]?.byline?.displayName || "Redaksi"}</span>
+										{item.data.bylines?.[0]?.byline?.slug ? (
+											<a href={`/penulis/${item.data.bylines[0].byline.slug}`} class="meta-author-link">
+												{item.data.bylines[0].byline.displayName}
+											</a>
+										) : (
+											<span class="meta-author">{item.data.bylines?.[0]?.byline?.displayName || "Redaksi"}</span>
+										)}
 										<span class="meta-sep">•</span>
 										<time class="meta-date">{formatDate(item.data.publishedAt)}</time>
 									</div>
@@ -517,8 +541,28 @@ const popularArticles = allArticles
 		color: var(--slate-800);
 	}
 
+	.meta-author-link {
+		font-weight: 600;
+		color: var(--slate-800);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+
+	.meta-author-link:hover {
+		color: var(--text-brand);
+		text-decoration: underline;
+	}
+
 	:global(.dark) .meta-author {
 		color: var(--slate-200);
+	}
+
+	:global(.dark) .meta-author-link {
+		color: var(--slate-200);
+	}
+
+	:global(.dark) .meta-author-link:hover {
+		color: var(--sky-400);
 	}
 
 	.meta-sep {

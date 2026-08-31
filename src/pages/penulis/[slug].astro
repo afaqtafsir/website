@@ -1,0 +1,710 @@
+---
+import {
+	getBylineBySlug,
+	getEmDashCollection,
+	getTermsForEntries,
+	decodeSlug,
+	getSiteSettings,
+} from "emdash";
+import { Image } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+import { resolveBlogSiteIdentity } from "../../utils/site-identity";
+
+const slug = decodeSlug(Astro.params.slug);
+
+if (!slug) {
+	return Astro.redirect("/404");
+}
+
+// 1. Fetch byline profile
+const byline = await getBylineBySlug(slug);
+
+if (!byline) {
+	return Astro.redirect("/404");
+}
+
+// 2. Fetch all articles written by this byline
+const { entries: articles, cacheHint } = await getEmDashCollection("articles", {
+	where: { byline: byline.translationGroup ?? byline.id },
+	orderBy: { published_at: "desc" },
+});
+
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+// 3. Batch query for categories, tags, and site settings (zero N+1)
+const articleIds = articles.map((a) => a.data.id);
+const [categoriesByEntry, tagsByEntry, siteSettings] = await Promise.all([
+	getTermsForEntries("articles", articleIds, "category"),
+	getTermsForEntries("articles", articleIds, "tag"),
+	getSiteSettings(),
+]);
+
+const { siteTitle } = resolveBlogSiteIdentity(siteSettings);
+
+// Helper for Indonesian dates
+function formatIndonesianDate(date: Date | string | null | undefined) {
+	if (!date) return "18 Agustus 2026";
+	const d = typeof date === "string" ? new Date(date) : date;
+	return d.toLocaleDateString("id-ID", {
+		day: "numeric",
+		month: "long",
+		year: "numeric",
+	});
+}
+
+// Helper for initials
+function getInitials(name: string) {
+	const parts = name
+		.replace(/^(Dr\.|Prof\.|K\.H\.|Ustadz|Ustadzah)\s+/gi, "")
+		.replace(/,\s*[A-Za-z\.]+/g, "")
+		.trim()
+		.split(/\s+/);
+	if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+	return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+---
+
+<Base
+	title={`Profil & Kajian: ${byline.displayName} — ${siteTitle}`}
+	description={byline.bio || `Kumpulan artikel, analisis, dan kajian tafsir Al-Qur'an oleh ${byline.displayName} di ${siteTitle}.`}
+>
+	<div class="author-page-container">
+		{/* BREADCRUMB */}
+		<nav class="breadcrumb-nav" aria-label="Breadcrumb">
+			<ol class="breadcrumb-list">
+				<li><a href="/">Beranda</a></li>
+				<li class="breadcrumb-sep">›</li>
+				<li><span class="breadcrumb-current">Penulis</span></li>
+				<li class="breadcrumb-sep">›</li>
+				<li class="breadcrumb-active" aria-current="page">{byline.displayName}</li>
+			</ol>
+		</nav>
+
+		{/* AUTHOR HERO PROFILE CARD */}
+		<header class="author-profile-hero">
+			<div class="author-hero-content">
+				<div class="author-avatar-wrapper">
+					{byline.avatarStorageKey || byline.avatarMediaId ? (
+						<img
+							src={`/_emdash/api/media/file/${byline.avatarStorageKey || byline.avatarMediaId}`}
+							alt={byline.displayName}
+							class="author-avatar-image"
+						/>
+					) : (
+						<div class="author-avatar-initials" aria-hidden="true">
+							{getInitials(byline.displayName)}
+						</div>
+					)}
+				</div>
+
+				<div class="author-info-wrapper">
+					<div class="author-badge-row">
+						<span class="author-role-badge">
+							{byline.isGuest ? "Kontributor Tamu" : "Penulis & Kontributor"}
+						</span>
+					</div>
+
+					<h1 class="author-display-name">{byline.displayName}</h1>
+					<span class="amber-bar"></span>
+
+					<p class="author-bio-text">
+						{byline.bio || "Penulis dan kontributor kajian tafsir Al-Qur'an, studi naskah, dan pemikiran Islam di afaqtafsir.id."}
+					</p>
+
+					<div class="author-meta-pills">
+						<div class="meta-pill">
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+								<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+							</svg>
+							<span>{articles.length} Kajian Diterbitkan</span>
+						</div>
+
+						{byline.websiteUrl && (
+							<a
+								href={byline.websiteUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="meta-pill meta-link-pill"
+							>
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<circle cx="12" cy="12" r="10"></circle>
+									<line x1="2" y1="12" x2="22" y2="12"></line>
+									<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+								</svg>
+								<span>Tautan Web / Profil ↗</span>
+							</a>
+						)}
+					</div>
+				</div>
+			</div>
+		</header>
+
+		{/* WRITTEN ARTICLES FEED */}
+		<main class="author-articles-section">
+			<div class="section-title-row">
+				<h2 class="section-title">Semua Kajian & Tulisan</h2>
+				<span class="section-count">{articles.length} artikel</span>
+			</div>
+
+			{articles.length === 0 ? (
+				<div class="empty-state-card">
+					<div class="empty-icon-wrap">
+						<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+							<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+							<polyline points="14 2 14 8 20 8"></polyline>
+							<line x1="16" y1="13" x2="8" y2="13"></line>
+							<line x1="16" y1="17" x2="8" y2="17"></line>
+						</svg>
+					</div>
+					<h3 class="empty-title">Belum Ada Artikel yang Diterbitkan</h3>
+					<p class="empty-desc">
+						Kajian dan artikel dari penulis ini akan tampil di sini setelah dipublikasikan melalui redaksi.
+					</p>
+					<a href="/" class="empty-btn">Kembali ke Beranda</a>
+				</div>
+			) : (
+				<div class="archive-grid">
+					{articles.map((article) => {
+						const categories = categoriesByEntry.get(article.data.id) ?? [];
+						const primaryCategory = categories[0] || { label: "Tafsir Tematik", slug: "tafsir-tematik" };
+						const tags = tagsByEntry.get(article.data.id) ?? [];
+
+						return (
+							<article class="archive-card">
+								<a href={`/${article.id}`} class="card-img-link" aria-label={article.data.title as string}>
+									<div class="card-img-wrapper">
+										{article.data.featured_image ? (
+											<Image image={article.data.featured_image} />
+										) : (
+											<div class="card-fallback">
+												<span>AFAQ TAFSIR</span>
+											</div>
+										)}
+									</div>
+								</a>
+
+								<div class="card-body">
+									<div class="card-category-row">
+										<a href={`/kategori/${primaryCategory.slug}`} class="badge-category">
+											{primaryCategory.label}
+										</a>
+										{tags.slice(0, 1).map((t) => (
+											<span class="tag-mini">#{t.label}</span>
+										))}
+									</div>
+
+									<h3 class="card-title">
+										<a href={`/${article.id}`}>{article.data.title}</a>
+									</h3>
+
+									{article.data.excerpt && (
+										<p class="card-excerpt">{article.data.excerpt}</p>
+									)}
+
+									<div class="card-footer-meta">
+										<time class="meta-date" datetime={article.data.publishedAt ? new Date(article.data.publishedAt).toISOString() : ""}>
+											{formatIndonesianDate(article.data.publishedAt)}
+										</time>
+										{article.data.reading_time && (
+											<>
+												<span class="meta-dot" aria-hidden="true">•</span>
+												<span class="meta-reading-time">{article.data.reading_time}</span>
+											</>
+										)}
+									</div>
+								</div>
+							</article>
+						);
+					})}
+				</div>
+			)}
+		</main>
+	</div>
+</Base>
+
+<style>
+	.author-page-container {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: var(--spacing-6) var(--spacing-6) var(--spacing-16);
+	}
+
+	/* Breadcrumb */
+	.breadcrumb-nav {
+		margin-bottom: var(--spacing-6);
+	}
+
+	.breadcrumb-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: var(--spacing-2);
+		font-size: 0.85rem;
+		color: var(--slate-600);
+	}
+
+	.breadcrumb-list a {
+		color: var(--slate-600);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+
+	.breadcrumb-list a:hover {
+		color: var(--text-brand);
+		text-decoration: underline;
+	}
+
+	:global(.dark) .breadcrumb-list a {
+		color: var(--slate-400);
+	}
+
+	.breadcrumb-sep {
+		opacity: 0.4;
+	}
+
+	.breadcrumb-current {
+		color: var(--slate-600);
+	}
+
+	.breadcrumb-active {
+		color: var(--blue-950);
+		font-weight: 600;
+	}
+
+	:global(.dark) .breadcrumb-active {
+		color: var(--sky-300);
+	}
+
+	/* Author Profile Hero */
+	.author-profile-hero {
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-8);
+		box-shadow: var(--shadow-sm);
+		margin-bottom: var(--spacing-12);
+		position: relative;
+		overflow: hidden;
+	}
+
+	:global(.dark) .author-profile-hero {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.author-hero-content {
+		display: flex;
+		gap: var(--spacing-8);
+		align-items: flex-start;
+	}
+
+	.author-avatar-wrapper {
+		flex-shrink: 0;
+	}
+
+	.author-avatar-image {
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 3px solid var(--sky-200);
+		box-shadow: var(--shadow-md);
+	}
+
+	.author-avatar-initials {
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 100%);
+		border: 3px solid var(--sky-300);
+		color: var(--sky-100);
+		font-family: var(--font-serif);
+		font-size: 2.5rem;
+		font-weight: 700;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: var(--shadow-md);
+		letter-spacing: 0.05em;
+	}
+
+	.author-info-wrapper {
+		flex-grow: 1;
+	}
+
+	.author-badge-row {
+		margin-bottom: var(--spacing-2);
+	}
+
+	.author-role-badge {
+		display: inline-block;
+		font-size: 0.72rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		background: var(--gold-100);
+		color: var(--gold-600);
+		padding: 3px 10px;
+		border-radius: var(--radius-full);
+		border: 1px solid rgba(217, 119, 6, 0.25);
+	}
+
+	:global(.dark) .author-role-badge {
+		background: rgba(217, 119, 6, 0.2);
+		color: var(--gold-400);
+		border-color: rgba(245, 158, 11, 0.3);
+	}
+
+	.author-display-name {
+		font-size: 2.2rem;
+		line-height: 1.2;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-2);
+	}
+
+	:global(.dark) .author-display-name {
+		color: var(--white);
+	}
+
+	.author-bio-text {
+		font-size: 1.05rem;
+		line-height: 1.75;
+		color: var(--slate-700);
+		margin: 0 0 var(--spacing-5);
+		max-width: 800px;
+	}
+
+	:global(.dark) .author-bio-text {
+		color: var(--slate-300);
+	}
+
+	.author-meta-pills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--spacing-3);
+		align-items: center;
+	}
+
+	.meta-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 6px 14px;
+		border-radius: var(--radius-full);
+		background: var(--sky-50);
+		border: 1px solid var(--sky-200);
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--text-brand);
+	}
+
+	:global(.dark) .meta-pill {
+		background: rgba(52, 198, 244, 0.1);
+		border-color: rgba(52, 198, 244, 0.2);
+		color: var(--sky-300);
+	}
+
+	.meta-link-pill {
+		text-decoration: none;
+		transition: background var(--transition-fast), border-color var(--transition-fast);
+	}
+
+	.meta-link-pill:hover {
+		background: var(--sky-100);
+		border-color: var(--sky-400);
+		color: var(--blue-900);
+	}
+
+	:global(.dark) .meta-link-pill:hover {
+		background: rgba(52, 198, 244, 0.2);
+		color: var(--white);
+	}
+
+	/* Section Headings */
+	.author-articles-section {
+		margin-top: var(--spacing-8);
+	}
+
+	.section-title-row {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: var(--spacing-6);
+		padding-bottom: var(--spacing-3);
+		border-bottom: 2px solid var(--sky-200);
+	}
+
+	:global(.dark) .section-title-row {
+		border-bottom-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.section-title {
+		font-size: 1.6rem;
+		color: var(--blue-950);
+		margin: 0;
+	}
+
+	:global(.dark) .section-title {
+		color: var(--white);
+	}
+
+	.section-count {
+		font-size: 0.9rem;
+		color: var(--slate-600);
+		font-weight: 500;
+	}
+
+	:global(.dark) .section-count {
+		color: var(--slate-400);
+	}
+
+	/* Card Grid */
+	.archive-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--spacing-8);
+	}
+
+	.archive-card {
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-md);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		box-shadow: var(--shadow-sm);
+		transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	:global(.dark) .archive-card {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.archive-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
+
+	.card-img-link {
+		display: block;
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+		background: var(--blue-900);
+	}
+
+	.card-img-wrapper {
+		width: 100%;
+		height: 100%;
+	}
+
+	.card-img-wrapper :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.archive-card:hover .card-img-wrapper :global(img) {
+		transform: scale(1.03);
+	}
+
+	.card-fallback {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(135deg, var(--blue-950) 0%, var(--blue-900) 100%);
+		color: var(--sky-300);
+		font-weight: 700;
+		font-size: 0.85rem;
+		letter-spacing: 0.1em;
+	}
+
+	.card-body {
+		padding: var(--spacing-5);
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.card-category-row {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: var(--spacing-2);
+	}
+
+	.tag-mini {
+		font-size: 0.72rem;
+		font-weight: 600;
+		color: var(--text-brand);
+	}
+
+	:global(.dark) .tag-mini {
+		color: var(--sky-400);
+	}
+
+	.card-title {
+		font-size: 1.18rem;
+		line-height: 1.35;
+		margin: 0 0 var(--spacing-2);
+	}
+
+	.card-title a {
+		color: var(--blue-950);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+
+	:global(.dark) .card-title a {
+		color: var(--white);
+	}
+
+	.card-title a:hover {
+		color: var(--text-brand);
+	}
+
+	:global(.dark) .card-title a:hover {
+		color: var(--sky-400);
+	}
+
+	.card-excerpt {
+		font-size: 0.88rem;
+		line-height: 1.6;
+		color: var(--slate-700);
+		margin-bottom: var(--spacing-4);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	:global(.dark) .card-excerpt {
+		color: var(--slate-300);
+	}
+
+	.card-footer-meta {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 0.8rem;
+		color: var(--slate-600);
+		margin-top: auto;
+		padding-top: var(--spacing-3);
+		border-top: 1px solid var(--slate-100);
+	}
+
+	:global(.dark) .card-footer-meta {
+		color: var(--slate-400);
+		border-top-color: rgba(255, 255, 255, 0.06);
+	}
+
+	.meta-dot {
+		opacity: 0.4;
+	}
+
+	/* Empty State */
+	.empty-state-card {
+		text-align: center;
+		padding: var(--spacing-16) var(--spacing-6);
+		background: var(--white);
+		border: 1px dashed var(--sky-300);
+		border-radius: var(--radius-lg);
+	}
+
+	:global(.dark) .empty-state-card {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.25);
+	}
+
+	.empty-icon-wrap {
+		width: 72px;
+		height: 72px;
+		margin: 0 auto var(--spacing-4);
+		border-radius: 50%;
+		background: var(--sky-50);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--text-brand);
+	}
+
+	:global(.dark) .empty-icon-wrap {
+		background: rgba(52, 198, 244, 0.1);
+		color: var(--sky-300);
+	}
+
+	.empty-title {
+		font-size: 1.35rem;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-2);
+	}
+
+	:global(.dark) .empty-title {
+		color: var(--white);
+	}
+
+	.empty-desc {
+		font-size: 0.95rem;
+		color: var(--slate-600);
+		max-width: 500px;
+		margin: 0 auto var(--spacing-6);
+	}
+
+	:global(.dark) .empty-desc {
+		color: var(--slate-400);
+	}
+
+	.empty-btn {
+		display: inline-block;
+		padding: 8px 20px;
+		border-radius: var(--radius-full);
+		background: var(--blue-900);
+		color: var(--white);
+		font-size: 0.88rem;
+		font-weight: 600;
+		text-decoration: none;
+		transition: background var(--transition-fast);
+	}
+
+	.empty-btn:hover {
+		background: var(--blue-800);
+	}
+
+	@media (max-width: 900px) {
+		.author-hero-content {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+
+		.author-bio-text {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.author-meta-pills {
+			justify-content: center;
+		}
+
+		.archive-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.archive-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.author-display-name {
+			font-size: 1.75rem;
+		}
+	}
+</style>

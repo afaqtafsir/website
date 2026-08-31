@@ -103,6 +103,9 @@ if (article) {
 
 	authorByline = article.data.bylines?.[0]?.byline;
 	authorName = authorByline?.displayName || "Mochamad Refian Prasetyo, S.Ag.";
+	if (authorByline?.bio) {
+		authorBio = authorByline.bio;
+	}
 
 	const { entries: relatedEntries } = await getEmDashCollection("articles", {
 		orderBy: { published_at: "desc" },
@@ -224,7 +227,7 @@ if (article) {
 						<h3 class="author-card-name">{authorName}</h3>
 						<p class="author-card-affiliation">{authorRole} • {authorAffiliation}</p>
 						<p class="author-card-bio">{authorBio}</p>
-						<a href={`/tentang#author-${authorByline?.slug || "refian"}`} class="author-archive-link">
+						<a href={authorByline?.slug ? `/penulis/${authorByline.slug}` : "/"} class="author-archive-link">
 							<span>Lihat Profil Lengkap & Arsip Kajian →</span>
 						</a>
 					</div>
