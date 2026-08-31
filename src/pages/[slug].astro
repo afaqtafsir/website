@@ -20,14 +20,29 @@ if (!slug) {
 	return Astro.redirect("/404");
 }
 
-// Query single article from "articles" collection
-const { entry: article, cacheHint } = await getEmDashEntry("articles", slug);
+// 1. First, check "articles" collection
+const { entry: article, cacheHint: articleCacheHint } = await getEmDashEntry("articles", slug);
 
+// 2. If not an article, check "pages" collection
+let page: any = null;
+let pageCacheHint: any = null;
 if (!article) {
+	const pageRes = await getEmDashEntry("pages", slug);
+	page = pageRes.entry;
+	pageCacheHint = pageRes.cacheHint;
+}
+
+// 3. If neither found, redirect to 404
+if (!article && !page) {
 	return Astro.redirect("/404");
 }
 
-if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+const activeCacheHint = article ? articleCacheHint : pageCacheHint;
+if (Astro.cache?.enabled && activeCacheHint) {
+	Astro.cache.set(activeCacheHint);
+}
+
+const { siteTitle } = resolveBlogSiteIdentity(await getSiteSettings());
 
 // Helper for image URLs
 function getImageUrl(img: unknown): string | undefined {
@@ -48,29 +63,6 @@ function getImageUrl(img: unknown): string | undefined {
 	return undefined;
 }
 
-const featuredImageUrl = getImageUrl(article.data.featured_image);
-const { siteTitle } = resolveBlogSiteIdentity(await getSiteSettings());
-
-// Generate SEO meta
-const seo = getSeoMeta(article, {
-	siteTitle,
-	siteUrl: Astro.url.origin,
-	path: `/${slug}`,
-	defaultOgImage: featuredImageUrl,
-});
-
-// Category and Tags
-const categories = article.data.terms?.category ?? [];
-const primaryCategory = categories[0] || { label: "Tafsir Tematik", slug: "tafsir-tematik" };
-const tags = article.data.terms?.tag ?? [];
-
-// Author / Bylines
-const authorByline = article.data.bylines?.[0]?.byline;
-const authorName = authorByline?.displayName || "Mochamad Refian Prasetyo, S.Ag.";
-const authorRole = "Peneliti Tafsir & Hermeneutika Al-Qur'an";
-const authorAffiliation = "Pendidikan Kader Ulama Masjid Istiqlal (PKUMI)";
-const authorBio = "Peneliti studi Al-Qur'an dan hermeneutika kontemporer. Menaruh minat mendalam pada studi gender, manuskrip tafsir Melayu-Nusantara, dan epistemologi maqashid.";
-
 // Indonesian Date Formatting
 function formatIndonesianDate(date: Date | string | null | undefined) {
 	if (!date) return "18 Agustus 2026";
@@ -82,200 +74,377 @@ function formatIndonesianDate(date: Date | string | null | undefined) {
 	});
 }
 
-// Fetch Related Articles (3 other articles)
-const { entries: relatedEntries } = await getEmDashCollection("articles", {
-	orderBy: { published_at: "desc" },
-	limit: 4,
-});
-const relatedArticles = relatedEntries.filter((a) => a.id !== article.id).slice(0, 3);
-const relatedIds = relatedArticles.map((a) => a.data.id);
-const relatedCategories = await getTermsForEntries("articles", relatedIds, "category");
+// --- Article Data Preparation ---
+let seo: any = null;
+let featuredImageUrl: string | undefined = undefined;
+let categories: Array<{ label: string; slug: string }> = [];
+let primaryCategory = { label: "Tafsir Tematik", slug: "tafsir-tematik" };
+let tags: Array<{ label: string; slug: string }> = [];
+let authorByline: any = null;
+let authorName = "Mochamad Refian Prasetyo, S.Ag.";
+let authorRole = "Peneliti Tafsir & Hermeneutika Al-Qur'an";
+let authorAffiliation = "Pendidikan Kader Ulama Masjid Istiqlal (PKUMI)";
+let authorBio = "Peneliti studi Al-Qur'an dan hermeneutika kontemporer. Menaruh minat mendalam pada studi gender, manuskrip tafsir Melayu-Nusantara, dan epistemologi maqashid.";
+let relatedArticles: any[] = [];
+let relatedCategories = new Map();
+
+if (article) {
+	featuredImageUrl = getImageUrl(article.data.featured_image);
+	seo = getSeoMeta(article, {
+		siteTitle,
+		siteUrl: Astro.url.origin,
+		path: `/${slug}`,
+		defaultOgImage: featuredImageUrl,
+	});
+
+	categories = article.data.terms?.category ?? [];
+	primaryCategory = categories[0] || { label: "Tafsir Tematik", slug: "tafsir-tematik" };
+	tags = article.data.terms?.tag ?? [];
+
+	authorByline = article.data.bylines?.[0]?.byline;
+	authorName = authorByline?.displayName || "Mochamad Refian Prasetyo, S.Ag.";
+
+	const { entries: relatedEntries } = await getEmDashCollection("articles", {
+		orderBy: { published_at: "desc" },
+		limit: 4,
+	});
+	relatedArticles = relatedEntries.filter((a) => a.id !== article.id).slice(0, 3);
+	const relatedIds = relatedArticles.map((a) => a.data.id);
+	relatedCategories = await getTermsForEntries("articles", relatedIds, "category");
+}
 ---
 
-<Base
-	title={seo.title}
-	pageTitle={article.data.title}
-	description={seo.description || article.data.excerpt}
-	image={featuredImageUrl}
-	canonical={seo.canonical}
-	type="article"
-	publishedTime={article.data.publishedAt ? new Date(article.data.publishedAt).toISOString() : null}
-	modifiedTime={article.data.updatedAt?.toISOString() || null}
-	author={authorName}
-	content={{ collection: "articles", id: article.data.id, slug }}
->
-	<article class="article-page-container">
-		
-		{/* 1. ARTICLE HEADER & BREADCRUMB */}
-		<header class="article-header">
-			<nav class="article-breadcrumb" aria-label="Breadcrumb">
-				<a href="/">Beranda</a>
-				<span class="bc-sep">›</span>
-				<a href={`/kategori/${primaryCategory.slug}`}>{primaryCategory.label.toUpperCase()}</a>
-				<span class="bc-sep">›</span>
-				<span class="bc-current">{article.data.title}</span>
-			</nav>
-
-			<div class="header-badge-row">
-				<a href={`/kategori/${primaryCategory.slug}`} class="badge-category">
-					{primaryCategory.label}
-				</a>
-			</div>
-
-			<h1 class="article-headline">{article.data.title}</h1>
+{article ? (
+	<Base
+		title={seo.title}
+		pageTitle={article.data.title}
+		description={seo.description || article.data.excerpt}
+		image={featuredImageUrl}
+		canonical={seo.canonical}
+		type="article"
+		publishedTime={article.data.publishedAt ? new Date(article.data.publishedAt).toISOString() : null}
+		modifiedTime={article.data.updatedAt?.toISOString() || null}
+		author={authorName}
+		content={{ collection: "articles", id: article.data.id, slug }}
+	>
+		<article class="article-page-container">
 			
-			{article.data.subheadline && (
-				<p class="article-subheadline">{article.data.subheadline}</p>
-			)}
+			{/* 1. ARTICLE HEADER & BREADCRUMB */}
+			<header class="article-header">
+				<nav class="article-breadcrumb" aria-label="Breadcrumb">
+					<a href="/">Beranda</a>
+					<span class="bc-sep">›</span>
+					<a href={`/kategori/${primaryCategory.slug}`}>{primaryCategory.label.toUpperCase()}</a>
+					<span class="bc-sep">›</span>
+					<span class="bc-current">{article.data.title}</span>
+				</nav>
 
-			<div class="article-byline-bar">
-				<div class="byline-left">
-					<span class="byline-written">Ditulis oleh</span>
-					<a href={`/tentang#author-${authorByline?.slug || "refian"}`} class="byline-name">
-						{authorName}
+				<div class="header-badge-row">
+					<a href={`/kategori/${primaryCategory.slug}`} class="badge-category">
+						{primaryCategory.label}
 					</a>
 				</div>
-				<span class="byline-dot">•</span>
-				<time class="byline-date">{formatIndonesianDate(article.data.publishedAt)}</time>
-				<span class="byline-dot">•</span>
-				<span class="byline-read-time">⏱ {article.data.reading_time || "6 mnt baca"}</span>
-			</div>
-		</header>
 
-		{/* 2. FEATURED IMAGE BANNER */}
-		{article.data.featured_image && (
-			<figure class="article-featured-banner">
-				<div class="banner-image-wrapper">
-					<Image image={article.data.featured_image} />
-				</div>
-				{article.data.featured_image.alt && (
-					<figcaption class="banner-caption">{article.data.featured_image.alt}</figcaption>
-				)}
-			</figure>
-		)}
-
-		{/* 3. PROSE CONTAINER (MAX-WIDTH 720PX) */}
-		<div class="article-body-wrapper">
-			<div class="article-prose">
-				{/* Lead Excerpt */}
-				{article.data.excerpt && (
-					<p class="article-lead-paragraph">
-						{article.data.excerpt}
-					</p>
+				<h1 class="article-headline">{article.data.title}</h1>
+				
+				{article.data.subheadline && (
+					<p class="article-subheadline">{article.data.subheadline}</p>
 				)}
 
-				{/* Rich Body Content (Portable Text) */}
-				{article.data.content && (
-					<div class="portable-text-container">
-						<PortableText value={article.data.content} />
+				<div class="article-byline-bar">
+					<div class="byline-left">
+						<span class="byline-written">Ditulis oleh</span>
+						<a href={`/tentang#author-${authorByline?.slug || "refian"}`} class="byline-name">
+							{authorName}
+						</a>
 					</div>
-				)}
-			</div>
-
-			{/* TAGS ROW */}
-			{tags.length > 0 && (
-				<div class="article-tags-section">
-					<span class="tags-label">Topik Terkait:</span>
-					<div class="tags-list">
-						{tags.map((tag) => (
-							<a href={`/tag/${tag.slug}`} class="tag-chip">
-								#{tag.label}
-							</a>
-						))}
-					</div>
+					<span class="byline-dot">•</span>
+					<time class="byline-date">{formatIndonesianDate(article.data.publishedAt)}</time>
+					<span class="byline-dot">•</span>
+					<span class="byline-read-time">⏱ {article.data.reading_time || "6 mnt baca"}</span>
 				</div>
+			</header>
+
+			{/* 2. FEATURED IMAGE BANNER */}
+			{article.data.featured_image && (
+				<figure class="article-featured-banner">
+					<div class="banner-image-wrapper">
+						<Image image={article.data.featured_image} />
+					</div>
+					{article.data.featured_image.alt && (
+						<figcaption class="banner-caption">{article.data.featured_image.alt}</figcaption>
+					)}
+				</figure>
 			)}
 
-			{/* 4. AUTHOR PROFILE CARD */}
-			<section class="author-profile-card" aria-label="Profil Penulis">
-				<div class="author-avatar-col">
-					<div class="author-avatar-img">
-						<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0e2746" stroke-width="1.5">
-							<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-							<circle cx="12" cy="7" r="4"></circle>
-						</svg>
-					</div>
-				</div>
-				<div class="author-bio-col">
-					<span class="author-card-label">PROFIL PENULIS</span>
-					<h3 class="author-card-name">{authorName}</h3>
-					<p class="author-card-affiliation">{authorRole} • {authorAffiliation}</p>
-					<p class="author-card-bio">{authorBio}</p>
-					<a href={`/tentang#author-${authorByline?.slug || "refian"}`} class="author-archive-link">
-						<span>Lihat Profil Lengkap & Arsip Kajian →</span>
-					</a>
-				</div>
-			</section>
+			{/* 3. PROSE CONTAINER (MAX-WIDTH 720PX) */}
+			<div class="article-body-wrapper">
+				<div class="article-prose">
+					{/* Lead Excerpt */}
+					{article.data.excerpt && (
+						<p class="article-lead-paragraph">
+							{article.data.excerpt}
+						</p>
+					)}
 
-			{/* 5. MODERATED DISCUSSION BOX */}
-			<section class="discussion-box-section" aria-label="Ruang Diskusi Ilmiah">
-				<div class="discussion-header">
-					<div class="discussion-title-row">
-						<h3 class="discussion-title">Ruang Diskusi Ilmiah</h3>
-					</div>
-					<p class="discussion-desc">
-						Sampaikan tanggapan, elaborasi metodologis, atau kritik ilmiah secara santun dan bertanggung jawab.
-					</p>
+					{/* Rich Body Content (Portable Text) */}
+					{article.data.content && (
+						<div class="portable-text-container">
+							<PortableText value={article.data.content} />
+						</div>
+					)}
 				</div>
-				<div class="discussion-card">
-					<textarea
-						placeholder="Tuliskan pandangan atau tanggapan ilmiah Anda atas kajian ini..."
-						rows="4"
-						class="discussion-textarea"
-					></textarea>
-					<div class="discussion-actions">
-						<span class="discussion-guideline-note">
-							*Diskusi dikurasi oleh Dewan Redaksi Afaq Tafsir sesuai Kode Etik Publikasi.
-						</span>
-						<button type="button" class="btn-submit-discussion" onclick="alert('Terima kasih. Tanggapan Anda telah diterima dan akan ditinjau oleh Dewan Redaksi.')">
-							Kirim Tanggapan
-						</button>
-					</div>
-				</div>
-			</section>
 
-			{/* 6. KAJIAN TERKAIT (3-CARD GRID) */}
-			{relatedArticles.length > 0 && (
-				<section class="related-articles-section" aria-label="Kajian Terkait">
-					<div class="section-header">
-						<h3 class="section-title">Kajian Terkait</h3>
-						<span class="amber-bar"></span>
+				{/* TAGS ROW */}
+				{tags.length > 0 && (
+					<div class="article-tags-section">
+						<span class="tags-label">Topik Terkait:</span>
+						<div class="tags-list">
+							{tags.map((tag) => (
+								<a href={`/tag/${tag.slug}`} class="tag-chip">
+									#{tag.label}
+								</a>
+							))}
+						</div>
 					</div>
-					<div class="related-grid">
-						{relatedArticles.map((rel) => {
-							const relCat = relatedCategories.get(rel.data.id)?.[0] || { label: "Tafsir Tematik", slug: "tafsir-tematik" };
-							return (
-								<article class="related-card">
-									<a href={`/${rel.id}`} class="related-img-link">
-										<div class="related-img">
-											{rel.data.featured_image ? (
-												<Image image={rel.data.featured_image} />
-											) : (
-												<div class="related-fallback">AFAQ TAFSIR</div>
-											)}
-										</div>
-									</a>
-									<div class="related-body">
-										<a href={`/kategori/${relCat.slug}`} class="badge-category-mini">
-											{relCat.label}
-										</a>
-										<h4 class="related-title">
-											<a href={`/${rel.id}`}>{rel.data.title}</a>
-										</h4>
-										<time class="related-date">{formatIndonesianDate(rel.data.publishedAt)}</time>
-									</div>
-								</article>
-							);
-						})}
+				)}
+
+				{/* 4. AUTHOR PROFILE CARD */}
+				<section class="author-profile-card" aria-label="Profil Penulis">
+					<div class="author-avatar-col">
+						<div class="author-avatar-img">
+							<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0e2746" stroke-width="1.5">
+								<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+								<circle cx="12" cy="7" r="4"></circle>
+							</svg>
+						</div>
+					</div>
+					<div class="author-bio-col">
+						<span class="author-card-label">PROFIL PENULIS</span>
+						<h3 class="author-card-name">{authorName}</h3>
+						<p class="author-card-affiliation">{authorRole} • {authorAffiliation}</p>
+						<p class="author-card-bio">{authorBio}</p>
+						<a href={`/tentang#author-${authorByline?.slug || "refian"}`} class="author-archive-link">
+							<span>Lihat Profil Lengkap & Arsip Kajian →</span>
+						</a>
 					</div>
 				</section>
-			)}
 
+				{/* 5. MODERATED DISCUSSION BOX */}
+				<section class="discussion-box-section" aria-label="Ruang Diskusi Ilmiah">
+					<div class="discussion-header">
+						<div class="discussion-title-row">
+							<h3 class="discussion-title">Ruang Diskusi Ilmiah</h3>
+						</div>
+						<p class="discussion-desc">
+							Sampaikan tanggapan, elaborasi metodologis, atau kritik ilmiah secara santun dan bertanggung jawab.
+						</p>
+					</div>
+					<div class="discussion-card">
+						<textarea
+							placeholder="Tuliskan pandangan atau tanggapan ilmiah Anda atas kajian ini..."
+							rows="4"
+							class="discussion-textarea"
+						></textarea>
+						<div class="discussion-actions">
+							<span class="discussion-guideline-note">
+								*Diskusi dikurasi oleh Dewan Redaksi Afaq Tafsir sesuai Kode Etik Publikasi.
+							</span>
+							<button type="button" class="btn-submit-discussion" onclick="alert('Terima kasih. Tanggapan Anda telah diterima dan akan ditinjau oleh Dewan Redaksi.')">
+								Kirim Tanggapan
+							</button>
+						</div>
+					</div>
+				</section>
+
+				{/* 6. KAJIAN TERKAIT (3-CARD GRID) */}
+				{relatedArticles.length > 0 && (
+					<section class="related-articles-section" aria-label="Kajian Terkait">
+						<div class="section-header">
+							<h3 class="section-title">Kajian Terkait</h3>
+							<span class="amber-bar"></span>
+						</div>
+						<div class="related-grid">
+							{relatedArticles.map((rel) => {
+								const relCat = relatedCategories.get(rel.data.id)?.[0] || { label: "Tafsir Tematik", slug: "tafsir-tematik" };
+								return (
+									<article class="related-card">
+										<a href={`/${rel.id}`} class="related-img-link">
+											<div class="related-img">
+												{rel.data.featured_image ? (
+													<Image image={rel.data.featured_image} />
+												) : (
+													<div class="related-fallback">AFAQ TAFSIR</div>
+												)}
+											</div>
+										</a>
+										<div class="related-body">
+											<a href={`/kategori/${relCat.slug}`} class="badge-category-mini">
+												{relCat.label}
+											</a>
+											<h4 class="related-title">
+												<a href={`/${rel.id}`}>{rel.data.title}</a>
+											</h4>
+											<time class="related-date">{formatIndonesianDate(rel.data.publishedAt)}</time>
+										</div>
+									</article>
+								);
+							})}
+						</div>
+					</section>
+				)}
+
+			</div>
+		</article>
+	</Base>
+) : page ? (
+	<Base
+		title={page.data.title}
+		pageTitle={page.data.title}
+		content={{ collection: "pages", id: page.data.id, slug }}
+	>
+		<div class="static-page-container">
+			<header class="static-page-header">
+				<h1 class="static-page-title" {...page.edit.title}>{page.data.title}</h1>
+				<span class="amber-bar"></span>
+			</header>
+
+			<div class="static-page-body" {...page.edit.content}>
+				<div class="portable-text-container page-prose">
+					<PortableText value={page.data.content} />
+				</div>
+			</div>
 		</div>
-	</article>
-</Base>
+	</Base>
+) : null}
 
 <style>
+	/* ==========================================================================
+	   STATIC PAGE LAYOUT (EmDash "pages" collection)
+	   ========================================================================== */
+	.static-page-container {
+		max-width: 840px;
+		margin: 0 auto;
+		padding: var(--spacing-10) var(--spacing-6) var(--spacing-16);
+	}
+
+	.static-page-header {
+		margin-bottom: var(--spacing-10);
+	}
+
+	.static-page-title {
+		font-size: 2.3rem;
+		line-height: 1.25;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-4);
+	}
+
+	:global(.dark) .static-page-title {
+		color: var(--white);
+	}
+
+	.static-page-body {
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-8);
+		box-shadow: var(--shadow-sm);
+	}
+
+	:global(.dark) .static-page-body {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.page-prose :global(p) {
+		font-size: 1.05rem;
+		line-height: 1.8;
+		color: var(--slate-700);
+		margin-bottom: 1.5em;
+	}
+
+	:global(.dark) .page-prose :global(p) {
+		color: var(--slate-300);
+	}
+
+	.page-prose :global(h2) {
+		font-size: 1.45rem;
+		line-height: 1.35;
+		color: var(--blue-950);
+		margin: 2em 0 0.75em;
+		padding-bottom: 0.35em;
+		border-bottom: 1px solid var(--sky-200);
+	}
+
+	:global(.dark) .page-prose :global(h2) {
+		color: var(--white);
+		border-bottom-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.page-prose :global(h3) {
+		font-size: 1.2rem;
+		line-height: 1.4;
+		color: var(--blue-950);
+		margin: 1.5em 0 0.5em;
+	}
+
+	:global(.dark) .page-prose :global(h3) {
+		color: var(--white);
+	}
+
+	.page-prose :global(ul),
+	.page-prose :global(ol) {
+		padding-left: 1.4rem;
+		margin-bottom: 1.5em;
+	}
+
+	.page-prose :global(li) {
+		font-size: 1rem;
+		line-height: 1.75;
+		color: var(--slate-700);
+		margin-bottom: 0.6em;
+	}
+
+	:global(.dark) .page-prose :global(li) {
+		color: var(--slate-300);
+	}
+
+	.page-prose :global(a) {
+		color: var(--text-brand);
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.page-prose :global(a:hover) {
+		text-decoration: underline;
+	}
+
+	.page-prose :global(code) {
+		background: var(--sky-100);
+		padding: 2px 6px;
+		border-radius: var(--radius-sm);
+		font-size: 0.88rem;
+		color: var(--blue-950);
+	}
+
+	:global(.dark) .page-prose :global(code) {
+		background: rgba(52, 198, 244, 0.15);
+		color: var(--sky-300);
+	}
+
+	.page-prose :global(hr) {
+		border: 0;
+		border-top: 1px solid var(--sky-200);
+		margin: 2em 0;
+	}
+
+	:global(.dark) .page-prose :global(hr) {
+		border-top-color: rgba(52, 198, 244, 0.2);
+	}
+
+	/* ==========================================================================
+	   ARTICLE PAGE LAYOUT (EmDash "articles" collection)
+	   ========================================================================== */
 	.article-page-container {
 		max-width: var(--wide-width);
 		margin: 0 auto;
@@ -801,6 +970,10 @@ const relatedCategories = await getTermsForEntries("articles", relatedIds, "cate
 	@media (max-width: 768px) {
 		.article-headline {
 			font-size: 1.65rem;
+		}
+
+		.static-page-title {
+			font-size: 1.75rem;
 		}
 
 		.author-profile-card {
