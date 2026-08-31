@@ -51,6 +51,7 @@ const navItems: Array<{ label: string; url: string; target?: string | null }> = 
 	? primaryMenu.items.filter((item) => item.url !== "/kirim-tulisan")
 	: [
 			{ label: "Beranda", url: "/", target: undefined },
+			{ label: "Penulis", url: "/penulis", target: undefined },
 			{ label: "Tentang", url: "/tentang", target: undefined },
 			{ label: "Kontak", url: "/kontak", target: undefined },
 	  ];
@@ -207,6 +208,7 @@ const isLoggedIn = !!Astro.locals.user;
 						<h4 class="footer-heading">Navigasi Utama</h4>
 						<ul class="footer-links">
 							<li><a href="/">Beranda Utama</a></li>
+							<li><a href="/penulis">Direktori Penulis</a></li>
 							<li><a href="/#kajian-pilihan">Kajian Pilihan Terkini</a></li>
 							<li><a href="/kirim-tulisan">Pedoman Kirim Naskah</a></li>
 							<li><a href="/tentang">Tentang Redaksi & Visi</a></li>

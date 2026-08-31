@@ -287,6 +287,11 @@
 				},
 				{
 					"type": "custom",
+					"label": "Penulis",
+					"url": "/penulis"
+				},
+				{
+					"type": "custom",
 					"label": "Tentang",
 					"url": "/tentang"
 				},
@@ -310,6 +315,11 @@
 					"type": "custom",
 					"label": "Beranda Utama",
 					"url": "/"
+				},
+				{
+					"type": "custom",
+					"label": "Direktori Penulis",
+					"url": "/penulis"
 				},
 				{
 					"type": "custom",
