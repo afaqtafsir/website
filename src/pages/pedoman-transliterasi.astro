@@ -1,0 +1,1435 @@
+---
+import Base from "../layouts/Base.astro";
+
+// 29 Single Consonants according to SKB Menteri Agama & Menteri P&K RI 1987/1988
+const consonants = [
+	{ no: 1, arabic: "ا", latin: "—", name: "Alif", note: "Tidak dilambangkan" },
+	{ no: 2, arabic: "ب", latin: "b", name: "Ba", note: "b" },
+	{ no: 3, arabic: "ت", latin: "t", name: "Ta", note: "t" },
+	{ no: 4, arabic: "ث", latin: "ṡ", name: "Sa", note: "s dengan titik di atas" },
+	{ no: 5, arabic: "ج", latin: "j", name: "Jim", note: "j" },
+	{ no: 6, arabic: "ح", latin: "ḥ", name: "Ha", note: "h dengan titik di bawah" },
+	{ no: 7, arabic: "خ", latin: "kh", name: "Kha", note: "kh" },
+	{ no: 8, arabic: "د", latin: "d", name: "Dal", note: "d" },
+	{ no: 9, arabic: "ذ", latin: "ż", name: "Zal", note: "z dengan titik di atas" },
+	{ no: 10, arabic: "ر", latin: "r", name: "Ra", note: "r" },
+	{ no: 11, arabic: "ز", latin: "z", name: "Zai", note: "z" },
+	{ no: 12, arabic: "س", latin: "s", name: "Sin", note: "s" },
+	{ no: 13, arabic: "ش", latin: "sy", name: "Syin", note: "sy" },
+	{ no: 14, arabic: "ص", latin: "ṣ", name: "Sad", note: "s dengan titik di bawah" },
+	{ no: 15, arabic: "ض", latin: "ḍ", name: "Dad", note: "d dengan titik di bawah" },
+	{ no: 16, arabic: "ط", latin: "ṭ", name: "Ta", note: "t dengan titik di bawah" },
+	{ no: 17, arabic: "ظ", latin: "ẓ", name: "Za", note: "z dengan titik di bawah" },
+	{ no: 18, arabic: "ع", latin: "‘", name: "‘Ain", note: "koma terbalik di atas" },
+	{ no: 19, arabic: "غ", latin: "g", name: "Gain", note: "g" },
+	{ no: 20, arabic: "ف", latin: "f", name: "Fa", note: "f" },
+	{ no: 21, arabic: "ق", latin: "q", name: "Qaf", note: "q" },
+	{ no: 22, arabic: "ك", latin: "k", name: "Kaf", note: "k" },
+	{ no: 23, arabic: "ل", latin: "l", name: "Lam", note: "l" },
+	{ no: 24, arabic: "م", latin: "m", name: "Mim", note: "m" },
+	{ no: 25, arabic: "ن", latin: "n", name: "Nun", note: "n" },
+	{ no: 26, arabic: "و", latin: "w", name: "Waw", note: "w" },
+	{ no: 27, arabic: "هـ", latin: "h", name: "Ha", note: "h" },
+	{ no: 28, arabic: "ء", latin: "’", name: "Hamzah", note: "apostrof" },
+	{ no: 29, arabic: "ي", latin: "y", name: "Ya", note: "y" },
+];
+
+// Special diacritics list for the Quick-Copy bar
+const quickCopyChars = [
+	{ char: "ā", label: "a macron" },
+	{ char: "ī", label: "i macron" },
+	{ char: "ū", label: "u macron" },
+	{ char: "ḥ", label: "h dot below" },
+	{ char: "ṣ", label: "s dot below" },
+	{ char: "ḍ", label: "d dot below" },
+	{ char: "ṭ", label: "t dot below" },
+	{ char: "ẓ", label: "z dot below" },
+	{ char: "ż", label: "z dot above" },
+	{ char: "ṡ", label: "s dot above" },
+	{ char: "‘", label: "‘ain (reversed quote)" },
+	{ char: "’", label: "hamzah (apostrophe)" },
+	{ char: "Ā", label: "A macron" },
+	{ char: "Ī", label: "I macron" },
+	{ char: "Ū", label: "U macron" },
+	{ char: "Ḥ", label: "H dot below" },
+	{ char: "Ṣ", label: "S dot below" },
+	{ char: "Ḍ", label: "D dot below" },
+	{ char: "Ṭ", label: "T dot below" },
+	{ char: "Ẓ", label: "Z dot below" },
+	{ char: "Ż", label: "Z dot above" },
+	{ char: "Ṡ", label: "S dot above" },
+];
+---
+
+<Base
+	title="Pedoman Transliterasi Arab-Latin"
+	description="Pedoman transliterasi Arab-Latin resmi berdasarkan SKB Menteri Agama dan Menteri P&K RI (1988) dan LPMQ Kemenag RI (2023) untuk publikasi di afaqtafsir.id."
+>
+	<div class="transliterasi-container">
+		
+		{/* BREADCRUMB */}
+		<nav class="breadcrumb-nav" aria-label="Breadcrumb">
+			<ol class="breadcrumb-list">
+				<li><a href="/">Beranda</a></li>
+				<li class="breadcrumb-sep" aria-hidden="true">/</li>
+				<li><a href="/kirim-tulisan">Panduan Penulis</a></li>
+				<li class="breadcrumb-sep" aria-hidden="true">/</li>
+				<li class="breadcrumb-active" aria-current="page">Pedoman Transliterasi</li>
+			</ol>
+		</nav>
+
+		{/* HERO HEADER */}
+		<header class="page-hero">
+			<span class="hero-badge">Standar Baku Kepenulisan</span>
+			<h1 class="page-title">Pedoman Transliterasi Arab-Latin</h1>
+			<span class="amber-bar"></span>
+			<p class="hero-lead">
+				Standar penulisan transliterasi Arab-Latin yang digunakan di <strong>afaqtafsir.id</strong> mengacu pada 
+				<strong>Surat Keputusan Bersama (SKB) Menteri Agama dan Menteri P&K RI No. 158/1987 dan No. 0543 b/U/1987</strong> tertanggal 22 Januari 1988, 
+				sebagaimana dimuat dalam pedoman Lajnah Pentashihan Mushaf Al-Qur'an (LPMQ) Kementerian Agama Republik Indonesia.
+			</p>
+
+			<div class="legal-callout">
+				<div class="legal-icon" aria-hidden="true">
+					<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path>
+						<path d="M6 6h10"></path>
+						<path d="M6 10h10"></path>
+					</svg>
+				</div>
+				<div class="legal-text">
+					<strong>Sumber Rujukan Resmi:</strong>
+					<span>
+						Lajnah Pentashihan Mushaf Al-Qur'an Kementerian Agama RI (2023: xv), <em>Juz 'Amma Isyarat Metode Kitabah</em> dan <em>Juz 'Amma Isyarat Metode Tilawah</em>.
+					</span>
+				</div>
+			</div>
+		</header>
+
+		{/* QUICK COPY DIACRITIC BAR */}
+		<section class="copy-bar-wrapper" aria-label="Salin Cepat Karakter Diakritik">
+			<div class="copy-bar-card">
+				<div class="copy-bar-header">
+					<div class="copy-bar-title-group">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="copy-icon">
+							<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+							<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+						</svg>
+						<h2 class="copy-bar-title">Alat Bantu Salin Karakter Diakritik</h2>
+					</div>
+					<span class="copy-bar-hint">Klik karakter khusus di bawah ini untuk menyalin ke clipboard:</span>
+				</div>
+				<div class="copy-chips-grid">
+					{quickCopyChars.map((item) => (
+						<button
+							type="button"
+							class="copy-chip"
+							data-char={item.char}
+							title={`Salin '${item.char}' (${item.label})`}
+							aria-label={`Salin karakter ${item.char}`}
+						>
+							<span class="chip-char">{item.char}</span>
+						</button>
+					))}
+				</div>
+				<div id="copy-toast" class="copy-toast" aria-live="polite" hidden>
+					Tersalin ke clipboard!
+				</div>
+			</div>
+		</section>
+
+		{/* QUICK JUMP LINKS */}
+		<nav class="jump-nav" aria-label="Navigasi Bagian Pedoman">
+			<span class="jump-label">Lompat ke:</span>
+			<a href="#konsonan-tunggal">I. Konsonan Tunggal</a>
+			<a href="#huruf-ganda">II. Huruf Ganda</a>
+			<a href="#ta-marbutah">III. Ta Marbutah</a>
+			<a href="#vokal-diftong">IV–VII. Vokal & Diftong</a>
+			<a href="#metodologi">IX. Metodologi</a>
+		</nav>
+
+		{/* SECTION I: KONSONAN TUNGGAL */}
+		<section id="konsonan-tunggal" class="content-section">
+			<div class="section-header">
+				<span class="section-number">Bagian I</span>
+				<h2 class="section-title">Konsonan Tunggal</h2>
+			</div>
+			<p class="section-desc">
+				Dua puluh sembilan huruf hijaiyah berikut dialihaksarakan ke dalam alfabet Latin sesuai kesepakatan SKB Menteri 1987. 
+				Perhatikan tanda titik di bawah (<em>dot-below</em>), titik di atas (<em>dot-above</em>), serta apostrof tunggal.
+			</p>
+
+			<div class="consonants-grid">
+				{consonants.map((item) => (
+					<div class="consonant-card">
+						<div class="consonant-header">
+							<span class="consonant-num">{item.no}</span>
+							<span class="consonant-name">{item.name}</span>
+						</div>
+						<div class="consonant-body">
+							<span class="consonant-arabic font-arabic">{item.arabic}</span>
+							<span class="consonant-arrow" aria-hidden="true">→</span>
+							<span class="consonant-latin">{item.latin}</span>
+						</div>
+						<div class="consonant-note">{item.note}</div>
+					</div>
+				))}
+			</div>
+		</section>
+
+		{/* SECTION II & III: HURUF GANDA & TA MARBUTAH */}
+		<div class="two-col-grid">
+			{/* SECTION II */}
+			<section id="huruf-ganda" class="content-section card-style">
+				<div class="section-header">
+					<span class="section-number">Bagian II</span>
+					<h2 class="section-title">Huruf Ganda (Tasydid)</h2>
+				</div>
+				<p class="section-desc">
+					Huruf ganda yang ditandai dengan tanda <strong>tasydid (syaddah)</strong> ditulis rangkap secara berurutan.
+				</p>
+				<div class="example-table-wrapper">
+					<table class="example-table">
+						<thead>
+							<tr>
+								<th>Bentuk Arab</th>
+								<th>Transliterasi Latin</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="font-arabic font-ar-lg">إِنَّهُمْ</td>
+								<td class="font-latin-match"><strong>Innahum</strong></td>
+							</tr>
+							<tr>
+								<td class="font-arabic font-ar-lg">رَبُّكُمْ</td>
+								<td class="font-latin-match"><strong>Rabbukum</strong></td>
+							</tr>
+							<tr>
+								<td class="font-arabic font-ar-lg">تَبَيَّنَ</td>
+								<td class="font-latin-match"><strong>Tabayyana</strong></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			{/* SECTION III */}
+			<section id="ta-marbutah" class="content-section card-style">
+				<div class="section-header">
+					<span class="section-number">Bagian III</span>
+					<h2 class="section-title">Ta Marbutah di Akhir Kata</h2>
+				</div>
+				<div class="rule-block">
+					<h3 class="rule-title">1. Apabila Sukun (Waqaf)</h3>
+					<p class="rule-text">
+						Ditulis dengan huruf <strong>h</strong>, kecuali kata Arab yang telah terserap ke dalam kosakata bahasa Indonesia baku (seperti <em>salat</em>, <em>zakat</em>, <em>taubat</em>).
+					</p>
+					<div class="mini-example">
+						<span class="font-arabic">الْقَارِعَةُ</span> → <strong>Al-Qāri‘ah</strong>
+					</div>
+					<div class="mini-example">
+						<span class="font-arabic">مُمَدَّدَةٍ</span> → <strong>Mumaddadah</strong>
+					</div>
+				</div>
+
+				<div class="rule-block" style="margin-top: var(--spacing-4);">
+					<h3 class="rule-title">2. Apabila Dihidupkan (Wasal/Berharakat)</h3>
+					<p class="rule-text">
+						Ditulis dengan huruf <strong>t</strong> ketika disambung dengan kata sesudahnya.
+					</p>
+					<div class="mini-example">
+						<span class="font-arabic">حَمَّالَةَ الْحَطَبِ</span> → <strong>Ḥammālatal-ḥaṭab</strong>
+					</div>
+					<div class="mini-example">
+						<span class="font-arabic">هُمَزَةٍ لُّمَزَةٍ</span> → <strong>Humazatil-lumazah</strong>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		{/* SECTION IV, V, VI, VII: VOKAL & DIFTONG */}
+		<section id="vokal-diftong" class="content-section card-style">
+			<div class="section-header">
+				<span class="section-number">Bagian IV – VII</span>
+				<h2 class="section-title">Vokal, Madd, Diftong, & Apostrof</h2>
+			</div>
+
+			<div class="vowels-quad-grid">
+				{/* IV. Vokal Pendek */}
+				<div class="sub-quad-card">
+					<h3 class="quad-title">IV. Vokal Pendek</h3>
+					<p class="quad-desc">Fathah ditulis <strong>a</strong>, Kasrah ditulis <strong>i</strong>, dan Dammah ditulis <strong>u</strong>.</p>
+					<ul class="quad-list">
+						<li>
+							<span class="badge-vowel">Fathah (a)</span>
+							<span class="font-arabic">أَحَدَ</span> = <strong>aḥada</strong>
+						</li>
+						<li>
+							<span class="badge-vowel">Kasrah (i)</span>
+							<span class="font-arabic">مَلِكِ</span> = <strong>maliki</strong>
+						</li>
+						<li>
+							<span class="badge-vowel">Dammah (u)</span>
+							<span class="font-arabic">كَسَبَ</span> = <strong>kasaba</strong>
+						</li>
+					</ul>
+				</div>
+
+				{/* V. Vokal Panjang (Madd) */}
+				<div class="sub-quad-card">
+					<h3 class="quad-title">V. Vokal Panjang (Madd)</h3>
+					<p class="quad-desc">Vokal panjang ditandai garis horizontal di atas huruf (<em>macron</em>): <strong>ā</strong>, <strong>ī</strong>, dan <strong>ū</strong>.</p>
+					<ul class="quad-list">
+						<li>
+							<span class="badge-vowel">Fathah + Alif (ā)</span>
+							<span class="font-arabic">قَالَ</span> = <strong>qāla</strong>
+						</li>
+						<li>
+							<span class="badge-vowel">Kasrah + Ya' (ī)</span>
+							<span class="font-arabic">قِيْلَ</span> = <strong>qīla</strong>
+						</li>
+						<li>
+							<span class="badge-vowel">Dammah + Waw (ū)</span>
+							<span class="font-arabic">يَقُوْلُ</span> = <strong>yaqūlu</strong>
+						</li>
+					</ul>
+				</div>
+
+				{/* VI. Diftong */}
+				<div class="sub-quad-card">
+					<h3 class="quad-title">VI. Diftong (Vokal Rangkap)</h3>
+					<p class="quad-desc">Gabungan harakat fathah dengan huruf waw sukun atau ya' sukun.</p>
+					<ul class="quad-list">
+						<li>
+							<span class="badge-vowel">au (أَوْ)</span>
+							<span class="font-arabic">خَوْفٍ</span> = <strong>khaufin</strong>
+						</li>
+						<li>
+							<span class="badge-vowel">ai (أَيْ)</span>
+							<span class="font-arabic">خَيْرٍ</span> = <strong>khaira</strong>
+						</li>
+					</ul>
+				</div>
+
+				{/* VII. Apostrof */}
+				<div class="sub-quad-card">
+					<h3 class="quad-title">VII. Apostrof Pemisah</h3>
+					<p class="quad-desc">Digunakan untuk memisahkan vokal pendek yang berurutan dalam satu kata agar tidak tertukar dengan diftong.</p>
+					<ul class="quad-list">
+						<li>
+							<span class="badge-vowel">Hamzah ganda</span>
+							<span class="font-arabic">ءَاَنْذَرْتَهُمْ</span> = <strong>a’anzartahum</strong>
+						</li>
+						<li>
+							<span class="badge-vowel">Vokal beruntun</span>
+							<span class="font-arabic">أُولَٰئِكَ</span> = <strong>ulā’ika</strong>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			{/* VIII. Huruf Kapital */}
+			<div class="rule-box-info" style="margin-top: var(--spacing-6);">
+				<div class="info-title">VIII. Huruf Kapital</div>
+				<p class="info-text">
+					Penulisan huruf kapital disesuaikan dengan <strong>Pedoman Umum Ejaan Bahasa Indonesia (EYD/PUEBI)</strong>, 
+					seperti pada awal kalimat, nama orang, gelar kehormatan, dan nama tempat. Untuk kata yang diawali artikel <em>al-</em>, 
+					huruf kapital diletakkan pada huruf awal kata dasarnya, bukan pada artikelnya (contoh: <em>al-Baqarah</em>, <em>al-Ghazali</em>), 
+					kecuali jika terletak pada awal kalimat.
+				</p>
+			</div>
+		</section>
+
+		{/* SECTION IX: METODOLOGI TRANSLITERASI */}
+		<section id="metodologi" class="content-section card-style">
+			<div class="section-header">
+				<span class="section-number">Bagian IX</span>
+				<h2 class="section-title">Metodologi & Kaidah Khusus Transliterasi</h2>
+			</div>
+			<p class="section-desc">
+				Ketentuan teknis mengenai penggalan ayat, alif wasal, tanda waqaf, serta partikel alif lam (syamsiyah dan qamariyah):
+			</p>
+
+			<div class="methodology-steps">
+				<div class="method-item">
+					<div class="method-index">1</div>
+					<div class="method-body">
+						<h3 class="method-heading">Pemisahan Kalimat</h3>
+						<p class="method-desc">Pemisahan kalimat dan klausa disesuaikan dengan penggalan ayat atau arti maknawiyah bacaan.</p>
+					</div>
+				</div>
+
+				<div class="method-item">
+					<div class="method-index">2</div>
+					<div class="method-body">
+						<h3 class="method-heading">Alif Wasal (Fi'il 'Amr)</h3>
+						<p class="method-desc">
+							Setiap kata atau kalimat yang bertemu dengan <strong>alif waṣal</strong> disambungkan dalam transliterasinya:
+						</p>
+						<div class="method-example">
+							<span class="font-arabic">قُلِ ادْعُوا اللهَ</span>
+							<span class="method-example-latin">→ ditulis: <strong>Qulid‘ullāha</strong></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="method-item">
+					<div class="method-index">3</div>
+					<div class="method-body">
+						<h3 class="method-heading">Penanda Harakat Terakhir pada Waqaf (Tanda Kurung)</h3>
+						<p class="method-desc">
+							Setiap kata di akhir waqaf (tanda waqaf dan tanda nomor ayat), selalu ditambahkan huruf sesuai harakat pada huruf terakhir dengan 
+							<strong>tanda kurung</strong>. Huruf dalam kurung tidak dilafazkan saat berhenti, tetapi menunjukkan bunyi harakat asli kata tersebut 
+							untuk tujuan edukatif dan pembelajaran.
+						</p>
+					</div>
+				</div>
+
+				<div class="method-item">
+					<div class="method-index">4</div>
+					<div class="method-body">
+						<h3 class="method-heading">Pengecualian Tanda Waqaf Lā (لا) dan Ṣallā (صلى)</h3>
+						<p class="method-desc">
+							Pengecualian berlaku pada tanda waqaf <span class="font-arabic font-bold">لا</span> dan <span class="font-arabic font-bold">صلى</span>. 
+							Ketika melewati kedua tanda ini dan bacaan dilanjutkan secara bersambung (waṣal), huruf dalam kurung tersebut berfungsi penuh dan wajib dilafazkan.
+						</p>
+					</div>
+				</div>
+
+				<div class="method-item">
+					<div class="method-index">5</div>
+					<div class="method-body">
+						<h3 class="method-heading">Alif Lam Syamsiyah & Qamariyah</h3>
+						<p class="method-desc">
+							Pada kata yang memiliki partikel alif lam (baik Syamsiyah maupun Qamariyah) selalu menggunakan tanda hubung (<strong>-</strong>), 
+							kecuali pada lafaz jalalah <em>Allah</em> (<span class="font-arabic">الله</span>):
+						</p>
+						<div class="method-examples-list">
+							<div class="method-example">
+								<span class="font-arabic">وَالنَّخْلُ</span>
+								<span class="method-example-latin">→ ditulis: <strong>wan-nakhlu</strong></span>
+							</div>
+							<div class="method-example">
+								<span class="font-arabic">ذَاتِ الْأَكْمَامِ</span>
+								<span class="method-example-latin">→ ditulis: <strong>żātul-akmām(i)</strong></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{/* CTA FOOTER CARD */}
+		<div class="cta-card-wrapper">
+			<div class="cta-card">
+				<div class="cta-content">
+					<span class="cta-badge">PANDUAN KONTRIBUTOR</span>
+					<h2 class="cta-title">Siap Mengirimkan Artikel Kajian Tafsir?</h2>
+					<p class="cta-desc">
+						Gunakan pedoman transliterasi ini saat menyusun draf naskah Anda agar istilah-istilah Qur'ani tetap konsisten, akurat, dan sesuai dengan standar dewan redaksi afaqtafsir.id.
+					</p>
+				</div>
+				<div class="cta-action">
+					<a href="/kirim-tulisan" class="cta-button">
+						Buka Panduan Naskah →
+					</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</Base>
+
+<script is:inline>
+	// Quick Copy Diacritic Handler
+	document.addEventListener("DOMContentLoaded", () => {
+		const chips = document.querySelectorAll(".copy-chip");
+		const toast = document.getElementById("copy-toast");
+		let toastTimer = null;
+
+		chips.forEach((chip) => {
+			chip.addEventListener("click", async () => {
+				const char = chip.getAttribute("data-char");
+				if (!char) return;
+
+				try {
+					await navigator.clipboard.writeText(char);
+
+					// Provide immediate visual feedback on the button
+					chip.classList.add("copied");
+					setTimeout(() => {
+						chip.classList.remove("copied");
+					}, 600);
+
+					// Show toast
+					if (toast) {
+						toast.textContent = `Tersalin: '${char}'`;
+						toast.hidden = false;
+						toast.classList.add("show");
+
+						if (toastTimer) clearTimeout(toastTimer);
+						toastTimer = setTimeout(() => {
+							toast.classList.remove("show");
+							setTimeout(() => {
+								toast.hidden = true;
+							}, 200);
+						}, 1500);
+					}
+				} catch (err) {
+					console.error("Gagal menyalin karakter:", err);
+				}
+			});
+		});
+	});
+</script>
+
+<style>
+	.transliterasi-container {
+		max-width: 1080px;
+		margin: 0 auto;
+		padding: var(--spacing-6) var(--spacing-6) var(--spacing-16);
+	}
+
+	/* Breadcrumb */
+	.breadcrumb-nav {
+		margin-bottom: var(--spacing-6);
+	}
+
+	.breadcrumb-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: var(--spacing-2);
+		font-size: 0.85rem;
+		color: var(--slate-600);
+	}
+
+	.breadcrumb-list a {
+		color: var(--slate-600);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+
+	.breadcrumb-list a:hover {
+		color: var(--text-brand);
+		text-decoration: underline;
+	}
+
+	:global(.dark) .breadcrumb-list a {
+		color: var(--slate-400);
+	}
+
+	.breadcrumb-sep {
+		opacity: 0.4;
+	}
+
+	.breadcrumb-active {
+		color: var(--blue-950);
+		font-weight: 600;
+	}
+
+	:global(.dark) .breadcrumb-active {
+		color: var(--sky-300);
+	}
+
+	/* Hero */
+	.page-hero {
+		margin-bottom: var(--spacing-8);
+	}
+
+	.hero-badge {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--text-brand);
+		margin-bottom: var(--spacing-2);
+	}
+
+	:global(.dark) .hero-badge {
+		color: var(--sky-400);
+	}
+
+	.page-title {
+		font-size: 2.35rem;
+		line-height: 1.25;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-3);
+	}
+
+	:global(.dark) .page-title {
+		color: var(--white);
+	}
+
+	.hero-lead {
+		font-size: 1.05rem;
+		line-height: 1.75;
+		color: var(--slate-700);
+		max-width: 860px;
+		margin-bottom: var(--spacing-5);
+	}
+
+	:global(.dark) .hero-lead {
+		color: var(--slate-300);
+	}
+
+	/* Legal Callout Box */
+	.legal-callout {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--spacing-3);
+		background: #f8fcff;
+		border: 1px solid var(--sky-200);
+		border-left: 4px solid var(--sky-500);
+		border-radius: var(--radius-md);
+		padding: var(--spacing-4) var(--spacing-5);
+		box-shadow: var(--shadow-sm);
+	}
+
+	:global(.dark) .legal-callout {
+		background: rgba(14, 39, 70, 0.5);
+		border-color: rgba(52, 198, 244, 0.3);
+		border-left-color: var(--sky-400);
+	}
+
+	.legal-icon {
+		color: var(--sky-500);
+		flex-shrink: 0;
+		margin-top: 2px;
+	}
+
+	.legal-text {
+		font-size: 0.92rem;
+		line-height: 1.6;
+		color: var(--slate-700);
+	}
+
+	:global(.dark) .legal-text {
+		color: var(--slate-300);
+	}
+
+	.legal-text strong {
+		color: var(--blue-950);
+		display: inline-block;
+		margin-right: 4px;
+	}
+
+	:global(.dark) .legal-text strong {
+		color: var(--white);
+	}
+
+	/* Quick Copy Bar */
+	.copy-bar-wrapper {
+		margin-bottom: var(--spacing-8);
+	}
+
+	.copy-bar-card {
+		position: relative;
+		background: linear-gradient(135deg, var(--white) 0%, #f4faff 100%);
+		border: 1.5px solid var(--sky-300);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-5) var(--spacing-6);
+		box-shadow: var(--shadow-sm);
+	}
+
+	:global(.dark) .copy-bar-card {
+		background: linear-gradient(135deg, var(--blue-950) 0%, var(--blue-900) 100%);
+		border-color: rgba(52, 198, 244, 0.35);
+	}
+
+	.copy-bar-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: var(--spacing-2);
+		margin-bottom: var(--spacing-4);
+	}
+
+	.copy-bar-title-group {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-2);
+	}
+
+	.copy-icon {
+		color: var(--sky-500);
+	}
+
+	.copy-bar-title {
+		font-size: 1.05rem;
+		font-weight: 700;
+		color: var(--blue-950);
+		margin: 0;
+	}
+
+	:global(.dark) .copy-bar-title {
+		color: var(--white);
+	}
+
+	.copy-bar-hint {
+		font-size: 0.82rem;
+		color: var(--slate-600);
+	}
+
+	:global(.dark) .copy-bar-hint {
+		color: var(--slate-400);
+	}
+
+	.copy-chips-grid {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.copy-chip {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 42px;
+		height: 40px;
+		padding: 4px 10px;
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-sm);
+		cursor: pointer;
+		font-family: var(--font-sans);
+		font-size: 1.15rem;
+		font-weight: 600;
+		color: var(--blue-950);
+		box-shadow: 0 1px 2px rgba(14, 39, 70, 0.04);
+		transition: all var(--transition-fast);
+	}
+
+	:global(.dark) .copy-chip {
+		background: var(--blue-900);
+		border-color: var(--blue-700);
+		color: var(--white);
+	}
+
+	.copy-chip:hover {
+		background: var(--sky-500);
+		color: var(--white);
+		border-color: var(--sky-500);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 10px rgba(52, 198, 244, 0.3);
+	}
+
+	.copy-chip.copied {
+		background: var(--gold-500) !important;
+		color: var(--white) !important;
+		border-color: var(--gold-500) !important;
+		transform: scale(1.1);
+	}
+
+	.copy-toast {
+		position: absolute;
+		right: var(--spacing-6);
+		bottom: -16px;
+		background: var(--blue-950);
+		color: var(--gold-400);
+		font-size: 0.82rem;
+		font-weight: 700;
+		padding: 6px 14px;
+		border-radius: var(--radius-full);
+		box-shadow: var(--shadow-md);
+		border: 1px solid var(--sky-400);
+		opacity: 0;
+		transform: translateY(6px);
+		transition: all 0.2s ease;
+		pointer-events: none;
+		z-index: 10;
+	}
+
+	.copy-toast.show {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* Jump Links */
+	.jump-nav {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: var(--spacing-2);
+		margin-bottom: var(--spacing-10);
+		padding: var(--spacing-3) var(--spacing-4);
+		background: var(--white);
+		border: 1px solid var(--slate-200);
+		border-radius: var(--radius-md);
+		font-size: 0.85rem;
+	}
+
+	:global(.dark) .jump-nav {
+		background: var(--blue-950);
+		border-color: var(--blue-800);
+	}
+
+	.jump-label {
+		font-weight: 700;
+		color: var(--slate-600);
+		margin-right: 4px;
+	}
+
+	:global(.dark) .jump-label {
+		color: var(--slate-400);
+	}
+
+	.jump-nav a {
+		display: inline-block;
+		padding: 4px 10px;
+		border-radius: var(--radius-sm);
+		color: var(--text-brand);
+		text-decoration: none;
+		font-weight: 600;
+		transition: all var(--transition-fast);
+	}
+
+	:global(.dark) .jump-nav a {
+		color: var(--sky-300);
+	}
+
+	.jump-nav a:hover {
+		background: var(--sky-100);
+		color: var(--blue-900);
+	}
+
+	:global(.dark) .jump-nav a:hover {
+		background: var(--blue-800);
+		color: var(--white);
+	}
+
+	/* Content Section & Headings */
+	.content-section {
+		margin-bottom: var(--spacing-12);
+	}
+
+	.card-style {
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-8);
+		box-shadow: var(--shadow-sm);
+	}
+
+	:global(.dark) .card-style {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.section-header {
+		margin-bottom: var(--spacing-3);
+	}
+
+	.section-number {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--brand-accent);
+		margin-bottom: 2px;
+	}
+
+	.section-title {
+		font-size: 1.55rem;
+		color: var(--blue-950);
+		margin: 0;
+	}
+
+	:global(.dark) .section-title {
+		color: var(--white);
+	}
+
+	.section-desc {
+		font-size: 0.98rem;
+		line-height: 1.7;
+		color: var(--slate-700);
+		margin-bottom: var(--spacing-6);
+		max-width: 800px;
+	}
+
+	:global(.dark) .section-desc {
+		color: var(--slate-300);
+	}
+
+	/* Section I: Consonants Grid */
+	.consonants-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: var(--spacing-4);
+	}
+
+	.consonant-card {
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-md);
+		padding: var(--spacing-4);
+		transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+		box-shadow: var(--shadow-sm);
+	}
+
+	:global(.dark) .consonant-card {
+		background: var(--blue-900);
+		border-color: var(--blue-800);
+	}
+
+	.consonant-card:hover {
+		transform: translateY(-2px);
+		border-color: var(--sky-400);
+		box-shadow: var(--shadow-md);
+	}
+
+	.consonant-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: var(--spacing-3);
+		padding-bottom: 6px;
+		border-bottom: 1px dashed var(--slate-200);
+	}
+
+	:global(.dark) .consonant-header {
+		border-bottom-color: var(--blue-800);
+	}
+
+	.consonant-num {
+		font-size: 0.75rem;
+		font-weight: 700;
+		color: var(--slate-600);
+	}
+
+	:global(.dark) .consonant-num {
+		color: var(--slate-400);
+	}
+
+	.consonant-name {
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: var(--text-brand);
+	}
+
+	:global(.dark) .consonant-name {
+		color: var(--sky-300);
+	}
+
+	.consonant-body {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: var(--spacing-2);
+		padding: 4px 8px;
+		background: var(--sky-50);
+		border-radius: var(--radius-sm);
+	}
+
+	:global(.dark) .consonant-body {
+		background: var(--blue-950);
+	}
+
+	.consonant-arabic {
+		font-size: 1.85rem;
+		color: var(--blue-950);
+		line-height: 1.2;
+	}
+
+	:global(.dark) .consonant-arabic {
+		color: var(--white);
+	}
+
+	.consonant-arrow {
+		color: var(--slate-400);
+		font-size: 0.9rem;
+	}
+
+	.consonant-latin {
+		font-size: 1.4rem;
+		font-weight: 700;
+		color: var(--brand-accent);
+		min-width: 32px;
+		text-align: center;
+	}
+
+	.consonant-note {
+		font-size: 0.78rem;
+		color: var(--slate-600);
+		line-height: 1.4;
+	}
+
+	:global(.dark) .consonant-note {
+		color: var(--slate-400);
+	}
+
+	/* Two Column Layout */
+	.two-col-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--spacing-6);
+		margin-bottom: var(--spacing-12);
+	}
+
+	/* Example Table */
+	.example-table-wrapper {
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-md);
+		overflow: hidden;
+	}
+
+	:global(.dark) .example-table-wrapper {
+		border-color: var(--blue-800);
+	}
+
+	.example-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.95rem;
+	}
+
+	.example-table th {
+		background: var(--sky-100);
+		color: var(--blue-950);
+		padding: 10px 14px;
+		text-align: left;
+		font-weight: 700;
+		font-size: 0.85rem;
+	}
+
+	:global(.dark) .example-table th {
+		background: var(--blue-900);
+		color: var(--white);
+	}
+
+	.example-table td {
+		padding: 12px 14px;
+		border-top: 1px solid var(--sky-100);
+		color: var(--slate-800);
+	}
+
+	:global(.dark) .example-table td {
+		border-top-color: var(--blue-900);
+		color: var(--slate-200);
+	}
+
+	.font-ar-lg {
+		font-size: 1.6rem;
+		line-height: 1.4;
+	}
+
+	.font-latin-match {
+		font-size: 1.05rem;
+		color: var(--text-brand);
+	}
+
+	:global(.dark) .font-latin-match {
+		color: var(--sky-300);
+	}
+
+	/* Rule Blocks */
+	.rule-block {
+		padding: var(--spacing-4);
+		background: var(--sky-50);
+		border-radius: var(--radius-md);
+		border: 1px solid var(--sky-200);
+	}
+
+	:global(.dark) .rule-block {
+		background: var(--blue-900);
+		border-color: var(--blue-800);
+	}
+
+	.rule-title {
+		font-size: 1rem;
+		font-weight: 700;
+		color: var(--blue-950);
+		margin: 0 0 6px;
+	}
+
+	:global(.dark) .rule-title {
+		color: var(--white);
+	}
+
+	.rule-text {
+		font-size: 0.9rem;
+		line-height: 1.6;
+		color: var(--slate-700);
+		margin: 0 0 var(--spacing-3);
+	}
+
+	:global(.dark) .rule-text {
+		color: var(--slate-300);
+	}
+
+	.mini-example {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-3);
+		font-size: 0.95rem;
+		padding: 6px 10px;
+		background: var(--white);
+		border-radius: var(--radius-sm);
+		border: 1px solid var(--sky-200);
+		margin-bottom: 6px;
+	}
+
+	:global(.dark) .mini-example {
+		background: var(--blue-950);
+		border-color: var(--blue-800);
+	}
+
+	.mini-example .font-arabic {
+		font-size: 1.35rem;
+		line-height: 1.3;
+	}
+
+	/* Section IV - VII: Quad Grid */
+	.vowels-quad-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--spacing-5);
+	}
+
+	.sub-quad-card {
+		background: var(--sky-50);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-md);
+		padding: var(--spacing-5);
+	}
+
+	:global(.dark) .sub-quad-card {
+		background: var(--blue-900);
+		border-color: var(--blue-800);
+	}
+
+	.quad-title {
+		font-size: 1.1rem;
+		color: var(--blue-950);
+		margin: 0 0 6px;
+	}
+
+	:global(.dark) .quad-title {
+		color: var(--white);
+	}
+
+	.quad-desc {
+		font-size: 0.88rem;
+		line-height: 1.6;
+		color: var(--slate-700);
+		margin-bottom: var(--spacing-4);
+	}
+
+	:global(.dark) .quad-desc {
+		color: var(--slate-300);
+	}
+
+	.quad-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.quad-list li {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-sm);
+		padding: 6px 12px;
+		font-size: 0.92rem;
+	}
+
+	:global(.dark) .quad-list li {
+		background: var(--blue-950);
+		border-color: var(--blue-800);
+	}
+
+	.badge-vowel {
+		font-size: 0.76rem;
+		font-weight: 700;
+		color: var(--slate-600);
+		text-transform: uppercase;
+	}
+
+	:global(.dark) .badge-vowel {
+		color: var(--slate-400);
+	}
+
+	.quad-list .font-arabic {
+		font-size: 1.4rem;
+		line-height: 1.2;
+	}
+
+	/* Info Box */
+	.rule-box-info {
+		background: #fffbeb;
+		border: 1px solid var(--gold-400);
+		border-left: 4px solid var(--gold-500);
+		border-radius: var(--radius-md);
+		padding: var(--spacing-5);
+	}
+
+	:global(.dark) .rule-box-info {
+		background: rgba(217, 119, 6, 0.1);
+		border-color: rgba(245, 158, 11, 0.3);
+		border-left-color: var(--gold-500);
+	}
+
+	.info-title {
+		font-size: 1rem;
+		font-weight: 700;
+		color: var(--gold-600);
+		margin-bottom: 6px;
+	}
+
+	:global(.dark) .info-title {
+		color: var(--gold-400);
+	}
+
+	.info-text {
+		font-size: 0.92rem;
+		line-height: 1.7;
+		color: var(--slate-800);
+		margin: 0;
+	}
+
+	:global(.dark) .info-text {
+		color: var(--slate-200);
+	}
+
+	/* Section IX: Methodology Steps */
+	.methodology-steps {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-4);
+	}
+
+	.method-item {
+		display: flex;
+		gap: var(--spacing-4);
+		padding: var(--spacing-5);
+		background: var(--sky-50);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-md);
+	}
+
+	:global(.dark) .method-item {
+		background: var(--blue-900);
+		border-color: var(--blue-800);
+	}
+
+	.method-index {
+		flex-shrink: 0;
+		width: 32px;
+		height: 32px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--blue-950);
+		color: var(--white);
+		font-weight: 700;
+		font-size: 0.9rem;
+		border-radius: var(--radius-full);
+	}
+
+	:global(.dark) .method-index {
+		background: var(--sky-500);
+		color: var(--blue-950);
+	}
+
+	.method-body {
+		flex: 1;
+	}
+
+	.method-heading {
+		font-size: 1.05rem;
+		font-weight: 700;
+		color: var(--blue-950);
+		margin: 0 0 6px;
+	}
+
+	:global(.dark) .method-heading {
+		color: var(--white);
+	}
+
+	.method-desc {
+		font-size: 0.92rem;
+		line-height: 1.7;
+		color: var(--slate-700);
+		margin: 0 0 var(--spacing-3);
+	}
+
+	:global(.dark) .method-desc {
+		color: var(--slate-300);
+	}
+
+	.font-bold {
+		font-weight: 700;
+		font-size: 1.25rem;
+	}
+
+	.method-example {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--spacing-3);
+		padding: 8px 16px;
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-sm);
+	}
+
+	:global(.dark) .method-example {
+		background: var(--blue-950);
+		border-color: var(--blue-800);
+	}
+
+	.method-example .font-arabic {
+		font-size: 1.5rem;
+		line-height: 1.3;
+	}
+
+	.method-example-latin {
+		font-size: 0.95rem;
+		color: var(--text-brand);
+	}
+
+	:global(.dark) .method-example-latin {
+		color: var(--sky-300);
+	}
+
+	.method-examples-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--spacing-3);
+	}
+
+	/* CTA Card */
+	.cta-card-wrapper {
+		margin-top: var(--spacing-12);
+	}
+
+	.cta-card {
+		background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-950) 100%);
+		border: 1px solid var(--sky-300);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-8) var(--spacing-10);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--spacing-8);
+		color: var(--white);
+		box-shadow: var(--shadow-md);
+	}
+
+	.cta-badge {
+		display: inline-block;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		color: var(--gold-400);
+		margin-bottom: var(--spacing-2);
+	}
+
+	.cta-title {
+		font-size: 1.6rem;
+		color: var(--white);
+		margin: 0 0 var(--spacing-2);
+	}
+
+	.cta-desc {
+		font-size: 0.95rem;
+		line-height: 1.65;
+		color: var(--sky-100);
+		max-width: 620px;
+		margin: 0;
+	}
+
+	.cta-action {
+		flex-shrink: 0;
+	}
+
+	.cta-button {
+		display: inline-block;
+		background: var(--gold-500);
+		color: var(--white);
+		font-weight: 700;
+		font-size: 0.92rem;
+		padding: 12px 24px;
+		border-radius: var(--radius-full);
+		text-decoration: none;
+		box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+		transition: background var(--transition-fast), transform var(--transition-fast);
+	}
+
+	.cta-button:hover {
+		background: var(--gold-600);
+		transform: translateY(-2px);
+	}
+
+	/* Responsive Media Queries */
+	@media (max-width: 900px) {
+		.two-col-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.vowels-quad-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.cta-card {
+			flex-direction: column;
+			align-items: flex-start;
+			padding: var(--spacing-6);
+		}
+
+		.cta-action {
+			width: 100%;
+		}
+
+		.cta-button {
+			display: block;
+			text-align: center;
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.page-title {
+			font-size: 1.85rem;
+		}
+
+		.consonants-grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 8px;
+		}
+
+		.consonant-card {
+			padding: var(--spacing-3);
+		}
+
+		.consonant-arabic {
+			font-size: 1.5rem;
+		}
+
+		.consonant-latin {
+			font-size: 1.2rem;
+		}
+
+		.copy-chips-grid {
+			gap: 6px;
+		}
+
+		.copy-chip {
+			min-width: 38px;
+			height: 36px;
+			font-size: 1rem;
+		}
+	}
+</style>
