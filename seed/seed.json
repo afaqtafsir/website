@@ -130,6 +130,18 @@
 			],
 			"terms": [
 				{
+					"slug": "epistemologi-ushul",
+					"label": "Epistemologi & Tradisi Keilmuan"
+				},
+				{
+					"slug": "etika-kontemporer",
+					"label": "Etika Digital & Ruang Publik"
+				},
+				{
+					"slug": "perempuan-keadilan",
+					"label": "Perempuan & Keadilan Gender"
+				},
+				{
 					"slug": "tafsir-tematik",
 					"label": "Tafsir Tematik"
 				},
@@ -233,45 +245,52 @@
 	],
 	"bylines": [
 		{
-			"id": "byline-arofah",
-			"slug": "arofah-nur",
-			"displayName": "Arofah Nur, M.Ag.",
-			"bio": "Peneliti kajian gender dan tafsir tematik Al-Qur'an di Pendidikan Kader Ulama Masjid Istiqlal (PKUMI).",
+			"id": "byline-tiara",
+			"slug": "tiara-nur-mulyawati",
+			"displayName": "Tiara Nur Mulyawati",
+			"bio": "Mahasiswa Magister Ilmu Al-Qur’an dan Tafsir di Universitas PTIQ Jakarta dan Pendidikan Kader Ulama Masjid Istiqlal (PKUMI). Menaruh minat pada studi Al-Qur'an, tafsir, dan isu-isu keislaman kontemporer.",
 			"isGuest": false
 		},
 		{
-			"id": "byline-hamdan",
-			"slug": "dr-hamdan-syukri",
-			"displayName": "Dr. Hamdan Syukri, M.Ud.",
-			"bio": "Pakar studi Al-Qur'an dan Kosmologi Islam. Mengkaji integrasi sains dan narasi penciptaan alam semesta dalam literatur tafsir.",
+			"id": "byline-fahmia",
+			"slug": "fahmia-nuha-tsabita",
+			"displayName": "Fahmia Nuha Tsabita",
+			"bio": "Mahasiswa Program Magister Ilmu Al-Qur’an dan Tafsir di Institut PTIQ Jakarta melalui Program Pendidikan Kader Ulama Perempuan (PKUP) Masjid Istiqlal.",
 			"isGuest": false
 		},
 		{
-			"id": "byline-refian",
-			"slug": "mochamad-refian-prasetyo",
-			"displayName": "Mochamad Refian Prasetyo, S.Ag.",
-			"bio": "Peneliti studi Al-Qur'an dan hermeneutika kontemporer. Menaruh minat mendalam pada studi gender, manuskrip tafsir Melayu-Nusantara, dan epistemologi maqashid.",
+			"id": "byline-putri",
+			"slug": "putri-arofah",
+			"displayName": "Putri Arofah",
+			"bio": "Mahasiswa Pascasarjana Universitas PTIQ Jakarta Program Studi Ilmu Al-Qur'an dan Tafsir melalui Program Pendidikan Kader Ulama Masjid Istiqlal (PKUMI).",
 			"isGuest": false
 		},
 		{
-			"id": "byline-fikri",
-			"slug": "fikri-anshari",
-			"displayName": "Fikri Anshari, M.Hum.",
-			"bio": "Peneliti filologi dan manuskrip Islam Nusantara, menaruh perhatian pada transmisi keilmuan tafsir abad ke-17 hingga ke-19.",
+			"id": "byline-ummi",
+			"slug": "ummi-hasanah",
+			"displayName": "Ummi Hasanah",
+			"bio": "Mahasiswa Program Magister Jurusan Ilmu Al-Qur’an dan Tafsir (IAT) di Universitas PTIQ Jakarta dan PKUMI. Fokus pada kajian linguistik Al-Qur’an dan kesetaraan gender.",
 			"isGuest": false
 		},
 		{
-			"id": "byline-iqbal",
-			"slug": "muhammad-iqbal",
-			"displayName": "Muhammad Iqbal, S.Ag.",
-			"bio": "Peneliti kajian siyasah syar'iyyah dan etika publik dalam perspektif Al-Qur'an.",
+			"id": "byline-fadia",
+			"slug": "fadia-alaniah",
+			"displayName": "Fadia Alaniah",
+			"bio": "Mahasiswa Pascasarjana Universitas PTIQ Jakarta Program Studi Magister Ilmu Al-Qur’an dan Tafsir serta Program Pendidikan Kader Ulama Perempuan (PKUP) Masjid Istiqlal.",
 			"isGuest": false
 		},
 		{
-			"id": "byline-nurul",
-			"slug": "nurul-izzah",
-			"displayName": "Nurul Izzah, M.Ag.",
-			"bio": "Peneliti tasawuf, spiritualitas Qur'ani, dan etika lingkungan dalam studi Islam kontemporer.",
+			"id": "byline-rizki",
+			"slug": "rizki-kurniawan",
+			"displayName": "Rizki Kurniawan",
+			"bio": "Peneliti studi Al-Qur'an dan kesetaraan nilai kemanusiaan dalam literatur tafsir.",
+			"isGuest": false
+		},
+		{
+			"id": "byline-redaksi",
+			"slug": "redaksi-afaq-tafsir",
+			"displayName": "Dewan Redaksi Afaq Tafsir",
+			"bio": "Redaksi Afaq Tafsir — Jurnal & Ruang Ilmiah Kajian Tafsir Al-Qur'an Mahasiswi Pendidikan Kader Ulama Masjid Istiqlal (PKUMI).",
 			"isGuest": false
 		}
 	],
@@ -399,376 +418,969 @@
 		"articles": [
 			{
 				"id": "art-01",
-				"slug": "benarkah-hawa-penyebab-manusia-turun-dari-surga",
+				"slug": "benarkah-perempuan-tidak-layak-memimpin-kisah-ratu-bilqis",
 				"status": "published",
 				"bylines": [
 					{
-						"byline": "byline-refian"
+						"byline": "byline-tiara"
 					}
 				],
 				"taxonomies": {
 					"category": [
-						"gender-islam",
+						"perempuan-keadilan",
 						"tafsir-tematik"
 					],
 					"tag": [
 						"pkumi",
-						"hermeneutika-feminis",
-						"ibn-kathir",
-						"muhammad-asad"
+						"kepemimpinan-perempuan",
+						"ratu-bilqis",
+						"bias-gender"
 					]
 				},
 				"data": {
-					"title": "Benarkah Hawa Penyebab Manusia Turun dari Surga? Meninjau Ulang Narasi Penciptaan dalam Literatur Tafsir",
-					"subheadline": "Meninjau Ulang Narasi Penciptaan dan Bias Isra'iliyyat dalam Khazanah Tafsir Klasik hingga Kontemporer",
-					"excerpt": "Selama berabad-abad, narasi populis menempatkan Hawa sebagai sosok penggoda Adam yang berujung pada terusirnya manusia dari surga. Padahal Al-Qur'an secara konsisten menggunakan bentuk dual (mutsanna) yang menegaskan tanggung jawab moral bersama.",
+					"title": "Benarkah Perempuan Tidak Layak Memimpin? Membaca Ulang Kisah Ratu Bilqis di Tengah Bias Gender",
+					"subheadline": "Refleksi Kritis atas Diskursus Kepemimpinan Perempuan dalam Tafsir Klasik dan Kontemporer",
+					"excerpt": "Ketika seorang perempuan maju sebagai pemimpin, komentar yang muncul kerap berkaitan dengan jenis kelaminnya, bukan kompetensinya. Melalui kisah Ratu Bilqis dalam QS. al-Naml [27]: 23–44, Al-Qur'an justru mengabadikan sosok ratu yang bijaksana, rasional, dan mengedepankan musyawarah.",
 					"featured_image": {
 						"$media": {
 							"url": "https://images.unsplash.com/photo-1544717305-2782549b5136?w=1200&h=675&fit=crop",
-							"alt": "Kitab tafsir dan pencahayaan hangat melambangkan diskursus keilmuan Al-Qur'an",
-							"filename": "hawa-penciptaan-tafsir.jpg"
+							"alt": "Simbol kepemimpinan dan khazanah naskah tafsir klasik",
+							"filename": "ratu-bilqis-kepemimpinan-perempuan.jpg"
 						}
 					},
-					"reading_time": "7 mnt baca",
+					"reading_time": "8 mnt baca",
 					"is_lead_hero": true,
 					"is_secondary_hero": false,
 					"is_featured": true,
 					"is_popular": true,
 					"popular_rank": 1,
-					"popular_reads": "18.4k dibaca",
+					"popular_reads": "19.2k dibaca",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k1",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Dalam memori kolektif sebagian besar masyarakat Muslim, sebuah mitos gender telah mengendap begitu kuat: bahwa Hawa adalah biang keladi yang membujuk Adam memakan buah terlarang sehingga keduanya terusir dari surga. Pandangan reduksionis ini tidak hanya melahirkan stigma teologis terhadap perempuan, tetapi juga membentuk subordinasi epistemologis yang telah diwariskan dari generasi ke generasi."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Struktur Bahasa Al-Qur'an: Penegasan Subjek Ganda (Mutsanna)"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Jika kita merujuk langsung kepada teks wahyu (nash al-Qur'an), tidak ditemukan satupun ayat yang menimpakan kesalahan secara eksklusif kepada perempuan. Sebaliknya, Al-Qur'an secara konsisten menggunakan pronomina dual (dhamir mutsanna) untuk menggambarkan godaan Iblis dan perbuatan keduanya:"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "blockquote",
-							"children": [
-								{
-									"_type": "span",
-									"text": "فَوَسْوَسَ لَهُمَا الشَّيْطَانُ لِيُبْدِيَ لَهُمَا مَا وُورِيَ عَنْهُمَا مِنْ سَوْآتِهِمَا وَقَالَ مَا نَهَاكُمَا رَبُّكُمَا عَنْ هَٰذِهِ الشَّجَرَةِ إِلَّا أَنْ تَكُونَا مَلَكَيْنِ أَوْ تَكُونَا مِنَ الْخَالِدِينَ\n\n",
+									"_key": "k0",
+									"text": "Benarkah Perempuan Tidak Layak Memimpin? Membaca Ulang Kisah Ratu Bilqis di Tengah Bias Gender",
 									"marks": [
 										"strong"
 									]
-								},
-								{
-									"_type": "span",
-									"text": "\"Lalu setan membisikkan pikiran jahat kepada keduanya untuk menampakkan kepada mereka apa yang tertutup dari aurat keduanya dan berkata: 'Tuhanmu tidak melarangmu dari mendekati pohon ini, melainkan supaya kamu berdua tidak menjadi malaikat atau tidak menjadi orang-orang yang kekal.'\"\n\n",
-									"marks": [
-										"em"
-									]
-								},
-								{
-									"_type": "span",
-									"text": "۞ — QS. Al-A'raf [7]: 20"
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k3",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Bahkan dalam Surah Thaha [20]: 120, rayuan Iblis secara eksplisit diarahkan kepada Adam secara personal (fa-waswasa ilaihi asy-syaithan), dan pada ayat 121 ditegaskan: 'wa 'asha Adamu rabbahu fa-ghawa' (dan durhakalah Adam kepada Tuhannya, lalu sesatlah ia). Ini membuktikan bahwa premis 'Hawa penggoda' merupakan pengaruh eksternal tafsir (isra'iliyyat) yang menyusup ke dalam tradisi penafsiran abad pertengahan."
+									"_key": "k2",
+									"text": "Ketika seorang perempuan maju sebagai pemimpin organisasi, kepala daerah, atau tokoh publik, komentar yang muncul sering kali tidak berkaitan dengan kompetensinya. Di media sosial, masih mudah ditemukan anggapan bahwa perempuan terlalu emosional untuk memimpin, kurang tegas dalam mengambil keputusan, atau tidak cocok berada di ruang politik.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Dekonstruksi Narasi Isra'iliyyat dalam Tafsir Kontemporer"
-								}
-							]
-						},
-						{
-							"_type": "block",
+							"_key": "k5",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Mufasir modern seperti Muhammad 'Abduh dan Rasyid Ridha dalam Tafsir Al-Manar telah memperingatkan bahaya infiltrasi riwayat-riwayat Perjanjian Lama yang menyudutkan perempuan sebagai pintu masuk dosa primordial (original sin). Dalam teologi Islam yang murni, setiap jiwa memikul tanggung jawab moralnya masing-masing, dan pertobatan Adam serta Hawa diterima Allah secara bersamaan tanpa kutukan biologis abadi atas tubuh perempuan."
+									"_key": "k4",
+									"text": "Menariknya, stereotip semacam ini tetap bertahan di tengah masyarakat yang setiap hari membaca Al-Qur'an, kitab suci yang justru mengabadikan kisah seorang ratu sebagai pemimpin sebuah kerajaan besar. Fenomena tersebut menunjukkan bahwa perdebatan tentang kepemimpinan perempuan belum benar-benar selesai. Yang dipersoalkan sering kali bukan kemampuan seseorang dalam memimpin, melainkan jenis kelaminnya.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"style": "h3",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Catatan Kaki & Rujukan Ilmiah"
-								}
-							]
-						},
-						{
-							"_type": "block",
+							"_key": "k7",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "[1] ",
-									"marks": [
-										"strong"
-									]
-								},
-								{
-									"_type": "span",
-									"text": "Muhammad Rasyid Ridha, Tafsir Al-Qur'an Al-Hakim (Tafsir Al-Manar), Kairo: Al-Hai'ah Al-Mishriyyah Al-'Ammah li Al-Kitab, 1990, Jilid VIII, hlm. 327-331."
+									"_key": "k6",
+									"text": "Dalam konteks ini, kisah Ratu Bilqis dalam QS. al-Naml [27]: 23–44 menjadi menarik untuk dibaca ulang. Sebab, Al-Qur'an tidak menghadirkan Bilqis sebagai tokoh perempuan biasa, melainkan sebagai kepala negara yang memimpin sebuah kerajaan makmur dan berpengaruh.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k9",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "[2] ",
-									"marks": [
-										"strong"
-									]
-								},
-								{
-									"_type": "span",
-									"text": "Ibnu Katsir, Tafsir Al-Qur'an Al-'Azhim, Beirut: Dar Al-Kutub Al-'Ilmiyyah, 1998, Jilid 3, hlm. 142."
+									"_key": "k8",
+									"text": "Kehadiran Bilqis dalam Al-Qur'an juga memunculkan pertanyaan yang lebih mendasar. Jika kepemimpinan perempuan dianggap bermasalah, mengapa Al-Qur'an justru mengabadikan sosok perempuan yang memegang otoritas politik? Mengapa narasi Al-Qur'an memberi ruang yang cukup luas untuk menggambarkan cara Bilqis mengambil keputusan, bermusyawarah, dan mengelola pemerintahan? Pertanyaan-pertanyaan ini penting diajukan, terutama ketika bias gender masih kerap mewarnai perbincangan publik.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "kb",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "[3] ",
-									"marks": [
-										"strong"
-									]
-								},
+									"_key": "ka",
+									"text": "Laporan tentang Bilqis pertama kali muncul melalui burung hud-hud yang menyampaikan informasi kepada Nabi Sulaiman. Hud-hud berkata bahwa ia menemukan seorang perempuan yang memerintah suatu kaum dan dianugerahi berbagai bentuk kekuasaan serta singgasana yang besar (QS. al-Naml [27]: 23). Menariknya, ayat tersebut tidak diawali dengan kecaman terhadap kepemimpinan perempuan. Al-Qur'an justru terlebih dahulu menggambarkan kemapanan politik dan kemakmuran kerajaan yang dipimpinnya.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kd",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
 								{
 									"_type": "span",
-									"text": "Muhammad Asad, The Message of the Qur'an, Gibraltar: Dar Al-Andalus, 1980, penjelasan QS Thaha [20]: 120-121."
+									"_key": "kc",
+									"text": "Dalam tafsir Al-Ṭabari, perhatian utama tidak diarahkan pada fakta bahwa Bilqis adalah seorang perempuan. Fokus penafsirannya justru terletak pada keyakinan Bilqis dan kaumnya yang masih menyembah matahari, bukan Allah. Dengan kata lain, problem yang disorot Al-Qur'an pada tahap awal kisah ini adalah persoalan teologis, bukan persoalan gender (Al-Ṭabari, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": "Penjelasan yang tidak jauh berbeda juga dapat ditemukan dalam tafsir Ibn Kathir. Ketika membahas Bilqis, Ibn Kathir lebih banyak menguraikan kondisi kerajaan Saba', kekayaan yang dimiliki, dan hubungan politiknya dengan Nabi Sulaiman dibanding menjadikan kepemimpinan perempuan sebagai fokus utama pembahasannya. Hal ini menunjukkan bahwa tidak semua mufasir klasik menjadikan kepemimpinan perempuan sebagai masalah yang harus diperdebatkan sejak awal (Ibn Kathir, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kh",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "Namun demikian, pembacaan terhadap Bilqis tidak sepenuhnya seragam. Al-Qurṭubi, misalnya, membawa diskusi ini ke wilayah yang lebih luas dengan mengaitkannya pada hadis yang sering dikutip dalam perdebatan tentang kepemimpinan perempuan, yaitu hadis *lan yufliḥa qawm wallaw amrahum imra’ah* yang menyatakan bahwa suatu kaum tidak akan beruntung apabila menyerahkan urusan mereka kepada perempuan (Al-Qurṭubi, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kj",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": "Meski demikian, menarik untuk dicatat bahwa Al-Qurṭubi tetap tidak mengabaikan kualitas kepemimpinan Bilqis. Dalam penafsirannya, Bilqis digambarkan sebagai penguasa yang berhati-hati, mampu membaca situasi politik, dan tidak tergesa-gesa mengambil keputusan. Di sinilah terlihat adanya ketegangan menarik antara diskusi normatif tentang kepemimpinan perempuan dan pengakuan terhadap kecakapan politik Bilqis yang ditampilkan oleh Al-Qur'an.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kl",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": "Kualitas kepemimpinan Bilqis tampak jelas ketika ia menerima surat dari Nabi Sulaiman. Alih-alih bertindak secara sepihak, Bilqis memilih mengumpulkan para pembesar kerajaan dan meminta pertimbangan mereka. Sikap ini terekam dalam QS. al-Naml [27]: 32. Tindakan tersebut menunjukkan bahwa Bilqis tidak mempraktikkan kekuasaan yang otoriter, melainkan memberi ruang bagi musyawarah dalam proses pengambilan keputusan (Al-Razi, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kn",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "km",
+									"text": "Fakhruddin Al-Razi memberi perhatian khusus pada aspek ini. Menurutnya, keputusan Bilqis untuk bermusyawarah mencerminkan kecerdasan politik dan kematangan berpikir seorang pemimpin. Bilqis tidak bertindak berdasarkan dorongan sesaat, tetapi mempertimbangkan berbagai kemungkinan sebelum menentukan sikap. Dalam perspektif kepemimpinan modern, kemampuan semacam ini justru sering dipandang sebagai indikator kepemimpinan yang efektif (Al-Razi, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kp",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ko",
+									"text": "Pembacaan Al-Razi menjadi menarik ketika dihadapkan pada stereotip yang masih beredar hingga sekarang. Salah satu prasangka yang paling sering diarahkan kepada perempuan adalah anggapan bahwa mereka lebih mengedepankan emosi daripada rasionalitas. Padahal, jika mengikuti narasi Al-Qur'an, Bilqis justru tampil sebagai tokoh yang sangat berhitung dalam mengambil keputusan politik. Ia mempertimbangkan risiko, membaca situasi, dan memikirkan dampak kebijakan terhadap rakyat yang dipimpinnya.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kr",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kq",
+									"text": "Kecermatan tersebut semakin terlihat ketika para pembesar kerajaan menyatakan kesiapan untuk menghadapi Nabi Sulaiman dengan kekuatan militer. Bilqis tidak langsung memilih jalan perang. Ia lebih dahulu mengirimkan utusan dan hadiah sebagai langkah diplomasi. Keputusan ini menunjukkan bahwa ia memahami konsekuensi konflik bersenjata dan berusaha mencari jalan yang lebih bijaksana sebelum menggunakan kekuatan (Al-Qurṭubi, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kt",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ks",
+									"text": "Dalam konteks ini, Al-Qur'an menghadirkan Bilqis sebagai figur pemimpin yang mengedepankan pertimbangan rasional dan kemaslahatan publik. Karakter tersebut justru bertolak belakang dengan stereotip bahwa perempuan tidak mampu berpikir strategis dalam urusan politik. Oleh karena itu, menarik untuk bertanya mengapa kualitas-kualitas kepemimpinan Bilqis sering kali tenggelam di balik perdebatan mengenai jenis kelaminnya.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kv",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": "Perbedaan pembacaan para mufasir terhadap Bilqis menunjukkan bahwa kisah ini tidak pernah dipahami secara tunggal. Al-Qurṭubi tidak hanya membahas narasi Bilqis sebagai penguasa Saba', tetapi juga menghubungkannya dengan hadis kepemimpinan perempuan. Karena itu, pembahasan Al-Qurṭubi bergerak pada wilayah hukum dan otoritas politik.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kx",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kw",
+									"text": "Berbeda dengan Al-Qurṭubi, Fakhruddin Al-Razi lebih banyak memberi perhatian pada dimensi rasionalitas yang ditunjukkan Bilqis. Baginya, tindakan Bilqis mengumpulkan para pembesar kerajaan sebelum menentukan sikap menunjukkan kemampuan berpikir yang matang. Al-Razi bahkan menempatkan musyawarah yang dilakukan Bilqis sebagai indikasi kebijaksanaan seorang penguasa yang tidak bertindak berdasarkan dorongan emosional semata (Al-Razi, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kz",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ky",
+									"text": "Sementara itu, mufasir kontemporer seperti Ibn ‘Āsyūr membaca kisah Bilqis dalam kerangka yang lebih luas. Perhatiannya tidak lagi terfokus pada jenis kelamin pemimpin, melainkan pada nilai-nilai yang dapat dipetik dari proses kepemimpinan itu sendiri. Ibn ‘Āsyūr menyoroti kemampuan Bilqis dalam berdialog, mengevaluasi informasi, dan bersedia mengubah pendirian ketika berhadapan dengan kebenaran yang lebih meyakinkan (Ibn ‘Āsyūr, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k11",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": "Penekanan yang hampir serupa juga dapat ditemukan dalam Tafsir Al-Misbah karya Quraish Shihab. Menurutnya, kisah Bilqis memperlihatkan sosok pemimpin yang bijaksana, terbuka terhadap masukan, dan memiliki kerendahan hati untuk mengakui kebenaran setelah memperoleh bukti yang meyakinkan (Shihab, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k13",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k12",
+									"text": "Pergeseran penekanan dari sebagian mufasir klasik menuju mufasir kontemporer menunjukkan bahwa penafsiran Al-Qur'an selalu berinteraksi dengan persoalan zamannya. Jika diskusi klasik banyak dipengaruhi oleh perdebatan hukum dan politik pada masanya, maka pembacaan kontemporer lebih memberi ruang pada isu representasi perempuan, relasi gender, dan kualitas kepemimpinan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k15",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": "Dalam konteks inilah pemikiran para sarjana Muslim kontemporer menjadi relevan. Amina Wadud berpendapat bahwa Al-Qur'an perlu dibaca secara menyeluruh dengan memperhatikan prinsip keadilan dan kesetaraan moral yang menjadi ruh ajarannya. Karena itu, penilaian terhadap perempuan tidak dapat hanya didasarkan pada satu teks yang dipahami secara terpisah dari keseluruhan pesan Al-Qur'an (Wadud, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k17",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": "Pandangan yang tidak jauh berbeda disampaikan oleh Asma Barlas. Ia mengkritik kecenderungan sebagian pembacaan keagamaan yang mencampurkan budaya patriarkal dengan pesan Al-Qur'an. Menurutnya, tidak semua pandangan yang berkembang dalam sejarah umat Islam dapat secara otomatis dianggap mewakili perspektif Al-Qur'an itu sendiri (Barlas, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k19",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k18",
+									"text": "Di Indonesia, Nasaruddin Umar juga menegaskan bahwa perbedaan biologis antara laki-laki dan perempuan tidak serta-merta menentukan kapasitas sosial, intelektual, maupun kepemimpinan seseorang. Oleh karena itu, kemampuan memimpin seharusnya dinilai berdasarkan kompetensi dan integritas, bukan semata-mata identitas gender (Umar, tahun: halaman).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": "Pandangan para pemikir kontemporer tersebut tidak berarti menghapus seluruh perdebatan yang telah berlangsung dalam khazanah Islam. Akan tetapi, mereka mengajak pembaca untuk melihat kembali bagaimana Al-Qur'an menghadirkan tokoh-tokohnya. Dalam kasus Bilqis, yang paling banyak ditampilkan bukanlah kelemahannya sebagai perempuan, melainkan kecakapannya sebagai pemimpin.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1c",
+									"text": "Di sinilah relevansi kisah Bilqis dengan kondisi masyarakat saat ini. Bias gender sering kali membuat publik lebih fokus pada siapa yang memimpin daripada bagaimana seseorang memimpin. Akibatnya, kualitas seperti kebijaksanaan, kemampuan bermusyawarah, keterbukaan terhadap kritik, dan kecakapan mengambil keputusan menjadi kurang diperhatikan dibanding identitas gender seorang pemimpin.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1e",
+									"text": "Padahal, jika membaca kisah Bilqis secara utuh, Al-Qur'an justru memperlihatkan bahwa kualitas-kualitas tersebut mendapat tempat yang sangat penting. Bilqis tidak digambarkan sebagai penguasa yang sewenang-wenang. Ia juga tidak ditampilkan sebagai sosok yang anti kritik atau menolak dialog. Sebaliknya, ia menjadi contoh pemimpin yang bersedia mendengar, mempertimbangkan, dan mengevaluasi keputusan sebelum bertindak.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1h",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1g",
+									"text": "Dengan demikian, kisah Bilqis menawarkan perspektif yang lebih kompleks daripada perdebatan sederhana tentang boleh atau tidaknya perempuan menjadi pemimpin. Narasi Al-Qur'an memperlihatkan bahwa kepemimpinan tidak hanya berkaitan dengan identitas, tetapi juga dengan kapasitas, kebijaksanaan, dan tanggung jawab moral.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1i",
+									"text": "Pada akhirnya, pertanyaan “apakah perempuan layak memimpin?” mungkin bukan lagi pertanyaan yang paling penting. Pertanyaan yang lebih relevan adalah mengapa kualitas kepemimpinan yang ditampilkan Bilqis sering kali kalah populer dibanding jenis kelaminnya. Di tengah bias gender yang masih bertahan hingga hari ini, kisah Bilqis mengingatkan bahwa Al-Qur'an mengajak pembacanya untuk menilai seorang pemimpin melalui integritas, kecakapan, dan kebijaksanaannya, bukan semata-mata berdasarkan apakah ia laki-laki atau perempuan.",
+									"marks": []
 								}
 							]
 						}
 					]
-				},
-				"publishedAt": "2026-08-18T08:30:00.000Z"
+				}
 			},
 			{
 				"id": "art-02",
-				"slug": "kosmologi-big-bang-dan-konsep-ratqan-fataqnah",
+				"slug": "hawa-dalam-narasi-al-quran-penyebab-adam-turun-dari-surga",
 				"status": "published",
 				"bylines": [
 					{
-						"byline": "byline-hamdan"
+						"byline": "byline-putri"
 					}
 				],
 				"taxonomies": {
 					"category": [
-						"kosmologi-qurani"
+						"perempuan-keadilan",
+						"tafsir-tematik"
 					],
 					"tag": [
-						"alam-semesta",
-						"pkumi"
+						"pkumi",
+						"hawa",
+						"adam-hawa",
+						"mitos-gender"
 					]
 				},
 				"data": {
-					"title": "Kosmologi Big Bang dan Konsep Ratqan-Fataqnah: Perspektif Hermeneutika Saintifik",
-					"subheadline": "Membaca Ayat-Ayat Kosmik Tanpa Terjebak Pencocok-cokan Sembrono (Ayatologi Pseudo-Science)",
-					"excerpt": "Bagaimana relasi antara fisika kuantum modern dengan diktum 'keduanya dahulunya menyatu lalu Kami pisahkan' (ratqan fa-fataqnahuma)? Kajian kritis atas epistemologi tafsir saintifik kontemporer.",
+					"title": "Hawa dalam Narasi Al-Qur’an: Benarkah Ia Penyebab Adam Turun dari Surga?",
+					"subheadline": "Analisis Struktur Kebahasaan Al-Qur'an dan Tanggung Jawab Moral Subjek Ganda (Mutsanna)",
+					"excerpt": "Stigma bahwa Hawa adalah biang keladi keluarnya manusia dari surga kerap diwariskan dalam tradisi penafsiran. Padahal secara tekstual, Al-Qur'an konsisten menggunakan bentuk dualis (mutsanna) yang menegaskan pertanggungjawaban moral bersama antara Adam dan pasangannya.",
 					"featured_image": {
 						"$media": {
-							"url": "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=1200&h=675&fit=crop",
-							"alt": "Galaksi dan panorama bintang kosmos yang megah",
-							"filename": "kosmologi-ratqan-fataqnah.jpg"
+							"url": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200&h=675&fit=crop",
+							"alt": "Ilustrasi narasi penciptaan dan tafsir Al-Qur'an",
+							"filename": "hawa-penciptaan-adam-tafsir.jpg"
 						}
 					},
-					"reading_time": "5 mnt baca",
+					"reading_time": "7 mnt baca",
 					"is_lead_hero": false,
 					"is_secondary_hero": true,
 					"is_featured": true,
 					"is_popular": true,
 					"popular_rank": 2,
-					"popular_reads": "14.2k dibaca",
+					"popular_reads": "17.8k dibaca",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k1l",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Diskursus perjumpaan antara sains dan wahyu seringkali terjebak dalam dua kutub ekstrem: penolakan positivistik di satu sisi, atau 'cocokologi' sembrono (i'jaz ilmi yang gegabah) di sisi lain. Padahal Al-Qur'an mengajak manusia berfikir reflektif melalui ayat-ayat kauniyah tanpa kehilangan dimensi transendentalnya."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "blockquote",
-							"children": [
-								{
-									"_type": "span",
-									"text": "أَوَلَمْ يَرَ الَّذِينَ كَفَرُوا أَنَّ السَّمَاوَاتِ وَالْأَرْضَ كَانَتَا رَتْقًا فَفَتَقْنَاهُمَا وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ أَفَلَا يُؤْمِنُونَ\n\n",
+									"_key": "k1k",
+									"text": "Hawa dalam Narasi Al-Qur’an: Benarkah Ia Penyebab Adam Turun dari Surga?",
 									"marks": [
 										"strong"
 									]
-								},
-								{
-									"_type": "span",
-									"text": "\"Dan apakah orang-orang kafir tidak mengetahui bahwa langit dan bumi keduanya dahulunya menyatu, kemudian Kami pisahkan antara keduanya; dan Kami jadikan dari air segala sesuatu yang hidup. Maka mengapakah mereka tidak juga beriman?\"\n\n",
-									"marks": [
-										"em"
-									]
-								},
-								{
-									"_type": "span",
-									"text": "۞ — QS. Al-Anbiya [21]: 30"
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k1n",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Secara kebahasaan, kata 'ratq' merujuk pada materi yang terpadu dan solid tanpa celah, sementara 'fatq' adalah proses pemisahan dan ekspansi. Penafsiran ilmiah tidak boleh dipaksakan untuk membuktikan teori relativitas umum secara kaku, melainkan mengarahkan kesadaran kosmologis bahwa alam semesta ini bermula dari rancangan yang Esa."
+									"_key": "k1m",
+									"text": "*“Perempuan adalah penyebab manusia jatuh dari surga.”* Narasi semacam ini masih cukup sering ditemukan dalam pembicaraan mengenai kisah Adam dan Hawa. Hawa digambarkan sebagai perempuan yang terlebih dahulu tergoda oleh setan, memakan buah dari pohon yang dilarang, kemudian membujuk Adam hingga keduanya dikeluarkan dari surga. Dari narasi tersebut, muncul kesan bahwa perempuan merupakan sumber awal kesalahan manusia.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1o",
+									"text": "Kisah Adam dan pasangannya perlu dibaca dengan memperhatikan struktur bahasa Al-Qur’an, hubungan antar ayat, serta penafsiran para mufasir. Salah satu bagian penting terdapat dalam QS. Al-Baqarah [2]: 35:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1r",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1q",
+									"text": "وَقُلْنَا يَآ آدَمُ ٱسْكُنْ أَنتَ وَزَوْجُكَ ٱلْجَنَّةَ وَكُلَا مِنْهَا رَغَدًا حَيْثُ شِئْتُمَا وَلَا تَقْرَبَا هَٰذِهِ ٱلشَّجَرَةَ فَتَكُونَا مِنَ ٱلظَّٰلِمِينَ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1t",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": "*“Dan Kami berfirman, ‘Wahai Adam! Tinggallah engkau dan istrimu di dalam surga, dan makanlah dengan nikmat berbagai makanan yang ada di sana sesukamu. Tetapi janganlah kamu dekati pohon ini, nanti kamu termasuk orang-orang zalim.’”* (QS. Al-Baqarah [2]: 35).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1v",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1u",
+									"text": "Ayat tersebut menunjukkan bahwa Adam dan pasangannya sejak awal ditempatkan sebagai dua subjek dalam perintah Allah. Hal ini terlihat dari penggunaan bentuk dualis, seperti كُلَا *“makanlah kalian berdua”*, شِئْتُمَا *“kalian berdua kehendaki”*, dan لَا تَقْرَبَا *“janganlah kalian berdua mendekati”*. Larangan tersebut bukan hanya ditujukan kepada perempuan ataupun laki-laki, melainkan kepada keduanya.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1x",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": "Al-Ṭabarī menjelaskan bahwa Allah memberikan izin kepada Adam dan istrinya untuk menikmati berbagai makanan di surga, tetapi melarang keduanya mendekati satu pohon tertentu. Dengan demikian, sejak awal kisah, keduanya memiliki posisi yang sama sebagai pihak yang menerima perintah dan larangan Allah (Al-Ṭabarī, w. 310 H). Persoalan kemudian muncul ketika setan menggoda mereka. QS. Al-Baqarah [2]: 36 menyatakan:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1z",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": "فَأَزَلَّهُمَا ٱلشَّيْطَٰنُ عَنْهَا فَأَخْرَجَهُمَا مِمَّا كَانَا فِيهِ ۖ وَقُلْنَا ٱهْبِطُوا۟ بَعْضُكُمْ لِبَعْضٍ عَدُوٌّ ۖ وَلَكُمْ فِى ٱلْأَرْضِ مُسْتَقَرٌّ وَمَتَٰعٌ إِلَىٰ حِينٍ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k21",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": "*“Lalu setan memperdayakan keduanya dari surga sehingga keduanya dikeluarkan dari segala kenikmatan ketika keduanya di sana. Dan Kami berfirman, ‘Turunlah kamu! Sebagian kamu menjadi musuh bagi sebagian yang lain. Dan bagi kamu ada tempat kediaman dan kesenangan di bumi sampai waktu yang ditentukan.’” (QS. Al-Baqarah [2]: 36).*",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k23",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k22",
+									"text": "Kata أَزَلَّهُمَا berasal dari akar kata *zalla* yang berarti tergelincir, sedangkan akhiran -humā menunjukkan dua orang. Artinya, pihak yang digelincirkan oleh setan adalah Adam dan pasangannya. Al-Qur’an tidak mengatakan bahwa Hawa terlebih dahulu tergoda kemudian menyeret Adam ke dalam pelanggaran. Justru, secara eksplisit disebutkan bahwa setan memperdayakan keduanya.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k25",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": "Ibn Kathīr ketika menafsirkan ayat ini menjelaskan bahwa setan menyebabkan Adam dan istrinya tergelincir sehingga keduanya dikeluarkan dari keadaan yang sebelumnya mereka nikmati (Ibn Kathīr, w. 774 H). Dengan demikian, menjadikan Hawa sebagai satu-satunya pihak yang bertanggung jawab tidak sepenuhnya sesuai dengan struktur narasi Al-Qur’an. Gambaran serupa terdapat dalam QS. Al-A‘rāf [7]: 20–22. Allah berfirman:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k27",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": "فَوَسْوَسَ لَهُمَا ٱلشَّيْطَٰنُ لِيُبْدِيَ لَهُمَا مَاۥ وُورِىَ عَنْهُمَا مِن سَوْءَٰتِهِمَا",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k29",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": "*“Lalu setan membisikkan pikiran jahat kepada keduanya untuk menampakkan aurat mereka yang selama ini tertutup dari mereka...”* (QS. Al-A‘rāf [7]: 20).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "Sekali lagi, kata لَهُمَا berarti *“kepada keduanya”.* Setan tidak digambarkan hanya menggoda Hawa. Ia menggoda keduanya. Menariknya, Al-Qur’an juga memberikan penekanan tersendiri terhadap tanggung jawab Adam. Dalam QS. Ṭāhā [20]:115, Allah berfirman:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2c",
+									"text": "وَلَقَدْ عَهِدْنَآ إِلَىٰٓ ءَادَمَ مِن قَبْلُ فَنَسِىَ وَلَمْ نَجِدْ لَهُۥ عَزْمًا",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2e",
+									"text": "*“Dan sungguh, sebelumnya telah Kami perintahkan kepada Adam, tetapi dia lupa, dan Kami tidak mendapati keteguhan hati padanya.” (QS. Ṭāhā [20]:115).*",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2h",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2g",
+									"text": "Ayat ini penting karena memperlihatkan bahwa Al-Qur’an tidak menggambarkan Adam sebagai laki-laki yang sepenuhnya menjadi korban bujukan perempuan. Adam sendiri memiliki tanggung jawab terhadap perintah yang telah diterimanya. Al-Qur’an bahkan secara khusus menyebut Adam sebagai pihak yang “lupa” terhadap pesan Allah.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2i",
+									"text": "Jika demikian, mengapa narasi Hawa sebagai penyebab kejatuhan Adam begitu kuat? Salah satu hal yang perlu diperhatikan adalah adanya berbagai riwayat yang berkembang dalam tradisi penafsiran dan cerita keagamaan di luar teks Al-Qur’an. Sejumlah riwayat memberikan detail mengenai siapa yang terlebih dahulu memakan buah, bagaimana proses godaan terjadi, hingga peran Hawa dalam peristiwa tersebut. Namun, tidak semua detail tersebut memiliki dasar yang eksplisit dalam Al-Qur’an.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2k",
+									"text": "Dalam konteks tafsir, sikap kritis diperlukan agar informasi tambahan dari riwayat tidak disamakan dengan pesan utama Al-Qur’an. Al-Ṭabarī, misalnya, ketika membahas pohon yang dilarang dalam QS. Al-Baqarah [2]: 35, menghimpun berbagai pendapat mengenai jenis pohon tersebut. Namun, Al-Qur’an sendiri tidak menjelaskan jenis pohon itu secara pasti (Al-Ṭabarī, w. 310 H). Hal ini menunjukkan bahwa tidak semua detail dalam kisah harus diketahui untuk memahami pesan utamanya.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2n",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2m",
+									"text": "Persoalan yang lebih menarik adalah Al-Qur’an tidak pernah menyebut nama “Hawa” dalam kisah tersebut. Perempuan yang bersama Adam disebut dengan istilah زَوْجُكَ *“istrimu”* atau *“pasanganmu”.* Penyebutan ini menempatkan Adam dan pasangannya sebagai dua pihak dalam satu rangkaian kisah, bukan sebagai pelaku dan korban. Keduanya juga bersama-sama mengakui kesalahan. Dalam QS. Al-A‘rāf [7]: 23, Allah mengabadikan doa mereka:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2o",
+									"text": "قَالَا رَبَّنَا ظَلَمْنَآ أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ ٱلْخَٰسِرِينَ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2r",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2q",
+									"text": "*“Keduanya berkata, ‘Ya Tuhan kami, kami telah menzalimi diri kami sendiri. Jika Engkau tidak mengampuni kami dan memberi rahmat kepada kami, niscaya kami termasuk orang-orang yang rugi.’” (QS. Al-A‘rāf [7]: 23).*",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2t",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2s",
+									"text": "Kata ظَلَمْنَا berarti *“kami telah menzalimi”.* Bentuknya menunjukkan subjek jamak, yaitu keduanya. Keduanya mengakui kesalahan secara bersama-sama dan memohon ampun kepada Allah. Hal yang tidak kalah penting adalah memahami makna “turun” ke bumi. Apakah bumi merupakan hukuman yang muncul semata-mata karena kesalahan Hawa? Jika diperhatikan, QS. Al-Baqarah [2]: 30 telah menyampaikan rencana Allah sebelum penciptaan Adam:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2v",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2u",
+									"text": "وَإِذْ قَالَ رَبُّكَ لِلْمَلَٰٓئِكَةِ إِنِّى جَاعِلٌ فِى ٱلْأَرْضِ خَلِيفَةً",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2x",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2w",
+									"text": "*“Dan ingatlah ketika Tuhanmu berfirman kepada para malaikat, ‘Sesungguhnya Aku hendak menjadikan khalifah di bumi.’”* (QS. Al-Baqarah [2]: 30).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2z",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2y",
+									"text": "Ayat tersebut menunjukkan bahwa bumi sejak awal telah menjadi bagian dari rencana penciptaan manusia. Karena itu, turunnya Adam dan pasangannya ke bumi tidak tepat jika dipahami semata-mata sebagai akibat dari tindakan Hawa. Kehidupan manusia di bumi telah menjadi bagian dari skenario penciptaan yang disebutkan sebelum peristiwa pelanggaran tersebut. Lebih jauh, kisah ini *tidak berakhir dengan dosa yang diwariskan* kepada seluruh keturunan manusia. QS. Al-Baqarah [2]: 37 menyatakan:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k31",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k30",
+									"text": "فَتَلَقَّىٰٓ ءَادَمُ مِن رَّبِّهِۦ كَلِمَٰتٍ فَتَابَ عَلَيْهِ ۚ إِنَّهُۥ هُوَ ٱلتَّوَّابُ ٱلرَّحِيمُ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k33",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k32",
+									"text": "*“Kemudian Adam menerima beberapa kalimat dari Tuhannya, lalu Dia pun menerima tobatnya. Sungguh, Dia Maha Penerima Tobat, Maha Penyayang.”* (QS. Al-Baqarah [2]: 37).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k35",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k34",
+									"text": "Kisah Adam dan pasangannya bukan tentang perempuan yang menyebabkan laki-laki jatuh, melainkan tentang tanggung jawab manusia. Al-Qur’an menggambarkan keduanya sama-sama menerima perintah, tergoda, melakukan kesalahan, dan bertobat. Karena itu, tidak tepat menjadikan Hawa sebagai penyebab Adam turun dari surga; pesan utamanya adalah tanggung jawab dan kesempatan untuk kembali kepada Allah.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k37",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k36",
+									"text": "Referensi:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k39",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k38",
+									"text": "Al-Ṭabarī, Muḥammad ibn Jarīr. *Jāmi‘ al-Bayān ‘an Ta’wīl Āy al-Qur’ān*. Kairo: Dār Hajr, 2000.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3b",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3a",
+									"text": "Ibn Kathīr, Ismā‘īl ibn ‘Umar. *Tafsīr al-Qur’ān al-‘Aẓīm*. Riyadh: Dār Ṭayyibah, 1999.",
+									"marks": []
 								}
 							]
 						}
 					]
-				},
-				"publishedAt": "2026-08-20T10:15:00.000Z"
+				}
 			},
 			{
 				"id": "art-03",
-				"slug": "genealogi-manuskrip-tafsir-nusantara-tarjuman-mustafid-marah-labid",
+				"slug": "etika-menjaga-pandangan-pencegahan-kekerasan-seksual-uu-tpks",
 				"status": "published",
 				"bylines": [
 					{
-						"byline": "byline-iqbal"
+						"byline": "byline-fahmia"
 					}
 				],
 				"taxonomies": {
 					"category": [
-						"studi-naskah",
-						"filologi"
-					],
-					"tag": [
-						"tafsir-nusantara",
-						"pesantren"
-					]
-				},
-				"data": {
-					"title": "Menelusuri Genealogi Manuskrip Tafsir Nusantara: Dari Tarjuman Al-Mustafid hingga Marah Labid",
-					"subheadline": "Jejak Epistemik dan Dinamika Inkulturasi Tafsir Al-Qur'an di Kawasan Melayu-Nusantara Abad 17-19",
-					"excerpt": "Bagaimana para ulama Nusantara mengadaptasi metodologi tafsir Timur Tengah ke dalam konteks sosial-budaya lokal? Menelusuri manuskrip Abdur Rauf As-Singkili hingga Syekh Nawawi Al-Bantani.",
-					"featured_image": {
-						"$media": {
-							"url": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&h=675&fit=crop",
-							"alt": "Manuskrip kuno dan lembaran naskah beraksara pegon",
-							"filename": "manuskrip-tafsir-nusantara.jpg"
-						}
-					},
-					"reading_time": "6 mnt baca",
-					"is_lead_hero": false,
-					"is_secondary_hero": true,
-					"is_featured": true,
-					"is_popular": false,
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Studi tafsir di Nusantara bukanlah reproduksi pasif atas literatur Arab klasik, melainkan proses dialektika hermeneutis yang kaya. Kitab Tarjuman al-Mustafid karya Syekh Abdur Rauf as-Singkili (w. 1693 M) di Aceh merepresentasikan karya tafsir lengkap 30 juz pertama dalam bahasa Melayu-Jawi yang menggunakan rujukan utama Tafsir Al-Baidhawi dan Al-Jalalayn."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Kearifan Lokal dalam Glosarium Makna Gandul Pegon"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Metode utawi-ikui (makna gandul) dalam tradisi pesantren Jawa tidak sekadar metode gramatika, melainkan instrumen semantik canggih yang mempertahankan akurasi i'rab sekaligus kontekstualisasi nilai lokal."
-								}
-							]
-						}
-					]
-				},
-				"publishedAt": "2026-08-21T14:00:00.000Z"
-			},
-			{
-				"id": "art-04",
-				"slug": "hermeneutika-emansipatoris-reinterpretasi-ayat-relasi-gender",
-				"status": "published",
-				"bylines": [
-					{
-						"byline": "byline-nurul"
-					}
-				],
-				"taxonomies": {
-					"category": [
-						"gender-islam",
-						"hermeneutika"
+						"perempuan-keadilan",
+						"tafsir-tematik"
 					],
 					"tag": [
 						"pkumi",
-						"hermeneutika-feminis"
+						"uu-tpks",
+						"kekerasan-seksual",
+						"tafsir-almishbah",
+						"quraish-shihab"
 					]
 				},
 				"data": {
-					"title": "Hermeneutika Emansipatoris: Reinterpretasi Ayat-Ayat Relasi Gender di Era Digital",
-					"subheadline": "Membongkar Konstruksi Patriarkis Menuju Keadilan Hakiki dalam Bingkai Maqashid Asy-Syari'ah",
-					"excerpt": "Tafsir atas ayat-ayat qiwamah dan waris kerap dipahami secara harfiah-statis. Pendekatan hermeneutika emansipatoris membedakan antara nilai universal dan ekspresi kultural temporal.",
+					"title": "Etika Menjaga Pandangan dan Penghormatan Martabat Manusia dalam Pencegahan Kekerasan Seksual: Dialog Tafsir Al-Mishbah dengan UU TPKS",
+					"subheadline": "Membangun Kesadaran Etis Qur'ani dalam Memperkuat Kerangka Hukum UU No. 12 Tahun 2022",
+					"excerpt": "Pencegahan kekerasan seksual tidak dapat berhenti pada pemberian sanksi semata. Menelaah QS. an-Nur 30–31 dan QS. an-Nisa' 19 lewat Tafsir Al-Mishbah memperlihatkan sinergi antara hukum negara UU TPKS dengan fondasi etis pengendalian diri dan penghormatan martabat manusia.",
 					"featured_image": {
 						"$media": {
-							"url": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1200&h=675&fit=crop",
-							"alt": "Buku-buku studi keilmuan dan perpustakaan modern",
-							"filename": "hermeneutika-gender-kontemporer.jpg"
+							"url": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=1200&h=675&fit=crop",
+							"alt": "Timbangan keadilan dan etika perlindungan martabat manusia",
+							"filename": "etika-pandangan-uu-tpks.jpg"
 						}
 					},
 					"reading_time": "8 mnt baca",
@@ -777,318 +1389,2603 @@
 					"is_featured": true,
 					"is_popular": true,
 					"popular_rank": 3,
-					"popular_reads": "11.8k dibaca",
+					"popular_reads": "15.6k dibaca",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k3d",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Tantangan terbesar dalam kajian gender dan Al-Qur'an adalah membedakan antara norma ideal transendental dengan instrumen hukum yang dipengaruhi oleh sosiologi Arab abad ke-7. Ketika Al-Qur'an berbicara mengenai kepemimpinan keluarga, orientasinya adalah perlindungan dan keadilan relasional, bukan dominasi hierarkis."
+									"_key": "k3c",
+									"text": "Etika Menjaga Pandangan dan Penghormatan Martabat Manusia dalam Pencegahan Kekerasan Seksual: Dialog Tafsir *Al-Mishbah* dengan UU TPKS",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3e",
+									"text": "Pendahuluan",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3h",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3g",
+									"text": "Kekerasan seksual masih menjadi persoalan serius di Indonesia. CATAHU Komnas Perempuan 2025 mencatat 376.529 kasus Kekerasan Berbasis Gender terhadap Perempuan (KBGtP), meningkat 14,07% dari tahun sebelumnya. Dari jumlah tersebut, 22.848 kasus merupakan kekerasan seksual.(Komnas Perempuan, 2026)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3i",
+									"text": "Kondisi tersebut menunjukkan bahwa kekerasan seksual tidak dapat dipahami semata sebagai persoalan individual. Fenomena ini berkaitan dengan relasi kuasa, budaya, serta cara masyarakat memandang tubuh dan martabat manusia. Karena itu, penanganannya membutuhkan pendekatan hukum sekaligus penguatan aspek preventif dan etis.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3k",
+									"text": "Negara merespons persoalan tersebut melalui Undang-Undang Nomor 12 Tahun 2022 tentang Tindak Pidana Kekerasan Seksual (UU TPKS). Regulasi ini mengatur pencegahan, penanganan, perlindungan, dan pemulihan korban secara lebih komprehensif.(Indonesia, 2022) Namun, implementasinya masih menghadapi berbagai tantangan, terutama dalam aspek pencegahan dan keterlibatan masyarakat.(Komnas Perempuan, 2026)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3n",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3m",
+									"text": "Dalam konteks masyarakat Muslim, Al-Qur’an memiliki prinsip etis yang dapat memperkuat kesadaran dalam mencegah kekerasan seksual. QS. an-Nūr ayat 30–31 berbicara mengenai menjaga pandangan dan kehormatan diri, QS. an-Nisā’ ayat 19 menekankan perlakuan yang baik terhadap perempuan, sedangkan QS. an-Nisā’ ayat135 menegaskan pentingnya keadilan. (Izzat Zaini, 2022: 90) Melalui Tafsir *Al-Mishbah*, ketiga ayat tersebut dapat dibaca secara tematik sebagai landasan etis bagi pencegahan kekerasan seksual.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3o",
+									"text": "Pembahasan",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3r",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3q",
+									"text": "Dalam Tafsir *Al-Mishbah*, M. Quraish Shihab menjelaskan QS. an-Nūr ayat 30 sebagai perintah kepada laki-laki beriman untuk menundukkan pandangan dan memelihara kehormatan. Menundukkan pandangan bukan berarti menutup mata dari segala sesuatu, melainkan mengendalikan pandangan agar tidak diarahkan kepada sesuatu yang tidak patut.(Muhammad Quraish Shihab, 2003: 323-325)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3t",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3s",
+									"text": "Penjelasan tersebut menunjukkan bahwa pencegahan kekerasan seksual dapat dimulai dari pengendalian diri. Seseorang tidak hanya dituntut menghindari tindakan kekerasan, tetapi juga mengendalikan dorongan dan cara memandang orang lain. Dengan demikian, pencegahan tidak berhenti pada larangan terhadap tindakan, tetapi juga menyentuh pembentukan kesadaran moral.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3v",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3u",
+									"text": "QS. an-Nūr ayat 31 kemudian memberikan tuntunan kepada perempuan untuk menjaga pandangan dan kehormatannya. Menurut Quraish Shihab, perintah tersebut menunjukkan adanya tanggung jawab moral pada kedua pihak. Prinsip ini penting agar ajaran menjaga pandangan tidak dipahami sebagai kewajiban perempuan untuk mencegah kekerasan yang dilakukan oleh orang lain.(Muhammad Quraish Shihab, 2003: 325-326)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3x",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3w",
+									"text": "Dengan demikian, menjaga pandangan merupakan tanggung jawab etis setiap individu untuk mengendalikan diri dan menghormati kehormatan orang lain. Dalam konteks kekerasan seksual, prinsip tersebut diarahkan kepada pelaku potensial dan masyarakat untuk mengendalikan perilaku, bukan kepada korban untuk mempertanggungjawabkan kekerasan yang dialaminya.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3z",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3y",
+									"text": "Selanjutnya, QS. an-Nisā’ ayat 19 memberikan prinsip *mu‘āsyarah bi al-ma‘rūf*, yaitu memperlakukan perempuan dengan cara yang patut. Quraish Shihab menjelaskan bahwa hubungan dengan perempuan harus dibangun berdasarkan perlakuan yang baik dan tidak didasarkan pada pemaksaan atau kepentingan sepihak.(Muhammad Quraish Shihab, 2003:325-326) Prinsip ini menempatkan perempuan sebagai manusia yang memiliki kehormatan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k41",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k40",
+									"text": "Prinsip *mu‘āsyarah bi al-ma‘rūf* memiliki relevansi dengan pencegahan kekerasan seksual karena menolak relasi yang menempatkan perempuan sebagai objek. Hubungan antarmanusia seharusnya dibangun atas penghormatan, perlakuan yang baik, serta pengakuan terhadap batas dan martabat masing-masing individu.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k43",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k42",
+									"text": "Sementara itu, QS. an-Nisā’ ayat 135 menegaskan kewajiban menegakkan keadilan. Quraish Shihab menjelaskan bahwa keadilan harus ditegakkan secara sungguh-sungguh, sekalipun berhadapan dengan diri sendiri, keluarga, maupun pihak yang memiliki kedudukan tertentu.(Muhammad Quraish Shihab, 2003:41-42) Prinsip ini menegaskan bahwa kepentingan personal tidak boleh mengalahkan keadilan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k45",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k44",
+									"text": "Prinsip keadilan memiliki posisi penting dalam penanganan kekerasan seksual. Korban dapat berada dalam posisi rentan akibat relasi kuasa, kedekatan dengan pelaku, maupun stigma sosial. Oleh karena itu, proses penanganan harus menjamin perlindungan terhadap hak korban dan memastikan bahwa hubungan personal atau kedudukan tertentu tidak menghambat keadilan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k47",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k46",
+									"text": "Jika ketiga ayat tersebut dibaca secara tematik, terdapat tiga prinsip etis yang saling berkaitan, yaitu pengendalian diri, penghormatan terhadap martabat manusia, dan penegakan keadilan. Pengendalian diri mencegah seseorang melakukan tindakan yang merugikan orang lain, penghormatan martabat membentuk relasi yang sehat, sedangkan keadilan menjadi prinsip ketika terjadi pelanggaran.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k49",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k48",
+									"text": "Ketiga prinsip tersebut memiliki titik temu dengan orientasi UU TPKS yang tidak hanya berfokus pada penghukuman pelaku, tetapi juga mencakup pencegahan, perlindungan, penanganan, dan pemulihan korban.(Fitha Ayun Lutvia Nitha, Ali Masyhar dkk, 2024: 90-100) Dengan demikian, nilai etis Al-Qur’an dapat didialogkan dengan kerangka hukum negara dalam membangun pencegahan kekerasan seksual.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4a",
+									"text": "Dialog tersebut menunjukkan bahwa pencegahan kekerasan seksual membutuhkan dua sisi yang saling melengkapi. UU TPKS menyediakan kerangka hukum dan mekanisme perlindungan, sedangkan prinsip Qur’ani memberikan landasan etis untuk membentuk kesadaran individu dan masyarakat. Keduanya dapat berjalan bersama dalam membangun budaya yang menolak kekerasan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4c",
+									"text": "Tantangan implementasi UU TPKS menunjukkan bahwa regulasi saja belum cukup untuk mengubah perilaku masyarakat. Pencegahan membutuhkan keterlibatan masyarakat dalam mengenali kekerasan, menghormati batas orang lain, serta menolak tindakan yang merendahkan dan menyalahkan korban. UU TPKS sendiri memberikan ruang bagi masyarakat untuk berpartisipasi dalam pencegahan dan penanganan kekerasan seksual.(Fitha Ayun Lutvia Nitha, Ali Masyhar dkk, 2024:101-105)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4e",
+									"text": "Dalam konteks tersebut, nilai-nilai Al-Qur’an dapat memperkuat dimensi preventif UU TPKS. Pengendalian diri dapat membentuk kesadaran untuk tidak melakukan kekerasan, penghormatan terhadap martabat mendorong relasi yang setara dan manusiawi, sedangkan keadilan memastikan korban memperoleh perlindungan ketika terjadi pelanggaran.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4h",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4g",
+									"text": "Kesimpulan",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4i",
+									"text": "Pencegahan kekerasan seksual membutuhkan pendekatan yang tidak berhenti pada pemberian sanksi terhadap pelaku. Tafsir *Al-Mishbah* terhadap QS. an-Nūr ayat 30–31, QS. an-Nisā’ ayat 19, dan QS. an-Nisā’ ayat 135 menunjukkan tiga prinsip etis yang relevan, yaitu pengendalian diri, penghormatan terhadap martabat manusia, dan penegakan keadilan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4k",
+									"text": "Dialog antara prinsip Qur’ani dan UU TPKS menunjukkan bahwa pencegahan kekerasan seksual memerlukan sinergi antara kerangka hukum dan pembentukan kesadaran etis. Regulasi memberikan mekanisme perlindungan dan penanganan, sedangkan nilai Al-Qur’an dapat memperkuat kesadaran individu dan masyarakat untuk membangun relasi yang menghormati kehormatan, keamanan, keadilan, dan martabat setiap manusia.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4n",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4m",
+									"text": "Daftar Isi",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4o",
+									"text": "Komnas Perempuan. “Siaran Pers Komnas Perempuan: Peluncuran Catatan Tahunan Kekerasan terhadap Perempuan 2025.” 2026. <https://komnasperempuan.go.id/siaran-pers-detail/siaran-pers-komnas-perempuan-peluncuran-catatan-tahunan-kekerasan-terhadap-perempuan-2025>.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4r",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4q",
+									"text": "Indonesia, Rebuplik. *Undang-Undang Nomor 12 Tahun 2022 Tindak Pidana Kekerasan*, 2022. <https://peraturan.bpk.go.id/Details/207944/uu-no-12-tahun-2022>.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4t",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4s",
+									"text": "Komnas Perempuan. “Siaran Pers Komnas Perempuan: Refleksi Empat Tahun Implementasi UU TPKS.” 2026. <https://komnasperempuan.go.id/siaran-pers-detail/siaran-pers-komnas-perempuan-refleksi-empat-tahun-implementasi-uu-tpks>.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4v",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4u",
+									"text": "Izzat Zaini. *“Pencegahan Pelecehan Seksual Dalam Al-Qur’an Prspektif Tafsir Al-Qurtubi (Studi Munasabah QS. An-Nur:30-31).”* Skripsi.2022",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4x",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4w",
+									"text": "Shihab, Muhammad Quraish. *Tafsir Al Misbah : Pesan, Kesan, Dan Keserasian Al-Qur’an*, Jilid 2. Lentera Hati. 2003.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4z",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4y",
+									"text": "Shihab, Muhammad Quraish. *Tafsir Al Misbah : Pesan, Kesan, Dan Keserasian Al-Qur’an*, Jilid 3. Lentera Hati. 2003.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k51",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k50",
+									"text": "Shihab, Muhammad Quraish. *Tafsir Al Misbah : Pesan, Kesan, Dan Keserasian Al-Qur’an*, Jilid 9. Lentera Hati. 2003.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k53",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k52",
+									"text": "Nitha, Fitha Ayun Lutvia, Ali Masyhar, dkk. “Optimalisasi Implementasi UU TPKS: Tantangan Dan Solusi Dalam Upaya Penghapusan Kekerasan Seksual Di Indonesia.” *Jurnal Masalah-Masalah Hukum.* Vol. 53. No. 1. 2024.DOI: https://doi.org/https://doi.org/10.14710/mmh.53.1.2024.90-100.",
+									"marks": []
 								}
 							]
 						}
 					]
-				},
-				"publishedAt": "2026-08-22T09:45:00.000Z"
+				}
 			},
 			{
-				"id": "art-05",
-				"slug": "estetika-ijaz-lughawi-retorika-iltifat-surah-al-kautsar",
+				"id": "art-04",
+				"slug": "membaca-ulang-makna-kesuksesan-dan-fitrah-perempuan",
 				"status": "published",
 				"bylines": [
 					{
-						"byline": "byline-fikri"
+						"byline": "byline-rizki"
 					}
 				],
 				"taxonomies": {
 					"category": [
-						"balaghah"
-					],
-					"tag": [
-						"retorika-arab"
-					]
-				},
-				"data": {
-					"title": "Estetika I'jaz Lughawi: Rahasia Retorika Iltifat dalam Surah Al-Kautsar",
-					"subheadline": "Menyelami Kedalaman Perpindahan Pronomina dan Keajaiban Ritme dalam Surah Terpendek Al-Qur'an",
-					"excerpt": "Hanya terdiri dari 3 ayat dan 10 kata, Surah Al-Kautsar memuat dinamika retorika iltifat yang menakjubkan para pakar balaghah dari masa ke masa.",
-					"featured_image": {
-						"$media": {
-							"url": "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&h=675&fit=crop",
-							"alt": "Arsitektur islami dengan kubah dan ornamen geometris yang presisi",
-							"filename": "balaghah-iltifat-alkautsar.jpg"
-						}
-					},
-					"reading_time": "4 mnt baca",
-					"is_lead_hero": false,
-					"is_secondary_hero": true,
-					"is_featured": true,
-					"is_popular": false,
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Ilmu Balaghah menempatkan konsep iltifat (peralihan sudut pandang gramatikal) sebagai salah satu puncak keindahan sastra Arab. Dalam Surah Al-Kautsar, terjadi pergeseran dramatis dari penggunaan kata ganti orang pertama jamak (inna a'thainaka) menuju perintah kepada pihak ketiga/nama Tuhan (fa-shalli li-rabbika), menciptakan nuansa keagungan sekaligus kedekatan personal."
-								}
-							]
-						}
-					]
-				},
-				"publishedAt": "2026-08-23T11:20:00.000Z"
-			},
-			{
-				"id": "art-06",
-				"slug": "kritik-epistemologi-tafsir-tekstualis-menghidupkan-maqashid",
-				"status": "published",
-				"bylines": [
-					{
-						"byline": "byline-arofah"
-					}
-				],
-				"taxonomies": {
-					"category": [
-						"filsafat-islam",
-						"hermeneutika"
-					],
-					"tag": [
-						"pkumi"
-					]
-				},
-				"data": {
-					"title": "Kritik Epistemologi Tafsir Tekstualis: Menghidupkan Maqashid Al-Qur'an dalam Realitas Sosial",
-					"subheadline": "Melampaui Literalisme Rigid Menuju Keberagamaan yang Membebaskan dan Berkeadilan Sosial",
-					"excerpt": "Pendekatan tekstualis-harfiah kerap kali mengorbankan jiwa kemaslahatan Al-Qur'an demi mempertahankan cangkang formalitas hukum. Diperlukan revitalisasi nalar maqashidi.",
-					"featured_image": {
-						"$media": {
-							"url": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=1200&h=675&fit=crop",
-							"alt": "Pelataran masjid dengan pilar megah dan sinar mentari",
-							"filename": "epistemologi-maqashid-quran.jpg"
-						}
-					},
-					"reading_time": "7 mnt baca",
-					"is_lead_hero": false,
-					"is_secondary_hero": false,
-					"is_featured": true,
-					"is_popular": true,
-					"popular_rank": 4,
-					"popular_reads": "9.6k dibaca",
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Al-Qur'an diturunkan sebagai huda li an-nas (petunjuk bagi umat manusia), bukan sekadar kompilasi teks beku yang terputus dari denyut nadi peradaban. Pendekatan maqashidi menegaskan bahwa setiap hukum wahyu memiliki 'illat dan maqshad: yaitu terwujudnya keadilan, kemaslahatan, dan martabat kemanusiaan."
-								}
-							]
-						}
-					]
-				},
-				"publishedAt": "2026-08-24T07:30:00.000Z"
-			},
-			{
-				"id": "art-07",
-				"slug": "etika-lingkungan-hidup-berbasis-tafsir-ekologis",
-				"status": "published",
-				"bylines": [
-					{
-						"byline": "byline-hamdan"
-					}
-				],
-				"taxonomies": {
-					"category": [
-						"sosio-historis",
+						"perempuan-keadilan",
 						"tafsir-tematik"
 					],
 					"tag": [
-						"alam-semesta"
+						"pkumi",
+						"fitrah-perempuan",
+						"kesuksesan-qurani",
+						"amina-wadud"
 					]
 				},
 				"data": {
-					"title": "Etika Lingkungan Hidup Berbasis Tafsir Ekologis: Memaknai Amanah Khilafah di Tengah Krisis Iklim",
-					"subheadline": "Menggali Teologi Lingkungan Al-Qur'an untuk Melawan Eksploitasi Antroposentris",
-					"excerpt": "Konsep khilafah fil ardh bukanlah lisensi untuk mengeksploitasi bumi tanpa batas, melainkan mandat penjagaan ekologis yang akan dimintai pertanggungjawaban.",
+					"title": "Membaca Ulang Makna Kesuksesan dan Fitrah Perempuan dalam Al-Qur’an",
+					"subheadline": "Dekonstruksi Standar Sosial Modern Menuju Konsep Kesuksesan Berbasis Ketakwaan",
+					"excerpt": "Apakah perempuan yang memilih fokus pada ranah domestik tidak memiliki pencapaian? Al-Qur'an tidak meletakkan kemuliaan pada jabatan atau peran sosial semata, melainkan pada kualitas taqwa dan amal saleh (QS. al-Hujurat [49]:13 & QS. an-Nahl [16]:97).",
 					"featured_image": {
 						"$media": {
-							"url": "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=1200&h=675&fit=crop",
-							"alt": "Hutan hijau subur dan sinar matahari menembus dedaunan",
-							"filename": "ekologi-tafsir-lingkungan.jpg"
+							"url": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=675&fit=crop",
+							"alt": "Perenungan spiritual dan nilai fitrah kemanusiaan",
+							"filename": "makna-kesuksesan-fitrah-perempuan.jpg"
 						}
 					},
 					"reading_time": "6 mnt baca",
 					"is_lead_hero": false,
-					"is_secondary_hero": false,
+					"is_secondary_hero": true,
 					"is_featured": true,
-					"is_popular": false,
+					"is_popular": true,
+					"popular_rank": 4,
+					"popular_reads": "14.2k dibaca",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k55",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Krisis iklim global saat ini berakar pada etika antroposentrisme yang memandang alam semesta semata sebagai komoditas. Al-Qur'an secara radikal mendefinisikan seluruh makhluk—termasuk hewan dan tumbuhan—sebagai 'umamun amtsalukum' (umat-umat yang setara dengan kamu sekalian)."
+									"_key": "k54",
+									"text": "Membaca Ulang Makna Kesuksesan dan Fitrah Perempuan dalam Al-Qur’an",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k57",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k56",
+									"text": "Tulisan ini berangkat dari sebuah pertanyaan yang saya temukan dalam sebuah unggahan di Threads: “Apakah perempuan yang hanya menjadi ibu dan istri bisa disebut sebagai perempuan sukses?” Pertanyaan tersebut mungkin terlihat sederhana, tetapi sebenarnya menyentuh persoalan yang cukup dalam: bagaimana kita mendefinisikan kesuksesan perempuan? Apakah kesuksesan harus selalu diukur dari karier, jabatan, pendidikan, penghasilan, atau kontribusi di ruang publik?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k59",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k58",
+									"text": "Pertanyaan tersebut menjadi penting karena hari ini perempuan berada di antara dua tuntutan. Di satu sisi, perempuan didorong untuk berpendidikan, mandiri, berkarier, dan memiliki pencapaian. Di sisi lain, ketika menikah dan menjadi ibu, ia tetap diharapkan mampu mengurus keluarga dengan sempurna. Akibatnya, perempuan seolah berada dalam situasi di mana apa pun pilihannya dapat dipertanyakan. Perempuan yang berkarier dianggap meninggalkan keluarga, sementara perempuan yang memilih fokus pada keluarga dianggap tidak memiliki pencapaian.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5a",
+									"text": "Jika kembali kepada Al-Qur’an, ukuran kemuliaan manusia ternyata tidak diletakkan pada jenis kelamin, status sosial, jabatan, maupun profesi. QS. al-Hujurāt [49]:13 menegaskan bahwa manusia diciptakan dari laki-laki dan perempuan, sementara ukuran kemuliaan di sisi Allah adalah taqwā. Dengan demikian, Al-Qur’an tidak menjadikan “seberapa tinggi posisi sosial seseorang” sebagai standar utama kesuksesan, melainkan kualitas ketakwaan dan kebaikan yang diwujudkan dalam kehidupan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5c",
+									"text": "Prinsip tersebut semakin jelas dalam QS. al-Nahl [16]:97. Allah menyebut laki-laki dan perempuan secara eksplisit sebagai subjek amal saleh: siapa pun yang beriman dan mengerjakan kebajikan akan memperoleh ḥayātan ṭayyibah, kehidupan yang baik, serta ganjaran atas amalnya. Artinya, perempuan tidak membutuhkan validasi berupa pencapaian tertentu yang harus mengikuti standar sosial tertentu agar kehidupannya dianggap bernilai di hadapan Allah.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5e",
+									"text": "Hal yang sama terdapat dalam QS. al-Nisā’ [4]:124. Ayat ini menyatakan bahwa siapa saja—laki-laki maupun perempuan—yang melakukan amal kebajikan dalam keadaan beriman akan memperoleh balasan dari Allah. Perspektif ini menunjukkan bahwa Al-Qur’an memberikan ruang spiritual yang sama kepada perempuan dan laki-laki. Dengan kata lain, ukuran keberhasilan Qur’ani bukan pertama-tama tentang apa profesinya, melainkan apa yang dikerjakannya dan bagaimana kualitas pengabdiannya kepada Allah (QS. al-Nisā’ [4]:124).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5h",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5g",
+									"text": "Lalu bagaimana dengan perempuan yang memilih menjadi ibu? Al-Qur’an justru memberikan perhatian yang sangat kuat terhadap pengalaman keibuan. QS. Luqmān [31]:14 menggambarkan bagaimana seorang ibu mengandung dalam keadaan wahnan ‘alā wahn—kelemahan yang bertambah-tambah. QS. al-Ahqāf [46]:15 juga menggambarkan kehamilan dan persalinan sebagai proses yang penuh kesusahan. Penggambaran tersebut menunjukkan bahwa kerja reproduktif dan pengasuhan bukan sesuatu yang remeh atau tidak bernilai.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5i",
+									"text": "Bahkan QS. al-Baqarah [2]:233 memperlihatkan bahwa pengasuhan anak tidak semestinya menjadi beban yang dipikul perempuan seorang diri. Ayat tersebut berbicara mengenai penyusuan, nafkah, kapasitas manusia, serta keputusan bersama antara ayah dan ibu melalui tarāḍin dan tasyāwur—kerelaan dan musyawarah. Ini penting karena menjadi ibu memang memiliki nilai besar, tetapi Islam tidak semestinya diterjemahkan menjadi tuntutan bahwa seluruh pekerjaan domestik dan pengasuhan otomatis merupakan tanggung jawab perempuan seorang diri.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5k",
+									"text": "Demikian pula dalam kehidupan perkawinan. QS. al-Rūm [30]:21 menggambarkan pasangan sebagai bagian dari tanda-tanda kebesaran Allah, dengan tujuan menghadirkan sakinah, mawaddah, dan rahmah. Pernikahan dalam perspektif Al-Qur’an bukan kompetisi antara suami dan istri, tetapi relasi yang seharusnya menghadirkan ketenteraman, kasih sayang, dan rahmat. Karena itu, menjadi istri dan membangun rumah tangga yang penuh kebaikan tidak dapat dianggap sebagai “pencapaian kelas dua” dibandingkan keberhasilan di ruang publik.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5n",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5m",
+									"text": "Namun demikian, mengatakan bahwa menjadi ibu dan istri adalah mulia tidak berarti bahwa semua perempuan harus menikah, harus memiliki anak, atau harus memilih ranah domestik. Di sinilah penting membedakan antara nilai sebuah peran dan kewajiban menjadikan peran tersebut sebagai satu-satunya jalan hidup perempuan. Al-Qur’an menyebut manusia sebagai makhluk yang memiliki tujuan pengabdian kepada Allah dalam QS. al-Dhāriyāt [51]:56. Ayat tersebut berbicara tentang manusia secara keseluruhan, bukan hanya laki-laki. Karena itu, identitas perempuan yang paling fundamental bukan sebagai istri, ibu, pekerja, akademisi, atau profesi tertentu, tetapi sebagai hamba Allah.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5o",
+									"text": "Dari sini kita dapat memahami kembali makna fitrah. QS. al-Rūm [30]:30 menyebut adanya fiṭratallāh, fitrah Allah yang menjadi dasar penciptaan manusia. Fitrah tidak tepat jika dipersempit menjadi anggapan bahwa “fitrah perempuan pasti menjadi ibu” atau “fitrah laki-laki pasti menjadi pemimpin”. Fitrah dalam ayat tersebut berada dalam konteks kecenderungan manusia kepada agama yang lurus (Abul Fida Ismail Ibnu Katsir ad-Dimasyqi, 1999, 313) Karena itu, fitrah lebih tepat dipahami sebagai dasar kemanusiaan yang mengarahkan manusia kepada pengenalan dan pengabdian kepada Allah, bukan sebagai cetak biru tunggal mengenai profesi dan pilihan hidup setiap perempuan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5r",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5q",
+									"text": "Pembacaan seperti ini sejalan dengan perkembangan kajian tafsir perempuan. Amina Wadud, misalnya, melalui pendekatan hermeneutika tauhid, menekankan pentingnya membaca Al-Qur’an secara holistik dengan mempertimbangkan struktur bahasa, konteks historis, serta pengalaman perempuan. Kajian terhadap pemikiran Wadud menunjukkan bahwa perbedaan biologis tidak seharusnya secara otomatis menghasilkan hierarki nilai antara laki-laki dan perempuan. Yang menjadi ukuran adalah ketakwaan dan amal manusia. (Amina Wadud, Quran and Woman, 1999).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5t",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5s",
+									"text": "Dengan demikian, pertanyaan “apakah perempuan yang hanya menjadi ibu dan istri bukan perempuan sukses?” sebenarnya perlu dibalik. Mengapa kita menggunakan ukuran kesuksesan yang dibentuk oleh dunia sosial untuk menentukan nilai seseorang, kemudian memaksakannya kepada perempuan? Seorang ibu yang mendidik anak dengan penuh kasih, seorang istri yang membangun rumah tangga dengan penuh tanggung jawab, seorang perempuan yang bekerja di ruang publik, seorang akademisi, pengusaha, aktivis, maupun perempuan yang memilih jalan hidup lainnya—semuanya memiliki kemungkinan menjadi amal saleh ketika dilakukan dengan iman, tanggung jawab, dan kemaslahatan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5v",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5u",
+									"text": "Kesuksesan perempuan, dengan demikian, tidak seharusnya memiliki satu bentuk. Ada perempuan yang menemukan makna hidupnya melalui keluarga, ada yang melalui ilmu pengetahuan, ada yang melalui pekerjaan, pelayanan sosial, dakwah, maupun berbagai jalan lainnya. Bahkan seseorang dapat menjalankan beberapa peran sekaligus. Yang perlu kita hindari adalah menjadikan salah satu pilihan sebagai standar tunggal untuk menghakimi pilihan perempuan lainnya.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5x",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5w",
+									"text": "Al-Qur’an mengajarkan bahwa nilai manusia tidak ditentukan oleh seberapa banyak ia terlihat oleh dunia, tetapi oleh seberapa baik ia menjalankan amanah kehidupannya di hadapan Allah. QS. al-Ahzāb [33]:35 bahkan menyebut laki-laki dan perempuan secara berulang dalam berbagai kualitas spiritual—Muslim, mukmin, taat, jujur, sabar, khusyuk, bersedekah, berpuasa, menjaga kehormatan, dan banyak mengingat Allah—lalu menjanjikan ampunan dan pahala yang besar bagi keduanya.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5z",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5y",
+									"text": "Maka, menjadi ibu dan istri bukan tanda kegagalan seorang perempuan. Tetapi menjadi ibu dan istri juga bukan satu-satunya definisi keberhasilan perempuan. Standar sukses yang lebih Qur’ani adalah ketika kehidupan menjadi ruang untuk menghadirkan iman, amal saleh, kemaslahatan, tanggung jawab, dan ketakwaan. Sebab, perempuan tidak diciptakan untuk memenuhi ekspektasi dunia semata. Ia diciptakan sebagai manusia yang memiliki hubungan langsung dengan Tuhannya—sebagai hamba Allāh—dan dari posisi itulah seluruh peran lainnya menemukan maknanya.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k61",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k60",
+									"text": "Referensi",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k63",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k62",
+									"text": "Amina Wadud, Quran and Woman, 1999",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k65",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k64",
+									"text": "Abul Fida Ismail Ibnu Katsir ad-Dimasyqi, Tafsīr al-Qur’ān al-‘Aẓīm, 1999.",
+									"marks": []
 								}
 							]
 						}
 					]
-				},
-				"publishedAt": "2026-08-24T13:00:00.000Z"
+				}
 			},
 			{
-				"id": "art-08",
-				"slug": "resensi-buku-membongkar-nalar-oposisi-biner-tafsir-kontemporer",
+				"id": "art-05",
+				"slug": "afeksi-verbal-orang-tua-pencegahan-kekerasan-anak-tafsir-al-jailani",
 				"status": "published",
 				"bylines": [
 					{
-						"byline": "byline-refian"
+						"byline": "byline-ummi"
 					}
 				],
 				"taxonomies": {
 					"category": [
-						"resensi-buku",
-						"hermeneutika"
+						"perempuan-keadilan",
+						"tafsir-tematik"
 					],
 					"tag": [
-						"muhammad-asad"
+						"pkumi",
+						"parenting-qurani",
+						"tafsir-aljailani",
+						"perlindungan-anak",
+						"psikologi-islam"
 					]
 				},
 				"data": {
-					"title": "Resensi Buku: Membongkar Nalar Oposisi Biner dalam Tafsir Kontemporer Karya Nasr Hamid",
-					"subheadline": "Tinjauan Kritis atas Mafhum an-Nash dan Signifikansi Analisis Wacana Kritis dalam Studi Al-Qur'an",
-					"excerpt": "Bagaimana Nasr Hamid Abu Zayd meletakkan teks Al-Qur'an sebagai produk kebudayaan (muntaj tsaqafi) yang kemudian bertransformasi menjadi pembentuk kebudayaan (muntij li ats-tsaqafah)?",
+					"title": "Afeksi Verbal Orang Tua dan Pencegahan Kekerasan Anak: Kajian Tafsir al-Jailani atas QS. al-Shaffat [37]: 102",
+					"subheadline": "Eksplorasi Linguistik Sapaan 'Ya Bunayya' sebagai Paradigma Parenting Qur'ani",
+					"excerpt": "Tafsir al-Jailani terhadap dialog Ibrahim dan Ismail mengungkap rahasia penggunaan bentuk tashghir 'ya bunayya' sebagai ungkapan cinta dan kelembutan. Model komunikasi afektif ini menjadi fondasi krusial dalam pencegahan kekerasan emosional terhadap anak di era modern.",
 					"featured_image": {
 						"$media": {
-							"url": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200&h=675&fit=crop",
-							"alt": "Tumpukan buku-buku referensi ilmiah dan kacamata baca",
-							"filename": "resensi-buku-nasr-hamid.jpg"
+							"url": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&h=675&fit=crop",
+							"alt": "Keluarga hangat dan komunikasi penuh kasih sayang",
+							"filename": "afeksi-verbal-parenting-qurani.jpg"
 						}
 					},
-					"reading_time": "5 mnt baca",
+					"reading_time": "9 mnt baca",
 					"is_lead_hero": false,
-					"is_secondary_hero": false,
+					"is_secondary_hero": true,
 					"is_featured": true,
 					"is_popular": true,
 					"popular_rank": 5,
-					"popular_reads": "8.1k dibaca",
+					"popular_reads": "12.9k dibaca",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k67",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Buku Mafhum an-Nash karya mendiang Profesor Nasr Hamid Abu Zayd tetap menjadi salah satu monumen penting dalam studi Al-Qur'an kontemporer. Buku ini menantang kemapanan metodologis dengan menawarkan pendekatan linguistik-semiotik yang ketat."
+									"_key": "k66",
+									"text": "Afeksi Verbal Orang Tua dan Pencegahan Kekerasan Anak: Kajian Tafsir al-Jailani atas QS. al-Shaffat [37]: 102",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k69",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k68",
+									"text": "Keluarga menjadi lingkungan awal yang memiliki peran penting dalam membentuk karakter, perkembangan emosional, dan kepribadian anak. Melalui interaksi di dalam keluarga, anak mulai mengenali dirinya, mempelajari cara membangun hubungan dengan orang lain, serta mengembangkan rasa aman dan kepercayaan terhadap lingkungan sekitarnya. Meskipun demikian, keluarga tidak selalu hadir sebagai lingkungan yang memberikan perlindungan dan kenyamanan bagi anak. Fenomena kekerasan terhadap anak yang masih marak menunjukkan bahwa terdapat persoalan dalam pola interaksi dan relasi pengasuhan antara orang tua dan anak.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6a",
+									"text": "Data Kementerian Pemberdayaan Perempuan dan Perlindungan Anak (KemenPPPA) memperlihatkan bahwa kekerasan terhadap anak masih menjadi persoalan yang berkelanjutan, dengan sekitar 70% kasus terjadi secara berulang. Dalam sejumlah kasus, anak bahkan menjadi korban lebih dari satu bentuk kekerasan, seperti kekerasan fisik, emosional, dan seksual secara bersamaan. Konsekuensi dari pengalaman tersebut tidak berhenti pada dampak fisik, tetapi juga dapat memengaruhi kondisi psikologis dan perkembangan anak, antara lain melalui munculnya trauma, menurunnya rasa percaya diri, terganggunya perkembangan emosional, serta hambatan dalam membangun relasi interpersonal pada tahap kehidupan berikutnya (Kemenpppa, 2025).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6c",
+									"text": "Fenomena kekerasan terhadap anak kerap dipandang terutama sebagai persoalan yang berkaitan dengan tindakan fisik. Perspektif tersebut berpotensi mengabaikan persoalan lain yang turut memengaruhi kualitas relasi pengasuhan, yakni keterbatasan ekspresi afeksi verbal dalam keluarga. Orang tua pada dasarnya dapat memiliki kasih sayang yang kuat terhadap anak, memenuhi berbagai kebutuhan material, serta berusaha memberikan perlindungan. Namun, kasih sayang tersebut tidak selalu dikomunikasikan melalui ungkapan verbal berupa tutur kata yang lembut, apresiasi, maupun pernyataan kasih sayang. Ketimpangan antara keberadaan kasih sayang dan cara mengekspresikannya dapat menciptakan relasi yang kurang hangat secara emosional, ketika komunikasi lebih dominan berbentuk instruksi, larangan, dan tuntutan kepatuhan daripada dialog yang memberikan penghargaan dan penguatan emosional kepada anak.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6e",
+									"text": "Dalam konteks tersebut, Al-Qur’an menawarkan gambaran mengenai komunikasi dalam relasi keluarga melalui dialog antara Nabi Ibrahim dan Nabi Ismail yang termuat dalam QS. al-Shaffat [37]: 102. Ayat ini pada umumnya dipahami dalam kerangka ketaatan, keimanan, dan pengorbanan Nabi Ibrahim serta Nabi Ismail. Namun, apabila ditelaah dari perspektif komunikasi pengasuhan, ayat tersebut juga memperlihatkan dimensi afeksi verbal yang signifikan melalui penggunaan ungkapan *yā bunayya*, yang dapat dimaknai sebagai “wahai anakku tercinta”. Pilihan sapaan tersebut memperlihatkan bahwa komunikasi Nabi Ibrahim dengan Ismail tidak semata-mata berlangsung dalam bentuk penyampaian kehendak atau instruksi, tetapi dibangun melalui bahasa yang mengandung kedekatan emosional dan kasih sayang. Dengan demikian, dialog tersebut menunjukkan bahwa penyampaian pesan yang berat sekalipun dapat berlangsung dalam relasi yang tetap hangat dan menghargai posisi anak.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6h",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6g",
+									"text": "Dimensi afeksi dalam dialog tersebut mendapat perhatian, salah satunya, dalam *Tafsir al-Jailani* karya Syekh Abdul Qadir al-Jailani. Dalam penafsirannya terhadap ayat tersebut, al-Jailani memberikan pemaknaan terhadap penggunaan kata *bunayya* yang merefleksikan kelembutan, kasih sayang, dan kedekatan emosional dalam relasi antara orang tua dan anak. Pemaknaan ini menunjukkan bahwa komunikasi dalam keluarga tidak hanya berkaitan dengan penyampaian pesan atau pembentukan kepatuhan, tetapi juga dengan cara membangun ikatan emosional melalui bahasa yang penuh afeksi. Berangkat dari perspektif tersebut, penelitian ini berupaya membaca kembali QS. al-Shaffat [37]: 102 sebagai representasi komunikasi afektif dalam relasi orang tua dan anak. Kajian ini sekaligus diarahkan untuk mengkritisi krisis afeksi verbal dalam praktik pengasuhan kontemporer yang dapat menyebabkan relasi emosional antara orang tua dan anak menjadi kurang hangat.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6i",
+									"text": "Ekspresi Afeksi Verbal dalam Dialog Ibrahim dan Ismail",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6k",
+									"text": "Allah berfirman:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6n",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6m",
+									"text": "فَلَمَّا بَلَغَ مَعَهُ السَّعْيَ قَالَ يَا بُنَيَّ إِنِّي أَرَىٰ فِي الْمَنَامِ أَنِّي أَذْبَحُكَ فَانظُرْ مَاذَا تَرَىٰ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6o",
+									"text": "\"Maka ketika anak itu sampai pada umur sanggup berusaha bersamanya, Ibrahim berkata: 'Wahai anakku, sesungguhnya aku melihat dalam mimpi bahwa aku menyembelihmu. Maka pikirkanlah bagaimana pendapatmu.'\" (QS. Ash-Shaffat: 102)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6r",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6q",
+									"text": "Dalam Tafsir al-Jailani, kisah ini tidak hanya dipahami sebagai narasi kepatuhan terhadap perintah Allah, tetapi juga sebagai gambaran hubungan emosional yang sangat dekat antara ayah dan anak. Syekh Abdul Qadir al-Jailani menjelaskan bahwa Nabi Ibrahim memiliki cinta yang sangat mendalam kepada Ismail sehingga hampir tidak pernah berpisah darinya. Justru karena besarnya cinta tersebut, Allah mengujinya melalui perintah penyembelihan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6t",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6s",
+									"text": "Menariknya, ketika menyampaikan mimpi tersebut, Nabi Ibrahim tidak menggunakan bahasa yang keras maupun otoriter. Sebaliknya, ia memilih ungkapan yang penuh kelembutan:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6v",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6u",
+									"text": "يَا بُنَيَّ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6x",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6w",
+									"text": "Al-Jailani menjelaskan:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6z",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6y",
+									"text": "فَنَادَاهُ وَصَغَّرَهُ تَحَنُّنًا وَتَعَطُّفًا",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k71",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k70",
+									"text": "Artinya:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k73",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k72",
+									"text": "\"Lalu beliau memanggilnya dengan bentuk tashghir (kata yang diperkecil) sebagai ungkapan kasih sayang dan kelembutan.\"",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k75",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k74",
+									"text": "Penjelasan ini menunjukkan bahwa penggunaan kata *bunayya* bukan sekadar panggilan biasa. Secara linguistik, kata ابن (ibn) ditashghir menjadi بُنَيّ (bunayy). Dalam bahasa Arab, bentuk *taṣghir* tidak selalu menunjukkan ukuran kecil, tetapi sering digunakan untuk mengungkapkan kasih sayang, kelembutan, kedekatan emosional, dan perhatian yang mendalam (Fachrina, 2025).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k77",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k76",
+									"text": "Dengan demikian, penggunaan ungkapan *yā bunayya* oleh Nabi Ibrahim tidak sekadar berfungsi sebagai sapaan kepada Ismail sebagai anaknya, tetapi juga menjadi medium verbal untuk menyampaikan kasih sayang dan kedekatan emosional. Hal ini menunjukkan bahwa Al-Qur’an tidak membatasi ekspresi afeksi dalam keluarga pada tindakan nyata, melainkan juga menempatkan penggunaan bahasa sebagai bagian penting dalam membangun relasi yang hangat. Pemilihan kata yang lembut dan penuh penghargaan dapat menjadi bentuk komunikasi yang menguatkan ikatan emosional antara orang tua dan anak.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k79",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k78",
+									"text": "Dalam perspektif *Tafsir al-Jailani*, pemaknaan terhadap ungkapan *yā bunayya* memberikan pijakan penting untuk melihat komunikasi keluarga sebagai relasi yang semestinya berlandaskan afeksi verbal. Menariknya, sebelum menyampaikan persoalan berat mengenai perintah penyembelihan dan meminta pandangan Ismail, Nabi Ibrahim terlebih dahulu membangun komunikasi melalui sapaan yang menunjukkan kasih sayang. Pola tersebut memperlihatkan bahwa dialog dalam keluarga tidak hanya berorientasi pada penyampaian keputusan, tetapi juga perlu diawali dengan penciptaan ruang emosional yang aman agar anak dapat merespons secara terbuka.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7a",
+									"text": "Dalam perspektif psikologi keluarga kontemporer, afeksi verbal merupakan salah satu unsur yang berperan dalam membentuk keterikatan emosional (*attachment*), rasa aman, dan kepercayaan diri pada anak. Ekspresi kasih sayang yang disampaikan melalui kata-kata dapat membantu anak merasakan penerimaan dan penghargaan dari orang tua. Kondisi tersebut pada gilirannya dapat mendukung terbentuknya relasi orang tua dan anak yang lebih positif, mendorong anak untuk mengungkapkan emosinya secara lebih terbuka, serta berkontribusi terhadap perkembangan kesejahteraan psikologisnya (Polcari et al., 2013).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7c",
+									"text": "Sebaliknya, keterbatasan dalam mengekspresikan afeksi secara verbal dapat membuat relasi antara orang tua dan anak terasa kurang hangat, kaku, atau bahkan berjarak secara emosional. Kasih sayang yang dimiliki orang tua belum tentu dapat dirasakan oleh anak apabila tidak disertai dengan bentuk komunikasi yang secara nyata menyampaikan penerimaan, penghargaan, dan kepedulian. Dengan demikian, keberadaan kasih sayang secara internal tidak selalu berbanding lurus dengan pengalaman emosional anak, sebab cara kasih sayang tersebut dikomunikasikan turut menentukan bagaimana anak memaknainya.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7e",
+									"text": "Dalam konteks tersebut, kisah Nabi Ibrahim dan Nabi Ismail memperlihatkan pentingnya mempertahankan komunikasi yang lembut bahkan ketika orang tua berhadapan dengan persoalan yang berat. Nabi Ibrahim tidak membuka percakapan dengan bentuk perintah, tekanan, atau ancaman, tetapi terlebih dahulu menggunakan sapaan *yā bunayya* yang mengandung nuansa kedekatan dan kasih sayang. Pola komunikasi ini menunjukkan bahwa penyampaian pesan yang sulit sekalipun dapat ditempatkan dalam relasi yang menghargai kondisi emosional anak.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7h",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7g",
+									"text": "Tingginya prevalensi kekerasan terhadap anak mengindikasikan bahwa dalam sebagian relasi keluarga masih terdapat pola komunikasi yang bertumpu pada ancaman, kemarahan, dan pemaksaan kehendak. Pola interaksi semacam ini berpotensi menghambat terbentuknya ruang emosional yang aman bagi anak, sehingga mereka mengalami kesulitan dalam menyampaikan perasaan, kebutuhan, maupun pandangannya secara terbuka.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7i",
+									"text": "Dalam perspektif penafsiran al-Jailani, QS. al-Shaffat [37]: 102 dapat dipahami sebagai refleksi kritis terhadap pola pengasuhan yang mengabaikan dimensi afeksi. Kisah Nabi Ibrahim dan Nabi Ismail justru memperlihatkan bahwa dalam situasi yang sarat dengan tekanan dan ujian, komunikasi yang lembut tetap dipertahankan. Penggunaan sapaan yang penuh kasih menunjukkan bahwa kedudukan Ibrahim sebagai ayah tidak menjadikannya mengabaikan kebutuhan emosional anak ketika menyampaikan persoalan yang berat.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7k",
+									"text": "Relevansi pesan tersebut semakin kuat dalam konteks kehidupan keluarga kontemporer. Pencegahan kekerasan terhadap anak tidak dapat hanya mengandalkan instrumen hukum dan mekanisme perlindungan sosial, tetapi juga membutuhkan perubahan pada budaya komunikasi di dalam keluarga. Orang tua perlu membangun pola interaksi yang memungkinkan kasih sayang dikomunikasikan secara verbal, memberikan apresiasi terhadap anak, serta menciptakan relasi pengasuhan yang hangat dan responsif terhadap kebutuhan emosional mereka.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7n",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7m",
+									"text": "Tafsir al-Jailani terhadap QS. Ash-Shaffat: 102 menunjukkan bahwa ungkapan \"Yā Bunayya\" merupakan bentuk afeksi verbal yang mengandung makna kasih sayang, kelembutan, dan kedekatan emosional. Melalui penjelasan \"تَحَنُّنًا وَتَعَطُّفًا\", al-Jailani menegaskan bahwa Nabi Ibrahim secara sadar menggunakan bahasa yang penuh cinta ketika berbicara kepada Ismail (‘Abd al-Qadir al-Jaylani, 2010).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7o",
+									"text": "Hal ini memperlihatkan bahwa komunikasi keluarga dalam Al-Qur'an tidak hanya bersifat dialogis, tetapi juga afektif. Di tengah maraknya kekerasan terhadap anak dan krisis relasi emosional dalam keluarga modern, model komunikasi yang dicontohkan Nabi Ibrahim menawarkan paradigma parenting Qur'ani yang menempatkan kasih sayang verbal sebagai fondasi hubungan antara orang tua dan anak. Dengan demikian, ungkapan cinta melalui bahasa bukan sekadar pelengkap dalam pengasuhan, melainkan bagian penting dari upaya membangun keluarga yang sehat, aman, dan penuh kasih sayang.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7r",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7q",
+									"text": "Referensi:",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7t",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7s",
+									"text": "‘Abd al-Qadir al-Jaylani. (2010). *Tafsir al-Jaylani*. Maktabah al-Ma‘rufiyyah.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7v",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7u",
+									"text": "Fachrina, Z. F. (2025). Pendekatan Kasih Sayang Dalam Pendidikan Anak: Analisis Penggunaan Kata “Bunayya” Dalam Surat Lukman. *Al-Furqan: Jurnal Agama, Sosial, Dan Budaya*, *4*(3), 795–804. https://publisherqu.com/index.php/Al-Furqan/article/view/2590",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7x",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7w",
+									"text": "Kemenpppa. (2025). *Analisis Tematik SNPHAR 2024 Tunjukan Separuh Anak Indonesia Alami Kekerasan, Kemen PPPA Serukan Kolaborasi Nasional*. Kemenpppa. https://kemenpppa.go.id/siaran-pers/analisis-tematik-snphar-2024-tunjukan-separuh-anak-indonesia-alami-kekerasan-kemen-pppa-serukan-kolaborasi-nasional?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7z",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7y",
+									"text": "Polcari, A., Rabi, K., Bolger, E., & Teicher, M. H. (2013). Parental Verbal Affection and Verbal Aggression in Childhood Differentially Influence Psychiatric Symptoms and Wellbeing in Young Adulthood. *PMC Pubmed Central*, *38*(1), 91–102. https://doi.org/10.1016/j.chiabu.2013.10.003",
+									"marks": []
 								}
 							]
 						}
 					]
-				},
-				"publishedAt": "2026-08-25T08:00:00.000Z"
+				}
 			},
 			{
-				"id": "art-09",
-				"slug": "tafsir-maqashidi-dalam-dialektika-siyasah-dan-demokrasi",
+				"id": "art-06",
+				"slug": "pkumi-dalami-tradisi-keilmuan-majelis-tarjih-muhammadiyah",
 				"status": "published",
 				"bylines": [
 					{
-						"byline": "byline-arofah"
+						"byline": "byline-tiara"
 					}
 				],
 				"taxonomies": {
 					"category": [
-						"siyasah",
-						"sosio-historis"
+						"etika-kontemporer",
+						"epistemologi-ushul"
 					],
 					"tag": [
-						"pkumi"
+						"pkumi",
+						"majelis-tarjih",
+						"muhammadiyah",
+						"epistemologi-tarbiyah",
+						"ijtihad"
 					]
 				},
 				"data": {
-					"title": "Tafsir Maqashidi dalam Dialektika Siyasah Syar'iyyah dan Demokrasi Konstitusional",
-					"subheadline": "Prinsip Syura, Musyawarah, dan Keadilan Sosial sebagai Fondasi Etika Bernegara",
-					"excerpt": "Menelaah titik temu antara prinsip deliberasi Al-Qur'an (wa amruhum syura bainahum) dengan supremasi hukum dalam negara bangsa modern.",
+					"title": "Belajar Cara Berpikir Ulama: PKUMI Dalami Tradisi Keilmuan di Majelis Tarjih Muhammadiyah",
+					"subheadline": "Kunjungan Akademik Mahasiswa PKUMI Menelaah Integrasi Pendekatan Bayani, Burhani, dan Irfani",
+					"excerpt": "Mahasiswa PKUMI mendalami tradisi ijtihad dan metodologi pengambilan keputusan keagamaan di Majelis Tarjih Muhammadiyah. Kunjungan akademik ini menegaskan bahwa fatwa hukum Islam lahir melalui proses dialektika sistematis antara wahyu, akal, dan realitas sosial.",
 					"featured_image": {
 						"$media": {
-							"url": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=1200&h=675&fit=crop",
-							"alt": "Gedung megah dengan arsitektur pilar klasik dan cahaya senja",
-							"filename": "siyasah-syura-demokrasi.jpg"
+							"url": "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=1200&h=675&fit=crop",
+							"alt": "Mahasiswa PKUMI dalam kunjungan keilmuan Majelis Tarjih",
+							"filename": "pkumi-majelis-tarjih-kunjungan.jpg"
 						}
 					},
-					"reading_time": "7 mnt baca",
+					"reading_time": "8 mnt baca",
 					"is_lead_hero": false,
 					"is_secondary_hero": false,
-					"is_featured": true,
+					"is_featured": false,
 					"is_popular": false,
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k81",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Islam tidak membatasi format negara pada satu bentuk teokrasi tunggal. Inti dari siyasah syar'iyyah adalah tasarruf al-imam 'ala ar-ra'iyyah manutun bi al-maslahah—kebijakan pemimpin atas rakyatnya sepenuhnya terikat pada kemaslahatan publik."
+									"_key": "k80",
+									"text": "Belajar Cara Berpikir Ulama: PKUMI Dalami Tradisi Keilmuan di Majelis Tarjih Muhammadiyah",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k83",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k82",
+									"text": "Oleh: Tiara Nur Mulyawati",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k85",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k84",
+									"text": "Mahasiswa Pendidikan Kader Ulama Masjid Istiqlal (PKUMI)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k87",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k86",
+									"text": "Dalam rangka memperkaya wawasan keilmuan dan memperkuat kapasitas intelektual kader ulama, mahasiswa Pendidikan Kader Ulama Masjid Istiqlal (PKUMI) melakukan kunjungan akademik ke Majelis Tarjih dan Tajdid Muhammadiyah pada Jumat, 26 Juni 2026. Kegiatan yang didampingi oleh Prof. Ai Fatimah Nur Fuad ini menjadi ruang belajar yang berharga bagi mahasiswa untuk mengenal lebih dekat tradisi ijtihad dan metodologi pengambilan hukum yang dikembangkan Muhammadiyah dalam merespons berbagai persoalan keagamaan kontemporer.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k88",
+							"alt": "",
+							"asset": {
+								"url": "data:image/jpeg;base64..."
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "k8a",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k89",
+									"text": "*Mahasiswa PKUMI berfoto bersama narasumber dan jajaran Majelis Tarjih Muhammadiyah usai kegiatan kunjungan akademik.*",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8c",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8b",
+									"text": "Kunjungan tersebut tidak hanya memberikan pemahaman mengenai peran dan fungsi Majelis Tarjih sebagai lembaga yang mengembangkan pemikiran keislaman Muhammadiyah, tetapi juga membuka wawasan mahasiswa mengenai pentingnya tradisi keilmuan dalam proses pengambilan keputusan keagamaan. Melalui dialog bersama para narasumber, mahasiswa diajak memahami bahwa sebuah keputusan hukum islam tidak lahir secara instan, melainkan melalui proses kajian yang mendalam, argumentasi yang kuat, dan pertimbangan terhadap realitas sosial yang terus berkembang.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8e",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8d",
+									"text": "Untuk memahami peran Majelis Tarjih secara lebih utuh, mahasiswa juga diperkenalkan pada latar belakang sejarah pembentukannya. Kehadiran Majelis Tarjih tidak dapat dilepaskan dari dinamika kehidupan umat islam pada awal abad ke-20. Pada masa itu, berbagai perbedaan pendapat (*khilafiyah*) yang berkembang di tengah masyarakat sering kali memunculkan perdebatan yang berpotensi mengganggu persatuan umat. Berangkat dari kondisi tersebut, dalam Kongres Muhammadiyah tahun 1927 muncul usulan pembentukan sebuah lembaga yang secara khusus bertugas melakukan kajian, penelitian, dan penetapan pendapat keagamaan berdasarkan argumentasi yang kuat. Dari sinilah lahir Majelis Tarjih yang kemudian berkembang menjadi salah satu institusi penting dalam Muhammadiyah untuk mengembangkan pemikiran islam serta memberikan panduan keagamaan bagi warga Muhammadiyah dan masyarakat luas.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8g",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8f",
+									"text": "Dalam pemaparannya, Prof. Dr. Drs. Sopa menjelaskan bahwa salah satu bentuk produk keilmuan yang dihasilkan oleh Majelis Tarjih adalah Himpunan Putusan Tarjih (HPT). HPT merupakan kumpulan keputusan yang dihasilkan melalui forum-forum tarjih, seperti Muktamar Khusus Tarjih maupun Musyawarah Nasional Tarjih. Keputusan-keputusan tersebut kemudian diajukan kepada Pimpinan Pusat Muhammadiyah untuk memperoleh *tanfidz* atau pengesahan sehingga dapat menjadi pedoman resmi bagi warga Muhammadiyah. Selain HPT, Majelis Tarjih juga menghasilkan berbagai fatwa keagamaan yang lahir sebagai respons terhadap pertanyaan dan persoalan yang berkembang di tengah masyarakat. Fatwa-fatwa tersebut dipublikasikan melalui berbagai media, salah satunya majalah *Suara Muhammadiyah*, dan telah dihimpun dalam beberapa jilid buku.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k8h",
+							"alt": "",
+							"asset": {
+								"url": "data:image/jpeg;base64..."
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "k8j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8i",
+									"text": "*Prof. Dr. Drs. Sopa, M.Ag. menyampaikan materi mengenai tradisi tarjih dan ijtihad.*",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8k",
+									"text": "Penjelasan tersebut memberikan gambaran bahwa tradisi tarjih bukan sekadar memilih pendapat yang dianggap paling kuat di antara berbagai pandangan ulama, melainkan sebuah proses intelektual yang melibatkan kajian terhadap Al-Qur'an, Sunnah, pendapat para ulama, serta realitas sosial yang dihadapi masyarakat. Dengan demikian, keputusan keagamaan yang dihasilkan tidak hanya memiliki dasar normatif yang kuat, tetapi juga relevan dengan kebutuhan zaman.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8n",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8m",
+									"text": "Dari perspektif epistemologi tarbiyah, kunjungan ini memberikan pelajaran penting bahwa pendidikan islam tidak hanya berorientasi pada penguasaan pengetahuan, tetapi juga pada pemahaman mengenai bagaimana pengetahuan tersebut diperoleh. Seorang calon ulama tidak cukup hanya mengetahui suatu hukum atau pendapat, melainkan perlu memahami proses intelektual yang melatarbelakangi lahirnya pemahaman tersebut. Kesadaran inilah yang menjadi inti dari epistemologi tarbiyah, yaitu kajian mengenai sumber, metode, dan validitas pengetahuan dalam pendidikan Islam.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8o",
+									"text": "Dalam dunia pendidikan islam, proses memperoleh ilmu memiliki kedudukan yang sama pentingnya dengan ilmu itu sendiri. Seseorang mungkin dapat mengetahui suatu hukum dengan cepat melalui buku, internet, atau media sosial. Namun tanpa memahami metodologi yang melandasinya, pengetahuan tersebut sering kali hanya berhenti pada tingkat informasi. Epistemologi tarbiyah mengajarkan bahwa pendidikan harus membentuk kemampuan berpikir, menelaah, dan mempertanggungjawabkan pengetahuan yang diperoleh.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k8q",
+							"alt": "",
+							"asset": {
+								"url": "data:image/jpeg;base64..."
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "k8s",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8r",
+									"text": "*Mahasiswa PKUMI mengikuti pemaparan materi dengan antusias sebagai bagian dari penguatan wawasan keilmuan.*",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8u",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8t",
+									"text": "Kunjungan ke Majelis Tarjih Muhammadiyah memperlihatkan bahwa sebuah pandangan keagamaan lahir melalui proses intelektual yang panjang. Proses tersebut melibatkan kajian terhadap Al-Qur'an dan Sunnah, pemahaman terhadap pendapat para ulama, analisis terhadap konteks sosial, serta dialog dengan perkembangan ilmu pengetahuan. Tradisi semacam ini menunjukkan bahwa islam memiliki budaya keilmuan yang dinamis dan terbuka terhadap pengembangan pemikiran.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8w",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8v",
+									"text": "Dalam pemaparannya, narasumber juga menjelaskan pendekatan yang digunakan dalam tradisi tarjih Muhammadiyah, yaitu bayani, burhani, dan irfani. Pendekatan bayani menitikberatkan pada pemahaman terhadap teks-teks keagamaan melalui analisis bahasa dan penafsiran nash. Pendekatan burhani mengedepankan penggunaan akal, logika, dan argumentasi rasional dalam memahami suatu persoalan. Sementara itu, pendekatan irfani menekankan dimensi spiritual dan pengalaman batin dalam memahami nilai-nilai agama.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8y",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8x",
+									"text": "Melalui penjelasan mengenai pendekatan bayani, burhani, dan irfani dalam tradisi tarjih Muhammadiyah, diperoleh pemahaman bahwa pengambilan keputusan keagamaan tidak dilakukan secara sederhana. Sebaliknya, proses tersebut melibatkan perpaduan antara pemahaman terhadap wahyu, penggunaan akal secara kritis, serta penghayatan terhadap nilai-nilai spiritual islam. Tradisi keilmuan semacam ini menunjukkan bahwa islam memiliki khazanah intelektual yang kaya dalam merespons berbagai persoalan kehidupan. Pemahaman tersebut menjadi semakin relevan di tengah tantangan zaman yang semakin kompleks dan menuntut pendekatan yang komprehensif dalam menjawab kebutuhan umat.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k90",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8z",
+									"text": "Dalam kajian epistemologi tarbiyah, pengetahuan tidak hanya dipahami sebagai sesuatu yang harus dikuasai, tetapi juga sebagai sesuatu yang harus dipahami sumber, metode, dan cara memperolehnya. Oleh karena itu, pendidikan islam tidak cukup berhenti pada penyampaian materi atau penguasaan informasi, melainkan harus mampu membentuk kesadaran intelektual mengenai bagaimana sebuah pengetahuan dibangun dan dipertanggungjawabkan. Dari perspektif ini, kunjungan ke Majelis Tarjih Muhammadiyah memberikan gambaran nyata mengenai pentingnya metodologi dalam proses pencarian kebenaran.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k92",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k91",
+									"text": "Melalui penjelasan mengenai produk-produk tarjih, proses pengambilan keputusan, serta pendekatan bayani, burhani, dan irfani, mahasiswa dapat melihat bahwa sebuah pandangan keagamaan lahir melalui proses yang sistematis dan tidak terlepas dari disiplin keilmuan. Pengetahuan keagamaan tidak dibangun atas dasar asumsi atau pendapat pribadi semata, melainkan melalui dialog antara wahyu, akal, dan realitas sosial. Tradisi ini menunjukkan bahwa islam memiliki mekanisme epistemologis yang memungkinkan ajaran agama tetap relevan dalam menjawab berbagai persoalan baru yang muncul di tengah masyarakat.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k94",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k93",
+									"text": "Bagi kader ulama, pemahaman semacam ini menjadi sangat penting. Seorang ulama tidak hanya dituntut mampu memberikan jawaban, tetapi juga memahami dasar-dasar keilmuan yang melandasi jawaban tersebut. Kemampuan berpikir metodologis, kritis, dan bertanggung jawab merupakan bagian yang tidak terpisahkan dari proses pendidikan ulama. Dengan demikian, kaderisasi ulama tidak hanya menghasilkan individu yang menguasai banyak pengetahuan, tetapi juga melahirkan generasi yang mampu mengembangkan tradisi keilmuan islam secara berkelanjutan dan memberikan kontribusi nyata bagi kehidupan umat.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k96",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k95",
+									"text": "Selain menjelaskan metodologi tarjih, Prof. Sopa juga menegaskan pentingnya kesungguhan dalam menuntut ilmu. Beliau mengingatkan bahwa kesempatan belajar yang diperoleh para mahasiswa PKUMI merupakan amanah yang harus dimanfaatkan sebaik mungkin. Menurutnya, kader ulama di masa depan tidak hanya dituntut menguasai ilmu-ilmu keislaman, tetapi juga mampu menjadi rujukan masyarakat dalam menjawab berbagai persoalan kontemporer yang terus berkembang.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k98",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k97",
+									"text": "Pesan tersebut menjadi refleksi penting bagi para mahasiswa PKUMI. Menjadi ulama pada era modern tidak cukup hanya dengan menguasai teks-teks keagamaan, tetapi juga memerlukan kemampuan memahami realitas sosial, perkembangan ilmu pengetahuan, serta tantangan-tantangan baru yang dihadapi masyarakat. Dengan demikian, ulama dapat hadir sebagai pemberi solusi sekaligus pembimbing umat yang mampu menjembatani ajaran Islam dengan kebutuhan zaman.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9a",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k99",
+									"text": "![](data:image/jpeg;base64...)*Penyerahan cinderamata kepada perwakilan mahasiswa PKUMI sebagai simbol silaturahmi PKUMI dan Majelis Tarjih Muhammadiyah*.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9c",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9b",
+									"text": "Sebagai mahasiswa PKUMI, kunjungan ini memberikan pemahaman bahwa menjadi ulama bukan hanya tentang menguasai banyak kitab atau mengetahui berbagai jawaban keagamaan. Lebih dari itu, seorang ulama dituntut memahami bagaimana pengetahuan tersebut diperoleh, diuji, dan dikembangkan untuk menjawab kebutuhan masyarakat. Kesadaran inilah yang menjadi inti dari epistemologi tarbiyah, yaitu membangun tradisi pendidikan yang tidak hanya melahirkan individu berilmu, tetapi juga individu yang memiliki cara berpikir ilmiah, kritis, dan bertanggung jawab.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9e",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9d",
+									"text": "Pada akhirnya, kunjungan ke Majelis Tarjih Muhammadiyah tidak hanya memperluas wawasan mahasiswa mengenai peran lembaga tersebut dalam pengembangan pemikiran Islam, tetapi juga memperlihatkan bahwa tradisi keilmuan Islam dibangun melalui proses yang panjang dan penuh tanggung jawab. Melalui pengalaman ini, para kader PKUMI diajak untuk terus menumbuhkan semangat belajar, memperkuat metodologi berpikir, serta mempersiapkan diri menjadi ulama yang mampu menjawab tantangan zaman tanpa kehilangan pijakan pada nilai-nilai Al-Qur'an dan Sunnah. Dengan semangat tersebut, kader ulama diharapkan dapat melanjutkan tradisi keilmuan Islam yang moderat, berkemajuan, dan tetap relevan dalam menghadapi dinamika masyarakat yang terus berkembang.",
+									"marks": []
 								}
 							]
 						}
 					]
-				},
-				"publishedAt": "2026-08-25T15:30:00.000Z"
+				}
 			},
 			{
-				"id": "art-10",
-				"slug": "dimensi-tasawuf-falsafi-dalam-isyarat-batin-surah-an-nur",
+				"id": "art-07",
+				"slug": "religiusitas-digital-dan-potensi-riya-representasi-ibadah",
 				"status": "published",
 				"bylines": [
 					{
-						"byline": "byline-hamdan"
+						"byline": "byline-fadia"
 					}
 				],
 				"taxonomies": {
 					"category": [
-						"tasawuf",
-						"filsafat-islam"
+						"etika-kontemporer",
+						"tafsir-tematik"
 					],
 					"tag": [
-						"pkumi"
+						"pkumi",
+						"religiusitas-digital",
+						"riya-digital",
+						"etika-media-sosial",
+						"tasawuf"
 					]
 				},
 				"data": {
-					"title": "Dimensi Tasawuf Falsafi dalam Isyarat Batin Surah An-Nur: Antara Nur Ilahi dan Kesadaran Manusia",
-					"subheadline": "Kajian Komparatif atas Penafsiran Al-Ghazali dalam Misykat Al-Anwar dan Ibn 'Arabi",
-					"excerpt": "Perumpamaan cahaya (matsalu nurihi ka-misykatin) memantik penafsiran mistik mendalam mengenai hierarki wujud, epistemologi kasyf, dan pencerahan batin.",
+					"title": "Religiusitas Digital dan Potensi Riya’: Analisis Tafsir terhadap Fenomena Representasi Ibadah di Media Sosial",
+					"subheadline": "Kajian Kritis atas QS. Al-Ma'un dan QS. Al-Baqarah dalam Lanskap Self-Presentation di Ruang Virtual",
+					"excerpt": "Media sosial mengubah ibadah personal menjadi panggung representasi diri. Menelaah QS. Al-Ma'un 4–6 dan QS. Al-Baqarah 264 mengingatkan bahwa esensi keberagamaan terletak pada keikhlasan batin, bukan pencitraan di ruang digital.",
 					"featured_image": {
 						"$media": {
-							"url": "https://images.unsplash.com/photo-1519817650390-64a93db51149?w=1200&h=675&fit=crop",
-							"alt": "Sinar cahaya keemasan masuk melalui jendela ornamen artistik",
-							"filename": "tasawuf-surah-annur.jpg"
+							"url": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&h=675&fit=crop",
+							"alt": "Refleksi spiritual di tengah arus teknologi digital",
+							"filename": "religiusitas-digital-riya-medsos.jpg"
+						}
+					},
+					"reading_time": "8 mnt baca",
+					"is_lead_hero": false,
+					"is_secondary_hero": false,
+					"is_featured": false,
+					"is_popular": false,
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k9g",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9f",
+									"text": "Religiusitas Digital dan Potensi Riya’:",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9i",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9h",
+									"text": "Analisis Tafsir terhadap Fenomena Representasi Ibadah di Media Sosial",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9k",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9j",
+									"text": "Perkembangan teknologi digital telah mengubah cara manusia mengekspresikan identitas diri, termasuk identitas keagamaan. Media sosial tidak lagi hanya berfungsi sebagai sarana komunikasi, tetapi juga menjadi ruang representasi diri di mana individu dapat menampilkan berbagai aspek kehidupannya kepada publik. Dalam konteks religiusitas, fenomena ini tampak melalui berbagai konten yang menampilkan praktik ibadah, seperti dokumentasi shalat berjamaah, kegiatan dakwah, sedekah, hingga momen spiritual lainnya yang dibagikan secara luas di platform digital. (Manuel Castells, 2010: 328).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9m",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9l",
+									"text": "Fenomena tersebut menunjukkan munculnya apa yang dapat disebut sebagai religiusitas digital, yaitu ekspresi keberagamaan yang dimediasi oleh teknologi dan ruang digital. Dalam banyak kasus, praktik ini dapat memiliki dimensi positif, seperti menjadi sarana dakwah dan inspirasi bagi masyarakat. Namun di sisi lain, fenomena ini juga memunculkan persoalan etis dan teologis terkait niat dan motivasi dalam beribadah, khususnya ketika praktik ibadah tersebut dipertontonkan di ruang publik digital.( Heidi A. Campbell, 2013: 67)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9o",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9n",
+									"text": "Beberapa peristiwa yang viral di media sosial, seperti rekaman seseorang yang menjadi imam shalat tarawih, dokumentasi tangisan saat membaca Al-Qur’an, atau unggahan aktivitas sedekah yang disertai pencitraan personal, memperlihatkan bagaimana ibadah yang pada dasarnya bersifat spiritual dapat berubah menjadi bagian dari self-presentation religius di ruang digital. Dalam konteks ini muncul pertanyaan penting: apakah representasi ibadah di media sosial merupakan bentuk syiar keagamaan, atau justru berpotensi mengarah pada riya’ digital, yaitu memperlihatkan ibadah demi memperoleh pengakuan sosial dari orang lain. (Heidi A. Campbell, 2013: 82).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9q",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9p",
+									"text": "Al-Qur’an sendiri telah memberikan perhatian serius terhadap persoalan niat dalam beribadah. Dalam beberapa ayat, Al-Qur’an mengecam praktik ibadah yang dilakukan bukan karena ketulusan kepada Tuhan, melainkan demi dilihat oleh manusia. Fenomena ini dikenal dalam tradisi Islam sebagai riya’, yakni memperlihatkan amal ibadah untuk memperoleh pujian atau pengakuan dari orang lain. (Al-Ghazali, 2005: 259).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9s",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9r",
+									"text": "Dalam QS. Al-Ma’un ayat 4–6 misalnya, Al-Qur’an memberikan kritik tajam terhadap orang-orang yang melaksanakan ibadah namun melakukannya dengan motivasi pamer.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9u",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9t",
+									"text": "فَوَيْلٌ لِّلْمُصَلِّينَ (4) الَّذِينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَ (5) الَّذِينَ هُمْ يُرَاءُونَ (6)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9w",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9v",
+									"text": "“Maka celakalah orang-orang yang shalat, yaitu orang-orang yang lalai terhadap shalatnya, dan mereka yang berbuat riya’.”",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9y",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9x",
+									"text": "Para mufasir klasik menjelaskan bahwa ayat dalam Al-Ma'un ayat 4–6 merupakan peringatan keras terhadap praktik ibadah yang kehilangan dimensi keikhlasan. Dalam tafsirnya, Ibnu Kathir menjelaskan bahwa ungkapan فَوَيْلٌ لِّلْمُصَلِّينَ bukanlah celaan terhadap orang yang melaksanakan shalat, melainkan terhadap mereka yang lalai dari hakikat shalatnya. Penjelasan ini sejalan dengan pandangan Abdullah ibn Abbas yang menafsirkan bahwa orang yang lalai dari shalatnya adalah mereka yang tidak memperhatikan kewajiban shalat secara serius dan tidak menjaga adab serta kehadiran hati di dalamnya. (Ibn Kathir, 1999: 494)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka0",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9z",
+									"text": "Sementara itu, para mufasir seperti al-Qurtubi dan Fakhruddin al-Razi menekankan bahwa ayat الَّذِينَ هُمْ يُرَاءُونَ menunjukkan salah satu bentuk kerusakan niat dalam ibadah, yaitu riya’, yakni melakukan amal kebaikan agar dilihat dan dipuji oleh manusia. Menurut mereka, riya’ merupakan penyakit spiritual yang dapat menghilangkan nilai ibadah di sisi Allah, karena orientasi amal tersebut berpindah dari ketulusan kepada Tuhan menuju pencarian pengakuan sosial. Ayat ini menunjukkan bahwa nilai ibadah tidak hanya ditentukan oleh tindakan lahiriah, tetapi juga oleh orientasi batin dan niat yang melandasinya. (Al-Qurtubi, 2006: 211, Al-Razi, 1999: 111).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka2",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka1",
+									"text": "Kritik serupa juga terdapat dalam QS. Al-Baqarah ayat 264 yang menegaskan bahwa amal kebaikan dapat kehilangan nilainya apabila dilakukan demi pamer kepada manusia.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka4",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka3",
+									"text": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تُبْطِلُوا صَدَقَاتِكُم بِالْمَنِّ وَالْأَذَىٰ كَالَّذِي يُنفِقُ مَالَهُ رِئَاءَ النَّاسِ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka6",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka5",
+									"text": "“Wahai orang-orang yang beriman! Janganlah kamu membatalkan sedekahmu dengan menyebut-nyebutnya dan menyakiti (perasaan penerima), seperti orang yang menginfakkan hartanya karena riya (pamer) kepada manusia.”",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka8",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka7",
+									"text": "Ayat ini menegaskan bahwa praktik kebaikan yang dilakukan dengan motif riya’ berpotensi menghilangkan nilai spiritual dari amal tersebut. Media sosial memberikan ruang yang sangat luas bagi individu untuk menampilkan dirinya di hadapan publik. Praktik ini dalam kajian sosial sering disebut sebagai self-presentation, yaitu strategi individu dalam membangun citra diri di hadapan orang lain. Ketika praktik self-presentation tersebut berkaitan dengan aktivitas keagamaan, maka muncul fenomena yang dapat disebut sebagai self-presentation religius. (Erving Goffman, 1959: 17).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kaa",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka9",
+									"text": "Ayat dalam Al-Baqarah ayat 264 dipahami oleh para mufasir klasik sebagai peringatan agar sedekah dilakukan dengan keikhlasan dan menjaga etika terhadap penerima. Dalam tafsirnya, Ismail ibn Kathir menjelaskan bahwa sedekah dapat batal pahalanya apabila pemberi mengungkit-ungkit pemberiannya (al-mann) atau menyakiti perasaan orang yang menerima (al-adzā). (Ibn Kathir, 1999: 705).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kac",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kab",
+									"text": "Penafsiran yang serupa juga disampaikan oleh al-Qurtubi, yang menegaskan bahwa tindakan tersebut menunjukkan rusaknya niat karena amal dilakukan bukan semata-mata untuk Allah. Oleh karena itu, para mufasir klasik menekankan bahwa nilai sedekah tidak hanya terletak pada tindakan memberi, tetapi juga pada sikap menjaga kehormatan penerima dan ketulusan niat. (Al-Qurtubi, 2006: 305).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kae",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kad",
+									"text": "Sementara itu, mufasir kontemporer melihat ayat ini tidak hanya dalam konteks hubungan personal, tetapi juga dalam konteks sosial yang lebih luas. Muhammad Quraish Shihab misalnya menafsirkan bahwa larangan mengungkit sedekah atau melakukannya dengan riya’ menunjukkan pentingnya menjaga martabat orang yang dibantu serta memurnikan tujuan amal. Dalam masyarakat modern, praktik pamer kebaikan atau bantuan kepada orang lain dapat merusak nilai kemanusiaan dari sedekah itu sendiri. (M. Quraish Shihab, 2002: 558).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kag",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kaf",
+									"text": "Fenomena religiusitas digital menunjukkan bahwa praktik keberagamaan masyarakat modern tidak lagi terbatas pada ruang fisik, tetapi juga hadir dan berkembang di ruang digital melalui media sosial. Berbagai bentuk representasi ibadah seperti dokumentasi kegiatan sedekah, pembacaan Al-Qur’an, hingga aktivitas menjadi imam shalat. Dalam batas tertentu, fenomena ini dapat memiliki dimensi positif sebagai sarana syiar, dakwah, dan inspirasi bagi masyarakat luas. (Heidi A. Campbell, 2013: 67).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kai",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kah",
+									"text": "Dari perspektif tafsir Al-Qur’an, fenomena tersebut juga menyimpan potensi problem spiritual yang tidak dapat diabaikan. Melalui QS. Al-Ma‘un ayat 4–6 dan QS. Al-Baqarah ayat 264, Al-Qur’an menegaskan bahwa nilai suatu amal tidak hanya ditentukan oleh tindakan lahiriah, tetapi juga oleh orientasi batin dan ketulusan niat yang melatarbelakanginya. Amal yang dilakukan untuk pamer atau mencari pujian manusia berpotensi kehilangan nilai spiritualnya di hadapan Tuhan. (Al-Qurtubi, 2006: 211)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kak",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kaj",
+									"text": "Dalam konteks masyarakat digital, konsep riya’ memperoleh dimensi baru yang dapat disebut sebagai riya’ digital, yakni kecenderungan menampilkan praktik ibadah di ruang publik digital dengan tujuan memperoleh legitimasi sosial, popularitas, atau pengakuan dari audiens media sosial. Fenomena ini menunjukkan bahwa teknologi digital tidak hanya mengubah pola komunikasi manusia, tetapi juga berpotensi memengaruhi orientasi spiritual dalam praktik keberagamaan. (Manuel Castells, 2010: 348)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kam",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kal",
+									"text": "Dalam pandangan Muhammad Quraish Shihab, suatu amal yang dilakukan secara terbuka tidak otomatis dianggap riya’ selama tujuannya adalah untuk memberi teladan atau mengajak orang lain kepada kebaikan. Dalam beberapa keadaan, menampakkan amal saleh justru dapat menjadi sarana syiar dan motivasi sosial, terutama jika hal tersebut mendorong orang lain untuk melakukan kebaikan yang serupa. (M. Quraish Shihab, 2002: 556). Namun demikian, Sufyan al-Tsawri pernah menyatakan bahwa tidak ada sesuatu yang lebih sulit untuk diluruskan dalam diri manusia selain niat, karena niat dapat berubah-ubah secara sangat halus. (Ibn Rajab, 2001: 19).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kao",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kan",
+									"text": "Hal yang serupa juga diungkapkan oleh Al-Ghazali, yang menjelaskan bahwa riya’ merupakan penyakit hati yang sangat tersembunyi dan sering kali bercampur dengan amal kebaikan tanpa disadari oleh seseorang. Menurutnya, perbedaan antara keikhlasan dan riya’ terkadang sangat tipis, karena keduanya dapat muncul dalam tindakan yang sama secara lahiriah, namun berbeda pada orientasi batinnya. (Al-Ghazali, 2005: 261).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kaq",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kap",
+									"text": "Oleh karena itu, refleksi tafsir terhadap fenomena religiusitas digital menjadi penting untuk mengingatkan bahwa esensi ibadah dalam Islam terletak pada keikhlasan hati dan hubungan personal antara manusia dengan Tuhan. Media sosial pada dasarnya hanyalah alat yang bersifat netral ia dapat menjadi sarana dakwah yang bermanfaat apabila digunakan dengan niat yang tulus, tetapi juga dapat menjadi ruang yang menumbuhkan kecenderungan riya’ apabila orientasi ibadah bergeser dari Tuhan menuju penilaian manusia.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kas",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kar",
+									"text": "Dengan demikian, relevansi ajaran Al-Qur’an mengenai keikhlasan dan bahaya riya’ tetap memiliki makna yang sangat aktual dalam kehidupan masyarakat modern. Tafsir Al-Qur’an tidak hanya berfungsi sebagai penjelasan terhadap teks suci, tetapi juga sebagai refleksi etis yang mampu memberikan panduan spiritual dalam menghadapi dinamika budaya digital kontemporer. Kesadaran terhadap dimensi batiniah dalam beribadah menjadi kunci agar praktik religiusitas di era digital tetap berakar pada nilai ketulusan, bukan sekadar pada pencitraan keagamaan di ruang publik.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kau",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kat",
+									"text": "Referensi",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kaw",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kav",
+									"text": "Al-Ghazali, A. H. (2005). *Ihya’ ‘ulum al-din* (Vol. 3). Beirut, Lebanon: Dar al-Kutub al-‘Ilmiyyah.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kay",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kax",
+									"text": "Al-Qurtubi, M. A. (2006). *Al-jami‘ li ahkam al-Qur’an* (Vols. 3 & 20). Beirut, Lebanon: Dar al-Kutub al-‘Ilmiyyah.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kb0",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kaz",
+									"text": "Al-Razi, F. D. (1999). *Mafatih al-ghayb* (Vol. 32). Beirut, Lebanon: Dar Ihya’ al-Turath al-‘Arabi.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kb2",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kb1",
+									"text": "Campbell, H. A. (2013). *Digital religion: Understanding religious practice in new media worlds*. New York, NY: Routledge.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kb4",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kb3",
+									"text": "Castells, M. (2010). *The rise of the network society* (2nd ed., Vol. 1). Oxford, UK: Wiley-Blackwell.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kb6",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kb5",
+									"text": "Goffman, E. (1959). The presentation of self in everyday life (University of Edinburgh Social Sciences Research Centre). Garden City, NY: Doubleday Anchor Books.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kb8",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kb7",
+									"text": "Ibn Kathir, I. (1999). *Tafsir al-Qur’an al-‘azim* (Vols. 1–8). Riyadh, Saudi Arabia: Dar Tayyibah.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kba",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kb9",
+									"text": "Ibn Rajab al-Hanbali, A. F. (2001). *Jami‘ al-‘ulum wa al-hikam*. Beirut, Lebanon: Mu’assasah al-Risalah.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbc",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbb",
+									"text": "Shihab, M. Q. (2002). *Tafsir al-Mishbah: Pesan, kesan, dan keserasian Al-Qur’an* (Vols. 1–15). Jakarta, Indonesia: Lentera Hati.",
+									"marks": []
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "art-08",
+				"slug": "hoaks-dan-krisis-informasi-ruang-publik-konsep-tabayyun",
+				"status": "published",
+				"bylines": [
+					{
+						"byline": "byline-tiara"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"etika-kontemporer",
+						"tafsir-tematik"
+					],
+					"tag": [
+						"pkumi",
+						"tabayyun",
+						"hoaks-politik",
+						"literasi-digital",
+						"demokrasi"
+					]
+				},
+				"data": {
+					"title": "Hoaks dan Krisis Informasi di Ruang Publik: Menimbang Konsep Tabayyun dalam Tafsir Al-Qur’an",
+					"subheadline": "Prinsip Verifikasi QS. Al-Hujurat Ayat 6 sebagai Landasan Budaya Kewargaan dan Literasi Politik",
+					"excerpt": "Arus disinformasi dan hoaks di ruang publik digital mengancam kohesi sosial dan kualitas demokrasi. Al-Qur'an melalui konsep tabayyun (QS. Al-Hujurat: 6) meletakkan verifikasi informasi bukan sekadar tindakan rasional, melainkan tanggung jawab etis dan kewargaan.",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=1200&h=675&fit=crop",
+							"alt": "Literasi informasi dan etika tabayyun di ruang publik",
+							"filename": "tabayyun-hoaks-krisis-informasi.jpg"
 						}
 					},
 					"reading_time": "6 mnt baca",
 					"is_lead_hero": false,
 					"is_secondary_hero": false,
-					"is_featured": true,
+					"is_featured": false,
 					"is_popular": false,
 					"content": [
 						{
 							"_type": "block",
+							"_key": "kbe",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Ayat Cahaya (Ayat An-Nur: 35) adalah salah satu ayat paling memukau dalam Al-Qur'an. Imam Al-Ghazali dalam kitab legendarisnya Misykat Al-Anwar memaparkan bahwa cahaya hakiki hanyalah Allah Subhanahu wa Ta'ala, sedangkan cahaya fisik dan pancaindra hanyalah bayang-bayang metaforis."
+									"_key": "kbd",
+									"text": "“Hoaks dan Krisis Informasi di Ruang Publik: Menimbang Konsep *Tabayyun* dalam Tafsir Al-Qur’an”",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbg",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbf",
+									"text": "Perkembangan teknologi digital telah mengubah cara masyarakat memperoleh informasi. Jika sebelumnya berita didominasi oleh media konvensional, kini hampir setiap orang dapat memproduksi sekaligus menyebarkan informasi melalui media sosial. Perubahan ini membawa manfaat besar bagi kehidupan demokrasi karena masyarakat memiliki ruang yang lebih luas untuk berpartisipasi dalam diskusi publik. Namun di sisi lain, arus informasi yang sangat cepat juga memunculkan tantangan baru berupa penyebaran hoaks, propaganda, dan manipulasi opini.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbi",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbh",
+									"text": "Dalam beberapa momentum politik di Indonesia, terutama menjelang pemilihan umum, media sosial sering dipenuhi berbagai narasi yang tidak selalu dapat dipastikan kebenarannya. Potongan video, kutipan pernyataan tokoh, hingga berita yang tidak jelas sumbernya dapat dengan mudah beredar dan dipercaya oleh masyarakat. Ketika informasi seperti ini diterima tanpa proses verifikasi, kesalahpahaman bahkan konflik sosial dapat terjadi.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbk",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbj",
+									"text": "Situasi tersebut menunjukkan bahwa kualitas demokrasi tidak hanya ditentukan oleh sistem politik atau lembaga negara, tetapi juga oleh tingkat kedewasaan masyarakat dalam mengelola informasi. Demokrasi membutuhkan warga negara yang mampu berpikir kritis, tidak mudah terprovokasi, dan memiliki kesadaran untuk memeriksa kebenaran informasi sebelum menyebarkannya kepada orang lain.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbm",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbl",
+									"text": "Dalam perspektif Islam, prinsip semacam ini sebenarnya telah lama diajarkan melalui konsep tabayyun. Prinsip ini secara eksplisit disebutkan dalam QS. Al-Hujurat ayat 6 yang memerintahkan orang beriman untuk memeriksa suatu berita sebelum mempercayainya. Ayat tersebut mengingatkan bahwa keputusan yang diambil tanpa mengetahui fakta yang sebenarnya dapat berujung pada penyesalan di kemudian hari.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbo",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbn",
+									"text": "Ayat tersebut mengandung pesan moral yang sangat kuat. Verifikasi informasi bukan sekadar tindakan rasional, tetapi juga bentuk tanggung jawab etis. Dalam kehidupan sosial, penyebaran informasi yang salah dapat merugikan banyak pihak. Oleh karena itu, Al-Qur’an menekankan pentingnya sikap hati-hati ketika menerima suatu kabar.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbq",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbp",
+									"text": "Dalam tafsirnya, Ibn Kathir menjelaskan bahwa ayat ini turun sebagai peringatan agar kaum Muslim tidak tergesa-gesa mempercayai berita yang datang dari pihak yang tidak dapat dipercaya. Tanpa proses klarifikasi, keputusan yang diambil dapat menimbulkan ketidakadilan terhadap orang lain (Ibn Kathir, 1999: 349). Penjelasan ini menunjukkan bahwa verifikasi informasi memiliki implikasi sosial yang sangat luas.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbs",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbr",
+									"text": "Jika dikaitkan dengan kehidupan modern, pesan tersebut memiliki hubungan erat dengan konsep literasi informasi. Literasi informasi menuntut seseorang untuk mampu menilai kredibilitas sumber, memahami konteks berita, serta memeriksa fakta sebelum menyimpulkan sesuatu. Tanpa kemampuan ini, masyarakat mudah terjebak dalam arus informasi yang menyesatkan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbu",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbt",
+									"text": "Dalam praktik politik kontemporer, informasi sering kali digunakan sebagai instrumen untuk membentuk persepsi publik. Kampanye politik tidak hanya berlangsung melalui debat kebijakan atau program kerja, tetapi juga melalui narasi yang dibangun di ruang digital. Dalam beberapa kasus, informasi yang belum tentu benar sengaja disebarkan untuk memengaruhi sikap masyarakat terhadap tokoh atau kelompok tertentu.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbw",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbv",
+									"text": "Fenomena ini memperlihatkan bahwa demokrasi modern sangat bergantung pada kualitas literasi politik masyarakat. Literasi politik tidak hanya berarti memahami mekanisme pemilu atau struktur pemerintahan, tetapi juga kemampuan untuk membaca informasi politik secara kritis. Tanpa kemampuan tersebut, masyarakat dapat dengan mudah dimobilisasi melalui narasi emosional yang belum tentu didasarkan pada fakta.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kby",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbx",
+									"text": "Dalam penafsirannya, M. Quraish Shihab menjelaskan bahwa kata tabayyun mengandung makna memperjelas suatu perkara hingga kebenarannya benar-benar tampak (Shihab, 2002: 611). Artinya, proses ini tidak berhenti pada pemeriksaan singkat, tetapi membutuhkan upaya untuk memahami informasi secara lebih mendalam.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc0",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbz",
+									"text": "Jika prinsip ini diterapkan dalam kehidupan politik, masyarakat akan terbiasa untuk tidak langsung mempercayai setiap informasi yang beredar. Warga negara akan lebih berhati-hati sebelum membagikan berita kepada orang lain. Sikap seperti ini sangat penting untuk menjaga kualitas ruang publik agar tetap rasional dan tidak dipenuhi oleh informasi yang menyesatkan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc2",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kc1",
+									"text": "Selain itu, penerapan prinsip tabayyun juga dapat memperkuat solidaritas sosial. Dalam masyarakat yang plural seperti Indonesia, perbedaan pilihan politik merupakan hal yang wajar. Namun perbedaan tersebut sering kali diperburuk oleh penyebaran informasi yang tidak akurat. Ketika masyarakat terbiasa memeriksa kebenaran berita sebelum mempercayainya, potensi konflik akibat kesalahpahaman dapat diminimalkan.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc4",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kc3",
+									"text": "Dalam pandangan penulis, pesan Al-Qur’an tentang tabayyun sebenarnya memiliki dimensi kebangsaan yang sangat kuat. Prinsip ini tidak hanya berkaitan dengan etika individu, tetapi juga dengan tanggung jawab warga negara dalam menjaga ruang publik yang sehat. Ketika masyarakat menyebarkan informasi yang belum jelas kebenarannya, mereka secara tidak langsung ikut memperkeruh kehidupan sosial.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc6",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kc5",
+									"text": "Karena itu, nilai tabayyun perlu dipahami sebagai bagian dari budaya kewargaan (civic culture). Warga negara yang baik bukan hanya mereka yang aktif dalam pemilu atau kegiatan politik, tetapi juga mereka yang bertanggung jawab dalam menggunakan informasi. Dengan membiasakan sikap kritis terhadap berita, masyarakat dapat berkontribusi dalam menciptakan kehidupan demokrasi yang lebih sehat.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc8",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kc7",
+									"text": "Pendidikan memiliki peran penting dalam menanamkan nilai-nilai tersebut. Literasi digital dan literasi politik perlu diperkuat agar masyarakat tidak mudah terpengaruh oleh propaganda atau disinformasi. Dalam konteks ini, pendekatan tafsir yang kontekstual dapat membantu menjembatani pesan-pesan Al-Qur’an dengan tantangan kehidupan modern.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kca",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kc9",
+									"text": "Ayat tentang tabayyun menunjukkan bahwa Al-Qur’an tidak hanya berbicara mengenai ibadah ritual, tetapi juga memberikan pedoman etika dalam kehidupan sosial. Ketika nilai-nilai tersebut dipahami secara kontekstual, ajaran Al-Qur’an dapat memberikan kontribusi nyata bagi pembangunan budaya demokrasi yang sehat.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kcc",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kcb",
+									"text": "Pada akhirnya, demokrasi yang kuat tidak hanya bergantung pada institusi politik, tetapi juga pada kualitas moral masyarakatnya. Ketika warga negara memiliki kesadaran untuk memeriksa kebenaran informasi sebelum mempercayainya, ruang publik akan menjadi lebih sehat dan produktif. Di sinilah ajaran Al-Qur’an tentang tabayyun menemukan relevansinya dalam kehidupan demokrasi modern.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kce",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kcd",
+									"text": "Daftar Pustaka",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kcg",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kcf",
+									"text": "Ibn Kathir. (1999). *Tafsir al-Qur’an al-‘Azhim*. Riyadh: Dar Tayyibah.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kci",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kch",
+									"text": "Shihab, M. Quraish. (2002). *Tafsir al-Mishbah: Pesan, kesan, dan keserasian Al-Qur’an*. Jakarta: Lentera Hati.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kck",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kcj",
+									"text": "Rahman, Fazlur. (1982). *Islam and modernity: Transformation of an intellectual tradition*. Chicago: University of Chicago Press.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kcm",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kcl",
+									"text": "Eickelman, Dale F., & Anderson, Jon W. (2003). *New media in the Muslim world: The emerging public sphere*. Bloomington: Indiana University Press.",
+									"marks": []
 								}
 							]
 						}
 					]
-				},
-				"publishedAt": "2026-08-26T06:00:00.000Z"
+				}
 			}
 		],
 		"pages": [
