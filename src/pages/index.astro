@@ -58,13 +58,13 @@ while (secondaryHeroes.length < 4 && remainingForHeroes.length > 0) {
 	}
 }
 
-// 2. Pattern A (Artikel Pilihan) Segmentation
+// 2. Pattern A (Fokus Tematik: Perempuan & Keadilan Gender) Segmentation
 const patternAArticles = allArticles.filter((a) => a.data.is_featured);
-const patternALead = patternAArticles[0] || allArticles[1] || leadHero;
+const patternALead = patternAArticles[0] || allArticles[0] || leadHero;
 const patternAMinis = patternAArticles.slice(1, 5);
 
 // 3. Pattern B (Artikel Terbaru) Segmentation
-const patternBArticles = allArticles.filter((a) => !heroSetIds.has(a.id) || a.id !== leadHero?.id);
+const patternBArticles = allArticles;
 const patternBLeads = patternBArticles.slice(0, 2);
 const patternBSubgrid = patternBArticles.slice(2, 6);
 
@@ -203,10 +203,10 @@ const popularArticles = allArticles
 			{/* LEFT COLUMN: 70% Content Feeds */}
 			<div class="content-feed-column">
 				
-				{/* 3.1 ARTIKEL PILIHAN (Layout Pattern A) */}
-				<section class="section-block" aria-label="Artikel Pilihan">
+				{/* 3.1 FOKUS TEMATIK (Layout Pattern A) */}
+				<section class="section-block" aria-label="Fokus Tematik: Perempuan & Keadilan Gender">
 					<div class="section-header">
-						<h2 class="section-title">Artikel Pilihan</h2>
+						<h2 class="section-title">Fokus Tematik: Perempuan & Keadilan Gender</h2>
 						<span class="amber-bar"></span>
 					</div>
 					
