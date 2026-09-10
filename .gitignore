@@ -12,3 +12,6 @@ data.db
 .dev.vars.*
 
 .wrangler/
+
+# data
+data/
