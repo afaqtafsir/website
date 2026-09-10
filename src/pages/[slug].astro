@@ -216,10 +216,19 @@ if (article) {
 				<section class="author-profile-card" aria-label="Profil Penulis">
 					<div class="author-avatar-col">
 						<div class="author-avatar-img">
-							<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0e2746" stroke-width="1.5">
-								<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-								<circle cx="12" cy="7" r="4"></circle>
-							</svg>
+							{authorByline?.avatarStorageKey || authorByline?.avatarMediaId ? (
+								<img
+									src={`/_emdash/api/media/file/${authorByline.avatarStorageKey || authorByline.avatarMediaId}`}
+									alt={authorName}
+									class="author-avatar-photo"
+									loading="lazy"
+								/>
+							) : (
+								<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0e2746" stroke-width="1.5">
+									<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+									<circle cx="12" cy="7" r="4"></circle>
+								</svg>
+							)}
 						</div>
 					</div>
 					<div class="author-bio-col">
@@ -734,6 +743,13 @@ if (article) {
 		justify-content: center;
 		border: 2px solid var(--sky-300);
 		flex-shrink: 0;
+		overflow: hidden;
+	}
+
+	.author-avatar-photo {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	.author-card-label {

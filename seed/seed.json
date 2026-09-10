@@ -249,6 +249,11 @@
 			"slug": "tiara-nur-mulyawati",
 			"displayName": "Tiara Nur Mulyawati",
 			"bio": "Mahasiswa Magister Ilmu Al-Qur’an dan Tafsir di Universitas PTIQ Jakarta dan Pendidikan Kader Ulama Masjid Istiqlal (PKUMI). Menaruh minat pada studi Al-Qur'an, tafsir, dan isu-isu keislaman kontemporer.",
+			"avatar": {
+				"storageKey": "01M13B_AUTHOR_TIARA.jpg",
+				"filename": "author-tiara.jpg",
+				"alt": "Tiara Nur Mulyawati"
+			},
 			"isGuest": false
 		},
 		{
@@ -256,6 +261,11 @@
 			"slug": "fahmia-nuha-tsabita",
 			"displayName": "Fahmia Nuha Tsabita",
 			"bio": "Mahasiswa Program Magister Ilmu Al-Qur’an dan Tafsir di Institut PTIQ Jakarta melalui Program Pendidikan Kader Ulama Perempuan (PKUP) Masjid Istiqlal.",
+			"avatar": {
+				"storageKey": "01M13B_AUTHOR_FAHMIA.jpg",
+				"filename": "author-fahmia.jpg",
+				"alt": "Fahmia Nuha Tsabita"
+			},
 			"isGuest": false
 		},
 		{
@@ -263,6 +273,11 @@
 			"slug": "putri-arofah",
 			"displayName": "Putri Arofah",
 			"bio": "Mahasiswa Pascasarjana Universitas PTIQ Jakarta Program Studi Ilmu Al-Qur'an dan Tafsir melalui Program Pendidikan Kader Ulama Masjid Istiqlal (PKUMI).",
+			"avatar": {
+				"storageKey": "01M13B_AUTHOR_PUTRI.jpg",
+				"filename": "author-putri.jpg",
+				"alt": "Putri Arofah"
+			},
 			"isGuest": false
 		},
 		{
@@ -270,6 +285,11 @@
 			"slug": "ummi-hasanah",
 			"displayName": "Ummi Hasanah",
 			"bio": "Mahasiswa Program Magister Jurusan Ilmu Al-Qur’an dan Tafsir (IAT) di Universitas PTIQ Jakarta dan PKUMI. Fokus pada kajian linguistik Al-Qur’an dan kesetaraan gender.",
+			"avatar": {
+				"storageKey": "01M13B_AUTHOR_UMMI.jpg",
+				"filename": "author-ummi.jpg",
+				"alt": "Ummi Hasanah"
+			},
 			"isGuest": false
 		},
 		{
@@ -277,6 +297,11 @@
 			"slug": "fadia-alaniah",
 			"displayName": "Fadia Alaniah",
 			"bio": "Mahasiswa Pascasarjana Universitas PTIQ Jakarta Program Studi Magister Ilmu Al-Qur’an dan Tafsir serta Program Pendidikan Kader Ulama Perempuan (PKUP) Masjid Istiqlal.",
+			"avatar": {
+				"storageKey": "01M13B_AUTHOR_FADIA.jpg",
+				"filename": "author-fadia.jpg",
+				"alt": "Fadia Alaniah"
+			},
 			"isGuest": false
 		},
 		{
