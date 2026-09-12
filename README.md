@@ -85,7 +85,17 @@ Or click the deploy button above to set up the project in your Cloudflare accoun
         the visual editing toolbar, until the entry expires.
 
       Deferred because the site is not public yet. See
-      [Workers Cache](https://docs.emdashcms.com/deployment/cloudflare/#workers-cache).
+      [Workers Cache](https://docs.emdashcms.com/deployment/cloudflare/#workers-cache)
+      and [Cloudflare Resource Limits and Monitoring](docs/CLOUDFLARE_RESOURCE_LIMITS_AND_MONITORING.md),
+      which explains why this matters more than it looks: **every route on this
+      site currently exceeds the 10 ms free-plan CPU limit** and stays up only on
+      isolate tolerance.
+
+## Operations
+
+- [Cloudflare Resource Limits and Monitoring](docs/CLOUDFLARE_RESOURCE_LIMITS_AND_MONITORING.md)
+  -- which limits bind this site, the measured CPU baseline per route, content
+  rules that keep it up, and how to triage a `1102` outage.
 
 ## See Also
 
