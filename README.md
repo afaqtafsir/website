@@ -60,6 +60,33 @@ pnpm deploy
 
 Or click the deploy button above to set up the project in your Cloudflare account.
 
+## TODO before going public
+
+- [ ] **Enable Workers Cache.** Every request currently runs the Worker and
+      re-renders the page -- nothing is cached at the edge (`server-timing` reports
+      `cache.hit;dur=0`). Workers Cache sits *in front of* the Worker, so matching
+      requests never invoke it at all. This is the main source of CPU headroom
+      available without leaving the free plan.
+
+      Setup: `"cache": { "enabled": true }` in `wrangler.jsonc`, plus
+      `cache: { provider: cacheCloudflare() }` from `@astrojs/cloudflare/cache` in
+      `astro.config.mjs`, and explicit `routeRules` (e.g.
+      `"/": { maxAge: 300, swr: 86400 }`). The pages already call
+      `Astro.cache.set(cacheHint)`, so tag-based invalidation starts working as
+      soon as a provider is configured.
+
+      Two caveats before switching it on:
+
+      - A `200` with no `Cache-Control` is still cached -- 2 hours, by RFC 9111
+        heuristic freshness. Give every custom route an explicit header, using
+        `private, no-store` for anything session-dependent.
+      - The cache runs before the Worker, so it cannot vary on cookies. A logged-in
+        editor may be served the cached anonymous variant of a public page, without
+        the visual editing toolbar, until the entry expires.
+
+      Deferred because the site is not public yet. See
+      [Workers Cache](https://docs.emdashcms.com/deployment/cloudflare/#workers-cache).
+
 ## See Also
 
 - [Node.js variant](../blog) -- same template using SQLite and local file storage
