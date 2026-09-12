@@ -62,11 +62,18 @@ Or click the deploy button above to set up the project in your Cloudflare accoun
 
 ## TODO before going public
 
-- [ ] **Enable Workers Cache.** Every request currently runs the Worker and
-      re-renders the page -- nothing is cached at the edge (`server-timing` reports
-      `cache.hit;dur=0`). Workers Cache sits *in front of* the Worker, so matching
-      requests never invoke it at all. This is the main source of CPU headroom
-      available without leaving the free plan.
+- [ ] **Enable Workers Cache — required before launch, not optional.** Every
+      route on this site exceeds the 10 ms free-plan CPU limit and stays up only
+      on isolate tolerance, which is withdrawn once overruns become frequent.
+      Traffic is what drives frequency, so **going public is itself the most
+      likely trigger**. Caching does not make renders cheaper; it collapses how
+      many renders happen, which is the variable that matters. See
+      [Cloudflare Resource Limits and Monitoring](docs/CLOUDFLARE_RESOURCE_LIMITS_AND_MONITORING.md).
+
+      Nothing is cached at the edge today -- `server-timing` reports
+      `cache.hit;dur=0`, so every request runs the Worker and re-renders the
+      page. Workers Cache sits *in front of* the Worker, so a hit never invokes
+      it at all.
 
       Setup: `"cache": { "enabled": true }` in `wrangler.jsonc`, plus
       `cache: { provider: cacheCloudflare() }` from `@astrojs/cloudflare/cache` in
@@ -84,12 +91,12 @@ Or click the deploy button above to set up the project in your Cloudflare accoun
         editor may be served the cached anonymous variant of a public page, without
         the visual editing toolbar, until the entry expires.
 
-      Deferred because the site is not public yet. See
-      [Workers Cache](https://docs.emdashcms.com/deployment/cloudflare/#workers-cache)
-      and [Cloudflare Resource Limits and Monitoring](docs/CLOUDFLARE_RESOURCE_LIMITS_AND_MONITORING.md),
-      which explains why this matters more than it looks: **every route on this
-      site currently exceeds the 10 ms free-plan CPU limit** and stays up only on
-      isolate tolerance.
+      And keep the limits of this in view: caching is a frequency control, not
+      a cost control. A cache miss still costs 35-99 ms and still overruns. The
+      cache is per-colo, every article and term is its own entry, and a crawler
+      walking the URL space after launch hits mostly misses -- so this is a
+      large mitigation, not a guarantee. Reference:
+      [Workers Cache](https://docs.emdashcms.com/deployment/cloudflare/#workers-cache).
 
 ## Operations
 

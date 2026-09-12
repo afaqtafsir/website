@@ -8,6 +8,26 @@ Reference: [Workers limits](https://developers.cloudflare.com/workers/platform/l
 
 ---
 
+> [!WARNING]
+> **Do not read a green dashboard as "we are fine."**
+>
+> This site exceeds the Workers Free CPU limit on **every single route**,
+> including pages that query no content at all. It serves traffic today only
+> because Cloudflare tolerates overruns that are *infrequent* -- and the
+> frequency is low only because almost nobody visits yet.
+>
+> That tolerance is not a budget. It has no published threshold, no gauge, and
+> no warning before it is withdrawn. When it is withdrawn it applies to the
+> **entire Worker**, so pages that were never expensive go down too, along with
+> the admin UI you would use to fix things.
+>
+> **Launching is the event most likely to trigger it**, because the variable the
+> runtime watches is how often you overrun, and traffic is what drives that.
+> Enable [Workers Cache](#what-to-do-about-the-cpu-overrun) *before* the site
+> goes public, not after.
+
+---
+
 ## Status: over budget on every route
 
 **This site is on Workers Free, whose CPU limit is 10 ms per request. Every
@@ -36,6 +56,20 @@ because of isolate flexibility, explained below. It is a tolerance, not a
 budget, and it is the single most important thing to understand about this
 deployment.
 
+### Getting under 10 ms is probably not achievable here
+
+Worth stating plainly, because it changes what "fixing this" means.
+
+`/tentang` costs 11 ms and queries no content whatsoever. That is the bare
+floor of Astro SSR plus EmDash -- layout, menus, fonts, SEO, site settings --
+and it is already over the limit. There is no content to trim, no query to
+remove. Meanwhile the homepage sits at 25 ms warm and 99 ms cold.
+
+So compliance is not realistically on the table on this stack. We cannot stop
+overrunning; we can only control **how often** we overrun. Every mitigation
+below should be read in that light: they are frequency controls, not cost
+controls.
+
 ---
 
 ## The isolate flexibility trap
@@ -58,6 +92,28 @@ This is a cliff, not a slope. Two regimes:
 The second regime applies to the **whole Worker script**, not the route that
 caused it. That is what makes this dangerous: one expensive page can take down
 pages that were never expensive.
+
+### Why this is not a normal "close to the limit" situation
+
+Three properties make isolate tolerance a bad thing to depend on, and they are
+worth understanding before deciding this is acceptable risk.
+
+**The threshold is undefined and unobservable.** Cloudflare says "infrequently"
+and "consistently" and never quantifies either. There is no tolerance meter, no
+percentage remaining, no warning event before withdrawal. Every other limit on
+this page is a number you can measure yourself against; this one is not. You
+cannot answer "how close are we?" -- you find out by crossing it.
+
+**The trigger is traffic, not code.** Overruns are infrequent today only because
+almost nobody visits. CPU per render does not change when the site goes public;
+the *rate* does. The variable the runtime watches is frequency, and traffic is
+what drives frequency. **The launch itself is the most likely trigger.** The
+current calm is a function of obscurity, and it expires on purpose.
+
+**Failure is total, and it locks you out.** Not a slow page -- every route
+returning 1102, including ones that query nothing, plus the admin UI you would
+use to fix the content that caused it. Recovery is neither immediate nor under
+your control.
 
 ### What happened on 2026-09-11
 
@@ -246,6 +302,13 @@ for r in rows:
 look at `Exceeded CPU Time Limits`. Any non-zero value here means the script has
 entered enforced mode -- treat it as an outage, not a warning.
 
+**This metric is a smoke alarm, not a fuel gauge.** It tells you the house is
+already on fire; it will never tell you the room is getting warm. Because
+tolerance is unobservable, a reading of zero means only "not yet" -- it is not
+evidence of headroom, and it is exactly what the dashboard showed the day before
+the 2026-09-11 outage. Check it after launch, after any traffic spike, and after
+any bulk content edit.
+
 ### Database
 
 ```bash
@@ -304,23 +367,42 @@ Notes on the ones that could bite later:
 
 ## What to do about the CPU overrun
 
-In increasing order of effort.
+Since compliance is not achievable (see
+[above](#getting-under-10-ms-is-probably-not-achievable-here)), all of these
+reduce how *often* we overrun rather than how much.
 
-1. **Enable Workers Cache.** The cache sits *in front of* the Worker, so a hit
-   never invokes it and costs no CPU at all. This does not reduce the cost of a
-   render; it reduces how often you pay it, which is what matters when you are
-   over a per-request limit. Tracked as the pre-launch item in the README.
-   Caveats there.
+1. **Enable Workers Cache -- before going public, not after.** This is the
+   load-bearing mitigation, not a nice-to-have, and the pre-launch framing in
+   the README understates it.
+
+   Be precise about what it does. It does **not** make renders cheaper: a cache
+   miss still costs 35-99 ms and still overruns. What it does is collapse the
+   *number of invocations*. A cache hit does not invoke the Worker cheaply --
+   it does not invoke the Worker at all. A page served 1,000 times a day at a
+   95% hit rate goes from 1,000 overruns to 50, which is exactly the difference
+   between "consistently" and "infrequently".
+
+   Residual risk after caching, because "cached" is not "safe":
+
+   - The cache is **per-colo**. A geographically spread audience means many
+     independent cold caches.
+   - Every article, tag, and category is a **separate cache entry**. A crawler
+     walking the whole URL space hits almost nothing but misses -- and that is
+     a normal thing to happen immediately after launch.
+   - Every deploy and every content edit invalidates.
+
 2. **Lower the listing limits** to what is actually rendered -- `limit: 24` on
    the homepage and `limit: 100` on `/penulis` both fetch far more than they
    display.
 3. **Stop fetching bodies for card lists.** No field selection exists in
    `getEmDashCollection()`, so this means either querying D1 directly through
    the binding for card data, or accepting the cost.
-4. **Workers Paid.** 10 ms to 30 s. Removes the constraint rather than managing
-   it. Deferred -- but understand that until one of the above lands, the site
-   runs on tolerance, and a traffic burst or one oversized entry can flip it to
-   enforced mode again.
+4. **Workers Paid ($5/month; confirm current pricing).** Raises 10 ms to 30 s
+   and converts this from a risk you actively manage into a non-issue. Deferred
+   by choice, and caching is a real mitigation rather than a consolation prize
+   -- but the honest trade is recurring operational attention in exchange for
+   not paying. Revisit if the site gets meaningful traffic, or the first time
+   tolerance is withdrawn in production.
 
 ---
 
