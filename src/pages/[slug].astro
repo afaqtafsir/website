@@ -301,7 +301,7 @@ if (article) {
 											<div class="card-meta">
 												<time class="related-date">{formatIndonesianDate(rel.data.publishedAt)}</time>
 												<span class="meta-sep">•</span>
-												<span class="related-date">{formatReadingTime(getReadingTime(rel.data.content), { short: true })}</span>
+												<span class="related-time">{formatReadingTime(getReadingTime(rel.data.content), { short: true })}</span>
 											</div>
 										</div>
 									</article>
@@ -560,6 +560,13 @@ if (article) {
 
 	:global(.dark) .article-byline-bar {
 		border-color: rgba(52, 198, 244, 0.2);
+		color: var(--slate-400);
+	}
+
+	.byline-left {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
 	}
 
 	.byline-name {
@@ -1048,10 +1055,22 @@ if (article) {
 		color: var(--text-brand);
 	}
 
-	.related-date {
+	.card-meta {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 6px;
 		font-size: 0.75rem;
 		color: var(--slate-600);
 		margin-top: auto;
+	}
+
+	:global(.dark) .card-meta {
+		color: var(--slate-400);
+	}
+
+	.meta-sep {
+		opacity: 0.5;
 	}
 
 	/* Responsive */
