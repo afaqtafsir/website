@@ -8,6 +8,7 @@ import { Image } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { getReadingTime, formatReadingTime } from "../utils/reading-time";
+import { env } from "cloudflare:workers";
 
 // Fetch articles and site settings
 const [{ entries: allArticles, cacheHint }, settings] = await Promise.all([
@@ -69,10 +70,38 @@ const patternBArticles = allArticles;
 const patternBLeads = patternBArticles.slice(0, 2);
 const patternBSubgrid = patternBArticles.slice(2, 6);
 
-// 4. Popular Articles Widget (Ranked 1-5)
-const popularArticles = allArticles
-	.filter((a) => a.data.is_popular)
-	.sort((a, b) => (a.data.popular_rank || 99) - (b.data.popular_rank || 99))
+// 4. Popular Articles Widget (Ranked 1-5 dynamically via analytics, tie-broken by latest)
+const articleViewsMap = new Map<string, number>();
+
+if (env?.DB) {
+	try {
+		const { results } = await env.DB.prepare(
+			"SELECT slug, views FROM article_views WHERE views > 0 ORDER BY views DESC LIMIT 10",
+		).all<{ slug: string; views: number }>();
+		if (results) {
+			for (const r of results) {
+				articleViewsMap.set(r.slug, r.views);
+			}
+		}
+	} catch (e) {
+		console.warn("[analytics] Failed to fetch article views for popular widget:", e);
+	}
+}
+
+// Map each article with its view count and sort
+const popularArticles = [...allArticles]
+	.map((article) => ({
+		...article,
+		views: articleViewsMap.get(article.id) ?? 0,
+	}))
+	.sort((a, b) => {
+		if (b.views !== a.views) {
+			return b.views - a.views;
+		}
+		const dateA = a.data.publishedAt ? new Date(a.data.publishedAt).getTime() : 0;
+		const dateB = b.data.publishedAt ? new Date(b.data.publishedAt).getTime() : 0;
+		return dateB - dateA;
+	})
 	.slice(0, 5);
 ---
 
@@ -388,8 +417,14 @@ const popularArticles = allArticles
 										<a href={`/${item.id}`}>{item.data.title}</a>
 									</h4>
 									<div class="popular-meta">
-										<span class="popular-reads-metric">🔥 {item.data.popular_reads || "12.4k dibaca"}</span>
-										<span class="meta-sep">•</span>
+										{item.views > 0 && (
+											<>
+												<span class="popular-reads-metric">
+													🔥 {item.views >= 1000 ? `${(item.views / 1000).toFixed(1)}k` : item.views} dibaca
+												</span>
+												<span class="meta-sep">•</span>
+											</>
+										)}
 										<span>{formatReadingTime(getReadingTime(item.data.content), { short: true })}</span>
 									</div>
 								</div>

@@ -69,21 +69,6 @@
 					"slug": "is_featured",
 					"label": "Artikel Pilihan (Pattern A/B)",
 					"type": "boolean"
-				},
-				{
-					"slug": "is_popular",
-					"label": "Tampilkan di Widget Terbanyak Dibaca",
-					"type": "boolean"
-				},
-				{
-					"slug": "popular_rank",
-					"label": "Urutan Populer (1-5)",
-					"type": "integer"
-				},
-				{
-					"slug": "popular_reads",
-					"label": "Metrik Pembaca",
-					"type": "string"
 				}
 			]
 		},
@@ -471,9 +456,6 @@
 					"is_lead_hero": true,
 					"is_secondary_hero": false,
 					"is_featured": true,
-					"is_popular": true,
-					"popular_rank": 1,
-					"popular_reads": "19.2k dibaca",
 					"content": [
 						{
 							"_type": "block",
@@ -907,9 +889,6 @@
 					"is_lead_hero": false,
 					"is_secondary_hero": true,
 					"is_featured": true,
-					"is_popular": true,
-					"popular_rank": 2,
-					"popular_reads": "17.8k dibaca",
 					"content": [
 						{
 							"_type": "block",
@@ -1404,9 +1383,6 @@
 					"is_lead_hero": false,
 					"is_secondary_hero": true,
 					"is_featured": true,
-					"is_popular": true,
-					"popular_rank": 3,
-					"popular_reads": "15.6k dibaca",
 					"content": [
 						{
 							"_type": "block",
@@ -1904,9 +1880,6 @@
 					"is_lead_hero": false,
 					"is_secondary_hero": true,
 					"is_featured": true,
-					"is_popular": true,
-					"popular_rank": 4,
-					"popular_reads": "14.2k dibaca",
 					"content": [
 						{
 							"_type": "block",
@@ -2217,9 +2190,6 @@
 					"is_lead_hero": false,
 					"is_secondary_hero": true,
 					"is_featured": true,
-					"is_popular": true,
-					"popular_rank": 5,
-					"popular_reads": "12.9k dibaca",
 					"content": [
 						{
 							"_type": "block",
@@ -2728,7 +2698,6 @@
 					"is_lead_hero": false,
 					"is_secondary_hero": false,
 					"is_featured": false,
-					"is_popular": false,
 					"content": [
 						{
 							"_type": "block",
@@ -3131,7 +3100,6 @@
 					"is_lead_hero": false,
 					"is_secondary_hero": false,
 					"is_featured": false,
-					"is_popular": false,
 					"content": [
 						{
 							"_type": "block",
@@ -3668,7 +3636,6 @@
 					"is_lead_hero": false,
 					"is_secondary_hero": false,
 					"is_featured": false,
-					"is_popular": false,
 					"content": [
 						{
 							"_type": "block",

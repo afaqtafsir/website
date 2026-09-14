@@ -459,9 +459,7 @@ All structured content is managed natively via **Cloudflare Emdash CMS** backed 
 * `is_lead_hero` (Boolean, Default: `false`) — Flags story as primary Hero Bento lead (~57% width)
 * `is_secondary_hero` (Boolean, Default: `false`) — Places story in the right Hero Bento stack
 * `is_featured` (Boolean, Default: `false`) — Toggles inclusion in curated Pattern A / B homepage feeds
-* `is_popular` (Boolean, Default: `false`) — Toggles presence in sidebar top reads
-* `popular_rank` (Number, 1–5, Optional) — Explicit ranking for popular widget
-* `popular_reads` (Text, Optional) — Readership metric display (*e.g., "14.2k dibaca"*)
+* Dynamic Popularity & Readership Metrics (Derived automatically from `article_views` analytics table via background beacon; manual popular flags removed from schema)
 * `status` (Enum: `'draft'`, `'in_review'`, `'published'`, `'scheduled'`, `'archived'`)
 * `published_at` (Datetime, Optional) — Publication timestamp for scheduling and ordering
 

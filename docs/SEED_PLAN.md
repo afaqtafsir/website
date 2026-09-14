@@ -12,7 +12,7 @@ This document establishes the architecture, schema definitions, and content matr
 ### Core Objectives:
 1. **Model the Complete PRD v1.2 Schema**: Configure collections (`articles`, `pages`), taxonomies (`category`, `tag`), bylines, navigation menus, and widget areas.
 2. **Provide Production-Grade Indonesian Content**: Seed 10 rich, realistic articles authored by PKUMI scholars and researchers, complete with Quranic Arabic blocks (`Amiri` font), translations, transliterations, and academic footnotes.
-3. **Power All Homepage & Detail Layouts**: Equip the system with all necessary presentation flags (`is_lead_hero`, `is_secondary_hero`, `is_featured`, `is_popular`, `popular_rank`) so the 5-Card Bento Grid, Pattern A/B feeds, and Sidebar widgets render immediately upon database initialization. Dynamic reading time is computed automatically from word count.
+3. **Power All Homepage & Detail Layouts**: Equip the system with all necessary presentation flags (`is_lead_hero`, `is_secondary_hero`, `is_featured`) so the 5-Card Bento Grid, Pattern A/B feeds, and Sidebar widgets render immediately upon database initialization. Dynamic reading time and article popularity are derived automatically from word count and edge analytics.
 
 ---
 
@@ -54,9 +54,6 @@ seed/seed.json
 | `is_lead_hero` | Tampilkan di Lead Hero Bento | `boolean` | `required: false` | Main 57% lead story on Homepage |
 | `is_secondary_hero` | Tampilkan di Secondary Hero Bento | `boolean` | `required: false` | 4 stacked compact cards in Hero Bento |
 | `is_featured` | Artikel Pilihan (Pattern A/B) | `boolean` | `required: false` | Highlighted editorial curation feed |
-| `is_popular` | Tampilkan di Widget Terbanyak Dibaca | `boolean` | `required: false` | Sidebar top 5 reads widget |
-| `popular_rank` | Urutan Popularitas (1–5) | `integer` | `required: false` | Ranking integer for `01`–`05` amber numerals |
-| `popular_reads` | Jumlah Pembaca (Metrik) | `string` | `required: false` | Readership stat (e.g. `"18.4k dibaca"`) |
 | `published_at` | Waktu Terbit | `datetime` | `required: false` | Publication timestamp for chronologic sorting |
 
 ### 3.2 `pages` Collection

@@ -311,6 +311,14 @@ if (article) {
 					</section>
 				)}
 
+				{/* Per-Page View Analytics Beacon */}
+				<script is:inline define:vars={{ articleSlug: article.id }}>
+					if (navigator.sendBeacon) {
+						navigator.sendBeacon(`/api/views/${articleSlug}`);
+					} else {
+						fetch(`/api/views/${articleSlug}`, { method: 'POST', keepalive: true }).catch(() => {});
+					}
+				</script>
 			</div>
 		</article>
 	</Base>
