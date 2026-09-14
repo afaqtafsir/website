@@ -7,6 +7,7 @@ import {
 import { Image } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
+import { getReadingTime, formatReadingTime } from "../utils/reading-time";
 
 // Fetch articles and site settings
 const [{ entries: allArticles, cacheHint }, settings] = await Promise.all([
@@ -115,7 +116,7 @@ const popularArticles = allArticles
 								<span class="meta-sep">•</span>
 								<time class="meta-date">{formatDate(leadHero.data.publishedAt)}</time>
 								<span class="meta-sep">•</span>
-								<span class="meta-reading-time">⏱ {leadHero.data.reading_time || "7 mnt baca"}</span>
+								<span class="meta-reading-time">⏱ {formatReadingTime(getReadingTime(leadHero.data.content))}</span>
 							</div>
 						</div>
 					</article>
@@ -153,7 +154,7 @@ const popularArticles = allArticles
 											</span>
 										)}
 										<span class="meta-sep">•</span>
-										<span class="meta-time">{item.data.reading_time || "5 mnt"}</span>
+										<span class="meta-time">{formatReadingTime(getReadingTime(item.data.content), { short: true })}</span>
 									</div>
 								</div>
 							</article>
@@ -241,6 +242,8 @@ const popularArticles = allArticles
 										)}
 										<span class="meta-sep">•</span>
 										<time class="meta-date">{formatDate(patternALead.data.publishedAt)}</time>
+										<span class="meta-sep">•</span>
+										<span class="meta-reading-time">⏱ {formatReadingTime(getReadingTime(patternALead.data.content))}</span>
 									</div>
 								</div>
 							</article>
@@ -266,7 +269,11 @@ const popularArticles = allArticles
 										<h4 class="mini-item-title">
 											<a href={`/${item.id}`}>{item.data.title}</a>
 										</h4>
-										<time class="mini-item-date">{formatDate(item.data.publishedAt)}</time>
+										<div class="mini-item-meta">
+											<time class="mini-item-date">{formatDate(item.data.publishedAt)}</time>
+											<span class="meta-sep">•</span>
+											<span class="mini-item-date">{formatReadingTime(getReadingTime(item.data.content), { short: true })}</span>
+										</div>
 									</div>
 								</article>
 							))}
@@ -312,6 +319,8 @@ const popularArticles = allArticles
 										)}
 										<span class="meta-sep">•</span>
 										<time class="meta-date">{formatDate(item.data.publishedAt)}</time>
+										<span class="meta-sep">•</span>
+										<span class="meta-reading-time">⏱ {formatReadingTime(getReadingTime(item.data.content))}</span>
 									</div>
 								</div>
 							</article>
@@ -337,6 +346,8 @@ const popularArticles = allArticles
 									</h4>
 									<div class="subgrid-meta">
 										<time>{formatDate(item.data.publishedAt)}</time>
+										<span class="meta-sep">•</span>
+										<span>{formatReadingTime(getReadingTime(item.data.content), { short: true })}</span>
 									</div>
 								</div>
 							</article>
@@ -378,6 +389,8 @@ const popularArticles = allArticles
 									</h4>
 									<div class="popular-meta">
 										<span class="popular-reads-metric">🔥 {item.data.popular_reads || "12.4k dibaca"}</span>
+										<span class="meta-sep">•</span>
+										<span>{formatReadingTime(getReadingTime(item.data.content), { short: true })}</span>
 									</div>
 								</div>
 							</article>

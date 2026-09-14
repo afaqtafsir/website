@@ -59,8 +59,24 @@ export function getReadingTime(content: PortableTextBlock[] | undefined): number
 }
 
 /**
- * Format reading time for display
+ * Format reading time for display (Indonesian)
  */
-export function formatReadingTime(minutes: number): string {
-	return `${minutes} min read`;
+export function formatReadingTime(
+	minutes: number,
+	options?: { short?: boolean },
+): string {
+	if (options?.short) {
+		return `${minutes} mnt`;
+	}
+	return `${minutes} mnt baca`;
+}
+
+/**
+ * Convenience helper to compute and format reading time directly from Portable Text content
+ */
+export function getArticleReadingTime(
+	content: PortableTextBlock[] | undefined,
+	options?: { short?: boolean },
+): string {
+	return formatReadingTime(getReadingTime(content), options);
 }

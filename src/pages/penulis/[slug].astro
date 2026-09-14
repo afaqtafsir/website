@@ -9,6 +9,7 @@ import {
 import { Image } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 import { resolveBlogSiteIdentity } from "../../utils/site-identity";
+import { getReadingTime, formatReadingTime } from "../../utils/reading-time";
 
 const slug = decodeSlug(Astro.params.slug);
 
@@ -200,12 +201,8 @@ function getInitials(name: string) {
 										<time class="meta-date" datetime={article.data.publishedAt ? new Date(article.data.publishedAt).toISOString() : ""}>
 											{formatIndonesianDate(article.data.publishedAt)}
 										</time>
-										{article.data.reading_time && (
-											<>
-												<span class="meta-dot" aria-hidden="true">•</span>
-												<span class="meta-reading-time">{article.data.reading_time}</span>
-											</>
-										)}
+										<span class="meta-dot" aria-hidden="true">•</span>
+										<span class="meta-reading-time">{formatReadingTime(getReadingTime(article.data.content))}</span>
 									</div>
 								</div>
 							</article>

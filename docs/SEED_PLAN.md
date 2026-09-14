@@ -12,7 +12,7 @@ This document establishes the architecture, schema definitions, and content matr
 ### Core Objectives:
 1. **Model the Complete PRD v1.2 Schema**: Configure collections (`articles`, `pages`), taxonomies (`category`, `tag`), bylines, navigation menus, and widget areas.
 2. **Provide Production-Grade Indonesian Content**: Seed 10 rich, realistic articles authored by PKUMI scholars and researchers, complete with Quranic Arabic blocks (`Amiri` font), translations, transliterations, and academic footnotes.
-3. **Power All Homepage & Detail Layouts**: Equip the system with all necessary presentation flags (`is_lead_hero`, `is_secondary_hero`, `is_featured`, `is_popular`, `popular_rank`, `reading_time`) so the 5-Card Bento Grid, Pattern A/B feeds, and Sidebar widgets render immediately upon database initialization.
+3. **Power All Homepage & Detail Layouts**: Equip the system with all necessary presentation flags (`is_lead_hero`, `is_secondary_hero`, `is_featured`, `is_popular`, `popular_rank`) so the 5-Card Bento Grid, Pattern A/B feeds, and Sidebar widgets render immediately upon database initialization. Dynamic reading time is computed automatically from word count.
 
 ---
 
@@ -50,8 +50,7 @@ seed/seed.json
 | `subheadline` | Subjudul / Deskripsi Singkat | `string` | `required: false` | Italic subheadline under main title |
 | `excerpt` | Ringkasan / Excerpt | `text` | `required: true`, `searchable: true` | 2–3 sentence summary for cards & meta description |
 | `featured_image` | Gambar Sampul | `image` | `required: false` | High-res 16:9 / 16:10 cover image object (`$media`) |
-| `content` | Isi Artikel & Kajian | `portableText` | `required: true`, `searchable: true` | Main body with Arabic ayat boxes & footnotes |
-| `reading_time` | Estimasi Waktu Baca | `string` | `required: false` | Display string (e.g. `"6 mnt baca"`) |
+| `content` | Isi Artikel & Kajian | `portableText` | `required: true`, `searchable: true` | Main body with Arabic ayat boxes & footnotes (used to compute dynamic reading time) |
 | `is_lead_hero` | Tampilkan di Lead Hero Bento | `boolean` | `required: false` | Main 57% lead story on Homepage |
 | `is_secondary_hero` | Tampilkan di Secondary Hero Bento | `boolean` | `required: false` | 4 stacked compact cards in Hero Bento |
 | `is_featured` | Artikel Pilihan (Pattern A/B) | `boolean` | `required: false` | Highlighted editorial curation feed |

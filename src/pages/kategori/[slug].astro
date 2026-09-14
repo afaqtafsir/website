@@ -7,6 +7,7 @@ import {
 } from "emdash";
 import { Image } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
+import { getReadingTime, formatReadingTime } from "../../utils/reading-time";
 
 const slug = decodeSlug(Astro.params.slug);
 const term = slug ? await getTerm("category", slug) : null;
@@ -87,6 +88,8 @@ function formatIndonesianDate(date: Date | string | null | undefined) {
 										)}
 										<span class="meta-sep">•</span>
 										<time class="meta-date">{formatIndonesianDate(article.data.publishedAt)}</time>
+										<span class="meta-sep">•</span>
+										<span class="meta-reading-time">{formatReadingTime(getReadingTime(article.data.content), { short: true })}</span>
 									</div>
 								</div>
 							</article>

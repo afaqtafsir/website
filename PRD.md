@@ -455,7 +455,7 @@ All structured content is managed natively via **Cloudflare Emdash CMS** backed 
 * `featured_image` (Media Asset / Image, Optional) — Cover image stored in R2 Media Library
 * `author` (Relation -> `authors`, Required) — Assigned author profile
 * `category` (Taxonomy -> `categories`, Hierarchical) — Assigned exegesis topic/category
-* `reading_time` (Text / Number, Optional) — Estimated reading duration (*e.g., "6 mnt baca"*)
+* Dynamic Reading Time (Computed on-the-fly from word count, *e.g., "6 mnt baca"* — removed from manual schema input for optimal editorial UX)
 * `is_lead_hero` (Boolean, Default: `false`) — Flags story as primary Hero Bento lead (~57% width)
 * `is_secondary_hero` (Boolean, Default: `false`) — Places story in the right Hero Bento stack
 * `is_featured` (Boolean, Default: `false`) — Toggles inclusion in curated Pattern A / B homepage feeds

@@ -13,6 +13,7 @@ import {
 } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
+import { getReadingTime, formatReadingTime } from "../utils/reading-time";
 
 const slug = decodeSlug(Astro.params.slug);
 
@@ -164,7 +165,7 @@ if (article) {
 					<span class="byline-dot">•</span>
 					<time class="byline-date">{formatIndonesianDate(article.data.publishedAt)}</time>
 					<span class="byline-dot">•</span>
-					<span class="byline-read-time">⏱ {article.data.reading_time || "6 mnt baca"}</span>
+					<span class="byline-read-time">⏱ {formatReadingTime(getReadingTime(article.data.content))}</span>
 				</div>
 			</header>
 
@@ -297,7 +298,11 @@ if (article) {
 											<h4 class="related-title">
 												<a href={`/${rel.id}`}>{rel.data.title}</a>
 											</h4>
-											<time class="related-date">{formatIndonesianDate(rel.data.publishedAt)}</time>
+											<div class="card-meta">
+												<time class="related-date">{formatIndonesianDate(rel.data.publishedAt)}</time>
+												<span class="meta-sep">•</span>
+												<span class="related-date">{formatReadingTime(getReadingTime(rel.data.content), { short: true })}</span>
+											</div>
 										</div>
 									</article>
 								);

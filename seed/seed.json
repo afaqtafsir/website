@@ -56,11 +56,6 @@
 					"searchable": true
 				},
 				{
-					"slug": "reading_time",
-					"label": "Estimasi Waktu Baca",
-					"type": "string"
-				},
-				{
 					"slug": "is_lead_hero",
 					"label": "Tampilkan di Lead Hero Bento",
 					"type": "boolean"
@@ -473,7 +468,6 @@
 							"filename": "ratu-bilqis-kepemimpinan-perempuan.jpg"
 						}
 					},
-					"reading_time": "8 mnt baca",
 					"is_lead_hero": true,
 					"is_secondary_hero": false,
 					"is_featured": true,
@@ -910,7 +904,6 @@
 							"filename": "hawa-penciptaan-adam-tafsir.jpg"
 						}
 					},
-					"reading_time": "7 mnt baca",
 					"is_lead_hero": false,
 					"is_secondary_hero": true,
 					"is_featured": true,
@@ -1408,7 +1401,6 @@
 							"filename": "etika-pandangan-uu-tpks.jpg"
 						}
 					},
-					"reading_time": "8 mnt baca",
 					"is_lead_hero": false,
 					"is_secondary_hero": true,
 					"is_featured": true,
@@ -1909,7 +1901,6 @@
 							"filename": "makna-kesuksesan-fitrah-perempuan.jpg"
 						}
 					},
-					"reading_time": "6 mnt baca",
 					"is_lead_hero": false,
 					"is_secondary_hero": true,
 					"is_featured": true,
@@ -2223,7 +2214,6 @@
 							"filename": "afeksi-verbal-parenting-qurani.jpg"
 						}
 					},
-					"reading_time": "9 mnt baca",
 					"is_lead_hero": false,
 					"is_secondary_hero": true,
 					"is_featured": true,
@@ -2735,7 +2725,6 @@
 							"filename": "pkumi-majelis-tarjih-kunjungan.jpg"
 						}
 					},
-					"reading_time": "8 mnt baca",
 					"is_lead_hero": false,
 					"is_secondary_hero": false,
 					"is_featured": false,
@@ -3139,7 +3128,6 @@
 							"filename": "religiusitas-digital-riya-medsos.jpg"
 						}
 					},
-					"reading_time": "8 mnt baca",
 					"is_lead_hero": false,
 					"is_secondary_hero": false,
 					"is_featured": false,
@@ -3677,7 +3665,6 @@
 							"filename": "tabayyun-hoaks-krisis-informasi.jpg"
 						}
 					},
-					"reading_time": "6 mnt baca",
 					"is_lead_hero": false,
 					"is_secondary_hero": false,
 					"is_featured": false,
