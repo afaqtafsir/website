@@ -301,7 +301,7 @@ const popularArticles = [...allArticles]
 										<div class="mini-item-meta">
 											<time class="mini-item-date">{formatDate(item.data.publishedAt)}</time>
 											<span class="meta-sep">•</span>
-											<span class="mini-item-date">{formatReadingTime(getReadingTime(item.data.content), { short: true })}</span>
+											<span class="mini-item-time">{formatReadingTime(getReadingTime(item.data.content), { short: true })}</span>
 										</div>
 									</div>
 								</article>
@@ -570,17 +570,41 @@ const popularArticles = [...allArticles]
 		color: var(--slate-300);
 	}
 
-	.card-meta {
+	/* Unified Meta Containers */
+	.card-meta,
+	.card-meta-mini,
+	.mini-item-meta,
+	.subgrid-meta,
+	.popular-meta {
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
 		gap: 6px;
+	}
+
+	.card-meta {
 		font-size: 0.82rem;
 		color: var(--slate-600);
 		margin-top: auto;
 	}
 
-	:global(.dark) .card-meta {
+	.card-meta-mini {
+		font-size: 0.78rem;
+		color: var(--slate-600);
+	}
+
+	.mini-item-meta,
+	.subgrid-meta,
+	.popular-meta {
+		font-size: 0.75rem;
+		color: var(--slate-600);
+	}
+
+	:global(.dark) .card-meta,
+	:global(.dark) .card-meta-mini,
+	:global(.dark) .mini-item-meta,
+	:global(.dark) .subgrid-meta,
+	:global(.dark) .popular-meta {
 		color: var(--slate-400);
 	}
 
@@ -705,17 +729,6 @@ const popularArticles = [...allArticles]
 		color: var(--text-brand);
 	}
 
-	.card-meta-mini {
-		display: flex;
-		align-items: center;
-		gap: 6px;
-		font-size: 0.78rem;
-		color: var(--slate-600);
-	}
-
-	:global(.dark) .card-meta-mini {
-		color: var(--slate-400);
-	}
 
 	/* ==========================================================================
 	   2. MODULAR R2 VIDEO SHOWCASE BOX
@@ -959,11 +972,6 @@ const popularArticles = [...allArticles]
 		color: var(--white);
 	}
 
-	.mini-item-date {
-		font-size: 0.75rem;
-		color: var(--slate-600);
-	}
-
 	/* Pattern B Grid (2 Leads + 2x2 Subgrid) */
 	.pattern-b-leads-grid {
 		display: grid;
@@ -1104,11 +1112,6 @@ const popularArticles = [...allArticles]
 		color: var(--white);
 	}
 
-	.subgrid-meta {
-		font-size: 0.75rem;
-		color: var(--slate-600);
-	}
-
 	/* ==========================================================================
 	   4. SIDEBAR WIDGETS (~340px)
 	   ========================================================================== */
@@ -1224,11 +1227,6 @@ const popularArticles = [...allArticles]
 
 	.popular-title a:hover {
 		color: var(--text-brand);
-	}
-
-	.popular-meta {
-		font-size: 0.75rem;
-		color: var(--slate-600);
 	}
 
 	/* Widget Contributor CTA */
