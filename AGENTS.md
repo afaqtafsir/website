@@ -41,6 +41,7 @@ This template ships with `.mcp.json`, `.cursor/mcp.json`, and `.vscode/mcp.json`
 - `entry.id` is the slug (for URLs). `entry.data.id` is the database ULID (for API calls like `getEntryTerms`).
 - Always call `Astro.cache.set(cacheHint)` on pages that query content.
 - Taxonomy names in queries must match the seed's `"name"` field exactly (e.g., `"category"` not `"categories"`).
+- **Database & Schema Source of Truth:** `seed/seed.json` is strictly Day-Zero bootstrap data. Modifying it has ZERO effect on deployed environments. Cloudflare D1 is the sole runtime source of truth. Schema updates and field removals require executing against D1 (`_emdash_fields` + physical `ec_<collection>` tables). For full details and operational runbooks, see [`docs/EMDASH_AND_CLOUDFLARE_DATA_LIFECYCLE.md`](docs/EMDASH_AND_CLOUDFLARE_DATA_LIFECYCLE.md).
 
 ## This Template
 
