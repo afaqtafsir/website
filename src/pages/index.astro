@@ -193,37 +193,40 @@ const popularArticles = [...allArticles]
 			</section>
 		)}
 
-		{/* 2. MODULAR R2 VIDEO SHOWCASE BOX */}
+		{/* 2. YOUTUBE VIDEO SHOWCASE BOX */}
 		<section class="video-showcase-section" id="kajian-pilihan" aria-label="Kajian Visual & Multimedia">
 			<div class="video-showcase-box">
 				<div class="video-player-container">
-					<video
-						controls
-						playsinline
-						preload="metadata"
-						poster="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=1200&h=675&fit=crop"
-						class="native-video-player"
-					>
-						<source src="https://assets.afaqtafsir.id/videos/kajian-kosmologi-qurani.mp4" type="video/mp4" />
-						Browser Anda tidak mendukung pemutar video HTML5.
-					</video>
+					<iframe
+						src="https://www.youtube-nocookie.com/embed/gBDRoNfvOTo"
+						title="Pemerkosaan dalam Pernikahan: Apakah Pernikahan Menghapus Persetujuan?"
+						loading="lazy"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen
+					></iframe>
 				</div>
 				<div class="video-info-container">
-					<h2 class="video-title">Kosmologi Al-Qur'an dan Dimensi Penciptaan Alam Semesta</h2>
+					<div class="video-badge-tag">
+						<span class="badge-category-mini">Perempuan & Keadilan</span>
+						<span class="badge-tag-pill">Podcast PKUMI</span>
+					</div>
+					<h2 class="video-title">Pemerkosaan dalam Pernikahan: Apakah Pernikahan Menghapus Persetujuan?</h2>
 					<div class="video-speaker-byline">
 						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
 							<path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
 							<line x1="12" y1="19" x2="12" y2="22"></line>
 						</svg>
-						<span>Dr. Hamdan Syukri, M.Ud. & Tim Redaksi Afaq Tafsir</span>
+						<span>Putri Arofah & Nirmala Sari (Host: Fahmia Nuha Tsabita)</span>
 					</div>
 					<p class="video-synopsis">
-						Menelaah perjumpaan metodologis antara teks wahyu Al-Qur'an dan fisika modern mengenai asal-usul singularitas kosmos dalam perspektif tafsir tematik saintifik.
+						Mengupas fenomena marital rape dari perspektif etika relasi Qur'ani, tinjauan UU PKDRT No. 23/2004, serta dekonstruksi stigma sosial atas penafsiran hadits pemenuhan hak suami-istri.
 					</p>
-					<a href="/kosmologi-big-bang-dan-konsep-ratqan-fataqnah" class="btn-video-read">
-						<span>Baca Ringkasan Kajian Ilmiah →</span>
-					</a>
+					<div class="video-cta-group">
+						<a href="/videos" class="btn-video-all">
+							<span>Lihat Semua Video Podcast →</span>
+						</a>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -731,7 +734,7 @@ const popularArticles = [...allArticles]
 
 
 	/* ==========================================================================
-	   2. MODULAR R2 VIDEO SHOWCASE BOX
+	   2. YOUTUBE VIDEO SHOWCASE BOX
 	   ========================================================================== */
 	.video-showcase-section {
 		margin-bottom: var(--spacing-16);
@@ -757,17 +760,41 @@ const popularArticles = [...allArticles]
 		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 		aspect-ratio: 16 / 9;
 		background: #000;
+		width: 100%;
 	}
 
-	.native-video-player {
+	/* CSS untuk iframe YouTube responsif */
+	.video-player-container iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
+		border: 0;
 	}
 
 	.video-info-container {
 		display: flex;
 		flex-direction: column;
+	}
+
+	.video-badge-tag {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: var(--spacing-2);
+	}
+
+	.badge-tag-pill {
+		font-size: 0.7rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		background: rgba(52, 198, 244, 0.15);
+		color: var(--sky-300);
+		border: 1px solid rgba(52, 198, 244, 0.3);
+		padding: 2px 8px;
+		border-radius: var(--radius-full);
 	}
 
 	.video-title {
@@ -795,7 +822,7 @@ const popularArticles = [...allArticles]
 		margin-bottom: var(--spacing-6);
 	}
 
-	.btn-video-read {
+	.btn-video-all {
 		display: inline-flex;
 		align-items: center;
 		font-size: 0.88rem;
@@ -805,7 +832,7 @@ const popularArticles = [...allArticles]
 		transition: color var(--transition-fast), transform var(--transition-fast);
 	}
 
-	.btn-video-read:hover {
+	.btn-video-all:hover {
 		color: var(--gold-500);
 		transform: translateX(4px);
 	}
