@@ -96,56 +96,132 @@ function getInitials(name: string) {
 			</p>
 		</header>
 
+		{/* AUTHORS FILTER BAR */}
+		{authors.length > 0 && (
+			<section class="filter-section" aria-label="Saring Penulis">
+				<div class="filter-toolbar">
+					<div class="filter-input-wrap">
+						<svg
+							class="search-icon"
+							width="17"
+							height="17"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<circle cx="11" cy="11" r="8"></circle>
+							<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+						</svg>
+
+						<input
+							type="search"
+							id="author-filter-input"
+							class="filter-input"
+							placeholder="Cari penulis..."
+							aria-label="Cari penulis"
+							autocomplete="off"
+							spellcheck="false"
+						/>
+
+						<button
+							type="button"
+							id="filter-clear-btn"
+							class="filter-clear-btn"
+							aria-label="Hapus penyaringan"
+							hidden
+						>
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+								<line x1="18" y1="6" x2="6" y2="18"></line>
+								<line x1="6" y1="6" x2="18" y2="18"></line>
+							</svg>
+						</button>
+					</div>
+
+					<div class="filter-counter" id="filter-counter" aria-live="polite">
+						Menampilkan <strong id="filter-count-val">{authors.length}</strong> dari {authors.length} penulis
+					</div>
+				</div>
+			</section>
+		)}
+
 		{/* AUTHORS DIRECTORY GRID */}
 		{authors.length === 0 ? (
 			<div class="empty-state-card">
 				<p>Belum ada profil penulis yang terdaftar.</p>
 			</div>
 		) : (
-			<section class="authors-grid" aria-label="Daftar Penulis">
-				{authors.map((author) => (
-					<article class="author-card">
-						<div class="card-top-row">
-							<div class="author-avatar-wrap">
-								{author.avatarStorageKey || author.avatarMediaId ? (
-									<img
-										src={`/_emdash/api/media/file/${author.avatarStorageKey || author.avatarMediaId}`}
-										alt={author.displayName}
-										class="author-avatar-img"
-									/>
-								) : (
-									<div class="author-avatar-fallback">
-										{getInitials(author.displayName)}
-									</div>
-								)}
-							</div>
-						</div>
-
-						<div class="card-info">
-							<h2 class="author-name">
-								<a href={`/penulis/${author.slug}`}>{author.displayName}</a>
-							</h2>
-							<p class="author-bio">
-								{author.bio}
-							</p>
-						</div>
-
-						<div class="card-footer">
-							<div class="count-pill">
-								<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-									<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-									<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-								</svg>
-								<span>{author.articleCount} Artikel</span>
+			<>
+				<section class="authors-grid" id="authors-grid" aria-label="Daftar Penulis">
+					{authors.map((author) => (
+						<article
+							class="author-card"
+							data-author-card
+							data-name={author.displayName.toLowerCase()}
+							data-bio={(author.bio ?? "").toLowerCase()}
+						>
+							<div class="card-top-row">
+								<div class="author-avatar-wrap">
+									{author.avatarStorageKey || author.avatarMediaId ? (
+										<img
+											src={`/_emdash/api/media/file/${author.avatarStorageKey || author.avatarMediaId}`}
+											alt={author.displayName}
+											class="author-avatar-img"
+										/>
+									) : (
+										<div class="author-avatar-fallback">
+											{getInitials(author.displayName)}
+										</div>
+									)}
+								</div>
 							</div>
 
-							<a href={`/penulis/${author.slug}`} class="profile-link" aria-label={`Lihat profil dan artikel ${author.displayName}`}>
-								<span>Lihat Profil →</span>
-							</a>
-						</div>
-					</article>
-				))}
-			</section>
+							<div class="card-info">
+								<h2 class="author-name">
+									<a href={`/penulis/${author.slug}`}>{author.displayName}</a>
+								</h2>
+								<p class="author-bio">
+									{author.bio}
+								</p>
+							</div>
+
+							<div class="card-footer">
+								<div class="count-pill">
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+										<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+									</svg>
+									<span>{author.articleCount} Artikel</span>
+								</div>
+
+								<a href={`/penulis/${author.slug}`} class="profile-link" aria-label={`Lihat profil dan artikel ${author.displayName}`}>
+									<span>Lihat Profil →</span>
+								</a>
+							</div>
+						</article>
+					))}
+				</section>
+
+				{/* NO FILTER MATCHES STATE */}
+				<div id="filter-empty-feedback" class="filter-empty-feedback" hidden>
+					<div class="empty-icon-wrap">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="11" cy="11" r="8"></circle>
+							<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+						</svg>
+					</div>
+					<h3 class="filter-empty-title">Penulis tidak ditemukan</h3>
+					<p class="filter-empty-text">
+						Tidak ada penulis yang sesuai dengan kata kunci <strong id="filter-empty-query"></strong>.
+					</p>
+					<button type="button" id="filter-reset-action" class="filter-reset-action">
+						Reset saringan
+					</button>
+				</div>
+			</>
 		)}
 
 		{/* CALL TO ACTION BANNER */}
@@ -167,6 +243,82 @@ function getInitials(name: string) {
 		</section>
 	</div>
 </Base>
+
+<script>
+	function initAuthorFilter() {
+		const input = document.getElementById("author-filter-input") as HTMLInputElement | null;
+		const clearBtn = document.getElementById("filter-clear-btn") as HTMLButtonElement | null;
+		const countVal = document.getElementById("filter-count-val");
+		const emptyFeedback = document.getElementById("filter-empty-feedback");
+		const emptyQuerySpan = document.getElementById("filter-empty-query");
+		const resetAction = document.getElementById("filter-reset-action");
+		const cards = document.querySelectorAll<HTMLElement>("[data-author-card]");
+
+		if (!input || cards.length === 0) return;
+
+		const totalCount = cards.length;
+
+		function handleFilter() {
+			const query = (input?.value || "").trim().toLowerCase();
+
+			// Toggle clear button
+			if (clearBtn) {
+				clearBtn.hidden = query.length === 0;
+			}
+
+			let visibleCount = 0;
+
+			cards.forEach((card) => {
+				const name = card.dataset.name || "";
+				const bio = card.dataset.bio || "";
+				const matches = !query || name.includes(query) || bio.includes(query);
+
+				if (matches) {
+					card.style.display = "";
+					visibleCount++;
+				} else {
+					card.style.display = "none";
+				}
+			});
+
+			// Update counter
+			if (countVal) {
+				countVal.textContent = visibleCount.toString();
+			}
+
+			// Show or hide empty search feedback
+			if (emptyFeedback) {
+				if (visibleCount === 0) {
+					emptyFeedback.hidden = false;
+					if (emptyQuerySpan) emptyQuerySpan.textContent = `"${query}"`;
+				} else {
+					emptyFeedback.hidden = true;
+				}
+			}
+		}
+
+		function resetFilter() {
+			if (!input) return;
+			input.value = "";
+			handleFilter();
+			input.focus();
+		}
+
+		input.addEventListener("input", handleFilter);
+		clearBtn?.addEventListener("click", resetFilter);
+		resetAction?.addEventListener("click", resetFilter);
+
+		input.addEventListener("keydown", (e) => {
+			if (e.key === "Escape") {
+				resetFilter();
+			}
+		});
+	}
+
+	// Initialize on page load and support Astro View Transitions if enabled
+	initAuthorFilter();
+	document.addEventListener("astro:page-load", initAuthorFilter);
+</script>
 
 <style>
 	.authors-page-container {
@@ -222,21 +374,7 @@ function getInitials(name: string) {
 
 	/* Header */
 	.authors-header {
-		margin-bottom: var(--spacing-10);
-	}
-
-	.header-badge {
-		display: inline-block;
-		font-size: 0.75rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--text-brand);
-		margin-bottom: var(--spacing-2);
-	}
-
-	:global(.dark) .header-badge {
-		color: var(--sky-400);
+		margin-bottom: var(--spacing-8);
 	}
 
 	.authors-title {
@@ -259,6 +397,123 @@ function getInitials(name: string) {
 
 	:global(.dark) .authors-lead {
 		color: var(--slate-300);
+	}
+
+	/* Minimalist Filter Section */
+	.filter-section {
+		margin-bottom: var(--spacing-8);
+	}
+
+	.filter-toolbar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: var(--spacing-4);
+	}
+
+	.filter-input-wrap {
+		position: relative;
+		display: flex;
+		align-items: center;
+		flex: 1 1 320px;
+		max-width: 480px;
+	}
+
+	.search-icon {
+		position: absolute;
+		left: 14px;
+		color: var(--slate-400);
+		pointer-events: none;
+		transition: color var(--transition-fast);
+	}
+
+	.filter-input {
+		width: 100%;
+		padding: 10px 38px 10px 38px;
+		font-size: 0.92rem;
+		border-radius: var(--radius-full);
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		color: var(--blue-950);
+		outline: none;
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	.filter-input::-webkit-search-cancel-button {
+		-webkit-appearance: none;
+		appearance: none;
+	}
+
+	.filter-input:focus {
+		border-color: var(--sky-400);
+		box-shadow: 0 0 0 3px rgba(52, 198, 244, 0.15);
+	}
+
+	.filter-input:focus + .search-icon,
+	.filter-input-wrap:focus-within .search-icon {
+		color: var(--sky-500);
+	}
+
+	:global(.dark) .filter-input {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.25);
+		color: var(--white);
+	}
+
+	:global(.dark) .filter-input:focus {
+		border-color: var(--sky-400);
+		box-shadow: 0 0 0 3px rgba(52, 198, 244, 0.2);
+	}
+
+	.filter-clear-btn {
+		position: absolute;
+		right: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 22px;
+		height: 22px;
+		border-radius: 50%;
+		border: none;
+		background: var(--slate-200);
+		color: var(--slate-600);
+		cursor: pointer;
+		padding: 0;
+		transition: background var(--transition-fast), color var(--transition-fast);
+	}
+
+	.filter-clear-btn:hover {
+		background: var(--slate-300);
+		color: var(--blue-950);
+	}
+
+	:global(.dark) .filter-clear-btn {
+		background: var(--blue-800);
+		color: var(--slate-300);
+	}
+
+	:global(.dark) .filter-clear-btn:hover {
+		background: var(--blue-700);
+		color: var(--white);
+	}
+
+	.filter-counter {
+		font-size: 0.88rem;
+		color: var(--slate-600);
+	}
+
+	.filter-counter strong {
+		color: var(--blue-950);
+		font-weight: 600;
+	}
+
+	:global(.dark) .filter-counter {
+		color: var(--slate-400);
+	}
+
+	:global(.dark) .filter-counter strong {
+		color: var(--sky-300);
 	}
 
 	/* Grid of Author Cards */
@@ -323,24 +578,6 @@ function getInitials(name: string) {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-	}
-
-	.role-badge {
-		font-size: 0.68rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		background: var(--gold-100);
-		color: var(--gold-600);
-		padding: 3px 8px;
-		border-radius: var(--radius-full);
-		border: 1px solid rgba(217, 119, 6, 0.25);
-	}
-
-	:global(.dark) .role-badge {
-		background: rgba(217, 119, 6, 0.2);
-		color: var(--gold-400);
-		border-color: rgba(245, 158, 11, 0.3);
 	}
 
 	.card-info {
@@ -431,6 +668,85 @@ function getInitials(name: string) {
 
 	:global(.dark) .profile-link:hover {
 		color: var(--sky-300);
+	}
+
+	/* Filter Empty Feedback */
+	.filter-empty-feedback {
+		text-align: center;
+		padding: var(--spacing-12) var(--spacing-6);
+		margin-bottom: var(--spacing-16);
+		border-radius: var(--radius-lg);
+		border: 1px dashed var(--sky-300);
+		background: rgba(240, 249, 255, 0.5);
+	}
+
+	:global(.dark) .filter-empty-feedback {
+		background: rgba(14, 165, 233, 0.04);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.empty-icon-wrap {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: var(--sky-100);
+		color: var(--text-brand);
+		margin-bottom: var(--spacing-3);
+	}
+
+	:global(.dark) .empty-icon-wrap {
+		background: rgba(52, 198, 244, 0.15);
+		color: var(--sky-400);
+	}
+
+	.filter-empty-title {
+		font-size: 1.15rem;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-2);
+	}
+
+	:global(.dark) .filter-empty-title {
+		color: var(--white);
+	}
+
+	.filter-empty-text {
+		font-size: 0.92rem;
+		color: var(--slate-600);
+		margin: 0 0 var(--spacing-4);
+	}
+
+	:global(.dark) .filter-empty-text {
+		color: var(--slate-300);
+	}
+
+	.filter-reset-action {
+		background: transparent;
+		color: var(--text-brand);
+		border: 1px solid var(--text-brand);
+		padding: 6px 16px;
+		border-radius: var(--radius-full);
+		font-size: 0.85rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all var(--transition-fast);
+	}
+
+	.filter-reset-action:hover {
+		background: var(--text-brand);
+		color: var(--white);
+	}
+
+	:global(.dark) .filter-reset-action {
+		color: var(--sky-400);
+		border-color: var(--sky-400);
+	}
+
+	:global(.dark) .filter-reset-action:hover {
+		background: var(--sky-400);
+		color: var(--blue-950);
 	}
 
 	/* Contributor CTA */
@@ -530,6 +846,15 @@ function getInitials(name: string) {
 
 		.authors-title {
 			font-size: 1.85rem;
+		}
+
+		.filter-toolbar {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.filter-input-wrap {
+			max-width: 100%;
 		}
 	}
 </style>
