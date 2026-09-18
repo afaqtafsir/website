@@ -1,0 +1,535 @@
+---
+import Base from "../layouts/Base.astro";
+
+interface VideoItem {
+	id: string;
+	youtubeId: string;
+	title: string;
+	speaker: string;
+	moderator: string;
+	category: string;
+	description: string;
+	duration: string;
+	date: string;
+	featured: boolean;
+}
+
+const videos: VideoItem[] = [
+	{
+		id: "pemerkosaan-dalam-pernikahan-persetujuan",
+		youtubeId: "gBDRoNfvOTo", // Ganti ID
+		title: "Pemerkosaan dalam Pernikahan: Apakah Pernikahan Menghapus Persetujuan?",
+		speaker: "Putri Arofah & Nirmala Sari",
+		moderator: "Fahmia Nuha Tsabita",
+		category: "Perempuan & Keadilan",
+		description:
+			"Mengupas fenomena marital rape dari perspektif etika relasi Qur'ani, tinjauan UU PKDRT No. 23/2004, serta dekonstruksi stigma sosial atas penafsiran hadits pemenuhan hak suami-istri.",
+		duration: "23 mnt",
+		date: "11 September 2026",
+		featured: true,
+	},
+	{
+		id: "sunat-perempuan-syariat-atau-kekerasan",
+		youtubeId: "qiqchvF3MoI", // Ganti ID
+		title: "Sunat Perempuan: Syariat atau Kekerasan Berbalut Tradisi?",
+		speaker: "Fadia Alaniah, S.S.I. & Shafira Munawaroh Dahlan, S.Ag.",
+		moderator: "Ummi Hasanah, S.Hum.",
+		category: "Fikih & Kesehatan",
+		description:
+			"Menelaah diskursus sunat perempuan (khifad / FGM) dari klasifikasi medis WHO dan Kemenkes RI, dinamika ijtihad empat mazhab, hingga perspektif Maqashid Syariah dan fatwa KUPI.",
+		duration: "24 mnt",
+		date: "9 Juni 2026",
+		featured: false,
+	},
+	{
+		id: "perempuan-sebagai-subjek-utuh-tradisi-intelektual",
+		youtubeId: "r77i68-Hxf8", // Ganti ID
+		title: "Perempuan sebagai Subjek Utuh: Tradisi Intelektual dan Kehidupan Sosial dalam Islam",
+		speaker: "Aqilatuz Zakiyah, S.Ag. & Syifaul Alami, S.S.I.",
+		moderator: "Tiara Nur Mulyawati, S.Hum.",
+		category: "Epistemologi & Sejarah",
+		description:
+			"Mendekonstruksi mitos domestikasi dan subordinasi perempuan dengan menelusuri genealogi keilmuan Islam, ketajaman kritis Sayyidah Aisyah r.a., hingga peran mufasir perempuan kontemporer.",
+		duration: "16 mnt",
+		date: "29 Mei 2026",
+		featured: false,
+	},
+];
+
+const featuredVideo = videos.find((v) => v.featured) || videos[0];
+const secondaryVideos = videos.filter((v) => v.id !== featuredVideo.id);
+---
+
+<Base
+	title="Kajian Visual & Podcast — Afaq Tafsir"
+	description="Serial podcast dan kajian keislaman bersama mahasiswi Pendidikan Kader Ulama Masjid Istiqlal (PKUMI) — Program Kader Ulama Perempuan."
+>
+	<div class="videos-page-container">
+		
+		{/* BREADCRUMB */}
+		<nav class="breadcrumb-nav" aria-label="Breadcrumb">
+			<ol class="breadcrumb-list">
+				<li><a href="/">Beranda</a></li>
+				<li class="breadcrumb-sep">›</li>
+				<li class="breadcrumb-active" aria-current="page">Video Kajian</li>
+			</ol>
+		</nav>
+
+		{/* HEADER */}
+		<header class="videos-header">
+			<span class="header-badge">Kajian Visual & Podcast</span>
+			<h1 class="page-title">Podcast & Diskusi Ilmiah PKUMI</h1>
+			<span class="amber-bar"></span>
+			<p class="page-lead">
+				Ruang dialog kritis dan mencerahkan bersama mahasiswi <strong>Pendidikan Kader Ulama Masjid Istiqlal (PKUMI) — Program Kader Ulama Perempuan</strong>, mengkaji isu-isu kontemporer dalam kacamata syariat, hak asasi, dan kemaslahatan publik.
+			</p>
+		</header>
+
+		{/* 1. SPOTLIGHT FEATURED VIDEO */}
+		{featuredVideo && (
+			<section class="featured-video-section" aria-label="Kajian Pilihan">
+				<div class="featured-video-card">
+					<div class="video-embed-wrapper">
+						<iframe
+							src={`https://www.youtube-nocookie.com/embed/${featuredVideo.youtubeId}`}
+							title={featuredVideo.title}
+							loading="lazy"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							allowfullscreen
+						></iframe>
+					</div>
+					<div class="featured-video-info">
+						<div class="meta-badge-row">
+							<span class="badge-category">{featuredVideo.category}</span>
+							<span class="badge-spotlight">Kajian Pilihan</span>
+						</div>
+						<h2 class="featured-title">{featuredVideo.title}</h2>
+						
+						<div class="speakers-box">
+							<div class="speaker-line">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+									<path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+									<line x1="12" y1="19" x2="12" y2="22"></line>
+								</svg>
+								<span><strong>Pemateri:</strong> {featuredVideo.speaker}</span>
+							</div>
+							<div class="speaker-line moderator-line">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<circle cx="12" cy="12" r="10"></circle>
+									<polygon points="10 8 16 12 10 16 10 8"></polygon>
+								</svg>
+								<span><strong>Moderator:</strong> {featuredVideo.moderator}</span>
+							</div>
+						</div>
+
+						<p class="featured-desc">{featuredVideo.description}</p>
+						
+						<div class="video-meta-row">
+							<time>{featuredVideo.date}</time>
+							<span class="meta-dot">•</span>
+							<span>⏱ {featuredVideo.duration}</span>
+						</div>
+					</div>
+				</div>
+			</section>
+		)}
+
+		{/* 2. SECONDARY VIDEOS GRID */}
+		<section class="secondary-videos-section" aria-label="Kajian Lainnya">
+			<div class="section-title-row">
+				<h3 class="section-title">Kajian Rekomendasi Lainnya</h3>
+				<span class="amber-bar"></span>
+			</div>
+
+			<div class="videos-grid">
+				{secondaryVideos.map((video) => (
+					<article class="video-card">
+						<div class="video-embed-wrapper">
+							<iframe
+								src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
+								title={video.title}
+								loading="lazy"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								allowfullscreen
+							></iframe>
+						</div>
+						<div class="video-card-body">
+							<span class="badge-category-mini">{video.category}</span>
+							<h3 class="video-card-title">{video.title}</h3>
+							
+							<div class="speakers-box-mini">
+								<div class="speaker-line-mini">
+									<span>🎙️ <strong>Narsum:</strong> {video.speaker}</span>
+								</div>
+								<div class="speaker-line-mini">
+									<span>💬 <strong>Host:</strong> {video.moderator}</span>
+								</div>
+							</div>
+
+							<p class="video-card-desc">{video.description}</p>
+							
+							<div class="card-footer-meta">
+								<time>{video.date}</time>
+								<span class="meta-dot">•</span>
+								<span>⏱ {video.duration}</span>
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+
+	</div>
+</Base>
+
+<style>
+	.videos-page-container {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: var(--spacing-6) var(--spacing-6) var(--spacing-16);
+	}
+
+	/* Breadcrumb */
+	.breadcrumb-nav {
+		margin-bottom: var(--spacing-6);
+	}
+
+	.breadcrumb-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: var(--spacing-2);
+		font-size: 0.85rem;
+		color: var(--slate-600);
+	}
+
+	.breadcrumb-list a {
+		color: var(--slate-600);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+
+	.breadcrumb-list a:hover {
+		color: var(--text-brand);
+		text-decoration: underline;
+	}
+
+	:global(.dark) .breadcrumb-list a {
+		color: var(--slate-400);
+	}
+
+	.breadcrumb-sep {
+		opacity: 0.4;
+	}
+
+	.breadcrumb-active {
+		color: var(--blue-950);
+		font-weight: 600;
+	}
+
+	:global(.dark) .breadcrumb-active {
+		color: var(--sky-300);
+	}
+
+	/* Header */
+	.videos-header {
+		margin-bottom: var(--spacing-10);
+	}
+
+	.header-badge {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--text-brand);
+		margin-bottom: var(--spacing-2);
+	}
+
+	:global(.dark) .header-badge {
+		color: var(--sky-400);
+	}
+
+	.page-title {
+		font-size: 2.35rem;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-2);
+		line-height: 1.25;
+	}
+
+	:global(.dark) .page-title {
+		color: var(--white);
+	}
+
+	.page-lead {
+		font-size: 1.08rem;
+		line-height: 1.7;
+		color: var(--slate-700);
+		max-width: 840px;
+		margin: 0;
+	}
+
+	:global(.dark) .page-lead {
+		color: var(--slate-300);
+	}
+
+	/* Video Embed Wrapper (16:9 responsive aspect ratio) */
+	.video-embed-wrapper {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		background: #000;
+		border-radius: var(--radius-md);
+		overflow: hidden;
+	}
+
+	.video-embed-wrapper iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
+	/* 1. Featured Spotlight Section */
+	.featured-video-section {
+		margin-bottom: var(--spacing-16);
+	}
+
+	.featured-video-card {
+		display: grid;
+		grid-template-columns: 58% 42%;
+		gap: var(--spacing-8);
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-6);
+		box-shadow: var(--shadow-sm);
+		align-items: center;
+	}
+
+	:global(.dark) .featured-video-card {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.meta-badge-row {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: var(--spacing-2);
+	}
+
+	.badge-spotlight {
+		font-size: 0.7rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		background: var(--gold-100);
+		color: var(--gold-600);
+		padding: 3px 8px;
+		border-radius: var(--radius-full);
+	}
+
+	:global(.dark) .badge-spotlight {
+		background: rgba(217, 119, 6, 0.2);
+		color: var(--gold-400);
+	}
+
+	.featured-title {
+		font-size: 1.45rem;
+		line-height: 1.35;
+		color: var(--blue-950);
+		margin: 0 0 var(--spacing-3);
+	}
+
+	:global(.dark) .featured-title {
+		color: var(--white);
+	}
+
+	.speakers-box {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		margin-bottom: var(--spacing-4);
+		padding: 8px 12px;
+		background: var(--sky-50);
+		border-radius: var(--radius-sm);
+		border-left: 3px solid var(--sky-400);
+	}
+
+	:global(.dark) .speakers-box {
+		background: rgba(8, 26, 47, 0.5);
+		border-left-color: var(--sky-400);
+	}
+
+	.speaker-line {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 0.85rem;
+		color: var(--slate-800);
+	}
+
+	:global(.dark) .speaker-line {
+		color: var(--slate-200);
+	}
+
+	.featured-desc {
+		font-size: 0.92rem;
+		line-height: 1.65;
+		color: var(--slate-700);
+		margin-bottom: var(--spacing-4);
+	}
+
+	:global(.dark) .featured-desc {
+		color: var(--slate-300);
+	}
+
+	.video-meta-row,
+	.card-footer-meta {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 0.8rem;
+		color: var(--slate-600);
+	}
+
+	:global(.dark) .video-meta-row,
+	:global(.dark) .card-footer-meta {
+		color: var(--slate-400);
+	}
+
+	.meta-dot {
+		opacity: 0.5;
+	}
+
+	/* 2. Secondary Videos Grid */
+	.secondary-videos-section {
+		margin-top: var(--spacing-12);
+	}
+
+	.section-title-row {
+		margin-bottom: var(--spacing-6);
+	}
+
+	.section-title {
+		font-size: 1.45rem;
+		color: var(--blue-950);
+		margin: 0;
+	}
+
+	:global(.dark) .section-title {
+		color: var(--white);
+	}
+
+	.videos-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--spacing-8);
+	}
+
+	.video-card {
+		background: var(--white);
+		border: 1px solid var(--sky-200);
+		border-radius: var(--radius-md);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		box-shadow: var(--shadow-sm);
+		transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	:global(.dark) .video-card {
+		background: var(--blue-950);
+		border-color: rgba(52, 198, 244, 0.2);
+	}
+
+	.video-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
+
+	.video-card-body {
+		padding: var(--spacing-5);
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.video-card-title {
+		font-size: 1.15rem;
+		line-height: 1.35;
+		color: var(--blue-950);
+		margin: var(--spacing-1) 0 var(--spacing-2);
+	}
+
+	:global(.dark) .video-card-title {
+		color: var(--white);
+	}
+
+	.speakers-box-mini {
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+		font-size: 0.8rem;
+		color: var(--text-brand);
+		margin-bottom: var(--spacing-3);
+		line-height: 1.4;
+	}
+
+	:global(.dark) .speakers-box-mini {
+		color: var(--sky-300);
+	}
+
+	.video-card-desc {
+		font-size: 0.88rem;
+		line-height: 1.6;
+		color: var(--slate-700);
+		margin-bottom: var(--spacing-4);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	:global(.dark) .video-card-desc {
+		color: var(--slate-300);
+	}
+
+	.card-footer-meta {
+		margin-top: auto;
+		padding-top: var(--spacing-3);
+		border-top: 1px solid var(--slate-100);
+	}
+
+	:global(.dark) .card-footer-meta {
+		border-top-color: rgba(255, 255, 255, 0.08);
+	}
+
+	/* Responsive */
+	@media (max-width: 960px) {
+		.featured-video-card {
+			grid-template-columns: 1fr;
+		}
+
+		.videos-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.page-title {
+			font-size: 1.85rem;
+		}
+
+		.featured-title {
+			font-size: 1.35rem;
+		}
+	}
+</style>
