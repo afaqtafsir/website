@@ -294,8 +294,13 @@ if (article) {
 									<article class="related-card">
 										<a href={`/${rel.id}`} class="related-img-link">
 											<div class="related-img">
-												{rel.data.featured_image ? (
-													<Image image={rel.data.featured_image} />
+												{getImageUrl(rel.data.featured_image) ? (
+													<img
+														src={getImageUrl(rel.data.featured_image)}
+														alt={rel.data.featured_image?.alt || rel.data.title}
+														loading="lazy"
+														decoding="async"
+													/>
 												) : (
 													<div class="related-fallback">AFAQ TAFSIR</div>
 												)}

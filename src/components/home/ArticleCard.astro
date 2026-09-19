@@ -57,6 +57,21 @@ const readingTimeShort =
 	(variant !== "lead"
 		? formatReadingTime(getReadingTime(article.data.content), { short: true })
 		: "");
+
+function getMediaUrl(image: unknown): string | undefined {
+	if (!image || typeof image !== "object") return undefined;
+	const img = image as Record<string, unknown>;
+	if (typeof img.src === "string" && img.src) return img.src;
+	const meta = img.meta as Record<string, unknown> | undefined;
+	const storageKey =
+		(typeof meta?.storageKey === "string" ? meta.storageKey : undefined) ||
+		(typeof img.id === "string" ? img.id : undefined);
+
+	return storageKey ? `/_emdash/api/media/file/${storageKey}` : undefined;
+}
+
+const thumbUrl = getMediaUrl(article.data.featured_image);
+const thumbAlt = article.data.featured_image?.alt || article.data.title;
 ---
 
 {/* ================================================================
@@ -114,8 +129,13 @@ const readingTimeShort =
   <article class="card-secondary">
     <a href={href} class="card-secondary__thumb-link" aria-label={article.data.title}>
       <div class:list={["card-secondary__thumb", `thumb--${thumbSize}`]}>
-        {article.data.featured_image ? (
-          <Image image={article.data.featured_image} />
+        {thumbUrl ? (
+          <img
+            src={thumbUrl}
+            alt={thumbAlt}
+            loading="lazy"
+            decoding="async"
+          />
         ) : (
           <div class="card-secondary__fallback"><span>TAFSIR</span></div>
         )}
@@ -154,8 +174,13 @@ const readingTimeShort =
   <article class="card-compact">
     <a href={href} class="card-compact__thumb-link">
       <div class="card-compact__thumb">
-        {article.data.featured_image ? (
-          <Image image={article.data.featured_image} />
+        {thumbUrl ? (
+          <img
+            src={thumbUrl}
+            alt={thumbAlt}
+            loading="lazy"
+            decoding="async"
+          />
         ) : (
           <div class="card-compact__fallback">📖</div>
         )}
