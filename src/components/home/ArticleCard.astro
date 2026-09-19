@@ -1,0 +1,477 @@
+---
+import { Image } from "emdash/ui";
+import { getReadingTime, formatReadingTime } from "../../utils/reading-time";
+
+interface Props {
+  article: any;
+  variant: "lead" | "secondary" | "compact" | "popular";
+  /** h1 for hero lead, h2 for hero secondary, h3/h4 elsewhere */
+  headingTag?: "h1" | "h2" | "h3" | "h4";
+  showExcerpt?: boolean;
+  showCategory?: boolean;
+  rank?: number;
+  /** Controls thumbnail size for secondary / compact variants */
+  thumbSize?: "lg" | "md" | "sm";
+  authorFallback?: string;
+}
+
+const {
+  article,
+  variant,
+  headingTag = "h3",
+  showExcerpt = false,
+  showCategory = true,
+  rank,
+  thumbSize = "md",
+  authorFallback = "Redaksi",
+} = Astro.props;
+
+const category = article.category as { label: string; slug: string } | undefined;
+const byline = article.data.bylines?.[0]?.byline;
+const href = `/${article.id}`;
+
+function formatDate(date: Date | string | null | undefined): string {
+  if (!date) return "18 Agustus 2026";
+  const d = typeof date === "string" ? new Date(date) : date;
+  return d.toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+/* ── tiny helpers to keep the template readable ── */
+const authorLink = byline?.slug
+  ? `/penulis/${byline.slug}`
+  : null;
+const authorName = byline?.displayName || authorFallback;
+const readingTime = formatReadingTime(getReadingTime(article.data.content));
+const readingTimeShort = formatReadingTime(getReadingTime(article.data.content), { short: true });
+---
+
+{/* ================================================================
+    VARIANT: LEAD  –  large vertical card (hero / pattern-a / pattern-b)
+    ================================================================ */}
+{variant === "lead" && (
+  <article class="card-lead">
+    <a href={href} class="card-lead__img-link" aria-label={article.data.title}>
+      <div class="card-lead__img">
+        {article.data.featured_image ? (
+          <Image image={article.data.featured_image} />
+        ) : (
+          <div class="card-lead__fallback"><span>AFAQ TAFSIR</span></div>
+        )}
+      </div>
+    </a>
+    <div class="card-lead__body">
+      {showCategory && category && (
+        <a href={`/kategori/${category.slug}`} class="badge-category">
+          {category.label}
+        </a>
+      )}
+
+      {headingTag === "h1" ? (
+        <h1 class="card-lead__title"><a href={href}>{article.data.title}</a></h1>
+      ) : headingTag === "h2" ? (
+        <h2 class="card-lead__title"><a href={href}>{article.data.title}</a></h2>
+      ) : (
+        <h3 class="card-lead__title"><a href={href}>{article.data.title}</a></h3>
+      )}
+
+      {showExcerpt && (
+        <p class="card-lead__excerpt">{article.data.excerpt}</p>
+      )}
+
+      <div class="card-meta">
+        {authorLink ? (
+          <a href={authorLink} class="meta-author-link">{authorName}</a>
+        ) : (
+          <span class="meta-author">{authorName}</span>
+        )}
+        <span class="meta-sep">•</span>
+        <time class="meta-date">{formatDate(article.data.publishedAt)}</time>
+        <span class="meta-sep">•</span>
+        <span class="meta-reading-time">⏱ {readingTime}</span>
+      </div>
+    </div>
+  </article>
+)}
+
+{/* ================================================================
+    VARIANT: SECONDARY  –  horizontal card with square thumb
+    ================================================================ */}
+{variant === "secondary" && (
+  <article class="card-secondary">
+    <a href={href} class="card-secondary__thumb-link" aria-label={article.data.title}>
+      <div class:list={["card-secondary__thumb", `thumb--${thumbSize}`]}>
+        {article.data.featured_image ? (
+          <Image image={article.data.featured_image} />
+        ) : (
+          <div class="card-secondary__fallback"><span>TAFSIR</span></div>
+        )}
+      </div>
+    </a>
+    <div class="card-secondary__body">
+      {showCategory && category && (
+        <a href={`/kategori/${category.slug}`} class="badge-category-mini">
+          {category.label}
+        </a>
+      )}
+
+      {headingTag === "h2" ? (
+        <h2 class="card-secondary__title"><a href={href}>{article.data.title}</a></h2>
+      ) : (
+        <h4 class="card-secondary__title"><a href={href}>{article.data.title}</a></h4>
+      )}
+
+      <div class="card-meta-mini">
+        {authorLink ? (
+          <a href={authorLink} class="meta-author-link">{authorName}</a>
+        ) : (
+          <span class="meta-author">{authorName}</span>
+        )}
+        <span class="meta-sep">•</span>
+        <span class="meta-time">{readingTimeShort}</span>
+      </div>
+    </div>
+  </article>
+)}
+
+{/* ================================================================
+    VARIANT: COMPACT  –  small horizontal card (pattern-b subgrid)
+    ================================================================ */}
+{variant === "compact" && (
+  <article class="card-compact">
+    <a href={href} class="card-compact__thumb-link">
+      <div class="card-compact__thumb">
+        {article.data.featured_image ? (
+          <Image image={article.data.featured_image} />
+        ) : (
+          <div class="card-compact__fallback">📖</div>
+        )}
+      </div>
+    </a>
+    <div class="card-compact__body">
+      <h4 class="card-compact__title">
+        <a href={href}>{article.data.title}</a>
+      </h4>
+      <div class="card-meta-mini">
+        <time>{formatDate(article.data.publishedAt)}</time>
+        <span class="meta-sep">•</span>
+        <span>{readingTimeShort}</span>
+      </div>
+    </div>
+  </article>
+)}
+
+{/* ================================================================
+    VARIANT: POPULAR  –  ranked sidebar item
+    ================================================================ */}
+{variant === "popular" && (
+  <article class="card-popular">
+    <span class="card-popular__rank">0{rank}</span>
+    <div class="card-popular__body">
+      <h4 class="card-popular__title">
+        <a href={href}>{article.data.title}</a>
+      </h4>
+      <div class="card-meta-mini">
+        {article.views > 0 && (
+          <>
+            <span class="popular-reads-metric">
+              🔥 {article.views >= 1000 ? `${(article.views / 1000).toFixed(1)}k` : article.views} dibaca
+            </span>
+            <span class="meta-sep">•</span>
+          </>
+        )}
+        <span>{readingTimeShort}</span>
+      </div>
+    </div>
+  </article>
+)}
+
+<style>
+  /* ================================================================
+     SHARED – badges & meta rows
+     ================================================================ */
+  .badge-category {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-brand);
+    text-decoration: none;
+    margin-bottom: var(--spacing-2);
+  }
+  .badge-category:hover { text-decoration: underline; }
+
+  .badge-category-mini {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-brand);
+    text-decoration: none;
+    margin-bottom: 4px;
+  }
+  .badge-category-mini:hover { text-decoration: underline; }
+
+  .card-meta,
+  .card-meta-mini {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .card-meta       { font-size: 0.82rem; color: var(--slate-600); margin-top: auto; }
+  .card-meta-mini  { font-size: 0.75rem; color: var(--slate-600); }
+
+  :global(.dark) .card-meta,
+  :global(.dark) .card-meta-mini { color: var(--slate-400); }
+
+  .meta-author       { font-weight: 600; color: var(--slate-800); }
+  .meta-author-link  { font-weight: 600; color: var(--slate-800); text-decoration: none; transition: color var(--transition-fast); }
+  .meta-author-link:hover { color: var(--text-brand); text-decoration: underline; }
+
+  :global(.dark) .meta-author      { color: var(--slate-200); }
+  :global(.dark) .meta-author-link { color: var(--slate-200); }
+  :global(.dark) .meta-author-link:hover { color: var(--sky-400); }
+
+  .meta-sep { opacity: 0.5; }
+
+  /* ================================================================
+     LEAD
+     ================================================================ */
+  .card-lead {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--sky-200);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  :global(.dark) .card-lead {
+    background: var(--blue-950);
+    border-color: rgba(52, 198, 244, 0.2);
+  }
+  .card-lead:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .card-lead__img-link { display: block; overflow: hidden; }
+  .card-lead__img {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    overflow: hidden;
+    background: var(--sky-100);
+  }
+  .card-lead__img :global(img) {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .card-lead:hover .card-lead__img :global(img) { transform: scale(1.03); }
+
+  .card-lead__fallback {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg-dark-section);
+    color: var(--sky-300);
+    font-family: var(--font-serif);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .card-lead__body {
+    padding: var(--spacing-5) var(--spacing-6) var(--spacing-6);
+    display: flex; flex-direction: column; flex-grow: 1;
+  }
+
+  .card-lead__title {
+    font-size: 1.2rem;
+    line-height: 1.3;
+    margin: var(--spacing-2) 0;
+  }
+  .card-lead__title a {
+    color: var(--blue-950);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  :global(.dark) .card-lead__title a { color: var(--white); }
+  .card-lead__title a:hover { color: var(--text-brand); }
+
+  .card-lead__excerpt {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--slate-700);
+    margin-bottom: var(--spacing-4);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  :global(.dark) .card-lead__excerpt { color: var(--slate-300); }
+
+  /* ================================================================
+     SECONDARY
+     ================================================================ */
+  .card-secondary {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    padding: var(--spacing-3);
+    background: var(--white);
+    border: 1px solid var(--sky-200);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  }
+  :global(.dark) .card-secondary {
+    background: var(--blue-950);
+    border-color: rgba(52, 198, 244, 0.15);
+  }
+  .card-secondary:hover {
+    transform: translateX(3px);
+    border-color: var(--sky-400);
+  }
+
+  .card-secondary__thumb-link { flex-shrink: 0; }
+  .card-secondary__thumb {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--sky-100);
+  }
+  .card-secondary__thumb :global(img) {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .thumb--lg { width: 100px; height: 100px; }
+  .thumb--md { width: 78px;  height: 78px; }
+  .thumb--sm { width: 60px;  height: 60px; }
+
+  .card-secondary__fallback {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--blue-900);
+    color: var(--sky-300);
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .card-secondary__body {
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .card-secondary__title {
+    font-size: 0.95rem;
+    line-height: 1.35;
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-secondary__title a {
+    color: var(--blue-950);
+    text-decoration: none;
+  }
+  :global(.dark) .card-secondary__title a { color: var(--white); }
+  .card-secondary__title a:hover { color: var(--text-brand); }
+
+  /* ================================================================
+     COMPACT
+     ================================================================ */
+  .card-compact {
+    display: flex;
+    gap: var(--spacing-3);
+    align-items: center;
+    padding: var(--spacing-3);
+    background: var(--white);
+    border: 1px solid var(--sky-200);
+    border-radius: var(--radius-sm);
+  }
+  :global(.dark) .card-compact {
+    background: var(--blue-950);
+    border-color: rgba(52, 198, 244, 0.15);
+  }
+
+  .card-compact__thumb-link { flex-shrink: 0; }
+  .card-compact__thumb {
+    width: 60px; height: 60px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--sky-100);
+  }
+  .card-compact__thumb :global(img) {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .card-compact__fallback {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    background: var(--sky-100);
+  }
+
+  .card-compact__body { min-width: 0; }
+  .card-compact__title {
+    font-size: 0.88rem;
+    line-height: 1.35;
+    margin-bottom: 3px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-compact__title a {
+    color: var(--blue-950);
+    text-decoration: none;
+  }
+  :global(.dark) .card-compact__title a { color: var(--white); }
+
+  /* ================================================================
+     POPULAR
+     ================================================================ */
+  .card-popular {
+    display: flex;
+    gap: var(--spacing-3);
+    align-items: flex-start;
+    border-bottom: 1px solid var(--sky-100);
+    padding-bottom: var(--spacing-3);
+  }
+  :global(.dark) .card-popular {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  .card-popular:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .card-popular__rank {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gold-500);
+    line-height: 1;
+    width: 28px;
+    flex-shrink: 0;
+  }
+
+  .card-popular__body { flex-grow: 1; }
+  .card-popular__title {
+    font-size: 0.9rem;
+    line-height: 1.35;
+    margin: 0 0 4px;
+  }
+  .card-popular__title a {
+    color: var(--blue-950);
+    text-decoration: none;
+  }
+  :global(.dark) .card-popular__title a { color: var(--white); }
+  .card-popular__title a:hover { color: var(--text-brand); }
+
+  .popular-reads-metric { font-weight: 600; }
+</style>

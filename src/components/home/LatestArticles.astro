@@ -1,0 +1,73 @@
+---
+import ArticleCard from "./ArticleCard.astro";
+
+interface Props {
+  leads: any[];
+  subgrid: any[];
+}
+
+const { leads, subgrid } = Astro.props;
+---
+
+<section class="section-block" aria-label="Artikel Terbaru">
+  <div class="section-header">
+    <h2 class="section-title">Artikel Terbaru</h2>
+    <span class="amber-bar"></span>
+  </div>
+
+  {/* Top – 2 medium featured cards */}
+  <div class="pattern-b-leads-grid">
+    {leads.map((item) => (
+      <ArticleCard
+        article={item}
+        variant="lead"
+        headingTag="h3"
+        showExcerpt
+        showCategory
+      />
+    ))}
+  </div>
+
+  {/* Bottom – 2×2 compact grid */}
+  <div class="pattern-b-subgrid">
+    {subgrid.map((item) => (
+      <ArticleCard
+        article={item}
+        variant="compact"
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .section-block { margin-bottom: var(--spacing-16); }
+
+  .section-header { margin-bottom: var(--spacing-6); }
+
+  .section-title {
+    font-size: 1.5rem;
+    color: var(--blue-950);
+    margin: 0;
+  }
+  :global(.dark) .section-title { color: var(--white); }
+
+  .pattern-b-leads-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-6);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .pattern-b-subgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-4);
+  }
+
+  @media (max-width: 640px) {
+    .pattern-b-leads-grid,
+    .pattern-b-subgrid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,72 @@
+---
+import ArticleCard from "./ArticleCard.astro";
+
+interface Props {
+  lead: any;
+  minis: any[];
+}
+
+const { lead, minis } = Astro.props;
+---
+
+<section class="section-block" aria-label="Fokus Tematik: Perempuan & Keadilan Gender">
+  <div class="section-header">
+    <h2 class="section-title">Fokus Tematik: Perempuan &amp; Keadilan Gender</h2>
+    <span class="amber-bar"></span>
+  </div>
+
+  <div class="pattern-a-grid">
+    {/* Left 50 % – large lead */}
+    {lead && (
+      <ArticleCard
+        article={lead}
+        variant="lead"
+        headingTag="h3"
+        showExcerpt
+        showCategory
+      />
+    )}
+
+    {/* Right 50 % – 4 stacked minis */}
+    <div class="pattern-a-mini-stack">
+      {minis.map((item) => (
+        <ArticleCard
+          article={item}
+          variant="secondary"
+          headingTag="h4"
+          showCategory
+          thumbSize="md"
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-block { margin-bottom: var(--spacing-16); }
+
+  .section-header { margin-bottom: var(--spacing-6); }
+
+  .section-title {
+    font-size: 1.5rem;
+    color: var(--blue-950);
+    margin: 0;
+  }
+  :global(.dark) .section-title { color: var(--white); }
+
+  .pattern-a-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-6);
+  }
+
+  .pattern-a-mini-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+
+  @media (max-width: 640px) {
+    .pattern-a-grid { grid-template-columns: 1fr; }
+  }
+</style>

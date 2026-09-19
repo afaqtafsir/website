@@ -1,0 +1,71 @@
+---
+import ArticleCard from "./ArticleCard.astro";
+
+interface Props {
+  lead: any;
+  secondaries: any[];
+}
+
+const { lead, secondaries } = Astro.props;
+---
+
+{lead && (
+  <section class="hero-bento-section" aria-label="Kajian Utama & Pilihan Editorial">
+    <div class="hero-bento-grid">
+      {/* Left ~58 % – major lead story */}
+      <div class="hero-bento__lead">
+        <ArticleCard
+          article={lead}
+          variant="lead"
+          headingTag="h1"
+          showExcerpt
+          showCategory
+          authorFallback="Mochamad Refian Prasetyo, S.Ag."
+        />
+      </div>
+
+      {/* Right ~42 % – 4 stacked secondary cards */}
+      <div class="hero-bento__stack">
+        {secondaries.map((item) => (
+          <ArticleCard
+            article={item}
+            variant="secondary"
+            headingTag="h2"
+            showCategory
+            thumbSize="lg"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .hero-bento-section {
+    margin-bottom: var(--spacing-12);
+  }
+
+  .hero-bento-grid {
+    display: grid;
+    grid-template-columns: 58% 42%;
+    gap: var(--spacing-8);
+    align-items: stretch;
+  }
+
+  .hero-bento__lead :global(.card-lead__title) {
+    font-size: 1.65rem;
+    line-height: 1.25;
+  }
+
+  .hero-bento__stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+
+  @media (max-width: 1024px) {
+    .hero-bento-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

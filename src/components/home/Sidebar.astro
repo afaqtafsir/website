@@ -1,0 +1,160 @@
+---
+import ArticleCard from "./ArticleCard.astro";
+
+interface Props {
+  popularArticles: any[];
+}
+
+const { popularArticles } = Astro.props;
+---
+
+<aside class="sidebar-column">
+
+  {/* ── Widget 1: About ── */}
+  <div class="sidebar-widget widget-about">
+    <div class="widget-header">
+      <h3 class="widget-title">Tentang Afaq Tafsir</h3>
+      <span class="amber-bar"></span>
+    </div>
+    <p class="widget-about-text">
+      Afaq Tafsir diinisiasi pada tahun 2026 oleh mahasiswi
+      <strong>Pendidikan Kader Ulama Masjid Istiqlal (PKUMI) — Program Kader Ulama Perempuan</strong>
+      untuk menghadirkan ruang ilmiah kajian tafsir dan pemikiran Qur'ani.
+    </p>
+    <a href="/tentang" class="widget-link-arrow">
+      <span>Baca Manifesto &amp; Visi Kami →</span>
+    </a>
+  </div>
+
+  {/* ── Widget 2: Popular articles (ranked 01-05) ── */}
+  <div class="sidebar-widget widget-popular">
+    <div class="widget-header">
+      <h3 class="widget-title">Artikel Terpopuler</h3>
+      <span class="amber-bar"></span>
+    </div>
+    <div class="popular-list">
+      {popularArticles.map((item, index) => (
+        <ArticleCard
+          article={item}
+          variant="popular"
+          rank={index + 1}
+        />
+      ))}
+    </div>
+  </div>
+
+  {/* ── Widget 3: Contributor CTA ── */}
+  <div class="sidebar-widget widget-contributor-cta">
+    <h3 class="contributor-title">Kirimkan Naskah Esai &amp; Kajian Tafsir Anda</h3>
+    <p class="contributor-desc">
+      Redaksi Afaq Tafsir membuka penerimaan artikel tematik tafsir, manuskrip,
+      dan pemikiran Islam untuk dipublikasikan secara berkala.
+    </p>
+    <a href="/kirim-tulisan" class="btn-contributor-full">
+      <span>Panduan Pengiriman Naskah →</span>
+    </a>
+  </div>
+
+</aside>
+
+<style>
+  .sidebar-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+  }
+
+  .sidebar-widget {
+    background: var(--white);
+    border: 1px solid var(--sky-200);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-6);
+    box-shadow: var(--shadow-sm);
+  }
+  :global(.dark) .sidebar-widget {
+    background: var(--blue-950);
+    border-color: rgba(52, 198, 244, 0.2);
+  }
+
+  .widget-header { margin-bottom: var(--spacing-4); }
+
+  .widget-title {
+    font-size: 1.15rem;
+    color: var(--blue-950);
+    margin: 0;
+  }
+  :global(.dark) .widget-title { color: var(--white); }
+
+  /* About widget */
+  .widget-about-text {
+    font-size: 0.88rem; line-height: 1.7;
+    color: var(--slate-700);
+    margin-bottom: var(--spacing-4);
+  }
+  :global(.dark) .widget-about-text { color: var(--slate-300); }
+
+  .widget-link-arrow {
+    font-size: 0.85rem; font-weight: 700;
+    color: var(--text-brand);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .widget-link-arrow:hover {
+    color: var(--blue-900);
+    text-decoration: underline;
+  }
+
+  /* Popular list */
+  .popular-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  /* Contributor CTA */
+  .widget-contributor-cta {
+    border: 2px solid var(--gold-400);
+    background: linear-gradient(180deg, var(--gold-50) 0%, var(--white) 100%);
+    text-align: center;
+  }
+  :global(.dark) .widget-contributor-cta {
+    background: linear-gradient(180deg, rgba(217,119,6,0.15) 0%, var(--blue-950) 100%);
+    border-color: var(--gold-500);
+  }
+
+  .contributor-title {
+    font-size: 1.1rem; line-height: 1.35;
+    color: var(--blue-950);
+    margin-bottom: var(--spacing-3);
+  }
+  :global(.dark) .contributor-title { color: var(--white); }
+
+  .contributor-desc {
+    font-size: 0.82rem; line-height: 1.6;
+    color: var(--slate-700);
+    margin-bottom: var(--spacing-5);
+  }
+  :global(.dark) .contributor-desc { color: var(--slate-300); }
+
+  .btn-contributor-full {
+    display: block; width: 100%;
+    padding: 10px 16px;
+    background: var(--gold-500);
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 0.85rem; font-weight: 700;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(217,119,6,0.3);
+    transition: background var(--transition-fast), transform var(--transition-fast);
+  }
+  .btn-contributor-full:hover {
+    background: var(--gold-600);
+    color: var(--white);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 1024px) {
+    .sidebar-column { margin-top: var(--spacing-8); }
+  }
+</style>
