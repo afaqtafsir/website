@@ -186,6 +186,7 @@ Unlike the 2026-09-11 outage, this was not caused by database row bloat or base6
    - **Suspicion Level:** **Medium-High (Plausible Multiplier / Baseline Elevation)**
    - **Mechanism:** Previously, only 3 articles had a `featured_image`; the other 6 rendered static fallback `<div>` boxes. After the migration, all 9 articles had thumbnails, causing the homepage to render **16 `<Image />` components** at once.
    - Because thumbnails were uploaded as 1920×1080 images, Astro's responsive image service (`layout="constrained"`) evaluated up to 12 responsive breakpoints (`widths`) per thumbnail, running URL string generation and regex checks ~192 times per render. Concurrently, `ArticleCard.astro` was invoking `getReadingTime()` twice per card (42 Portable Text AST traversals per homepage request).
+   - *Measurement distinction:* The unoptimized warm cost was extrapolated to ~60–80 ms based on component density and AST traversals over the historical 17–35 ms baseline. It could not be measured directly during the outage because the runtime truncated execution at exactly 10 ms (`outcome: exceededCpu`).
 
 3. **Factor C: Compound Interaction**
    - **Suspicion Level:** **Highest (Most Probable Reality)**
@@ -194,6 +195,16 @@ Unlike the 2026-09-11 outage, this was not caused by database row bloat or base6
 #### Mitigations Applied
 - **Commit `1a0e8ca` (`perf(reading-time)`):** Precomputed reading times once per unique article in `index.astro` (reducing AST traversals on the homepage from 42 to 9) and consumed precomputed strings in `ArticleCard.astro`.
 - **Commit `42ffd8e` (`perf(thumbnail)`):** Bypassed Astro's runtime image service on small 60px/78px thumbnails (secondary, compact, and related article cards) in favor of direct `<img>` tags pointing to `/_emdash/api/media/file/<storageKey>`, reserving full responsive `<Image />` for lead hero cards and main article banners.
+
+#### Post-Mitigation Empirical Telemetry (Measured 2026-09-19, Deployment `dfa14257`)
+
+Measured live via `wrangler tail` under Tolerated Mode once isolates cooled down:
+
+| Route | Outcome | `cpuTime` (warm) | `wallTime` | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| `/` (Homepage) | `ok` | **37 ms – 49 ms** | 202 ms – 245 ms | All 9 articles rendered with thumbnails |
+| `/<article-slug>` | `ok` | **53 ms – 56 ms** | 207 ms – 258 ms | Related cards using direct `<img>` |
+| `/penulis` | `ok` | **30 ms** | 203 ms | 100-article byline aggregation |
 
 ---
 
