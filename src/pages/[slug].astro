@@ -7,10 +7,7 @@ import {
 	decodeSlug,
 	getSiteSettings,
 } from "emdash";
-import {
-	Image,
-	PortableText,
-} from "emdash/ui";
+import { Image, PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { getReadingTime, formatReadingTime } from "../utils/reading-time";
@@ -22,7 +19,10 @@ if (!slug) {
 }
 
 // 1. First, check "articles" collection
-const { entry: article, cacheHint: articleCacheHint } = await getEmDashEntry("articles", slug);
+const { entry: article, cacheHint: articleCacheHint } = await getEmDashEntry(
+	"articles",
+	slug,
+);
 
 // 2. If not an article, check "pages" collection
 let page: any = null;
@@ -85,7 +85,8 @@ let authorByline: any = null;
 let authorName = "Mochamad Refian Prasetyo, S.Ag.";
 let authorRole = "Peneliti Tafsir & Hermeneutika Al-Qur'an";
 let authorAffiliation = "Pendidikan Kader Ulama Masjid Istiqlal (PKUMI)";
-let authorBio = "Peneliti studi Al-Qur'an dan hermeneutika kontemporer. Menaruh minat mendalam pada studi gender, manuskrip tafsir Melayu-Nusantara, dan epistemologi maqashid.";
+let authorBio =
+	"Peneliti studi Al-Qur'an dan hermeneutika kontemporer. Menaruh minat mendalam pada studi gender, manuskrip tafsir Melayu-Nusantara, dan epistemologi maqashid.";
 let relatedArticles: any[] = [];
 let relatedCategories = new Map();
 
@@ -99,7 +100,10 @@ if (article) {
 	});
 
 	categories = article.data.terms?.category ?? [];
-	primaryCategory = categories[0] || { label: "Tafsir Tematik", slug: "tafsir-tematik" };
+	primaryCategory = categories[0] || {
+		label: "Tafsir Tematik",
+		slug: "tafsir-tematik",
+	};
 	tags = article.data.terms?.tag ?? [];
 
 	authorByline = article.data.bylines?.[0]?.byline;
@@ -112,9 +116,15 @@ if (article) {
 		orderBy: { published_at: "desc" },
 		limit: 4,
 	});
-	relatedArticles = relatedEntries.filter((a) => a.id !== article.id).slice(0, 3);
+	relatedArticles = relatedEntries
+		.filter((a) => a.id !== article.id)
+		.slice(0, 3);
 	const relatedIds = relatedArticles.map((a) => a.data.id);
-	relatedCategories = await getTermsForEntries("articles", relatedIds, "category");
+	relatedCategories = await getTermsForEntries(
+		"articles",
+		relatedIds,
+		"category",
+	);
 }
 ---
 

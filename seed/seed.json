@@ -16,12 +16,7 @@
 			"slug": "articles",
 			"label": "Articles",
 			"labelSingular": "Article",
-			"supports": [
-				"drafts",
-				"revisions",
-				"search",
-				"seo"
-			],
+			"supports": ["drafts", "revisions", "search", "seo"],
 			"commentsEnabled": false,
 			"fields": [
 				{
@@ -76,11 +71,7 @@
 			"slug": "pages",
 			"label": "Pages",
 			"labelSingular": "Page",
-			"supports": [
-				"drafts",
-				"revisions",
-				"search"
-			],
+			"supports": ["drafts", "revisions", "search"],
 			"fields": [
 				{
 					"slug": "title",
@@ -105,9 +96,7 @@
 			"label": "Kategori",
 			"labelSingular": "Kategori",
 			"hierarchical": true,
-			"collections": [
-				"articles"
-			],
+			"collections": ["articles"],
 			"terms": [
 				{
 					"slug": "epistemologi-ushul",
@@ -180,9 +169,7 @@
 			"label": "Tag",
 			"labelSingular": "Tag",
 			"hierarchical": false,
-			"collections": [
-				"articles"
-			],
+			"collections": ["articles"],
 			"terms": [
 				{
 					"slug": "istiqlal",
@@ -431,10 +418,7 @@
 					}
 				],
 				"taxonomies": {
-					"category": [
-						"perempuan-keadilan",
-						"tafsir-tematik"
-					],
+					"category": ["perempuan-keadilan", "tafsir-tematik"],
 					"tag": [
 						"pkumi",
 						"kepemimpinan-perempuan",
@@ -467,9 +451,7 @@
 									"_type": "span",
 									"_key": "k0",
 									"text": "Benarkah Perempuan Tidak Layak Memimpin? Membaca Ulang Kisah Ratu Bilqis di Tengah Bias Gender",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -864,16 +846,8 @@
 					}
 				],
 				"taxonomies": {
-					"category": [
-						"perempuan-keadilan",
-						"tafsir-tematik"
-					],
-					"tag": [
-						"pkumi",
-						"hawa",
-						"adam-hawa",
-						"mitos-gender"
-					]
+					"category": ["perempuan-keadilan", "tafsir-tematik"],
+					"tag": ["pkumi", "hawa", "adam-hawa", "mitos-gender"]
 				},
 				"data": {
 					"title": "Hawa dalam Narasi Al-Qur’an: Benarkah Ia Penyebab Adam Turun dari Surga?",
@@ -900,9 +874,7 @@
 									"_type": "span",
 									"_key": "k1k",
 									"text": "Hawa dalam Narasi Al-Qur’an: Benarkah Ia Penyebab Adam Turun dari Surga?",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -1357,10 +1329,7 @@
 					}
 				],
 				"taxonomies": {
-					"category": [
-						"perempuan-keadilan",
-						"tafsir-tematik"
-					],
+					"category": ["perempuan-keadilan", "tafsir-tematik"],
 					"tag": [
 						"pkumi",
 						"uu-tpks",
@@ -1394,9 +1363,7 @@
 									"_type": "span",
 									"_key": "k3c",
 									"text": "Etika Menjaga Pandangan dan Penghormatan Martabat Manusia dalam Pencegahan Kekerasan Seksual: Dialog Tafsir *Al-Mishbah* dengan UU TPKS",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -1410,9 +1377,7 @@
 									"_type": "span",
 									"_key": "k3e",
 									"text": "Pendahuluan",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -1482,9 +1447,7 @@
 									"_type": "span",
 									"_key": "k3o",
 									"text": "Pembahasan",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -1680,9 +1643,7 @@
 									"_type": "span",
 									"_key": "k4g",
 									"text": "Kesimpulan",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -1724,9 +1685,7 @@
 									"_type": "span",
 									"_key": "k4m",
 									"text": "Daftar Isi",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -1855,10 +1814,7 @@
 					}
 				],
 				"taxonomies": {
-					"category": [
-						"perempuan-keadilan",
-						"tafsir-tematik"
-					],
+					"category": ["perempuan-keadilan", "tafsir-tematik"],
 					"tag": [
 						"pkumi",
 						"fitrah-perempuan",
@@ -1891,9 +1847,7 @@
 									"_type": "span",
 									"_key": "k54",
 									"text": "Membaca Ulang Makna Kesuksesan dan Fitrah Perempuan dalam Al-Qur’an",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -2117,9 +2071,7 @@
 									"_type": "span",
 									"_key": "k60",
 									"text": "Referensi",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -2164,10 +2116,7 @@
 					}
 				],
 				"taxonomies": {
-					"category": [
-						"perempuan-keadilan",
-						"tafsir-tematik"
-					],
+					"category": ["perempuan-keadilan", "tafsir-tematik"],
 					"tag": [
 						"pkumi",
 						"parenting-qurani",
@@ -2201,9 +2150,7 @@
 									"_type": "span",
 									"_key": "k66",
 									"text": "Afeksi Verbal Orang Tua dan Pencegahan Kekerasan Anak: Kajian Tafsir al-Jailani atas QS. al-Shaffat [37]: 102",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -2287,9 +2234,7 @@
 									"_type": "span",
 									"_key": "k6i",
 									"text": "Ekspresi Afeksi Verbal dalam Dialog Ibrahim dan Ismail",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -2597,9 +2542,7 @@
 									"_type": "span",
 									"_key": "k7q",
 									"text": "Referensi:",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -2672,10 +2615,7 @@
 					}
 				],
 				"taxonomies": {
-					"category": [
-						"etika-kontemporer",
-						"epistemologi-ushul"
-					],
+					"category": ["etika-kontemporer", "epistemologi-ushul"],
 					"tag": [
 						"pkumi",
 						"majelis-tarjih",
@@ -2709,9 +2649,7 @@
 									"_type": "span",
 									"_key": "k80",
 									"text": "Belajar Cara Berpikir Ulama: PKUMI Dalami Tradisi Keilmuan di Majelis Tarjih Muhammadiyah",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -3074,10 +3012,7 @@
 					}
 				],
 				"taxonomies": {
-					"category": [
-						"etika-kontemporer",
-						"tafsir-tematik"
-					],
+					"category": ["etika-kontemporer", "tafsir-tematik"],
 					"tag": [
 						"pkumi",
 						"religiusitas-digital",
@@ -3111,9 +3046,7 @@
 									"_type": "span",
 									"_key": "k9f",
 									"text": "Religiusitas Digital dan Potensi Riya’:",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -3127,9 +3060,7 @@
 									"_type": "span",
 									"_key": "k9h",
 									"text": "Analisis Tafsir terhadap Fenomena Representasi Ibadah di Media Sosial",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -3465,9 +3396,7 @@
 									"_type": "span",
 									"_key": "kat",
 									"text": "Referensi",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -3610,10 +3539,7 @@
 					}
 				],
 				"taxonomies": {
-					"category": [
-						"etika-kontemporer",
-						"tafsir-tematik"
-					],
+					"category": ["etika-kontemporer", "tafsir-tematik"],
 					"tag": [
 						"pkumi",
 						"tabayyun",
@@ -3647,9 +3573,7 @@
 									"_type": "span",
 									"_key": "kbd",
 									"text": "“Hoaks dan Krisis Informasi di Ruang Publik: Menimbang Konsep *Tabayyun* dalam Tafsir Al-Qur’an”",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},
@@ -3901,9 +3825,7 @@
 									"_type": "span",
 									"_key": "kcd",
 									"text": "Daftar Pustaka",
-									"marks": [
-										"strong"
-									]
+									"marks": ["strong"]
 								}
 							]
 						},

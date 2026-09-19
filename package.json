@@ -1,41 +1,41 @@
 {
-  "name": "website",
-  "version": "0.0.3",
-  "private": true,
-  "type": "module",
-  "emdash": {
-    "seed": "seed/seed.json"
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "deploy": "astro build && wrangler deploy",
-    "typecheck": "astro check",
-    "cf-typegen": "wrangler types",
-    "d1:reset:remote": "wrangler d1 execute afaqtafsir-website --remote --file=scripts/reset-d1.sql",
-    "seed:r2": "bun scripts/seed-r2.js --local",
-    "seed:r2:remote": "bun scripts/seed-r2.js --remote",
-    "format": "biome format --write",
-    "lint": "biome lint",
-    "lint:write": "biome lint --write",
-    "check": "biome check",
-    "check:write": "biome check --write"
-  },
-  "dependencies": {
-    "@astrojs/cloudflare": "^14.3.2",
-    "@astrojs/react": "^6.0.6",
-    "@emdash-cms/cloudflare": "^0.38.0",
-    "astro": "^7.3.3",
-    "emdash": "^0.38.0",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.9.10",
-    "@biomejs/biome": "2.5.14",
-    "@cloudflare/workers-types": "^5.20260918.1",
-    "wrangler": "^4.134.0"
-  },
-  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b"
+	"name": "website",
+	"version": "0.0.3",
+	"private": true,
+	"type": "module",
+	"emdash": {
+		"seed": "seed/seed.json"
+	},
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"deploy": "astro build && wrangler deploy",
+		"typecheck": "astro check",
+		"cf-typegen": "wrangler types",
+		"d1:reset:remote": "wrangler d1 execute afaqtafsir-website --remote --file=scripts/reset-d1.sql",
+		"seed:r2": "bun scripts/seed-r2.js --local",
+		"seed:r2:remote": "bun scripts/seed-r2.js --remote",
+		"format": "biome format --write",
+		"lint": "biome lint",
+		"lint:write": "biome lint --write",
+		"check": "biome check",
+		"check:write": "biome check --write"
+	},
+	"dependencies": {
+		"@astrojs/cloudflare": "^14.3.2",
+		"@astrojs/react": "^6.0.6",
+		"@emdash-cms/cloudflare": "^0.38.0",
+		"astro": "^7.3.3",
+		"emdash": "^0.38.0",
+		"react": "19.3.0",
+		"react-dom": "19.3.0"
+	},
+	"devDependencies": {
+		"@astrojs/check": "^0.9.10",
+		"@biomejs/biome": "2.5.14",
+		"@cloudflare/workers-types": "^5.20260918.1",
+		"wrangler": "^4.134.0"
+	},
+	"packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b"
 }

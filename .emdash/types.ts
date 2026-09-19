@@ -4,37 +4,50 @@
 import type { PortableTextBlock } from "emdash";
 
 export interface Article {
-  id: string;
-  slug: string | null;
-  status: string;
-  title: string;
-  subheadline?: string;
-  excerpt: string;
-  featured_image?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
-  content: PortableTextBlock[];
-  reading_time?: string;
-  is_lead_hero?: boolean;
-  is_secondary_hero?: boolean;
-  is_featured?: boolean;
-  is_popular?: boolean;
-  popular_rank?: number;
-  popular_reads?: string;
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt: Date | null;
-  bylines?: ContentBylineCredit[];
-  terms?: Record<string, TaxonomyTerm[]>;
+	id: string;
+	slug: string | null;
+	status: string;
+	title: string;
+	subheadline?: string;
+	excerpt: string;
+	featured_image?: {
+		id: string;
+		src?: string;
+		alt?: string;
+		width?: number;
+		height?: number;
+		filename?: string;
+		mimeType?: string;
+		blurhash?: string;
+		dominantColor?: string;
+		provider?: string;
+		previewUrl?: string;
+		meta?: Record<string, unknown>;
+	};
+	content: PortableTextBlock[];
+	reading_time?: string;
+	is_lead_hero?: boolean;
+	is_secondary_hero?: boolean;
+	is_featured?: boolean;
+	is_popular?: boolean;
+	popular_rank?: number;
+	popular_reads?: string;
+	createdAt: Date;
+	updatedAt: Date;
+	publishedAt: Date | null;
+	bylines?: ContentBylineCredit[];
+	terms?: Record<string, TaxonomyTerm[]>;
 }
 
 export interface Page {
-  id: string;
-  slug: string | null;
-  status: string;
-  title: string;
-  content: PortableTextBlock[];
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt: Date | null;
-  bylines?: ContentBylineCredit[];
-  terms?: Record<string, TaxonomyTerm[]>;
+	id: string;
+	slug: string | null;
+	status: string;
+	title: string;
+	content: PortableTextBlock[];
+	createdAt: Date;
+	updatedAt: Date;
+	publishedAt: Date | null;
+	bylines?: ContentBylineCredit[];
+	terms?: Record<string, TaxonomyTerm[]>;
 }

@@ -5,7 +5,9 @@ import { resolveBlogSiteIdentity } from "../utils/site-identity";
 
 export const GET: APIRoute = async ({ site, url }) => {
 	const siteUrl = site?.toString() || url.origin;
-	const { siteTitle, siteTagline } = resolveBlogSiteIdentity(await getSiteSettings());
+	const { siteTitle, siteTagline } = resolveBlogSiteIdentity(
+		await getSiteSettings(),
+	);
 
 	const { entries: articles } = await getEmDashCollection("articles", {
 		orderBy: { published_at: "desc" },
@@ -15,7 +17,9 @@ export const GET: APIRoute = async ({ site, url }) => {
 	const items = articles
 		.map((article) => {
 			const pubDateRaw = article.data.publishedAt;
-			const pubDate = pubDateRaw ? new Date(pubDateRaw).toUTCString() : new Date().toUTCString();
+			const pubDate = pubDateRaw
+				? new Date(pubDateRaw).toUTCString()
+				: new Date().toUTCString();
 
 			const articleUrl = `${siteUrl}/${article.id}`;
 			const title = escapeXml(article.data.title || "Untitled");

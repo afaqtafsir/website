@@ -34,7 +34,8 @@ const MEDIA_SEEDS = [
 	{
 		storage_key: "01M13B18PEEY70SEDR0FQ068X1.jpg",
 		filename: "pkumi-majelis-tarjih-kunjungan.jpg",
-		local_path: "data/Belajar Cara Berpikir Ulama, PKUMI Dalami Tradisi Keilmuan di Majelis Tarjih Muhammadiyah_images/image1.jpeg",
+		local_path:
+			"data/Belajar Cara Berpikir Ulama, PKUMI Dalami Tradisi Keilmuan di Majelis Tarjih Muhammadiyah_images/image1.jpeg",
 		url: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=1200&h=675&fit=crop",
 	},
 	{
@@ -50,22 +51,26 @@ const MEDIA_SEEDS = [
 	{
 		storage_key: "01M13B_AUTHOR_FAHMIA.jpg",
 		filename: "author-fahmia.jpg",
-		local_path: "data/Al-Qur’an dan Kebijakan Negara_ Fahmia Nuha Tsabita_Etika Menjaga Pandangan dan Penghormatan Martabat Manusia dalam Pencegahan Kekerasan Seksual_images/image1.jpeg",
+		local_path:
+			"data/Al-Qur’an dan Kebijakan Negara_ Fahmia Nuha Tsabita_Etika Menjaga Pandangan dan Penghormatan Martabat Manusia dalam Pencegahan Kekerasan Seksual_images/image1.jpeg",
 	},
 	{
 		storage_key: "01M13B_AUTHOR_TIARA.jpg",
 		filename: "author-tiara.jpg",
-		local_path: "data/“Hoaks dan Krisis Informasi di Ruang Publik Menimbang Konsep Tabayyun dalam Tafsir Al-Qur’an”_images/image1.jpeg",
+		local_path:
+			"data/“Hoaks dan Krisis Informasi di Ruang Publik Menimbang Konsep Tabayyun dalam Tafsir Al-Qur’an”_images/image1.jpeg",
 	},
 	{
 		storage_key: "01M13B_AUTHOR_PUTRI.jpg",
 		filename: "author-putri.jpg",
-		local_path: "data/Hawa dalam Narasi Al-Qur’an Benarkah Ia Penyebab Adam Turun dari Surga_images/image1.jpg",
+		local_path:
+			"data/Hawa dalam Narasi Al-Qur’an Benarkah Ia Penyebab Adam Turun dari Surga_images/image1.jpg",
 	},
 	{
 		storage_key: "01M13B_AUTHOR_UMMI.jpg",
 		filename: "author-ummi.jpg",
-		local_path: "data/Pendekatan Psikologi_Ummi Hasanah_Afeksi Verbal Orang Tua dan Pencegahan Kekerasan Anak Kajian Tafsir al-Jailani atas QS. al-Shaffat [37] 102_images/image1.jpeg",
+		local_path:
+			"data/Pendekatan Psikologi_Ummi Hasanah_Afeksi Verbal Orang Tua dan Pencegahan Kekerasan Anak Kajian Tafsir al-Jailani atas QS. al-Shaffat [37] 102_images/image1.jpeg",
 	},
 	{
 		storage_key: "01M13B_AUTHOR_FADIA.jpg",
@@ -78,11 +83,18 @@ const tmpDir = "/tmp/afaq_seed_images";
 if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
 
 async function run() {
-	console.log(`\nStarting R2 Seed Upload (Target: ${isRemote ? "PRODUCTION CLOUDFLARE R2" : "LOCAL MINIFLARE R2"})...`);
+	console.log(
+		`\nStarting R2 Seed Upload (Target: ${isRemote ? "PRODUCTION CLOUDFLARE R2" : "LOCAL MINIFLARE R2"})...`,
+	);
 
 	for (const item of MEDIA_SEEDS) {
-		const localFile = item.local_path ? path.resolve(process.cwd(), item.local_path) : null;
-		const filePath = (localFile && fs.existsSync(localFile)) ? localFile : path.join(tmpDir, item.filename);
+		const localFile = item.local_path
+			? path.resolve(process.cwd(), item.local_path)
+			: null;
+		const filePath =
+			localFile && fs.existsSync(localFile)
+				? localFile
+				: path.join(tmpDir, item.filename);
 
 		if (!fs.existsSync(filePath) && item.url) {
 			console.log(`Fetching ${item.filename} from Unsplash...`);
@@ -95,7 +107,9 @@ async function run() {
 			fs.writeFileSync(filePath, buffer);
 		}
 
-		console.log(`Uploading ${item.filename} -> R2 key: ${item.storage_key} (${targetFlag})...`);
+		console.log(
+			`Uploading ${item.filename} -> R2 key: ${item.storage_key} (${targetFlag})...`,
+		);
 		const r2Path = `afaqtafsir-website/${item.storage_key}`;
 		const proc = spawnSync(
 			"bunx",
@@ -111,7 +125,7 @@ async function run() {
 				"--content-type",
 				"image/jpeg",
 			],
-			{ stdio: "inherit" }
+			{ stdio: "inherit" },
 		);
 
 		if (proc.status !== 0) {
@@ -121,7 +135,9 @@ async function run() {
 		}
 	}
 
-	console.log(`\n✓ All seed media uploaded to ${isRemote ? "Production R2" : "Local R2"} successfully!\n`);
+	console.log(
+		`\n✓ All seed media uploaded to ${isRemote ? "Production R2" : "Local R2"} successfully!\n`,
+	);
 }
 
 run();

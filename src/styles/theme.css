@@ -11,7 +11,7 @@
 	--sky-300: #7ed2ef; /* Mid Light Sky Blue */
 	--sky-200: #a7dff3; /* Soft Sky Blue */
 	--sky-100: #d6eff8; /* Lightest Sky Blue Tint */
-	--sky-50:  #f4faff; /* Global Soft Sky Background */
+	--sky-50: #f4faff; /* Global Soft Sky Background */
 
 	/* Deep Celestial Navy */
 	--blue-950: #081a2f; /* Deep Midnight Navy (Headings, Navbar, Footer) */
@@ -26,79 +26,92 @@
 	--gold-500: #d97706; /* Sunrise Amber / Secondary Accent */
 	--gold-400: #f59e0b; /* Bright Amber */
 	--gold-100: #fef3c7; /* Amber Badge Background */
-	--gold-50:  #fffbeb; /* Light Gold Tint */
+	--gold-50: #fffbeb; /* Light Gold Tint */
 
-	--white:       #ffffff;
-	--slate-900:   #0f172a;
-	--slate-800:   #1e293b; /* High-Legibility Body Text */
-	--slate-700:   #334155;
-	--slate-600:   #475569; /* Muted Metadata / Byline Text */
-	--slate-400:   #94a3b8; /* Placeholder Text */
-	--slate-300:   #cbd5e1;
-	--slate-200:   #e2e8f0; /* Default Divider Lines */
-	--slate-100:   #f1f5f9;
+	--white: #ffffff;
+	--slate-900: #0f172a;
+	--slate-800: #1e293b; /* High-Legibility Body Text */
+	--slate-700: #334155;
+	--slate-600: #475569; /* Muted Metadata / Byline Text */
+	--slate-400: #94a3b8; /* Placeholder Text */
+	--slate-300: #cbd5e1;
+	--slate-200: #e2e8f0; /* Default Divider Lines */
+	--slate-100: #f1f5f9;
 
 	/* --- Semantic Tokens --- */
-	--brand-primary:       var(--sky-500);
+	--brand-primary: var(--sky-500);
 	--brand-primary-hover: var(--sky-400);
-	--brand-navy:          var(--blue-900);
-	--brand-accent:        var(--gold-500);
-	--brand-accent-hover:  var(--gold-600);
+	--brand-navy: var(--blue-900);
+	--brand-accent: var(--gold-500);
+	--brand-accent-hover: var(--gold-600);
 
-	--bg-body:             var(--sky-50);
-	--bg-surface:          var(--white);
-	--bg-surface-subtle:   var(--sky-100);
-	--bg-dark-section:     linear-gradient(180deg, var(--blue-900) 0%, var(--blue-950) 100%);
-	--bg-sky-gradient:     linear-gradient(135deg, var(--sky-100) 0%, var(--sky-200) 50%, var(--sky-300) 100%);
+	--bg-body: var(--sky-50);
+	--bg-surface: var(--white);
+	--bg-surface-subtle: var(--sky-100);
+	--bg-dark-section: linear-gradient(
+		180deg,
+		var(--blue-900) 0%,
+		var(--blue-950) 100%
+	);
+	--bg-sky-gradient: linear-gradient(
+		135deg,
+		var(--sky-100) 0%,
+		var(--sky-200) 50%,
+		var(--sky-300) 100%
+	);
 
-	--text-heading:        var(--blue-950);
-	--text-body:           var(--slate-800);
-	--text-muted:          var(--slate-600);
-	--text-inverse:        var(--white);
-	--text-brand:          #0b688c;
-	--text-accent:         var(--gold-500);
+	--text-heading: var(--blue-950);
+	--text-body: var(--slate-800);
+	--text-muted: var(--slate-600);
+	--text-inverse: var(--white);
+	--text-brand: #0b688c;
+	--text-accent: var(--gold-500);
 
-	--border-subtle:       var(--slate-200);
-	--border-brand:        var(--sky-200);
+	--border-subtle: var(--slate-200);
+	--border-brand: var(--sky-200);
 	--border-brand-strong: var(--sky-300);
-	--border-accent:       var(--gold-500);
+	--border-accent: var(--gold-500);
 
 	/* --- EmDash Core Overrides --- */
-	--color-bg:            var(--bg-body);
-	--color-bg-subtle:     var(--bg-surface-subtle);
-	--color-surface:       var(--bg-surface);
-	--color-text:          var(--text-body);
-	--color-text-secondary:var(--text-muted);
-	--color-muted:         var(--slate-600);
-	--color-border:        var(--border-subtle);
+	--color-bg: var(--bg-body);
+	--color-bg-subtle: var(--bg-surface-subtle);
+	--color-surface: var(--bg-surface);
+	--color-text: var(--text-body);
+	--color-text-secondary: var(--text-muted);
+	--color-muted: var(--slate-600);
+	--color-border: var(--border-subtle);
 	--color-border-subtle: var(--sky-100);
-	--color-brand:         var(--text-brand);
-	--color-brand-hover:   var(--blue-800);
-	--color-on-brand:      var(--white);
-	--color-brand-ring:    rgba(52, 198, 244, 0.35);
+	--color-brand: var(--text-brand);
+	--color-brand-hover: var(--blue-800);
+	--color-on-brand: var(--white);
+	--color-brand-ring: rgba(52, 198, 244, 0.35);
 
 	/* --- Typography Families --- */
-	--font-serif:  var(--font-heading, 'Lora', Georgia, serif);
-	--font-sans:   var(--font-body, 'Plus Jakarta Sans', -apple-system, sans-serif);
-	--font-arabic: var(--font-arabic, 'Amiri', 'Traditional Arabic', serif);
+	--font-serif: var(--font-heading, "Lora", Georgia, serif);
+	--font-sans: var(--font-body, "Plus Jakarta Sans", -apple-system, sans-serif);
+	--font-arabic: var(--font-arabic, "Amiri", "Traditional Arabic", serif);
 
 	--font-weight-heading: 600;
 	--font-weight-display: 700;
 
 	/* --- Geometry & Elevation --- */
-	--radius-sm:   6px;
-	--radius-md:   12px;
-	--radius-lg:   20px;
+	--radius-sm: 6px;
+	--radius-md: 12px;
+	--radius-lg: 20px;
 	--radius-full: 9999px;
 
 	--shadow-sm: 0 1px 3px rgba(14, 39, 70, 0.05);
-	--shadow-md: 0 6px 18px -3px rgba(14, 39, 70, 0.08), 0 2px 6px -1px rgba(14, 39, 70, 0.03);
-	--shadow-lg: 0 16px 32px -4px rgba(14, 39, 70, 0.12), 0 6px 12px -2px rgba(14, 39, 70, 0.05);
+	--shadow-md:
+		0 6px 18px -3px rgba(14, 39, 70, 0.08),
+		0 2px 6px -1px rgba(14, 39, 70, 0.03);
+	--shadow-lg:
+		0 16px 32px -4px rgba(14, 39, 70, 0.12),
+		0 6px 12px -2px rgba(14, 39, 70, 0.05);
 
-	--container-max:     1240px;
-	--wide-width:        1240px;
-	--content-width:     720px;
-	--transition-fast:   0.2s cubic-bezier(0.16, 1, 0.3, 1);
+	--container-max: 1240px;
+	--wide-width: 1240px;
+	--content-width: 720px;
+	--transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 	--transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -111,7 +124,12 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	font-family: var(--font-serif);
 	color: var(--text-heading);
 	font-weight: var(--font-weight-heading);

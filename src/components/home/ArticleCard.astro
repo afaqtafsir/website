@@ -3,50 +3,53 @@ import { Image } from "emdash/ui";
 import { getReadingTime, formatReadingTime } from "../../utils/reading-time";
 
 interface Props {
-  article: any;
-  variant: "lead" | "secondary" | "compact" | "popular";
-  /** h1 for hero lead, h2 for hero secondary, h3/h4 elsewhere */
-  headingTag?: "h1" | "h2" | "h3" | "h4";
-  showExcerpt?: boolean;
-  showCategory?: boolean;
-  rank?: number;
-  /** Controls thumbnail size for secondary / compact variants */
-  thumbSize?: "lg" | "md" | "sm";
-  authorFallback?: string;
+	article: any;
+	variant: "lead" | "secondary" | "compact" | "popular";
+	/** h1 for hero lead, h2 for hero secondary, h3/h4 elsewhere */
+	headingTag?: "h1" | "h2" | "h3" | "h4";
+	showExcerpt?: boolean;
+	showCategory?: boolean;
+	rank?: number;
+	/** Controls thumbnail size for secondary / compact variants */
+	thumbSize?: "lg" | "md" | "sm";
+	authorFallback?: string;
 }
 
 const {
-  article,
-  variant,
-  headingTag = "h3",
-  showExcerpt = false,
-  showCategory = true,
-  rank,
-  thumbSize = "md",
-  authorFallback = "Redaksi",
+	article,
+	variant,
+	headingTag = "h3",
+	showExcerpt = false,
+	showCategory = true,
+	rank,
+	thumbSize = "md",
+	authorFallback = "Redaksi",
 } = Astro.props;
 
-const category = article.category as { label: string; slug: string } | undefined;
+const category = article.category as
+	| { label: string; slug: string }
+	| undefined;
 const byline = article.data.bylines?.[0]?.byline;
 const href = `/${article.id}`;
 
 function formatDate(date: Date | string | null | undefined): string {
-  if (!date) return "18 Agustus 2026";
-  const d = typeof date === "string" ? new Date(date) : date;
-  return d.toLocaleDateString("id-ID", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+	if (!date) return "18 Agustus 2026";
+	const d = typeof date === "string" ? new Date(date) : date;
+	return d.toLocaleDateString("id-ID", {
+		day: "numeric",
+		month: "long",
+		year: "numeric",
+	});
 }
 
 /* ── tiny helpers to keep the template readable ── */
-const authorLink = byline?.slug
-  ? `/penulis/${byline.slug}`
-  : null;
+const authorLink = byline?.slug ? `/penulis/${byline.slug}` : null;
 const authorName = byline?.displayName || authorFallback;
 const readingTime = formatReadingTime(getReadingTime(article.data.content));
-const readingTimeShort = formatReadingTime(getReadingTime(article.data.content), { short: true });
+const readingTimeShort = formatReadingTime(
+	getReadingTime(article.data.content),
+	{ short: true },
+);
 ---
 
 {/* ================================================================

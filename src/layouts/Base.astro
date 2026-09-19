@@ -41,20 +41,23 @@ const {
 	author,
 	content,
 } = Astro.props;
-const { siteTitle, siteTagline } = resolveBlogSiteIdentity(await getSiteSettings());
+const { siteTitle, siteTagline } = resolveBlogSiteIdentity(
+	await getSiteSettings(),
+);
 // If title already includes site title (from getSeoMeta), use as-is
 const fullTitle = title.includes(siteTitle) ? title : `${title} — ${siteTitle}`;
 
 // Fetch primary menu defined in seed, with fallback items
 const primaryMenu = await getMenu("primary");
-const navItems: Array<{ label: string; url: string; target?: string | null }> = primaryMenu?.items?.length
-	? primaryMenu.items.filter((item) => item.url !== "/kirim-tulisan")
-	: [
-			{ label: "Beranda", url: "/", target: undefined },
-			{ label: "Penulis", url: "/penulis", target: undefined },
-			{ label: "Tentang", url: "/tentang", target: undefined },
-			{ label: "Kontak", url: "/kontak", target: undefined },
-	  ];
+const navItems: Array<{ label: string; url: string; target?: string | null }> =
+	primaryMenu?.items?.length
+		? primaryMenu.items.filter((item) => item.url !== "/kirim-tulisan")
+		: [
+				{ label: "Beranda", url: "/", target: undefined },
+				{ label: "Penulis", url: "/penulis", target: undefined },
+				{ label: "Tentang", url: "/tentang", target: undefined },
+				{ label: "Kontak", url: "/kontak", target: undefined },
+			];
 
 // Build public page context for plugin contributions
 // SEO data is passed here and rendered securely by EmDashHead

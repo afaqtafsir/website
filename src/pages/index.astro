@@ -1,8 +1,8 @@
 ---
 import {
-  getEmDashCollection,
-  getTermsForEntries,
-  getSiteSettings,
+	getEmDashCollection,
+	getTermsForEntries,
+	getSiteSettings,
 } from "emdash";
 import Base from "../layouts/Base.astro";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
@@ -16,11 +16,11 @@ import Sidebar from "../components/home/Sidebar.astro";
 
 /* ── 1. Fetch articles + settings in parallel ─────────────────── */
 const [{ entries: allArticles, cacheHint }, settings] = await Promise.all([
-  getEmDashCollection("articles", {
-    orderBy: { published_at: "desc" },
-    limit: 24,
-  }),
-  getSiteSettings(),
+	getEmDashCollection("articles", {
+		orderBy: { published_at: "desc" },
+		limit: 24,
+	}),
+	getSiteSettings(),
 ]);
 const { siteTitle, siteTagline } = resolveBlogSiteIdentity(settings);
 
@@ -28,36 +28,39 @@ if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 
 /* ── 2. Batch-fetch categories & enrich every article ─────────── */
 const articleEntryIds = allArticles.map((a) => a.data.id);
-const categoriesByEntry = await getTermsForEntries("articles", articleEntryIds, "category");
+const categoriesByEntry = await getTermsForEntries(
+	"articles",
+	articleEntryIds,
+	"category",
+);
 
 function resolveCategory(articleId: string) {
-  const terms = categoriesByEntry.get(articleId);
-  return terms?.length
-    ? terms[0]
-    : { label: "Tafsir Tematik", slug: "tafsir-tematik" };
+	const terms = categoriesByEntry.get(articleId);
+	return terms?.length
+		? terms[0]
+		: { label: "Tafsir Tematik", slug: "tafsir-tematik" };
 }
 
 const enriched = allArticles.map((a) => ({
-  ...a,
-  category: resolveCategory(a.data.id),
+	...a,
+	category: resolveCategory(a.data.id),
 }));
 
 /* ── 3. Hero Bento segmentation ───────────────────────────────── */
-const leadHero =
-  enriched.find((a) => a.data.is_lead_hero) ?? enriched[0];
+const leadHero = enriched.find((a) => a.data.is_lead_hero) ?? enriched[0];
 
-const secondaryHeroes = enriched.filter(
-  (a) => a.data.is_secondary_hero && a.id !== leadHero?.id,
-).slice(0, 4);
+const secondaryHeroes = enriched
+	.filter((a) => a.data.is_secondary_hero && a.id !== leadHero?.id)
+	.slice(0, 4);
 
 const heroSetIds = new Set([leadHero?.id, ...secondaryHeroes.map((a) => a.id)]);
 const remainingForHeroes = enriched.filter((a) => !heroSetIds.has(a.id));
 while (secondaryHeroes.length < 4 && remainingForHeroes.length > 0) {
-  const next = remainingForHeroes.shift();
-  if (next) {
-    secondaryHeroes.push(next);
-    heroSetIds.add(next.id);
-  }
+	const next = remainingForHeroes.shift();
+	if (next) {
+		secondaryHeroes.push(next);
+		heroSetIds.add(next.id);
+	}
 }
 
 /* ── 4. Pattern A – Fokus Tematik ─────────────────────────────── */
@@ -73,27 +76,27 @@ const patternBSubgrid = enriched.slice(2, 6);
 const articleViewsMap = new Map<string, number>();
 
 if (env?.DB) {
-  try {
-    const { results } = await env.DB.prepare(
-      "SELECT slug, views FROM article_views WHERE views > 0 ORDER BY views DESC LIMIT 10",
-    ).all<{ slug: string; views: number }>();
-    if (results) {
-      for (const r of results) articleViewsMap.set(r.slug, r.views);
-    }
-  } catch (e) {
-    console.warn("[analytics] Failed to fetch article views:", e);
-  }
+	try {
+		const { results } = await env.DB.prepare(
+			"SELECT slug, views FROM article_views WHERE views > 0 ORDER BY views DESC LIMIT 10",
+		).all<{ slug: string; views: number }>();
+		if (results) {
+			for (const r of results) articleViewsMap.set(r.slug, r.views);
+		}
+	} catch (e) {
+		console.warn("[analytics] Failed to fetch article views:", e);
+	}
 }
 
 const popularArticles = [...enriched]
-  .map((a) => ({ ...a, views: articleViewsMap.get(a.id) ?? 0 }))
-  .sort((a, b) => {
-    if (b.views !== a.views) return b.views - a.views;
-    const dA = a.data.publishedAt ? new Date(a.data.publishedAt).getTime() : 0;
-    const dB = b.data.publishedAt ? new Date(b.data.publishedAt).getTime() : 0;
-    return dB - dA;
-  })
-  .slice(0, 5);
+	.map((a) => ({ ...a, views: articleViewsMap.get(a.id) ?? 0 }))
+	.sort((a, b) => {
+		if (b.views !== a.views) return b.views - a.views;
+		const dA = a.data.publishedAt ? new Date(a.data.publishedAt).getTime() : 0;
+		const dB = b.data.publishedAt ? new Date(b.data.publishedAt).getTime() : 0;
+		return dB - dA;
+	})
+	.slice(0, 5);
 ---
 
 <Base title={siteTitle} description={siteTagline}>
