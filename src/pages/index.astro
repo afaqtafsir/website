@@ -6,6 +6,7 @@ import {
 } from "emdash";
 import Base from "../layouts/Base.astro";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
+import { getReadingTime, formatReadingTime } from "../utils/reading-time";
 import { env } from "cloudflare:workers";
 
 import HeroBento from "../components/home/HeroBento.astro";
@@ -41,10 +42,15 @@ function resolveCategory(articleId: string) {
 		: { label: "Tafsir Tematik", slug: "tafsir-tematik" };
 }
 
-const enriched = allArticles.map((a) => ({
-	...a,
-	category: resolveCategory(a.data.id),
-}));
+const enriched = allArticles.map((a) => {
+	const minutes = getReadingTime(a.data.content);
+	return {
+		...a,
+		category: resolveCategory(a.data.id),
+		readingTime: formatReadingTime(minutes),
+		readingTimeShort: formatReadingTime(minutes, { short: true }),
+	};
+});
 
 /* ── 3. Hero Bento segmentation ───────────────────────────────── */
 const leadHero = enriched.find((a) => a.data.is_lead_hero) ?? enriched[0];

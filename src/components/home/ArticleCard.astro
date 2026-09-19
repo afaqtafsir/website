@@ -44,11 +44,19 @@ function formatDate(date: Date | string | null | undefined): string {
 
 const authorLink = byline?.slug ? `/penulis/${byline.slug}` : null;
 const authorName = byline?.displayName || authorFallback;
-const readingTime = formatReadingTime(getReadingTime(article.data.content));
-const readingTimeShort = formatReadingTime(
-	getReadingTime(article.data.content),
-	{ short: true },
-);
+
+// Use precomputed reading times when available (e.g. from index.astro),
+// or compute on-demand only for the requested variant.
+const readingTime =
+	article.readingTime ??
+	(variant === "lead"
+		? formatReadingTime(getReadingTime(article.data.content))
+		: "");
+const readingTimeShort =
+	article.readingTimeShort ??
+	(variant !== "lead"
+		? formatReadingTime(getReadingTime(article.data.content), { short: true })
+		: "");
 ---
 
 {/* ================================================================
