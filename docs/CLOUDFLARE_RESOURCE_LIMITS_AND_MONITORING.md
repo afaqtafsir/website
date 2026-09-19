@@ -161,6 +161,42 @@ Aftermath, once the images were moved to R2 and the revisions pruned:
 
 ---
 
+### What happened on 2026-09-19 (16:9 Thumbnail Migration)
+
+Shortly after editors replaced all article featured images with dedicated 16:9 WebP thumbnails (~150 KB each in R2), the site collapsed with `error code: 1102 (Worker exceeded CPU time limit)`.
+
+#### Diagnosis: NOT a Payload Bloat
+
+Unlike the 2026-09-11 outage, this was not caused by database row bloat or base64 inlining:
+- The D1 database size remained healthy at 3.13 MB total.
+- Article `content` rows remained between 10 KB and 25 KB.
+- The `featured_image` column stores only ~300 bytes of JSON metadata; the image binaries reside in R2.
+
+#### Investigated Factors & Suspicion Levels
+
+> [!NOTE]
+> These hypotheses reflect an engineering post-mortem assessment based on runtime traces and isolate behavior; they remain operational suspicions awaiting prolonged telemetry confirmation under live traffic.
+
+1. **Factor A: Consecutive Admin Saves & Upload Burst**
+   - **Suspicion Level:** **High (Very Likely Trigger)**
+   - **Mechanism:** On Workers Free (10 ms limit), every remote admin operation—handling multipart uploads to R2, parsing editor payloads, updating D1 records, and writing revision snapshots—consumes 40–100 ms of CPU.
+   - **Trigger:** Editors uploaded 7+ images and saved 9 articles back-to-back within a 10-minute window (10:03–10:13 UTC). This concentrated sequence of consecutive overruns likely prompted Cloudflare's supervisor to revoke isolate tolerance and lock the script into **Enforced Mode**, strictly terminating any request at 10.0 ms.
+
+2. **Factor B: SSR Thumbnail `<Image />` Component Overhead**
+   - **Suspicion Level:** **Medium-High (Plausible Multiplier / Baseline Elevation)**
+   - **Mechanism:** Previously, only 3 articles had a `featured_image`; the other 6 rendered static fallback `<div>` boxes. After the migration, all 9 articles had thumbnails, causing the homepage to render **16 `<Image />` components** at once.
+   - Because thumbnails were uploaded as 1920×1080 images, Astro's responsive image service (`layout="constrained"`) evaluated up to 12 responsive breakpoints (`widths`) per thumbnail, running URL string generation and regex checks ~192 times per render. Concurrently, `ArticleCard.astro` was invoking `getReadingTime()` twice per card (42 Portable Text AST traversals per homepage request).
+
+3. **Factor C: Compound Interaction**
+   - **Suspicion Level:** **Highest (Most Probable Reality)**
+   - The rapid admin edits flipped the script into Enforced Mode, while the heavier thumbnail SSR baseline prevented the frontend from squeaking under 10 ms until the isolate supervisor cooled down.
+
+#### Mitigations Applied
+- **Commit `1a0e8ca` (`perf(reading-time)`):** Precomputed reading times once per unique article in `index.astro` (reducing AST traversals on the homepage from 42 to 9) and consumed precomputed strings in `ArticleCard.astro`.
+- **Commit `42ffd8e` (`perf(thumbnail)`):** Bypassed Astro's runtime image service on small 60px/78px thumbnails (secondary, compact, and related article cards) in favor of direct `<img>` tags pointing to `/_emdash/api/media/file/<storageKey>`, reserving full responsive `<Image />` for lead hero cards and main article banners.
+
+---
+
 ## What drives CPU on this site
 
 In rough order of contribution:
