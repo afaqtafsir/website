@@ -1,5 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
+
+if (Astro.cache?.enabled) {
+	Astro.cache.set({
+		maxAge: 86400,
+		swr: 3600,
+		tags: ["static-pages"],
+	});
+}
 ---
 
 <Base

@@ -1,6 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
 
+if (Astro.cache?.enabled) {
+	Astro.cache.set({
+		maxAge: 86400,
+		swr: 3600,
+		tags: ["static-pages"],
+	});
+}
+
 // 29 Single Consonants according to SKB Menteri Agama & Menteri P&K RI 1987/1988
 const consonants = [
 	{ no: 1, arabic: "ا", latin: "—", name: "Alif", note: "Tidak dilambangkan" },
