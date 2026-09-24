@@ -1,4 +1,5 @@
 import cloudflare from "@astrojs/cloudflare";
+import { cacheCloudflare } from "@astrojs/cloudflare/cache";
 import react from "@astrojs/react";
 import { d1, r2 } from "@emdash-cms/cloudflare";
 import { defineConfig, fontProviders } from "astro/config";
@@ -8,6 +9,9 @@ import { google } from "emdash/auth/providers/google";
 export default defineConfig({
 	output: "server",
 	adapter: cloudflare(),
+	cache: {
+		provider: cacheCloudflare(),
+	},
 	image: {
 		layout: "constrained",
 		responsiveStyles: true,
