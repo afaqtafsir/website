@@ -124,6 +124,8 @@ const isLoggedIn = !!Astro.locals.user;
 				}
 			})();
 		</script>
+		<!-- Umami Analytics -->
+		<script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="95e9404d-0fb5-4904-9397-c83f19013378"></script>
 	</head>
 	<body>
 		<EmDashBodyStart page={pageCtx} />
@@ -953,5 +955,35 @@ const isLoggedIn = !!Astro.locals.user;
 			});
 		</script>
 		<EmDashBodyEnd page={pageCtx} />
+
+		<!-- Default Statcounter code for Afaq Tafsir Official
+		Website https://www.afaqtafsir.id -->
+		<script is:inline type="text/javascript">
+			var sc_project=13338523; 
+			var sc_invisible=1; 
+			var sc_security="45aa6b5f"; 
+		</script>
+		<script
+			is:inline
+			type="text/javascript"
+			src="https://www.statcounter.com/counter/counter.js"
+			async></script>
+		<noscript>
+			<div class="statcounter">
+				<a
+					title="Web Analytics"
+					href="https://statcounter.com/"
+					target="_blank"
+				>
+					<img
+						class="statcounter"
+						src="https://c.statcounter.com/13338523/0/45aa6b5f/1/"
+						alt="Web Analytics"
+						referrerpolicy="no-referrer-when-downgrade"
+					/>
+				</a>
+			</div>
+		</noscript>
+		<!-- End of Statcounter Code -->
 	</body>
 </html>
