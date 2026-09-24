@@ -7,6 +7,7 @@ import emdash from "emdash/astro";
 import { google } from "emdash/auth/providers/google";
 
 export default defineConfig({
+	site: "https://www.afaqtafsir.id",
 	output: "server",
 	adapter: cloudflare(),
 	cache: {

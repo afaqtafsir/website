@@ -4,7 +4,7 @@ import { getEmDashCollection, getSiteSettings } from "emdash";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 
 export const GET: APIRoute = async ({ site, url }) => {
-	const siteUrl = site?.toString() || url.origin;
+	const siteUrl = site ? site.toString().replace(/\/$/, "") : (url?.origin || "https://www.afaqtafsir.id");
 	const { siteTitle, siteTagline } = resolveBlogSiteIdentity(
 		await getSiteSettings(),
 	);

@@ -15,7 +15,7 @@ import { getReadingTime, formatReadingTime } from "../utils/reading-time";
 const slug = decodeSlug(Astro.params.slug);
 
 if (!slug) {
-	return Astro.redirect("/404");
+	return Astro.rewrite("/404");
 }
 
 // 1. First, check "articles" collection
@@ -33,9 +33,9 @@ if (!article) {
 	pageCacheHint = pageRes.cacheHint;
 }
 
-// 3. If neither found, redirect to 404
+// 3. If neither found, rewrite to 404
 if (!article && !page) {
-	return Astro.redirect("/404");
+	return Astro.rewrite("/404");
 }
 
 const activeCacheHint = article ? articleCacheHint : pageCacheHint;
@@ -94,7 +94,7 @@ if (article) {
 	featuredImageUrl = getImageUrl(article.data.featured_image);
 	seo = getSeoMeta(article, {
 		siteTitle,
-		siteUrl: Astro.url.origin,
+		siteUrl: Astro.site?.origin || "https://www.afaqtafsir.id",
 		path: `/${slug}`,
 		defaultOgImage: featuredImageUrl,
 	});

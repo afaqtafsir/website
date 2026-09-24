@@ -14,14 +14,14 @@ import { getReadingTime, formatReadingTime } from "../../utils/reading-time";
 const slug = decodeSlug(Astro.params.slug);
 
 if (!slug) {
-	return Astro.redirect("/404");
+	return Astro.rewrite("/404");
 }
 
 // 1. Fetch byline profile
 const byline = await getBylineBySlug(slug);
 
 if (!byline) {
-	return Astro.redirect("/404");
+	return Astro.rewrite("/404");
 }
 
 // 2. Fetch all articles written by this byline
