@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"emdashVersion": "0.39.1",
+	"emdashVersion": "1.0.1",
 	"migrationSet": {
 		"names": [
 			"001_initial",
@@ -83,14 +83,21 @@
 			"079_datetime_normalization",
 			"080_content_translation_locale_unique",
 			"081_redirect_write_guards",
-			"082_taxonomy_translation_locale_unique"
+			"082_taxonomy_translation_locale_unique",
+			"083_block_types",
+			"084_site_transfer",
+			"085_taxonomy_def_groups",
+			"086_relations_structural",
+			"087_reference_field_relations",
+			"088_cron_oneshot_utc",
+			"089_auto_seed_completion"
 		],
-		"fingerprint": "aeaabb4903dbbf2d2c23ac9b0b1be33e3dd4230ec9b82f8cd72d6754e2d7e672"
+		"fingerprint": "d040241afe27f01b0dcb6f360d78056e4ee7d32a29e8b23ae2443c40620f5dc6"
 	},
 	"i18n": null,
 	"database": {
 		"type": "sqlite",
-		"executorEntrypoint": "@emdash-cms/cloudflare/db/d1-migrations",
+		"executorEntrypoint": "@emdash-cms/cloudflare/internal/db/d1-migrations",
 		"executorConfig": {
 			"binding": "DB"
 		}
