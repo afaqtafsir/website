@@ -97,21 +97,13 @@ Time Travel captures transactional bookmarks at the raw storage engine layer, co
 
 ## 5. Migration Execution & Tooling Nuances
 
-### Issue 1: `bun outdated` Silent Skip
-Running `bun outdated` failed to list `emdash` or `@emdash-cms/cloudflare`, only showing devDependencies.  
-*Reason:* Under SemVer rules, `^0.39.1` locks the minor version (only permitting `0.39.x`). Bun's outdated resolver filtered out `1.0.1` because it crossed both the `0.x -> 1.x` boundary and the caret range.  
-*Resolution:* Upgrades must be pinned explicitly:
-```bash
-bun add emdash@1.0.1 @emdash-cms/cloudflare@1.0.1
-```
-
-### Issue 2: `bunx emdash types` Fetch Error
-Running `bunx emdash types` offline failed with:
+### Tooling Observation: `bunx emdash types` Offline Behavior
+Running `bunx emdash types` offline produced:
 ```
 ERROR Failed to fetch schema: fetch failed
 ```
-*Reason:* The CLI command `emdash types` acts as an HTTP client querying an active running server (defaulting to `http://localhost:4321/_emdash/api/schema`). With the dev server offline, the network call failed.  
-*Resolution:* Running `emdash types` manually is unnecessary prior to build; the EmDash Astro integration automatically regenerates `emdash-env.d.ts` during `astro build`.
+*Context:* The CLI command `emdash types` operates as an HTTP client querying an active, running EmDash instance (defaulting to `http://localhost:4321/_emdash/api/schema` or via `--url`). Because the local development server was not active, the fetch failed as expected.  
+*Resolution:* Running `emdash types` manually is unnecessary before building; the EmDash Astro integration automatically hooks into `astro build` (and `astro dev`) to regenerate `emdash-env.d.ts` directly from the schema.
 
 ### Execution Steps
 1. **Dependency Upgrade:**
