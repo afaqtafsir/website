@@ -47,7 +47,8 @@ const { siteTitle, siteTagline } = resolveBlogSiteIdentity(settings);
 const fullTitle = title.includes(siteTitle) ? title : `${title} — ${siteTitle}`;
 
 const siteOrigin = Astro.site?.origin || "https://www.afaqtafsir.id";
-const cleanPath = Astro.url.pathname === "/" ? "" : Astro.url.pathname.replace(/\/$/, "");
+const cleanPath =
+	Astro.url.pathname === "/" ? "" : Astro.url.pathname.replace(/\/$/, "");
 const resolvedCanonical = canonical || `${siteOrigin}${cleanPath || "/"}`;
 const resolvedImage =
 	image ||
