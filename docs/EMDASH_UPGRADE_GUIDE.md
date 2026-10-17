@@ -40,32 +40,30 @@ To upgrade EmDash reliably, you must understand how its lifecycle is split acros
 * **The Trap:** Official EmDash starter templates ship with `"packageManager": "pnpm@..."`. On systems using Bun without `pnpm` installed, `upgrade-emdash` crashes with `spawn pnpm ENOENT` and rolls back.
 * **The Fix:** Ensure `package.json` either declares Bun (`"packageManager": "bun@<version>"`) or omit the field entirely so it auto-detects `bun.lock`.
 
-### 2.2 Cloudflare D1 Backup Limitation (FTS5)
+### 2.2 Cloudflare D1 Backups: Continuous Time Travel vs. FTS5 Export Limitation
 Standard SQL dumps (`wrangler d1 export`) fail on EmDash databases with:
 ```text
 ✘ [ERROR] D1 Export error: cannot export databases with Virtual Tables (fts5)
 ```
 EmDash creates SQLite `fts5` virtual tables (`_emdash_fts_*`) for search. Cloudflare's SQL serializer cannot dump virtual shadow tables.
 
-* **The Production Safety Standard:** Always capture a **Cloudflare D1 Time Travel bookmark** before any deployment with schema changes:
-  ```bash
-  bunx wrangler d1 time-travel info <database-name>
-  ```
-* **Rollback Command (if disaster strikes):**
-  ```bash
-  bunx wrangler d1 time-travel restore <database-name> --bookmark=<bookmark-id>
-  ```
+* **How D1 Time Travel Works:** Time Travel is **always on, automatic, and continuous** at the storage engine level. Cloudflare maintains a rolling 7-day (Free plan) or 30-day (Paid plan) transaction history. You do **not** need to trigger, schedule, or initiate backups before an upgrade.
+* **Point-in-Time Restoration:** You can restore D1 to any minute in the retention window simply by providing a timestamp (e.g. `--timestamp="2026-10-18T00:50:00Z"` or Unix seconds).
+* **The Role of Bookmarks:** Running `time-travel info` does not create a backup; it is a read-only query that fetches the deterministic bookmark string for that exact second. Capturing it before an upgrade is strictly an **optional convenience** so you have an exact, unambiguous rollback target without guessing UTC timestamps.
 
 ---
 
 ## 3. Step-by-Step Upgrade Runbook
 
-### Step 1: Capture Pre-Upgrade D1 Safety Bookmark
-Before touching dependencies or deploying:
+### Step 1: Note Pre-Upgrade Timestamp or Bookmark (Optional Record-Keeping)
+Because D1 Time Travel runs continuously, you are always protected. However, noting the exact state right before the deployment avoids timestamp guesswork if you need to revert:
 ```bash
+# Capture the exact bookmark string
 bunx wrangler d1 time-travel info afaqtafsir-website
+
+# Or simply note the current UTC timestamp
+date -u +"%Y-%m-%dT%H:%M:%SZ"
 ```
-Record the latest bookmark ID in your deployment notes.
 
 ---
 
@@ -183,8 +181,13 @@ If a Worker crashes during migration under traffic or a lock fails to free:
 
 ### Database Rollback (Time Travel)
 If a migration corrupts data or causes runtime 500s:
-1. Revert Git commit and redeploy prior application version.
-2. Restore D1 to the pre-upgrade bookmark captured in Step 1:
-   ```bash
-   bunx wrangler d1 time-travel restore afaqtafsir-website --bookmark=<bookmark-id>
-   ```
+1. Revert the Git commit and redeploy the prior application version.
+2. Restore D1 using either method:
+   * **Via Pre-Upgrade Timestamp (no prior setup needed):**
+     ```bash
+     bunx wrangler d1 time-travel restore afaqtafsir-website --timestamp="2026-10-18T00:50:00Z"
+     ```
+   * **Via Bookmark (if captured in Step 1):**
+     ```bash
+     bunx wrangler d1 time-travel restore afaqtafsir-website --bookmark=<bookmark-id>
+     ```
