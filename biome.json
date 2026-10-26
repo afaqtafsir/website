@@ -6,7 +6,7 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"includes": ["**", "!!**/dist", "!!*.d.ts"]
+		"includes": ["**", "!!**/dist", "!!*.d.ts", "!skills-lock.json"]
 	},
 	"formatter": {
 		"enabled": true,
