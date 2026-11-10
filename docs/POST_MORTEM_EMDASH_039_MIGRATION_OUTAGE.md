@@ -10,6 +10,7 @@
 ## 1. Executive Summary
 
 Following a minor upgrade from `emdash@0.38.0` / `@emdash-cms/cloudflare@0.38.0` to `0.39.1` on `preview.afaqtafsir.id`, all requests to uploaded media files returned:
+
 ```json
 HTTP/2 500 Internal Server Error
 {
@@ -34,8 +35,10 @@ The issue was resolved on Cloudflare D1 by purging the orphaned malformed revisi
 ## 2. Initial Symptoms & The Red Herrings
 
 ### Observed Behavior
+
 1. Direct requests to media assets (e.g., `GET /_emdash/api/media/file/01M2WJ1AZ5M964D5EBSHK4YYDS.01M2WJ1B5G80C2BR8D9SVCSTHA.webp`) failed with `HTTP 500`.
 2. Response payload:
+
    ```json
    {
      "success": false,
@@ -48,6 +51,7 @@ The issue was resolved on Cloudflare D1 by purging the orphaned malformed revisi
 3. Release notes for `0.39.0` and `0.39.1` showed no changes to the R2 storage adapter (`r2({ binding: "MEDIA" })`).
 
 ### Why the Error Was Misleading
+
 - **R2 was fully functional:** Inspecting the remote R2 bucket `afaqtafsir-website` via `wrangler r2 object get ... --remote` confirmed the WebP file was physically present and downloadable.
 - **Wrangler configuration was correct:** `wrangler.jsonc` retained the valid `"r2_buckets": [{"binding": "MEDIA", "bucket_name": "afaqtafsir-website"}]`.
 - **Adapter code was identical:** A diff between `@emdash-cms/cloudflare@0.38.0` and `0.39.1` confirmed zero modifications to `src/storage/r2.ts`.
@@ -57,6 +61,7 @@ The issue was resolved on Cloudflare D1 by purging the orphaned malformed revisi
 ## 3. Telemetry & Investigative Journey
 
 ### Phase 1: Code Tracing the Error Message
+
 Auditing the compiled route chunks in `dist/` and `node_modules/emdash/` isolated the exact route handler generating the response:
 
 ```typescript
@@ -73,6 +78,7 @@ const GET = async ({ params, locals }) => {
 Notice the guard: `if (!emdash?.storage)`. This returns `NOT_CONFIGURED` if `emdash` itself is `undefined`, or if `emdash.storage` is `null`/`undefined`.
 
 Checking another API route (`/_emdash/api/settings`):
+
 ```bash
 curl -s https://preview.afaqtafsir.id/_emdash/api/settings
 # Response: {"success":false,"error":{"code":"NOT_CONFIGURED","message":"EmDash is not initialized"}}
@@ -80,6 +86,7 @@ curl -s https://preview.afaqtafsir.id/_emdash/api/settings
 This proved that **`locals.emdash` was never initialized on `locals`**, which pointed directly to a startup crash inside the middleware initialization block.
 
 ### Phase 2: Live Worker Tailing (`wrangler tail`)
+
 Tailing production logs on `preview.afaqtafsir.id` while replaying the media request captured the true exception before middleware swallowed it:
 
 ```text
@@ -94,26 +101,31 @@ GET https://preview.afaqtafsir.id/_emdash/api/media/file/01M2WJ1AZ5M964D5EBSHK4Y
 ```
 
 ### Phase 3: D1 Database Auditing
+
 1. **Migration State Table (`_emdash_migrations`):**
+
    ```sql
    SELECT name, timestamp FROM _emdash_migrations ORDER BY name DESC LIMIT 5;
    ```
-   *Result:*
+
+   _Result:_
    - `078_menu_item_translation_groups` was the last successfully applied migration.
    - `079_datetime_normalization` was pending and executing on every worker cold start.
    - The migration lock `_emdash_migrations_lock` was clear (`is_locked = 0`), ruling out lock starvation.
 
 2. **Inspecting the Offending Row in `revisions`:**
+
    ```sql
-   SELECT id, collection, entry_id, substr(data, 1, 60), typeof(data) 
-   FROM revisions 
+   SELECT id, collection, entry_id, substr(data, 1, 60), typeof(data)
+   FROM revisions
    WHERE id = '01M27W2RDFB9A9C2511X9JA68F';
    ```
-   *Result:*
+
+   _Result:_
    - `collection`: `articles`
    - `entry_id`: `01M25S76ZMYPKSA2D2TGW1RDNW`
    - `data`: `[{"_type":"block","_key":"k81","style":"normal",...`
-   
+
    Across all 88 revisions in the database, 87 contained JSON objects (`{"title": "...", "content": [...]}`). Exactly **1 row** contained a raw JSON array (`[...]`).
 
 ---
@@ -164,9 +176,11 @@ Two interrelated upstream architectural flaws caused this outage:
 ```
 
 ### Upstream Flaw 1: Migration 079's Fragile Preflight Validation
+
 In `emdash/src/database/datetime-storage.ts`, migration `079_datetime_normalization` attempts to convert datetime fields across content tables and historical revisions into UTC ISO strings.
 
 Inside `scanRevisions()`:
+
 ```typescript
 for (const row of rows) {
     const schema = schemas.get(row.collection);
@@ -187,21 +201,25 @@ for (const row of rows) {
 `isRecord(data)` evaluates `!Array.isArray(value)`. When a non-object is encountered, it logs an `inspection_error`.
 
 Then, `normalizeDatetimeStorage()` halts completely:
+
 ```typescript
 const preflight = await scan(db, false);
 if (preflight.manualReviewCount > 0 || preflight.inspectionErrorCount > 0) {
-    throw new Error(
-        `Datetime migration requires manual review:\n${formatDatetimeStorageReport(preflight)}`,
-    );
+	throw new Error(
+		`Datetime migration requires manual review:\n${formatDatetimeStorageReport(preflight)}`,
+	);
 }
 ```
 
 **Why this is an upstream bug:**
+
 1. **Historical revisions are non-authoritative snapshots:** An old revision snapshot does not represent live published content. An anomaly in an archived revision should never prevent the site from booting.
 2. **Semantic irrelevance:** Migration 079 searches for datetime fields defined on the collection (`schema.fields`). If a revision contains a raw block array, it has no datetime keys to normalize. The scanner should have logged a warning, skipped the row, and continued.
 
 ### Upstream Flaw 2: Middleware Error Swallowing & Error Masking
+
 In `emdash/src/astro/middleware.ts`:
+
 ```typescript
 try {
     const runtime = await getRuntime(config, migrationMode, initSubTimings);
@@ -217,18 +235,24 @@ try {
 }
 ```
 Looking at `runtimeConfigurationErrorResponse`:
+
 ```typescript
 function runtimeConfigurationErrorResponse(error, pathname) {
-    if (!pathname.startsWith("/_emdash/api/")) return null;
-    if (error instanceof EmDashConfigurationError) return apiError(error.code, error.message, 500);
-    if (error instanceof EmDashStorageError && error.code === "BINDING_NOT_FOUND") {
-        return apiError(error.code, error.message, 500);
-    }
-    return null;
+	if (!pathname.startsWith("/_emdash/api/")) return null;
+	if (error instanceof EmDashConfigurationError)
+		return apiError(error.code, error.message, 500);
+	if (
+		error instanceof EmDashStorageError &&
+		error.code === "BINDING_NOT_FOUND"
+	) {
+		return apiError(error.code, error.message, 500);
+	}
+	return null;
 }
 ```
 
 **Why this is an upstream bug:**
+
 1. When an unexpected migration error occurs, `runtimeConfigurationErrorResponse()` returns `null`.
 2. The middleware logs to console, but **does not return an HTTP response and does not set `locals.emdash`**.
 3. The request falls through to the route handler. Because `locals.emdash` is `undefined`, every API route that accesses `locals.emdash` emits confusing, incorrect error codes (`NOT_CONFIGURED: Storage not configured` or `NOT_CONFIGURED: EmDash is not initialized`).
@@ -239,26 +263,33 @@ function runtimeConfigurationErrorResponse(error, pathname) {
 ## 5. Remediation & Verification
 
 ### Step 1: Database Remediation
+
 Because article `01M25S76ZMYPKSA2D2TGW1RDNW` had 10 other valid revisions before and after the malformed record, row `01M27W2RDFB9A9C2511X9JA68F` was safely purged from D1:
+
 ```bash
 bunx wrangler d1 execute afaqtafsir-website --remote \
   --command="DELETE FROM revisions WHERE id = '01M27W2RDFB9A9C2511X9JA68F';"
 ```
 
 ### Step 2: Auto-Migration Execution
+
 A test curl to the media endpoint immediately triggered the cold-start runtime init:
+
 ```bash
 curl -i https://preview.afaqtafsir.id/_emdash/api/media/file/01M2WJ1AZ5M964D5EBSHK4YYDS.01M2WJ1B5G80C2BR8D9SVCSTHA.webp
 ```
 
 **Server Timing Trace:**
+
 ```text
 server-timing: rt;dur=3955;desc="Runtime init", rt.db;dur=3924;desc="DB init + migration policy"
 ```
 The Worker acquired the D1 lock, executed all pending migrations (`079`, `080`, `081`, `082`) in 1.3 seconds, and committed them to `_emdash_migrations`.
 
 ### Step 3: Service Health Verification
+
 1. **Migration State Table:**
+
    ```text
    082_taxonomy_translation_locale_unique  (2026-09-24T20:32:13.492Z)
    081_redirect_write_guards               (2026-09-24T20:32:13.362Z)
@@ -266,6 +297,7 @@ The Worker acquired the D1 lock, executed all pending migrations (`079`, `080`, 
    079_datetime_normalization              (2026-09-24T20:32:12.187Z)
    ```
 2. **Media Serving:**
+
    ```text
    HTTP/2 200 OK
    content-type: image/webp
@@ -283,14 +315,17 @@ The Worker acquired the D1 lock, executed all pending migrations (`079`, `080`, 
 When reporting this to the EmDash team (`emdash-cms/emdash`), use the following structure:
 
 ### Issue Title
+
 `fix(migrations): migration 079 halts on non-object revision records and middleware masks the error as "Storage not configured"`
 
 ### Issue Description
+
 > **Summary:**  
 > When upgrading to `0.39.0` / `0.39.1`, migration `079_datetime_normalization` aborts if any historical record in the `revisions` table contains a JSON array rather than an object envelope. Furthermore, `middleware.ts` swallows the migration exception on `/_emdash/api/*` routes, causing media endpoints to fail with a false `500 NOT_CONFIGURED: Storage not configured` error.
 >
 > **Reproduction:**
 > 1. In an existing database, insert a revision whose `data` column is a valid JSON array:
+>
 >    ```sql
 >    INSERT INTO revisions (id, collection, entry_id, data) 
 >    VALUES ('test_rev', 'articles', 'entry_1', '[{"_type":"block","text":"hello"}]');

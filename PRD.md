@@ -1,40 +1,45 @@
 # Product Requirement Document (PRD)
+
 ## Project: Afaq Tafsir (afaqtafsir.id)
+
 **Document Version:** 1.2  
 **Target Platform:** Web (Desktop & Mobile Responsive)  
 **Tech Stack:** Astro v7 (SSR/SSG Edge-Ready), Cloudflare Workers / Pages, Cloudflare Emdash CMS (v0.35), Cloudflare R2, Cloudflare D1  
-**Author / Engineering Lead:** Farhan & Tim Redaksi Afaq Tafsir  
+**Author / Engineering Lead:** Farhan & Tim Redaksi Afaq Tafsir
 
 ---
 
 ## 1. Executive Summary & Product Vision
 
 ### 1.1 Mission & Value Proposition
-**Afaq Tafsir** is a curated, high-authority digital publishing platform dedicated to Quranic exegesis (*Tafsir*), Islamic studies, and contemporary socio-religious discourse. The platform bridges rigorous academic scholarship with accessible, modern public intellectual discourse.
+
+**Afaq Tafsir** is a curated, high-authority digital publishing platform dedicated to Quranic exegesis (_Tafsir_), Islamic studies, and contemporary socio-religious discourse. The platform bridges rigorous academic scholarship with accessible, modern public intellectual discourse.
 
 Initiated in 2026 by scholars from **Pendidikan Kader Ulama Masjid Istiqlal (PKUMI) — Program Kader Ulama Perempuan**, Afaq Tafsir provides a dignified intellectual space for research, contextual exegesis, and academic collaboration.
 
 ### 1.2 Business & Publishing Model
+
 1. **Phase 1 (Launch & Authority Building):** Internal publishing by the founding editorial board and close collaborators to establish brand authority and define rigorous editorial standards. Contributor submissions are handled via an informal email placeholder flow.
 2. **Phase 2 (Growth & Contributor Network):** An open submission portal where external scholars, researchers, and writers submit manuscripts through a contributor dashboard for peer editorial review.
 
 ### 1.3 Target Audience
-* Academic researchers, Islamic studies university students, pesantren scholars, and Muslim intellectuals.
-* General readers seeking nuanced, contextual, and textually grounded interpretations of the Quran.
+
+- Academic researchers, Islamic studies university students, pesantren scholars, and Muslim intellectuals.
+- General readers seeking nuanced, contextual, and textually grounded interpretations of the Quran.
 
 ---
 
 ## 2. Technical Architecture & Infrastructure
 
-| Layer | Technology | Purpose / Configuration |
-| :--- | :--- | :--- |
-| **Frontend Framework** | Astro v7 | Ultra-fast static & server-side rendering (SSR), zero JS by default, component-island architecture. |
-| **Compute / Edge** | Cloudflare Workers / Pages | Server-side rendering, routing, and edge execution with ultra-low global latency. |
-| **CMS Engine** | Cloudflare Emdash v0.33 | Headless editorial backend for article CRUD, preview, scheduling, and metadata management. |
-| **Database** | Cloudflare D1 (Serverless SQLite) | Relational storage for articles, authors, taxonomy, and system configurations. |
-| **Media / Video Storage** | Cloudflare R2 | Zero-egress object storage for article graphics, assets, and self-hosted native MP4 videos. |
-| **Media Delivery** | Custom Domain on R2 (`assets.afaqtafsir.id`) | Automatic HTTP 206 Partial Content (Range Request) streaming for video/audio. |
-| **Styling & Tokens** | Pure Vanilla CSS / CSS Variables | Centralized design tokens in `tokens.css` without heavy CSS frameworks for maximum performance. |
+| Layer                     | Technology                                   | Purpose / Configuration                                                                             |
+| :------------------------ | :------------------------------------------- | :-------------------------------------------------------------------------------------------------- |
+| **Frontend Framework**    | Astro v7                                     | Ultra-fast static & server-side rendering (SSR), zero JS by default, component-island architecture. |
+| **Compute / Edge**        | Cloudflare Workers / Pages                   | Server-side rendering, routing, and edge execution with ultra-low global latency.                   |
+| **CMS Engine**            | Cloudflare Emdash v0.33                      | Headless editorial backend for article CRUD, preview, scheduling, and metadata management.          |
+| **Database**              | Cloudflare D1 (Serverless SQLite)            | Relational storage for articles, authors, taxonomy, and system configurations.                      |
+| **Media / Video Storage** | Cloudflare R2                                | Zero-egress object storage for article graphics, assets, and self-hosted native MP4 videos.         |
+| **Media Delivery**        | Custom Domain on R2 (`assets.afaqtafsir.id`) | Automatic HTTP 206 Partial Content (Range Request) streaming for video/audio.                       |
+| **Styling & Tokens**      | Pure Vanilla CSS / CSS Variables             | Centralized design tokens in `tokens.css` without heavy CSS frameworks for maximum performance.     |
 
 ---
 
@@ -73,100 +78,116 @@ The visual identity is a hybrid combining the **modern whitespace, sleek cards, 
 
 ```css
 :root {
-  /* --- Primitive Color Palette --- */
-  /* Afaq Sky Blue Color Palette (Primary Brand Palette) */
-  --sky-500: #34c6f4; /* Primary Vibrant Sky Blue */
-  --sky-400: #55caf0; /* Bright Sky Blue */
-  --sky-300: #7ed2ef; /* Mid Light Sky Blue */
-  --sky-200: #a7dff3; /* Soft Sky Blue */
-  --sky-100: #d6eff8; /* Lightest Sky Blue Tint */
-  --sky-50:  #f0f8fd; /* Global Soft Sky Background */
+	/* --- Primitive Color Palette --- */
+	/* Afaq Sky Blue Color Palette (Primary Brand Palette) */
+	--sky-500: #34c6f4; /* Primary Vibrant Sky Blue */
+	--sky-400: #55caf0; /* Bright Sky Blue */
+	--sky-300: #7ed2ef; /* Mid Light Sky Blue */
+	--sky-200: #a7dff3; /* Soft Sky Blue */
+	--sky-100: #d6eff8; /* Lightest Sky Blue Tint */
+	--sky-50: #f0f8fd; /* Global Soft Sky Background */
 
-  /* Deep Celestial Navy (High-Legibility Text & Dark Contrast Elements) */
-  --blue-950: #081a2f; /* Deep Midnight Navy (Headings, Navbar, Footer) */
-  --blue-900: #0e2746; /* Deep Celestial Navy (Hero gradients, Container backdrops) */
-  --blue-800: #143861; /* Interactive Navy Hover */
-  --blue-700: #1c4b7f; /* Secondary Navy Accent */
-  --blue-600: #2563a6; /* Brand Navy Blue */
-  --blue-500: #34c6f4; /* Brand Sky Blue */
+	/* Deep Celestial Navy (High-Legibility Text & Dark Contrast Elements) */
+	--blue-950: #081a2f; /* Deep Midnight Navy (Headings, Navbar, Footer) */
+	--blue-900: #0e2746; /* Deep Celestial Navy (Hero gradients, Container backdrops) */
+	--blue-800: #143861; /* Interactive Navy Hover */
+	--blue-700: #1c4b7f; /* Secondary Navy Accent */
+	--blue-600: #2563a6; /* Brand Navy Blue */
+	--blue-500: #34c6f4; /* Brand Sky Blue */
 
-  /* Sunrise Amber / Gold Accent */
-  --gold-600: #b45309; /* Dark Amber (Active CTA Hover) */
-  --gold-500: #d97706; /* Sunrise Amber / Secondary Accent (Primary CTA, Badges, Underline Bars) */
-  --gold-400: #f59e0b; /* Bright Amber */
-  --gold-100: #fef3c7; /* Amber Badge Background */
-  --gold-50:  #fffbeb; /* Light Gold Tint */
+	/* Sunrise Amber / Gold Accent */
+	--gold-600: #b45309; /* Dark Amber (Active CTA Hover) */
+	--gold-500: #d97706; /* Sunrise Amber / Secondary Accent (Primary CTA, Badges, Underline Bars) */
+	--gold-400: #f59e0b; /* Bright Amber */
+	--gold-100: #fef3c7; /* Amber Badge Background */
+	--gold-50: #fffbeb; /* Light Gold Tint */
 
-  --white:       #ffffff;
-  --slate-900:   #0f172a;
-  --slate-800:   #1e293b; /* High-Legibility Body Text */
-  --slate-700:   #334155;
-  --slate-600:   #475569; /* Muted Metadata / Byline Text */
-  --slate-400:   #94a3b8; /* Placeholder Text */
-  --slate-300:   #cbd5e1;
-  --slate-200:   #e2e8f0; /* Default Divider Lines */
-  --slate-100:   #f1f5f9;
+	--white: #ffffff;
+	--slate-900: #0f172a;
+	--slate-800: #1e293b; /* High-Legibility Body Text */
+	--slate-700: #334155;
+	--slate-600: #475569; /* Muted Metadata / Byline Text */
+	--slate-400: #94a3b8; /* Placeholder Text */
+	--slate-300: #cbd5e1;
+	--slate-200: #e2e8f0; /* Default Divider Lines */
+	--slate-100: #f1f5f9;
 
-  /* --- Semantic Tokens --- */
-  --brand-primary:       var(--sky-500);       /* Light Sky Blue Brand */
-  --brand-primary-hover: var(--sky-400);
-  --brand-navy:          var(--blue-900);
-  --brand-accent:        var(--gold-500);
-  --brand-accent-hover:  var(--gold-600);
+	/* --- Semantic Tokens --- */
+	--brand-primary: var(--sky-500); /* Light Sky Blue Brand */
+	--brand-primary-hover: var(--sky-400);
+	--brand-navy: var(--blue-900);
+	--brand-accent: var(--gold-500);
+	--brand-accent-hover: var(--gold-600);
 
-  --bg-body:             var(--sky-50);
-  --bg-surface:          var(--white);
-  --bg-surface-subtle:   var(--sky-100);
-  --bg-dark-section:     linear-gradient(180deg, var(--blue-900) 0%, var(--blue-950) 100%);
-  --bg-sky-gradient:     linear-gradient(135deg, var(--sky-100) 0%, var(--sky-200) 50%, var(--sky-300) 100%);
+	--bg-body: var(--sky-50);
+	--bg-surface: var(--white);
+	--bg-surface-subtle: var(--sky-100);
+	--bg-dark-section: linear-gradient(
+		180deg,
+		var(--blue-900) 0%,
+		var(--blue-950) 100%
+	);
+	--bg-sky-gradient: linear-gradient(
+		135deg,
+		var(--sky-100) 0%,
+		var(--sky-200) 50%,
+		var(--sky-300) 100%
+	);
 
-  --text-heading:        var(--blue-950);
-  --text-body:           var(--slate-800);
-  --text-muted:          var(--slate-600);
-  --text-inverse:        var(--white);
-  --text-brand:          #0b688c; /* Accessible Sky/Navy for light backgrounds */
-  --text-accent:         var(--gold-500);
+	--text-heading: var(--blue-950);
+	--text-body: var(--slate-800);
+	--text-muted: var(--slate-600);
+	--text-inverse: var(--white);
+	--text-brand: #0b688c; /* Accessible Sky/Navy for light backgrounds */
+	--text-accent: var(--gold-500);
 
-  --border-subtle:       var(--slate-200);
-  --border-brand:        var(--sky-200);
-  --border-brand-strong: var(--sky-300);
-  --border-accent:       var(--gold-500);
+	--border-subtle: var(--slate-200);
+	--border-brand: var(--sky-200);
+	--border-brand-strong: var(--sky-300);
+	--border-accent: var(--gold-500);
 
-  /* --- Typography --- */
-  --font-serif:  'Lora', Georgia, 'Times New Roman', serif;
-  --font-sans:   'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-arabic: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
+	/* --- Typography --- */
+	--font-serif: "Lora", Georgia, "Times New Roman", serif;
+	--font-sans:
+		"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		sans-serif;
+	--font-arabic: "Amiri", "Traditional Arabic", "Scheherazade New", serif;
 
-  --text-xs:   0.75rem;    /* 12px */
-  --text-sm:   0.875rem;   /* 14px */
-  --text-base: 1rem;       /* 16px */
-  --text-lg:   1.125rem;   /* 18px */
-  --text-xl:   1.25rem;    /* 20px */
-  --text-2xl:  1.5rem;     /* 24px */
-  --text-3xl:  1.875rem;   /* 30px */
-  --text-4xl:  2.25rem;    /* 36px */
+	--text-xs: 0.75rem; /* 12px */
+	--text-sm: 0.875rem; /* 14px */
+	--text-base: 1rem; /* 16px */
+	--text-lg: 1.125rem; /* 18px */
+	--text-xl: 1.25rem; /* 20px */
+	--text-2xl: 1.5rem; /* 24px */
+	--text-3xl: 1.875rem; /* 30px */
+	--text-4xl: 2.25rem; /* 36px */
 
-  --leading-tight:  1.25;
-  --leading-normal: 1.6;
-  --leading-loose:  1.85;
+	--leading-tight: 1.25;
+	--leading-normal: 1.6;
+	--leading-loose: 1.85;
 
-  /* --- Elevation & Geometry --- */
-  --radius-sm:   6px;
-  --radius-md:   12px;
-  --radius-lg:   20px;
-  --radius-full: 9999px;
+	/* --- Elevation & Geometry --- */
+	--radius-sm: 6px;
+	--radius-md: 12px;
+	--radius-lg: 20px;
+	--radius-full: 9999px;
 
-  --shadow-sm: 0 1px 3px rgba(14, 39, 70, 0.05);
-  --shadow-md: 0 6px 18px -3px rgba(14, 39, 70, 0.08), 0 2px 6px -1px rgba(14, 39, 70, 0.03);
-  --shadow-lg: 0 16px 32px -4px rgba(14, 39, 70, 0.12), 0 6px 12px -2px rgba(14, 39, 70, 0.05);
+	--shadow-sm: 0 1px 3px rgba(14, 39, 70, 0.05);
+	--shadow-md:
+		0 6px 18px -3px rgba(14, 39, 70, 0.08),
+		0 2px 6px -1px rgba(14, 39, 70, 0.03);
+	--shadow-lg:
+		0 16px 32px -4px rgba(14, 39, 70, 0.12),
+		0 6px 12px -2px rgba(14, 39, 70, 0.05);
 
-  --container-max:     1240px;
-  --transition-fast:   0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	--container-max: 1240px;
+	--transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+	--transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 ```
 
 ### 4.2 Core Visual Rules
+
 1. **Headline Treatment:** All primary and section headlines MUST use `--font-serif` with color `--text-heading`.
 2. **The "Amber Sunrise Bar":** Section headers feature a warm accent underline bar (`height: 3px; width: 48px; background: var(--brand-accent); border-radius: var(--radius-full);`).
 3. **Card Styling:** Clean white backgrounds (`--bg-surface`), rounded corners (`--radius-md`), 1px subtle sky border (`--border-brand`), and soft navy drop shadow (`--shadow-sm`).
@@ -185,35 +206,36 @@ The visual identity is a hybrid combining the **modern whitespace, sleek cards, 
 └─────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-* **Logo:** Left-aligned SVG emblem (Quran book icon with sky gradient) + Brand title ("Afaq Tafsir") & subtitle ("JURNAL & PEMIKIRAN QUR'ANI"). Clicking routes to `/` (Homepage).
-* **Navigation Links (`--font-sans`, 14px, font-weight: 600):**
-  * `Beranda` (`/`) — Active indicator is a Sky Blue gradient underline bar.
-  * `Tentang` (`/tentang`) — Manifesto, PKUMI initiator profile, Code of Ethics, and Editorial directory.
-  * `Kontak` (`/kontak`) — Official inquiries, email directory, and social media channels.
-* **Search Trigger `[ 🔍 ]`:** Opens an accessible client-side modal search dialog with live keyword filtering across titles, authors, and categories. Keyboard shortcuts: `Ctrl+K` / `Cmd+K` to open, `Escape` to close.
-* **Primary Action CTA (`[+ Kirim Tulisan]`):** Sunrise Amber button with pen icon linking to `/kirim-tulisan`.
-* **Mobile Responsiveness:** Features a mobile drawer toggle displaying all navigation links and the CTA button on smaller screens (<768px).
-* **Sticky Behavior:** `position: sticky; top: 0; z-index: 900; background: var(--white); border-bottom: 1px solid var(--border-subtle);`.
+- **Logo:** Left-aligned SVG emblem (Quran book icon with sky gradient) + Brand title ("Afaq Tafsir") & subtitle ("JURNAL & PEMIKIRAN QUR'ANI"). Clicking routes to `/` (Homepage).
+- **Navigation Links (`--font-sans`, 14px, font-weight: 600):**
+  - `Beranda` (`/`) — Active indicator is a Sky Blue gradient underline bar.
+  - `Tentang` (`/tentang`) — Manifesto, PKUMI initiator profile, Code of Ethics, and Editorial directory.
+  - `Kontak` (`/kontak`) — Official inquiries, email directory, and social media channels.
+- **Search Trigger `[ 🔍 ]`:** Opens an accessible client-side modal search dialog with live keyword filtering across titles, authors, and categories. Keyboard shortcuts: `Ctrl+K` / `Cmd+K` to open, `Escape` to close.
+- **Primary Action CTA (`[+ Kirim Tulisan]`):** Sunrise Amber button with pen icon linking to `/kirim-tulisan`.
+- **Mobile Responsiveness:** Features a mobile drawer toggle displaying all navigation links and the CTA button on smaller screens (<768px).
+- **Sticky Behavior:** `position: sticky; top: 0; z-index: 900; background: var(--white); border-bottom: 1px solid var(--border-subtle);`.
 
-*(Note for Phase 2: A dropdown labeled `Kategori ▾` will be inserted between `Beranda` and `Tentang` once taxonomy is fully populated).*
+_(Note for Phase 2: A dropdown labeled `Kategori ▾` will be inserted between `Beranda` and `Tentang` once taxonomy is fully populated)._
 
 ### 5.2 URL Routing & Information Architecture
 
 Afaq Tafsir adopts a clean flat URL architecture (`/[slug]`) for primary editorial content, backed by explicit namespace boundaries and telemetry decoupling.
 
-| Route Pattern | Target View | Content Collection / Source | Priority & Matching Rule |
-| :--- | :--- | :--- | :--- |
-| `/` | Homepage | Curated Bento Hero + Pattern A/B feeds | Root index (`src/pages/index.astro`) |
-| `/[slug]` | Article Detail | `articles` collection (single entry) | Dynamic fallback (`src/pages/[slug].astro`) |
-| `/kategori/[slug]` | Category Archive | `category` taxonomy term entries | Dedicated route (`src/pages/kategori/[slug].astro`) |
-| `/tag/[slug]` | Tag Archive | `tag` taxonomy term entries | Dedicated route (`src/pages/tag/[slug].astro`) |
-| `/tentang` | Manifesto, Ethics & Authors | Static Page (`pages` / custom template) | Explicit file match (`src/pages/tentang.astro`) |
-| `/kontak` | Official Inquiries & Directory | Static Page (`pages` / custom template) | Explicit file match (`src/pages/kontak.astro`) |
-| `/kirim-tulisan` | Contributor Guidelines | Static Page (`pages` / custom template) | Explicit file match (`src/pages/kirim-tulisan.astro`) |
-| `/search` | Full-Text Search Interface | Emdash Search / Client-side index | Explicit file match (`src/pages/search.astro`) |
-| `/_emdash/*` | CMS Admin Panel & API | Emdash Engine internal router | Reserved system routes |
+| Route Pattern      | Target View                    | Content Collection / Source             | Priority & Matching Rule                              |
+| :----------------- | :----------------------------- | :-------------------------------------- | :---------------------------------------------------- |
+| `/`                | Homepage                       | Curated Bento Hero + Pattern A/B feeds  | Root index (`src/pages/index.astro`)                  |
+| `/[slug]`          | Article Detail                 | `articles` collection (single entry)    | Dynamic fallback (`src/pages/[slug].astro`)           |
+| `/kategori/[slug]` | Category Archive               | `category` taxonomy term entries        | Dedicated route (`src/pages/kategori/[slug].astro`)   |
+| `/tag/[slug]`      | Tag Archive                    | `tag` taxonomy term entries             | Dedicated route (`src/pages/tag/[slug].astro`)        |
+| `/tentang`         | Manifesto, Ethics & Authors    | Static Page (`pages` / custom template) | Explicit file match (`src/pages/tentang.astro`)       |
+| `/kontak`          | Official Inquiries & Directory | Static Page (`pages` / custom template) | Explicit file match (`src/pages/kontak.astro`)        |
+| `/kirim-tulisan`   | Contributor Guidelines         | Static Page (`pages` / custom template) | Explicit file match (`src/pages/kirim-tulisan.astro`) |
+| `/search`          | Full-Text Search Interface     | Emdash Search / Client-side index       | Explicit file match (`src/pages/search.astro`)        |
+| `/_emdash/*`       | CMS Admin Panel & API          | Emdash Engine internal router           | Reserved system routes                                |
 
 #### Namespace Rules:
+
 1. **Primary Editorial Monopoly**: The root `/[slug]` path is reserved exclusively for the `articles` collection.
 2. **Explicit Secondary Prefixes**: All taxonomy archives, author archives, and tags use dedicated prefixes (`/kategori/`, `/tag/`, `/penulis/`).
 3. **Static File Precedence**: In Astro, explicit files (`/tentang.astro`, `/kontak.astro`) take precedence over dynamic `[slug].astro`, preventing slug collisions with system pages.
@@ -280,32 +302,32 @@ The homepage uses a balanced magazine layout: **Main Feed (~70% width)** on the 
 #### Section Details:
 
 1. **Hero Section (Bento 5-Card Grid):**
-   * **Left (~57%):** Major weekly curated lead story. Displays high-resolution 16:9 cover image, category badge, 1.65rem Serif title, 2-line excerpt, author byline, publication date, and estimated reading time (*e.g., "6 mnt baca"*).
-   * **Right (~43%):** 4 stacked secondary editorial picks. Compact horizontal card format with 120x120px square thumbnail, category badge, 1.02rem Serif title, author, and reading time.
+   - **Left (~57%):** Major weekly curated lead story. Displays high-resolution 16:9 cover image, category badge, 1.65rem Serif title, 2-line excerpt, author byline, publication date, and estimated reading time (_e.g., "6 mnt baca"_).
+   - **Right (~43%):** 4 stacked secondary editorial picks. Compact horizontal card format with 120x120px square thumbnail, category badge, 1.02rem Serif title, author, and reading time.
 
 2. **Modular Video Showcase (Cloudflare R2 Direct Stream):**
-   * **Configuration:** Toggleable via `siteConfig.videoShowcase.enabled` (or CMS setting). Renders only when enabled.
-   * **Container:** Deep Celestial Navy gradient box (`--bg-dark-section`) with 20px radius, subtle border glow, and white typography.
-   * **Video Player Specs:**
-     * Features Cloudflare R2 Stream badge pill overlay.
-     * Streams MP4 direct content with `controls`, `playsinline`, `preload="metadata"`, and high-resolution `poster` thumbnail.
-   * **Right Side:** Gold badge `"KAJIAN PILIHAN"`, Serif video title, speaker byline (with microphone icon), and descriptive synopsis.
+   - **Configuration:** Toggleable via `siteConfig.videoShowcase.enabled` (or CMS setting). Renders only when enabled.
+   - **Container:** Deep Celestial Navy gradient box (`--bg-dark-section`) with 20px radius, subtle border glow, and white typography.
+   - **Video Player Specs:**
+     - Features Cloudflare R2 Stream badge pill overlay.
+     - Streams MP4 direct content with `controls`, `playsinline`, `preload="metadata"`, and high-resolution `poster` thumbnail.
+   - **Right Side:** Gold badge `"KAJIAN PILIHAN"`, Serif video title, speaker byline (with microphone icon), and descriptive synopsis.
 
 3. **Main Feed Block 1: "Artikel Pilihan" (Layout Pattern A):**
-   * Header: `Artikel Pilihan` with the Sunrise Amber underline bar.
-   * Left Column (50%): 1 Large Lead Card with 16:10 thumbnail, category badge, 1.25rem title, excerpt, and author/date metadata.
-   * Right Column (50%): 4 vertical stacked mini-items (78x78px thumbnail on the left, 2-line title on the right, category badge, date).
+   - Header: `Artikel Pilihan` with the Sunrise Amber underline bar.
+   - Left Column (50%): 1 Large Lead Card with 16:10 thumbnail, category badge, 1.25rem title, excerpt, and author/date metadata.
+   - Right Column (50%): 4 vertical stacked mini-items (78x78px thumbnail on the left, 2-line title on the right, category badge, date).
 
 4. **Main Feed Block 2: "Artikel Terbaru" (Layout Pattern B):**
-   * Header: `Artikel Terbaru` with the Sunrise Amber underline bar.
-   * Top Half: 2 Medium featured cards side-by-side (16:9 thumbnail, category badge, 1.1rem title, excerpt, author, date).
-   * Bottom Half: 2x2 subgrid of 4 compact list items (60x60px thumbnail + 2-line title + date).
-   * Bottom Action: Primary outline button `"Muat Lebih Banyak Artikel"`.
+   - Header: `Artikel Terbaru` with the Sunrise Amber underline bar.
+   - Top Half: 2 Medium featured cards side-by-side (16:9 thumbnail, category badge, 1.1rem title, excerpt, author, date).
+   - Bottom Half: 2x2 subgrid of 4 compact list items (60x60px thumbnail + 2-line title + date).
+   - Bottom Action: Primary outline button `"Muat Lebih Banyak Artikel"`.
 
 5. **Sidebar Widgets (Right ~30% / 340px):**
-   * **Widget 1 (Tentang Afaq Tafsir):** Mission summary with link `Baca Manifesto & Visi Kami →` pointing to `/tentang`.
-   * **Widget 2 (Artikel Terbanyak Dibaca):** Numbered popular list ranked #1 to #5 with prominent Amber digits (`01`–`05`), clickable titles, and readership statistics (*e.g., "14.2k dibaca"*).
-   * **Widget 3 (CTA Kontributor):** Gold-bordered card with `PANGGILAN KONTRIBUTOR` badge: *"Redaksi Afaq Tafsir membuka penerimaan artikel tematik tafsir dan pemikiran Islam."* Includes full-width CTA button `Panduan Pengiriman Naskah →` linking to `/kirim-tulisan`.
+   - **Widget 1 (Tentang Afaq Tafsir):** Mission summary with link `Baca Manifesto & Visi Kami →` pointing to `/tentang`.
+   - **Widget 2 (Artikel Terbanyak Dibaca):** Numbered popular list ranked #1 to #5 with prominent Amber digits (`01`–`05`), clickable titles, and readership statistics (_e.g., "14.2k dibaca"_).
+   - **Widget 3 (CTA Kontributor):** Gold-bordered card with `PANGGILAN KONTRIBUTOR` badge: _"Redaksi Afaq Tafsir membuka penerimaan artikel tematik tafsir dan pemikiran Islam."_ Includes full-width CTA button `Panduan Pengiriman Naskah →` linking to `/kirim-tulisan`.
 
 ---
 
@@ -364,11 +386,12 @@ A reading experience optimized for intellectual contemplation, distraction-free 
 ```
 
 #### Key Technical Requirements for Article Detail:
-* **Arabic Typography & Ayat Rendering:** Quranic verses use `--font-arabic` (Amiri), `font-size: 1.65rem`, `line-height: 2.3`, `direction: rtl`, with ornamental reference formatting (`۞ — QS. ...`).
-* **Interactive Footnotes:** Footnotes render as clickable superscripts (`[1]`, `[2]`) that trigger smooth scrolling to the footnote item and highlight it temporarily with a gold background.
-* **Author Card Attribution:** Displays author photo, role/affiliation, biography, and anchor link pointing to the author's card in `/tentang#author-[slug]`.
-* **Related Articles:** 3-card grid showcasing related exegesis pieces.
-* **Moderated Discussion Box:** Scientific discussion prompt with a moderation badge and toast feedback.
+
+- **Arabic Typography & Ayat Rendering:** Quranic verses use `--font-arabic` (Amiri), `font-size: 1.65rem`, `line-height: 2.3`, `direction: rtl`, with ornamental reference formatting (`۞ — QS. ...`).
+- **Interactive Footnotes:** Footnotes render as clickable superscripts (`[1]`, `[2]`) that trigger smooth scrolling to the footnote item and highlight it temporarily with a gold background.
+- **Author Card Attribution:** Displays author photo, role/affiliation, biography, and anchor link pointing to the author's card in `/tentang#author-[slug]`.
+- **Related Articles:** 3-card grid showcasing related exegesis pieces.
+- **Moderated Discussion Box:** Scientific discussion prompt with a moderation badge and toast feedback.
 
 ---
 
@@ -380,65 +403,68 @@ An informational landing page providing preliminary guidelines and email submiss
 > Detailed honorarium structures, formal peer-review SLAs, and automated contributor portals are currently unformalized placeholders and will be finalized prior to Phase 2.
 
 #### Page Content & Sections (Placeholder Scope):
+
 1. **Header & Manifesto:**
-   * Badge: `PANDUAN KONTRIBUTOR & PENULIS`
-   * Headline: *Syarat dan Ketentuan Pengiriman Naskah*
-   * Subheadline: *Afaq Tafsir membuka ruang bagi akademisi, peneliti, santri, dan pemikir keislaman untuk mempublikasikan kajian Al-Qur'an dan tafsir.*
+   - Badge: `PANDUAN KONTRIBUTOR & PENULIS`
+   - Headline: _Syarat dan Ketentuan Pengiriman Naskah_
+   - Subheadline: _Afaq Tafsir membuka ruang bagi akademisi, peneliti, santri, dan pemikir keislaman untuk mempublikasikan kajian Al-Qur'an dan tafsir._
 2. **Draft Submission Guidelines:**
-   * **General Structure:** Essay format (~800–1.000 words), readable digital paragraphs.
-   * **Scope & Topic:** Quranic exegesis (thematic tafsir), hermeneutics, manuscript studies, and contextual discourse.
-   * **Style & Reference:** Academic-popular tone, standard transliteration, and author attribution info.
+   - **General Structure:** Essay format (~800–1.000 words), readable digital paragraphs.
+   - **Scope & Topic:** Quranic exegesis (thematic tafsir), hermeneutics, manuscript studies, and contextual discourse.
+   - **Style & Reference:** Academic-popular tone, standard transliteration, and author attribution info.
 3. **Instruksi Pengiriman Surel:**
-   * **Surel Tujuan:** `afaqtafsir.id@gmail.com` / `redaksi@afaqtafsir.id`
-   * **Format Subjek:** `Tema_Nama Penulis_Judul Tulisan`
-   * **Template Naskah & Bio:** Includes quick-copy format button (*"Salin Format Pengiriman"*) and direct mailto launcher (*"Buka Aplikasi Email"*).
+   - **Surel Tujuan:** `afaqtafsir.id@gmail.com` / `redaksi@afaqtafsir.id`
+   - **Format Subjek:** `Tema_Nama Penulis_Judul Tulisan`
+   - **Template Naskah & Bio:** Includes quick-copy format button (_"Salin Format Pengiriman"_) and direct mailto launcher (_"Buka Aplikasi Email"_).
 
 ---
 
 ### 6.4 Static Pages: "Tentang Kami" & "Kontak"
 
 #### `Tentang Kami` (`/tentang`)
-* **Profil & Manifesto Platform:** Diinisiasi pada tahun 2026 oleh mahasiswi **Pendidikan Kader Ulama Masjid Istiqlal (PKUMI) — Program Kader Ulama Perempuan**.
-* **Kode Etik {siteConfig.name}:**
-  1. *Integritas Akademik & Orisinalitas:* Bebas plagiasi, rujukan ilmiah akurat dan dapat dipertanggungjawabkan.
-  2. *Kebebasan Berpendapat yang Bertanggung Jawab:* Santun, argumentatif, objektif, tanpa diskriminasi atau ujaran kebencian.
-* **Inisiator & Dewan Redaksi:**
-  * *Inisiator:* Kader Ulama Perempuan PKUMI.
-  * *Dewan Redaksi & Kurasi:* Bertanggung jawab atas penyuntingan, kurasi substansi, dan standarisasi publikasi.
-* **Direktori Penulis & Redaksi:** Profil terperinci (nama, foto, jabatan, afiliasi, bio) untuk Arofah Nur (Pimred), Dr. Hamdan Syukri (Dewan Pakar), Mochamad Refian Prasetyo, Fikri Anshari, Muhammad Iqbal, Nurul Izzah, dkk.
-* **CTA Kontributor Banner:** Banner ajakan menulis dengan tautan ke `/kirim-tulisan`.
+
+- **Profil & Manifesto Platform:** Diinisiasi pada tahun 2026 oleh mahasiswi **Pendidikan Kader Ulama Masjid Istiqlal (PKUMI) — Program Kader Ulama Perempuan**.
+- **Kode Etik {siteConfig.name}:**
+  1. _Integritas Akademik & Orisinalitas:_ Bebas plagiasi, rujukan ilmiah akurat dan dapat dipertanggungjawabkan.
+  2. _Kebebasan Berpendapat yang Bertanggung Jawab:_ Santun, argumentatif, objektif, tanpa diskriminasi atau ujaran kebencian.
+- **Inisiator & Dewan Redaksi:**
+  - _Inisiator:_ Kader Ulama Perempuan PKUMI.
+  - _Dewan Redaksi & Kurasi:_ Bertanggung jawab atas penyuntingan, kurasi substansi, dan standarisasi publikasi.
+- **Direktori Penulis & Redaksi:** Profil terperinci (nama, foto, jabatan, afiliasi, bio) untuk Arofah Nur (Pimred), Dr. Hamdan Syukri (Dewan Pakar), Mochamad Refian Prasetyo, Fikri Anshari, Muhammad Iqbal, Nurul Izzah, dkk.
+- **CTA Kontributor Banner:** Banner ajakan menulis dengan tautan ke `/kirim-tulisan`.
 
 #### `Kontak` (`/kontak`)
-* **Saluran Surel Resmi:**
-  * *Surel Editorial & Submisi:* `afaqtafsir.id@gmail.com` (pengiriman naskah, koreksi editorial, hak cipta).
-  * *Kerjasama & Kemitraan:* `afaqtafsir.id@gmail.com` (kolaborasi riset, seminar, bedah buku, publikasi bersama).
-* **Media Sosial Resmi:**
-  * Instagram: `@afaqtafsir`
-  * YouTube: `@afaqtafsir`
-  * TikTok: `@afaqtafsir`
-  * X (Twitter): `@afaqtafsir`
+
+- **Saluran Surel Resmi:**
+  - _Surel Editorial & Submisi:_ `afaqtafsir.id@gmail.com` (pengiriman naskah, koreksi editorial, hak cipta).
+  - _Kerjasama & Kemitraan:_ `afaqtafsir.id@gmail.com` (kolaborasi riset, seminar, bedah buku, publikasi bersama).
+- **Media Sosial Resmi:**
+  - Instagram: `@afaqtafsir`
+  - YouTube: `@afaqtafsir`
+  - TikTok: `@afaqtafsir`
+  - X (Twitter): `@afaqtafsir`
 
 ---
 
 ### 6.5 Global Footer
 
-* **Styling:** Deep Celestial Navy gradient (`--bg-dark-section`), light sky blue text (`--sky-200`), and subtle gold accents.
-* **Column 1 (Brand & Slogan):** Emblem logo, site title, slogan *"Membaca Al-Qur'an, Melihat Lebih Luas"*, and circular social channel icon buttons.
-* **Column 2 (Navigasi Utama):** Links to `Beranda Utama`, `Kajian Pilihan Terkini`, `Pedoman Kirim Naskah`, `Tentang Redaksi & Visi`.
-* **Column 3 (Editorial & Kontak):** Contact email highlight, `Hubungi Kerjasama →`, and `Dewan Redaksi & Kebijakan`.
-* **Bottom Bar:** `© [Tahun Berjalan] Afaq Tafsir. Dikelola secara independen.`
+- **Styling:** Deep Celestial Navy gradient (`--bg-dark-section`), light sky blue text (`--sky-200`), and subtle gold accents.
+- **Column 1 (Brand & Slogan):** Emblem logo, site title, slogan _"Membaca Al-Qur'an, Melihat Lebih Luas"_, and circular social channel icon buttons.
+- **Column 2 (Navigasi Utama):** Links to `Beranda Utama`, `Kajian Pilihan Terkini`, `Pedoman Kirim Naskah`, `Tentang Redaksi & Visi`.
+- **Column 3 (Editorial & Kontak):** Contact email highlight, `Hubungi Kerjasama →`, and `Dewan Redaksi & Kebijakan`.
+- **Bottom Bar:** `© [Tahun Berjalan] Afaq Tafsir. Dikelola secara independen.`
 
 ---
 
 ## 7. User Roles & Permission Matrix
 
-| Role | Account Required | Frontend Capabilities | CMS / Backend Capabilities |
-| :--- | :---: | :--- | :--- |
-| **Reader (Pembaca)** | No | Read public articles, search, view author profiles, explore footnotes. | None. |
-| **Guest Author (Phase 1)** | No | Reads submission guidelines, copies email format, submits manuscripts via email. | None (Admin manually attributes author bio). |
-| **Contributor (Phase 2)** | Yes | Submits drafts via contributor dashboard, tracks review and payment status. | Limited Contributor Portal view. |
-| **Editor (Arofah dkk)** | Yes | Preview drafts, full reading access. | Create, edit, approve, reject, schedule, and publish articles; manage authors. |
-| **Admin (Farhan)** | Yes | Full platform access. | Full system configuration, user/role management, CMS schema, R2 video config. |
+| Role                       | Account Required | Frontend Capabilities                                                            | CMS / Backend Capabilities                                                     |
+| :------------------------- | :--------------: | :------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- |
+| **Reader (Pembaca)**       |        No        | Read public articles, search, view author profiles, explore footnotes.           | None.                                                                          |
+| **Guest Author (Phase 1)** |        No        | Reads submission guidelines, copies email format, submits manuscripts via email. | None (Admin manually attributes author bio).                                   |
+| **Contributor (Phase 2)**  |       Yes        | Submits drafts via contributor dashboard, tracks review and payment status.      | Limited Contributor Portal view.                                               |
+| **Editor (Arofah dkk)**    |       Yes        | Preview drafts, full reading access.                                             | Create, edit, approve, reject, schedule, and publish articles; manage authors. |
+| **Admin (Farhan)**         |       Yes        | Full platform access.                                                            | Full system configuration, user/role management, CMS schema, R2 video config.  |
 
 ---
 
@@ -447,58 +473,66 @@ An informational landing page providing preliminary guidelines and email submiss
 All structured content is managed natively via **Cloudflare Emdash CMS** backed by D1, eliminating manual SQL schema migrations. Content types are modeled as type-safe collections and taxonomies.
 
 ### 8.1 Collection: `articles` (Primary Content Collection)
-* `title` (Text, Required, Searchable) — *Judul Artikel*
-* `slug` (Slug, Required, Unique) — URL-friendly slug
-* `subheadline` (Text, Optional) — Secondary italic subheadline
-* `excerpt` (Textarea, Required, Searchable) — 2-sentence summary for cards and OpenGraph metadata
-* `content` (RichText / Markdown / Portable Text, Required) — Primary article body
-* `featured_image` (Media Asset / Image, Optional) — Cover image stored in R2 Media Library
-* `author` (Relation -> `authors`, Required) — Assigned author profile
-* `category` (Taxonomy -> `categories`, Hierarchical) — Assigned exegesis topic/category
-* Dynamic Reading Time (Computed on-the-fly from word count, *e.g., "6 mnt baca"* — removed from manual schema input for optimal editorial UX)
-* `is_lead_hero` (Boolean, Default: `false`) — Flags story as primary Hero Bento lead (~57% width)
-* `is_secondary_hero` (Boolean, Default: `false`) — Places story in the right Hero Bento stack
-* `is_featured` (Boolean, Default: `false`) — Toggles inclusion in curated Pattern A / B homepage feeds
-* Dynamic Popularity & Readership Metrics (Derived automatically from `article_views` analytics table via background beacon; manual popular flags removed from schema)
-* `status` (Enum: `'draft'`, `'in_review'`, `'published'`, `'scheduled'`, `'archived'`)
-* `published_at` (Datetime, Optional) — Publication timestamp for scheduling and ordering
+
+- `title` (Text, Required, Searchable) — _Judul Artikel_
+- `slug` (Slug, Required, Unique) — URL-friendly slug
+- `subheadline` (Text, Optional) — Secondary italic subheadline
+- `excerpt` (Textarea, Required, Searchable) — 2-sentence summary for cards and OpenGraph metadata
+- `content` (RichText / Markdown / Portable Text, Required) — Primary article body
+- `featured_image` (Media Asset / Image, Optional) — Cover image stored in R2 Media Library
+- `author` (Relation -> `authors`, Required) — Assigned author profile
+- `category` (Taxonomy -> `categories`, Hierarchical) — Assigned exegesis topic/category
+- Dynamic Reading Time (Computed on-the-fly from word count, _e.g., "6 mnt baca"_ — removed from manual schema input for optimal editorial UX)
+- `is_lead_hero` (Boolean, Default: `false`) — Flags story as primary Hero Bento lead (~57% width)
+- `is_secondary_hero` (Boolean, Default: `false`) — Places story in the right Hero Bento stack
+- `is_featured` (Boolean, Default: `false`) — Toggles inclusion in curated Pattern A / B homepage feeds
+- Dynamic Popularity & Readership Metrics (Derived automatically from `article_views` analytics table via background beacon; manual popular flags removed from schema)
+- `status` (Enum: `'draft'`, `'in_review'`, `'published'`, `'scheduled'`, `'archived'`)
+- `published_at` (Datetime, Optional) — Publication timestamp for scheduling and ordering
 
 #### Custom Content Components (Rich Body Extensions):
-* **`AyatQuote` Block:** Arabic verse (Amiri font, RTL direction), Indonesian translation, and Surah verse reference (`۞ — QS. ...`).
-* **`Footnotes` Block:** Numbered academic citations rendering as interactive clickable anchor targets.
+
+- **`AyatQuote` Block:** Arabic verse (Amiri font, RTL direction), Indonesian translation, and Surah verse reference (`۞ — QS. ...`).
+- **`Footnotes` Block:** Numbered academic citations rendering as interactive clickable anchor targets.
 
 ### 8.2 Collection: `authors` (Directory Collection)
-* `name` (Text, Required, Searchable) — Full name and academic titles (*e.g., "Dr. Hamdan Syukri, M.Ud."*)
-* `slug` (Slug, Required, Unique) — Author profile slug
-* `role` (Text, Optional) — Editorial role (*e.g., "Pemimpin Redaksi"*, *"Dewan Pakar"*, *"Kontributor"*)
-* `avatar` (Media Asset / Image, Optional) — Author photo from R2 Media Library
-* `bio` (Textarea, Required) — Biographical narrative (50–100 words)
-* `affiliation` (Text, Optional) — Academic or institutional affiliation (*e.g., "Fakultas Ushuluddin & Peneliti Independen"*)
-* `email` (Email, Optional) — Correspondence email
+
+- `name` (Text, Required, Searchable) — Full name and academic titles (_e.g., "Dr. Hamdan Syukri, M.Ud."_)
+- `slug` (Slug, Required, Unique) — Author profile slug
+- `role` (Text, Optional) — Editorial role (_e.g., "Pemimpin Redaksi"_, _"Dewan Pakar"_, _"Kontributor"_)
+- `avatar` (Media Asset / Image, Optional) — Author photo from R2 Media Library
+- `bio` (Textarea, Required) — Biographical narrative (50–100 words)
+- `affiliation` (Text, Optional) — Academic or institutional affiliation (_e.g., "Fakultas Ushuluddin & Peneliti Independen"_)
+- `email` (Email, Optional) — Correspondence email
 
 ### 8.3 Taxonomy: `categories` (Hierarchical Classification)
+
 Managed through Emdash Taxonomies to categorize exegesis topics:
-* `TAFSIR TEMATIK`, `KOSMOLOGI QUR'ANI`, `STUDI NASKAH`, `FILSAFAT ISLAM`, `BALAGHAH`, `MANUSKRIP`, `SOSIO-HISTORIS`, `RESENSI BUKU`, `HERMENEUTIKA`, `SIYASAH`, `TASAWUF`, `GENDER & ISLAM`, `FILOLOGI`.
+
+- `TAFSIR TEMATIK`, `KOSMOLOGI QUR'ANI`, `STUDI NASKAH`, `FILSAFAT ISLAM`, `BALAGHAH`, `MANUSKRIP`, `SOSIO-HISTORIS`, `RESENSI BUKU`, `HERMENEUTIKA`, `SIYASAH`, `TASAWUF`, `GENDER & ISLAM`, `FILOLOGI`.
 
 ### 8.4 Site Settings & Menu Management
+
 Configured via Emdash Site Settings and Visual Menu Builder:
-* `site_name`: `"Afaq Tafsir"`
-* `site_tagline`: `"Membaca Al-Qur'an, Melihat Lebih Luas"`
-* `subtagline`: `"Jurnal & Pemikiran Qur'ani"`
-* `video_showcase` (Settings Object):
-  * `enabled`: `true` / `false`
-  * `badge`: `"KAJIAN PILIHAN"`
-  * `title`: Video title string
-  * `speaker`: Speaker and presenter credits
-  * `video_url`: R2 direct MP4 streaming URL
-  * `poster_url`: R2 thumbnail cover image
-* `menus`: Managed via Emdash Menu Builder (`primary-nav`, `footer-nav`, `footer-editorial`).
+
+- `site_name`: `"Afaq Tafsir"`
+- `site_tagline`: `"Membaca Al-Qur'an, Melihat Lebih Luas"`
+- `subtagline`: `"Jurnal & Pemikiran Qur'ani"`
+- `video_showcase` (Settings Object):
+  - `enabled`: `true` / `false`
+  - `badge`: `"KAJIAN PILIHAN"`
+  - `title`: Video title string
+  - `speaker`: Speaker and presenter credits
+  - `video_url`: R2 direct MP4 streaming URL
+  - `poster_url`: R2 thumbnail cover image
+- `menus`: Managed via Emdash Menu Builder (`primary-nav`, `footer-nav`, `footer-editorial`).
 
 ---
 
 ## 9. Frontend Querying & Search Architecture
 
 ### 9.1 Astro Data Layer Integration (`emdash`)
+
 Content is queried directly in Astro templates using Emdash's type-safe query helpers following the Live Content Collections pattern:
 
 ```astro
@@ -514,11 +548,12 @@ const { entry: article, isPreview } = await getEmDashEntry("articles", Astro.par
 ```
 
 ### 9.2 Search Implementation (Phase 1 Scope)
-* **UI:** Accessible modal dialog triggered by the `[ 🔍 ]` icon in the header or keyboard shortcut `Ctrl+K` / `Cmd+K`.
-* **Mechanism:**
-  * Client-side fast filtering across cached article collection fields (`title`, `author`, `category`, `excerpt`) for sub-10ms response times.
-  * In production, connects seamlessly with Emdash Search / Cloudflare AI Search index across searchable collection fields.
-* **UX:** Live search results displaying category badge, serif title, author name, and date with instant keyboard navigation (`Esc` to dismiss).
+
+- **UI:** Accessible modal dialog triggered by the `[ 🔍 ]` icon in the header or keyboard shortcut `Ctrl+K` / `Cmd+K`.
+- **Mechanism:**
+  - Client-side fast filtering across cached article collection fields (`title`, `author`, `category`, `excerpt`) for sub-10ms response times.
+  - In production, connects seamlessly with Emdash Search / Cloudflare AI Search index across searchable collection fields.
+- **UX:** Live search results displaying category badge, serif title, author name, and date with instant keyboard navigation (`Esc` to dismiss).
 
 ### 9.3 Publisher Data Layer & Telemetry Specification
 
@@ -527,17 +562,17 @@ To decouple URL aesthetics from analytics and observability, the layout layer (`
 ```javascript
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
-  page_type: 'article', // 'article' | 'page' | 'taxonomy' | 'home'
-  article_title: article.data.title,
-  author_name: article.data.author?.name || article.data.byline?.displayName,
-  category: primaryCategoryTerm?.name,
-  tags: tagTerms?.map(t => t.name) || [],
-  published_date: article.data.published_at,
-  reading_time_mins: article.data.reading_time || 6
+	page_type: "article", // 'article' | 'page' | 'taxonomy' | 'home'
+	article_title: article.data.title,
+	author_name: article.data.author?.name || article.data.byline?.displayName,
+	category: primaryCategoryTerm?.name,
+	tags: tagTerms?.map((t) => t.name) || [],
+	published_date: article.data.published_at,
+	reading_time_mins: article.data.reading_time || 6,
 });
 ```
 
-* **Platform-Agnostic Observability**: Connects seamlessly to Cloudflare Zaraz, Google Analytics 4 (Custom Dimensions / Content Grouping), Plausible, PostHog, or Google Tag Manager without coupling telemetry to URL strings.
+- **Platform-Agnostic Observability**: Connects seamlessly to Cloudflare Zaraz, Google Analytics 4 (Custom Dimensions / Content Grouping), Plausible, PostHog, or Google Tag Manager without coupling telemetry to URL strings.
 
 ---
 

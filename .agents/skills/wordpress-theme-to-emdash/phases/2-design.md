@@ -57,7 +57,9 @@ Block themes store design tokens in `theme.json`:
 			"palette": [{ "slug": "primary", "color": "#0073aa", "name": "Primary" }]
 		},
 		"typography": {
-			"fontFamilies": [{ "fontFamily": "'Open Sans', sans-serif", "slug": "body" }]
+			"fontFamilies": [
+				{ "fontFamily": "'Open Sans', sans-serif", "slug": "body" }
+			]
 		},
 		"layout": {
 			"contentSize": "650px",

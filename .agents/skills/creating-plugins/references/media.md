@@ -19,7 +19,11 @@ With `media:write`, upload bytes through the bridge:
 
 ```typescript
 const bytes = await source.arrayBuffer();
-const uploaded = await ctx.media!.upload("report.pdf", "application/pdf", bytes);
+const uploaded = await ctx.media!.upload(
+	"report.pdf",
+	"application/pdf",
+	bytes,
+);
 ```
 
 Both sandbox runners write through the configured media adapter and create a ready record. A sandbox does not follow a presigned upload URL directly.

@@ -47,6 +47,7 @@ In an EmDash CMS project running on Cloudflare Workers, media management is deco
 ## 2. The Offline Seeding Caveat ("Media Not Found")
 
 ### Why Offline Seeding Creates a Desync:
+
 When populating initial demo or production seed content via the EmDash CLI:
 
 ```bash
@@ -72,6 +73,7 @@ bunx wrangler r2 object put <bucket-name>/<storage-key> --local --file <path-to-
 ```
 
 ### Example:
+
 ```bash
 bunx wrangler r2 object put afaqtafsir-website/01M13B173KRFM2FNBPG7N55XM9.jpg \
   --local \
@@ -112,7 +114,7 @@ async function seedLocalR2() {
 
 	for (const item of MEDIA_SEEDS) {
 		const filePath = path.join(tmpDir, item.filename);
-		
+
 		// 1. Fetch image bytes if not cached locally
 		if (!fs.existsSync(filePath)) {
 			const res = await fetch(item.url);
@@ -122,18 +124,22 @@ async function seedLocalR2() {
 
 		// 2. Put into local Miniflare R2 bucket
 		const r2Target = `afaqtafsir-website/${item.storage_key}`;
-		const proc = spawnSync("bunx", [
-			"wrangler",
-			"r2",
-			"object",
-			"put",
-			r2Target,
-			"--local",
-			"--file",
-			filePath,
-			"--content-type",
-			"image/jpeg",
-		], { stdio: "inherit" });
+		const proc = spawnSync(
+			"bunx",
+			[
+				"wrangler",
+				"r2",
+				"object",
+				"put",
+				r2Target,
+				"--local",
+				"--file",
+				filePath,
+				"--content-type",
+				"image/jpeg",
+			],
+			{ stdio: "inherit" },
+		);
 
 		if (proc.status === 0) {
 			console.log(`✓ Uploaded ${item.storage_key}`);
@@ -149,11 +155,13 @@ seedLocalR2();
 ## 5. Verification & Health Check
 
 ### 1. Verify Object in Local R2 via CLI:
+
 ```bash
 bunx wrangler r2 object get afaqtafsir-website/01M13B173KRFM2FNBPG7N55XM9.jpg --local
 ```
 
 Expected Output:
+
 ```text
 Resource location: local 
 Downloading "01M13B173KRFM2FNBPG7N55XM9.jpg" from "afaqtafsir-website".
@@ -161,11 +169,13 @@ Download complete.
 ```
 
 ### 2. Verify Object Serving via HTTP Endpoint:
+
 ```bash
 curl -I http://localhost:4321/_emdash/api/media/file/01M13B173KRFM2FNBPG7N55XM9.jpg
 ```
 
 Expected Headers:
+
 ```http
 HTTP/1.1 200 OK
 content-type: image/jpeg
@@ -179,5 +189,6 @@ content-disposition: inline
 ## 6. Production Deployment Notes
 
 When deploying to production Cloudflare Workers:
+
 1. Running `bunx emdash seed` with API credentials (`--url https://...`) or running migrations through the runtime will execute inside the worker environment where the live `env.MEDIA` binding is active.
 2. Direct image uploads in the EmDash Admin UI (`/_emdash/admin/media`) automatically stream files directly into R2 and insert the matching records into D1 in a single transaction.

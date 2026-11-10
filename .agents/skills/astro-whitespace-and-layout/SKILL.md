@@ -1,4 +1,5 @@
 ---
+
 name: astro-whitespace-and-layout
 description: Handling JSX whitespace rules, HTML minification, and component spacing in Astro v7+. Use when building UI components, metadata bars, prose layouts, or debugging missing spaces and collapsed inline elements.
 ---
@@ -12,11 +13,13 @@ In Astro v7.0+, Astro applies JSX whitespace rules by default (`compressHTML: "j
 ## 1. The Core Mechanic: `compressHTML: 'jsx'`
 
 When templates are compiled:
-* **Whitespace and line breaks between tags on separate lines are stripped.**
-* **Whitespace within a single line is preserved.**
-* **Multi-line text is collapsed onto a single line.**
+
+- **Whitespace and line breaks between tags on separate lines are stripped.**
+- **Whitespace within a single line is preserved.**
+- **Multi-line text is collapsed onto a single line.**
 
 ### The Gotcha
+
 ```astro
 <!-- Source: formatting tags on separate lines -->
 <div class="card-meta">
@@ -41,6 +44,7 @@ If the parent container is a standard block or inline flow container, adjacent t
 Do not treat this solely as a whitespace bug. The solution depends on whether you are working with **grammatical sentences (prose)** or **structured UI elements (components)**.
 
 ### A. Use `{" "}` ONLY in Inline Prose / Running Text
+
 When elements form a continuous grammatical sentence or paragraph, use explicit JSX string literals `{" "}`:
 
 ```astro
@@ -56,6 +60,7 @@ When elements form a continuous grammatical sentence or paragraph, use explicit 
 ---
 
 ### B. Use Flexbox `gap` for UI Components (Metadata, Chips, Badges)
+
 For metadata strips, breadcrumbs, action bars, tags, and card headers, **never rely on `{" "}` or HTML whitespace**. Always make the container a Flexbox element with an explicit `gap`:
 
 ```astro
@@ -89,11 +94,11 @@ For metadata strips, breadcrumbs, action bars, tags, and card headers, **never r
 
 ## 3. Why Flexbox `gap` Beats `{" "}` in Components
 
-| Problem with `{" "}` in Components | How Flexbox `gap` Fixes It |
-| :--- | :--- |
-| **Variable Width**: The width of `U+0020` varies with font family, weight, and letter-spacing. | **Pixel-Precise**: `gap: 6px` is deterministic and tokenized. |
-| **Baseline Drift**: Emojis (`⏱`, `🔥`) and bullet characters (`•`) sit 1–2px off-baseline from text. | **Vertical Centering**: `align-items: center` ensures uniform alignment. |
-| **Awkward Wrapping**: Separator dots can be orphaned at the start of wrapped lines (`• 5 mnt`). | **Controlled Flow**: Flex items wrap predictably as bounded units. |
+| Problem with `{" "}` in Components                                                                         | How Flexbox `gap` Fixes It                                                          |
+| :--------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
+| **Variable Width**: The width of `U+0020` varies with font family, weight, and letter-spacing.             | **Pixel-Precise**: `gap: 6px` is deterministic and tokenized.                       |
+| **Baseline Drift**: Emojis (`⏱`, `🔥`) and bullet characters (`•`) sit 1–2px off-baseline from text.       | **Vertical Centering**: `align-items: center` ensures uniform alignment.            |
+| **Awkward Wrapping**: Separator dots can be orphaned at the start of wrapped lines (`• 5 mnt`).            | **Controlled Flow**: Flex items wrap predictably as bounded units.                  |
 | **High Regression Risk**: Developers or linters reformatting code across lines will silently drop `{" "}`. | **Encapsulated**: The CSS guarantees correct layout regardless of HTML indentation. |
 
 ---
@@ -117,16 +122,16 @@ Ensure the inner wrapper `.byline-author` is also flex-aware:
 
 ```css
 .article-byline-bar {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px; /* Spacing between major metadata chunks */
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px; /* Spacing between major metadata chunks */
 }
 
 .byline-author {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px; /* Natural word spacing between prefix and name */
+	display: inline-flex;
+	align-items: center;
+	gap: 5px; /* Natural word spacing between prefix and name */
 }
 ```
 

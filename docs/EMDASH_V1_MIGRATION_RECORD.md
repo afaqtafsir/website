@@ -19,6 +19,7 @@ This upgrade transitions the site from the fast-moving pre-1.0 development cycle
 ## 2. Comprehensive Inventory of Changes (v0.39.1 → v1.0.1)
 
 ### v0.40.0 & v0.40.1
+
 1. **First-Class `blocks` Fields:** Added support for structured, versioned block compositions in schemas and visual editing with `<Blocks />` from `emdash/ui`.
 2. **Portable Text Image Links:** Added structured `link` object support to Portable Text image blocks, wrapping rendered images in sanitized `<a>` tags.
 3. **Taxonomy Definition Consolidation:** Moved `hierarchical` and `collections` configuration to the taxonomy definition level rather than splitting across locales.
@@ -27,18 +28,21 @@ This upgrade transitions the site from the fast-moving pre-1.0 development cycle
 6. **Cloudflare D1 Setup Resilience:** Chunked sample content imports across requests to eliminate D1 per-request query exhaustion.
 
 ### v0.41.0
+
 1. **Relations & Reference Overhaul:** Reference fields transformed into entry pickers joining collections via site-unique relation slugs. `relations` became a reserved collection slug.
 2. **Export-Seed Media Base URLs:** Added `--media-base-url` flag to `emdash export-seed` to export absolute media references that survive fresh imports.
 3. **WidgetArea Automatic Cache Dependency:** `<WidgetArea>` components now register cache invalidation dependencies automatically.
 4. **Locale Fallback Handling:** `getEmDashEntry` returns `entry: null` instead of throwing a 500 error when an entry does not exist in any locale in the fallback chain.
 
 ### v0.42.0
+
 1. **Stored XSS URL Sanitization:** Hardened `url` content fields by rejecting dangerous schemes (`javascript:`, `data:`, and malformed protocol-relative paths). Only `http:`, `https:`, `mailto:`, `tel:`, and relative paths are permitted.
 2. **URL Routing Segment Safeguards:** Restricted collection URL patterns to at most one placeholder per path segment to eliminate ReDoS attack vectors in `resolveEmDashPath()`.
 3. **Static Output Mode Hardening:** Fixed `GetStaticPathsRequired` errors when building EmDash routes under `output: "static"`.
 4. **Session Driver Verification:** Warns during startup if no session driver is configured (Node/Cloudflare adapters configure this automatically).
 
 ### v1.0.1 (The Major 1.0 Milestone)
+
 1. **Removed `cloudflareCache()`:** Dropped legacy REST-based cache purger. Sites must use `@astrojs/cloudflare/cache`'s `cacheCloudflare()`.
 2. **Moved Comments Components:** `Comments` and `CommentForm` removed from `emdash/ui` export; now imported strictly from `emdash/ui/comments`.
 3. **Removed Legacy CLI Commands:** Removed `emdash dev` and `emdash auth secret` in favor of standard `astro dev` and `emdash secrets generate`.
@@ -52,43 +56,50 @@ This upgrade transitions the site from the fast-moving pre-1.0 development cycle
 
 Prior to running the upgrade, an audit was conducted on `/home/invictus/coding/work/afaqtafsir/website` to evaluate risk:
 
-| Upstream Change | State in Afaq Tafsir | Architectural Impact |
-| :--- | :--- | :--- |
-| **`cloudflareCache()` removal** | `astro.config.mjs` was already using `cacheCloudflare()` from `@astrojs/cloudflare/cache`. | **Zero impact:** No deprecated cache adapter was present. |
-| **Comments export path** | No comment forms or comment threads are used on the website. | **Zero impact:** No imports to update. |
-| **`emdash dev` CLI drop** | `package.json` already defined `"dev": "astro dev"`. | **Zero impact:** Dev workflows unaffected. |
-| **Internal subpaths** | All imports strictly use official public entrypoints (`emdash`, `emdash/astro`, `emdash/ui`, `emdash/page`, `emdash/ui/search`). | **Zero impact:** No internal imports broken. |
-| **Reserved `relations` slug** | Collections are `articles` and `pages`. | **Zero impact:** No naming collisions. |
-| **URL segment routing** | Routes use standard patterns (`/[slug]`, `/kategori/[slug]`, `/penulis/[slug]`). | **Zero impact:** No multi-placeholder segments. |
-| **D1 Session & Auth** | Uses `d1({ binding: "DB", session: "auto" })` and `google()`. | **Zero impact:** Both are fully supported in v1.0. |
+| Upstream Change                 | State in Afaq Tafsir                                                                                                             | Architectural Impact                                      |
+| :------------------------------ | :------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------- |
+| **`cloudflareCache()` removal** | `astro.config.mjs` was already using `cacheCloudflare()` from `@astrojs/cloudflare/cache`.                                       | **Zero impact:** No deprecated cache adapter was present. |
+| **Comments export path**        | No comment forms or comment threads are used on the website.                                                                     | **Zero impact:** No imports to update.                    |
+| **`emdash dev` CLI drop**       | `package.json` already defined `"dev": "astro dev"`.                                                                             | **Zero impact:** Dev workflows unaffected.                |
+| **Internal subpaths**           | All imports strictly use official public entrypoints (`emdash`, `emdash/astro`, `emdash/ui`, `emdash/page`, `emdash/ui/search`). | **Zero impact:** No internal imports broken.              |
+| **Reserved `relations` slug**   | Collections are `articles` and `pages`.                                                                                          | **Zero impact:** No naming collisions.                    |
+| **URL segment routing**         | Routes use standard patterns (`/[slug]`, `/kategori/[slug]`, `/penulis/[slug]`).                                                 | **Zero impact:** No multi-placeholder segments.           |
+| **D1 Session & Auth**           | Uses `d1({ binding: "DB", session: "auto" })` and `google()`.                                                                    | **Zero impact:** Both are fully supported in v1.0.        |
 
 ---
 
 ## 4. Pre-Migration Safety Check & The D1 Export Limitation
 
 ### The Failed SQL Export Attempt
+
 Before mutating production dependencies, a full SQL dump was attempted via Wrangler:
+
 ```bash
 bunx wrangler d1 export afaqtafsir-website --remote --output=backup.sql
 ```
 Cloudflare D1 aborted the command with the following error:
+
 ```
 ✘ [ERROR] D1 Export error: cannot export databases with Virtual Tables (fts5)
 ```
 
 #### Why it occurred:
+
 EmDash implements full-text search using SQLite's `fts5` virtual table module (`_emdash_fts_posts`, `_emdash_fts_articles`, `_emdash_fts_pages`). In SQLite, each FTS5 virtual table creates internal shadow tables (`_data`, `_idx`, `_content`, `_docsize`, `_config`). Cloudflare's server-side export pipeline relies on standard SQLite table dumps which cannot serialize FTS5 shadow structures and virtual table module callbacks.
 
 ### The Point-in-Time Recovery Solution (D1 Time Travel)
+
 Rather than executing destructive `DROP TABLE` operations on live virtual tables solely to satisfy the export tool, we utilized Cloudflare D1's native **Time Travel** engine (the official recovery path recommended by EmDash documentation).
 
 Time Travel captures transactional bookmarks at the raw storage engine layer, completely immune to virtual table restrictions.
 
 - **Pre-Migration Safety Bookmark:**
+
   ```text
   00000346-00000078-000050f5-0190665465fe4611ea5a1ae6a638030d
   ```
 - **Recorded Recovery Command (if needed):**
+
   ```bash
   bunx wrangler d1 time-travel restore afaqtafsir-website --bookmark=00000346-00000078-000050f5-0190665465fe4611ea5a1ae6a638030d
   ```
@@ -98,36 +109,46 @@ Time Travel captures transactional bookmarks at the raw storage engine layer, co
 ## 5. Migration Execution & Tooling Nuances
 
 ### Tooling Observation: `bunx emdash types` Offline Behavior
+
 Running `bunx emdash types` offline produced:
+
 ```
 ERROR Failed to fetch schema: fetch failed
 ```
-*Context:* The CLI command `emdash types` operates as an HTTP client querying an active, running EmDash instance (defaulting to `http://localhost:4321/_emdash/api/schema` or via `--url`). Because the local development server was not active, the fetch failed as expected.  
-*Resolution:* Running `emdash types` manually is unnecessary before building; the EmDash Astro integration automatically hooks into `astro build` (and `astro dev`) to regenerate `emdash-env.d.ts` directly from the schema.
+_Context:_ The CLI command `emdash types` operates as an HTTP client querying an active, running EmDash instance (defaulting to `http://localhost:4321/_emdash/api/schema` or via `--url`). Because the local development server was not active, the fetch failed as expected.  
+_Resolution:_ Running `emdash types` manually is unnecessary before building; the EmDash Astro integration automatically hooks into `astro build` (and `astro dev`) to regenerate `emdash-env.d.ts` directly from the schema.
 
 ### Execution Steps
+
 1. **Dependency Upgrade:**
+
    ```bash
    bun add emdash@1.0.1 @emdash-cms/cloudflare@1.0.1
    ```
 2. **Build & Manifest Generation:**
+
    ```bash
    bun run build
    ```
-   * Regenerated TypeScript definitions in `emdash-env.d.ts`.
-   * Compiled `.emdash/migrations.json` to schema version `1.0.1`, registering migrations `083` to `089` and pointing to `@emdash-cms/cloudflare/internal/db/d1-migrations`.
+
+   - Regenerated TypeScript definitions in `emdash-env.d.ts`.
+   - Compiled `.emdash/migrations.json` to schema version `1.0.1`, registering migrations `083` to `089` and pointing to `@emdash-cms/cloudflare/internal/db/d1-migrations`.
 3. **Typecheck Diagnostics:**
+
    ```bash
    bun run typecheck
    ```
-   * Result: 29 files scanned — `0 errors`, `0 warnings`, `4 hints`.
+
+   - Result: 29 files scanned — `0 errors`, `0 warnings`, `4 hints`.
 4. **Git Commit & Push:**
-   * Staged and committed `package.json`, `bun.lock`, and `.emdash/migrations.json` (`commit a48ba44`).
+   - Staged and committed `package.json`, `bun.lock`, and `.emdash/migrations.json` (`commit a48ba44`).
 5. **Deployment:**
+
    ```bash
    bun run deploy
    ```
-   * Wrangler packaged the Worker and uploaded client assets to Cloudflare Workers.
+
+   - Wrangler packaged the Worker and uploaded client assets to Cloudflare Workers.
 
 ---
 
@@ -138,29 +159,33 @@ Because `database: d1({ binding: "DB", session: "auto" })` was configured, EmDas
 Direct queries against the remote D1 database (`afaqtafsir-website`) confirmed complete execution:
 
 ### Database Migration Records (`_emdash_migrations`)
+
 ```sql
 SELECT name, timestamp FROM _emdash_migrations ORDER BY name DESC LIMIT 10;
 ```
 **Results:**
-| Migration Name | Applied Timestamp (UTC) | State |
-| :--- | :--- | :--- |
-| `089_auto_seed_completion` | `2026-09-29T02:38:41.472Z` | **Applied** |
-| `088_cron_oneshot_utc` | `2026-09-29T02:38:41.127Z` | **Applied** |
-| `087_reference_field_relations` | `2026-09-29T02:38:40.787Z` | **Applied** |
-| `086_relations_structural` | `2026-09-29T02:38:40.264Z` | **Applied** |
-| `085_taxonomy_def_groups` | `2026-09-29T02:38:38.174Z` | **Applied** |
-| `084_site_transfer` | `2026-09-29T02:38:37.131Z` | **Applied** |
-| `083_block_types` | `2026-09-29T02:38:33.124Z` | **Applied** |
+
+| Migration Name                           | Applied Timestamp (UTC)    | State         |
+| :--------------------------------------- | :------------------------- | :------------ |
+| `089_auto_seed_completion`               | `2026-09-29T02:38:41.472Z` | **Applied**   |
+| `088_cron_oneshot_utc`                   | `2026-09-29T02:38:41.127Z` | **Applied**   |
+| `087_reference_field_relations`          | `2026-09-29T02:38:40.787Z` | **Applied**   |
+| `086_relations_structural`               | `2026-09-29T02:38:40.264Z` | **Applied**   |
+| `085_taxonomy_def_groups`                | `2026-09-29T02:38:38.174Z` | **Applied**   |
+| `084_site_transfer`                      | `2026-09-29T02:38:37.131Z` | **Applied**   |
+| `083_block_types`                        | `2026-09-29T02:38:33.124Z` | **Applied**   |
 | `082_taxonomy_translation_locale_unique` | `2026-09-24T20:32:13.492Z` | Prior release |
 
 ### Migration Lock Status (`_emdash_migrations_lock`)
+
 ```sql
 SELECT * FROM _emdash_migrations_lock;
 ```
 **Results:**
-| id | is_locked |
-| :--- | :--- |
-| `migration_lock` | `0` |
+
+| id               | is_locked |
+| :--------------- | :-------- |
+| `migration_lock` | `0`       |
 
 The lock was cleanly released, confirming zero transaction deadlocks or stalled migration workers.
 
@@ -172,8 +197,8 @@ The lock was cleanly released, confirming zero transaction deadlocks or stalled 
    In 0.x, minor versions introduced breaking changes and API deprecations. With 1.0.1, the EmDash team has formally locked the public API; breaking changes will only occur in future major versions (v2.0+), providing peace of mind for ongoing editorial operations.
 2. **Schema Extensibility Unlocked:**
    The application of migrations `083` through `087` provisions the physical tables and registry for:
-   * **Blocks compositions:** Enabling modular visual storytelling sections without altering SQLite table structures.
-   * **Relations:** Enabling multi-way cross-referencing between articles, special series, and scholar bylines.
+   - **Blocks compositions:** Enabling modular visual storytelling sections without altering SQLite table structures.
+   - **Relations:** Enabling multi-way cross-referencing between articles, special series, and scholar bylines.
 3. **Enhanced Security Posture:**
    The v0.42.0+ stored XSS sanitizer actively guards all URL fields against malicious `javascript:` and `data:` injections from contributor forms, API requests, or bulk imports.
 4. **Robust Automated Caching:**

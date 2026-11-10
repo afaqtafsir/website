@@ -36,27 +36,33 @@ To upgrade EmDash reliably, you must understand how its lifecycle is split acros
 ## 2. Pre-Upgrade Prerequisites & Quirks
 
 ### 2.1 The `packageManager` Declaration Trap
+
 `upgrade-emdash` checks the `"packageManager"` field in `package.json` before falling back to lockfiles (`bun.lock`, `pnpm-lock.yaml`).
-* **The Trap:** Official EmDash starter templates ship with `"packageManager": "pnpm@..."`. On systems using Bun without `pnpm` installed, `upgrade-emdash` crashes with `spawn pnpm ENOENT` and rolls back.
-* **The Fix:** Ensure `package.json` either declares Bun (`"packageManager": "bun@<version>"`) or omit the field entirely so it auto-detects `bun.lock`.
+
+- **The Trap:** Official EmDash starter templates ship with `"packageManager": "pnpm@..."`. On systems using Bun without `pnpm` installed, `upgrade-emdash` crashes with `spawn pnpm ENOENT` and rolls back.
+- **The Fix:** Ensure `package.json` either declares Bun (`"packageManager": "bun@<version>"`) or omit the field entirely so it auto-detects `bun.lock`.
 
 ### 2.2 Cloudflare D1 Backups: Continuous Time Travel vs. FTS5 Export Limitation
+
 Standard SQL dumps (`wrangler d1 export`) fail on EmDash databases with:
+
 ```text
 ✘ [ERROR] D1 Export error: cannot export databases with Virtual Tables (fts5)
 ```
 EmDash creates SQLite `fts5` virtual tables (`_emdash_fts_*`) for search. Cloudflare's SQL serializer cannot dump virtual shadow tables.
 
-* **How D1 Time Travel Works:** Time Travel is **always on, automatic, and continuous** at the storage engine level. Cloudflare maintains a rolling 7-day (Free plan) or 30-day (Paid plan) transaction history. You do **not** need to trigger, schedule, or initiate backups before an upgrade.
-* **Point-in-Time Restoration:** You can restore D1 to any minute in the retention window simply by providing a timestamp (e.g. `--timestamp="2026-10-18T00:50:00Z"` or Unix seconds).
-* **The Role of Bookmarks:** Running `time-travel info` does not create a backup; it is a read-only query that fetches the deterministic bookmark string for that exact second. Capturing it before an upgrade is strictly an **optional convenience** so you have an exact, unambiguous rollback target without guessing UTC timestamps.
+- **How D1 Time Travel Works:** Time Travel is **always on, automatic, and continuous** at the storage engine level. Cloudflare maintains a rolling 7-day (Free plan) or 30-day (Paid plan) transaction history. You do **not** need to trigger, schedule, or initiate backups before an upgrade.
+- **Point-in-Time Restoration:** You can restore D1 to any minute in the retention window simply by providing a timestamp (e.g. `--timestamp="2026-10-18T00:50:00Z"` or Unix seconds).
+- **The Role of Bookmarks:** Running `time-travel info` does not create a backup; it is a read-only query that fetches the deterministic bookmark string for that exact second. Capturing it before an upgrade is strictly an **optional convenience** so you have an exact, unambiguous rollback target without guessing UTC timestamps.
 
 ---
 
 ## 3. Step-by-Step Upgrade Runbook
 
 ### Step 1: Note Pre-Upgrade Timestamp or Bookmark (Optional Record-Keeping)
+
 Because D1 Time Travel runs continuously, you are always protected. However, noting the exact state right before the deployment avoids timestamp guesswork if you need to revert:
+
 ```bash
 # Capture the exact bookmark string
 bunx wrangler d1 time-travel info afaqtafsir-website
@@ -68,11 +74,14 @@ date -u +"%Y-%m-%dT%H:%M:%SZ"
 ---
 
 ### Step 2: Execute `upgrade-emdash`
+
 Run the official upgrade orchestrator:
+
 ```bash
 bunx upgrade-emdash@latest
 ```
-*It will:*
+_It will:_
+
 1. Resolve matching versions across `emdash` and `@emdash-cms/*`.
 2. Update `package.json` preserving version range prefixes (`^`).
 3. Run `bun install` to update `bun.lock`.
@@ -82,36 +91,45 @@ bunx upgrade-emdash@latest
 ---
 
 ### Step 3: Audit `.emdash/UPGRADE.md`
+
 Open `.emdash/UPGRADE.md` and review the crossed release notes:
-* **Breaking Changes:** Check if any imports, removed APIs, or changed defaults affect your `src/` or `astro.config.mjs`.
-* **Portable Text Changes:** Verify if new block types (`/video`, `/iframe`, isolated `/html`) impact custom serializers.
-* **Database Work:** Check the "Core database migrations" section at the bottom of the work order.
+
+- **Breaking Changes:** Check if any imports, removed APIs, or changed defaults affect your `src/` or `astro.config.mjs`.
+- **Portable Text Changes:** Verify if new block types (`/video`, `/iframe`, isolated `/html`) impact custom serializers.
+- **Database Work:** Check the "Core database migrations" section at the bottom of the work order.
 
 ---
 
 ### Step 4: Reconcile Migration Manifest (`bun run build`)
+
 **Mandatory step.** Trigger EmDash's Astro compiler hooks:
+
 ```bash
 bun run build
 ```
-*What this accomplishes:*
-* Recompiles `.emdash/migrations.json` to the target EmDash version, appending any newly added core migrations (`090`, `091`, etc.) and computing the SHA-256 fingerprint.
-* Regenerates TypeScript collection types in `emdash-env.d.ts`.
+_What this accomplishes:_
+
+- Recompiles `.emdash/migrations.json` to the target EmDash version, appending any newly added core migrations (`090`, `091`, etc.) and computing the SHA-256 fingerprint.
+- Regenerates TypeScript collection types in `emdash-env.d.ts`.
 
 ---
 
 ### Step 5: Code Quality & Type Diagnostics
+
 Ensure zero regressions before staging:
+
 ```bash
 bun run typecheck
 bun run check
 ```
-*(Runs `astro check` and `biome check`)*.
+_(Runs `astro check` and `biome check`)_.
 
 ---
 
 ### Step 6: Atomic Git Commit
+
 Stage all upgrade-related artifacts together in **one coherent atomic commit**:
+
 ```bash
 git add package.json bun.lock .emdash/migrations.json .emdash/UPGRADE.md emdash-env.d.ts .agents/
 git commit -m "chore(deps): upgrade emdash to <version>"
@@ -125,17 +143,20 @@ git commit -m "chore(deps): upgrade emdash to <version>"
 ### Step 7: Deployment
 
 #### Scenario A: Cloudflare Native Git Integration (Auto-Deploy)
+
 Push your atomic commit:
+
 ```bash
 git push origin main
 ```
 Cloudflare Workers Builds will clone the repository, run `bun run build`, and deploy the worker.
 
 #### Scenario B: Manual CLI Deploy
+
 ```bash
 bun run deploy
 ```
-*(Runs `astro build && wrangler deploy`)*.
+_(Runs `astro build && wrangler deploy`)_.
 
 ---
 
@@ -146,48 +167,59 @@ Because `astro.config.mjs` configures `database: d1({ binding: "DB", session: "a
 Run these verification commands against the live production D1 database:
 
 #### 1. Confirm Applied Migrations
+
 ```bash
 bunx wrangler d1 execute afaqtafsir-website --remote --command="SELECT name, timestamp FROM _emdash_migrations ORDER BY name DESC LIMIT 5;"
 ```
-*Ensure all new migrations listed in `.emdash/migrations.json` show up with recent timestamps.*
+_Ensure all new migrations listed in `.emdash/migrations.json` show up with recent timestamps._
 
 #### 2. Confirm Migration Lock Release
+
 ```bash
 bunx wrangler d1 execute afaqtafsir-website --remote --command="SELECT * FROM _emdash_migrations_lock;"
 ```
-*Must return `is_locked = 0`. If `is_locked = 1`, a migration process stalled or timed out.*
+_Must return `is_locked = 0`. If `is_locked = 1`, a migration process stalled or timed out._
 
 #### 3. Edge HTTP Status Checks
+
 ```bash
 curl -s -o /dev/null -w "%{http_code}\n" https://www.afaqtafsir.id
 curl -s -o /dev/null -w "%{http_code}\n" https://www.afaqtafsir.id/_emdash/admin
 ```
-*Public routes must return `200 OK`. Admin route must return `302` (redirect to login).*
+_Public routes must return `200 OK`. Admin route must return `302` (redirect to login)._
 
 ---
 
 ## 4. Emergency Procedures & Recovery
 
 ### Stuck Migration Lock (`is_locked = 1`)
+
 If a Worker crashes during migration under traffic or a lock fails to free:
-* **EmDash 1.3.0+:** Run lock takeover:
+
+- **EmDash 1.3.0+:** Run lock takeover:
+
   ```bash
   bunx emdash migrate --take-over-lock <migration_lock_id>
   ```
-* **Manual SQL Fallback:**
+- **Manual SQL Fallback:**
+
   ```bash
   bunx wrangler d1 execute afaqtafsir-website --remote --command="UPDATE _emdash_migrations_lock SET is_locked = 0 WHERE id = 'migration_lock';"
   ```
 
 ### Database Rollback (Time Travel)
+
 If a migration corrupts data or causes runtime 500s:
+
 1. Revert the Git commit and redeploy the prior application version.
 2. Restore D1 using either method:
-   * **Via Pre-Upgrade Timestamp (no prior setup needed):**
+   - **Via Pre-Upgrade Timestamp (no prior setup needed):**
+
      ```bash
      bunx wrangler d1 time-travel restore afaqtafsir-website --timestamp="2026-10-18T00:50:00Z"
      ```
-   * **Via Bookmark (if captured in Step 1):**
+   - **Via Bookmark (if captured in Step 1):**
+
      ```bash
      bunx wrangler d1 time-travel restore afaqtafsir-website --bookmark=<bookmark-id>
      ```

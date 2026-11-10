@@ -97,7 +97,7 @@ cannot answer "how close are we?" -- you find out by crossing it.
 
 **The trigger is traffic, not code.** Overruns are infrequent today only because
 almost nobody visits. CPU per render does not change when the site goes public;
-the *rate* does. The variable the runtime watches is frequency, and traffic is
+the _rate_ does. The variable the runtime watches is frequency, and traffic is
 what drives frequency. **The launch itself is the most likely trigger.** The
 current calm is a function of obscurity, and it expires on purpose.
 
@@ -144,11 +144,11 @@ Two details made this confusing to diagnose, both worth remembering:
 
 Aftermath, once the images were moved to R2 and the revisions pruned:
 
-| Measure                | Before        | After     |
-| ---------------------- | ------------- | --------- |
-| Article `content` row  | 3,275,304 b   | 13,173 b  |
-| Its revision history   | 9,843,423 b   | 27,752 b  |
-| Whole D1 database      | 14.97 MB      | 2.11 MB   |
+| Measure               | Before      | After    |
+| --------------------- | ----------- | -------- |
+| Article `content` row | 3,275,304 b | 13,173 b |
+| Its revision history  | 9,843,423 b | 27,752 b |
+| Whole D1 database     | 14.97 MB    | 2.11 MB  |
 
 ---
 
@@ -159,6 +159,7 @@ Shortly after editors replaced all article featured images with dedicated 16:9 W
 #### Diagnosis: NOT a Payload Bloat
 
 Unlike the 2026-09-11 outage, this was not caused by database row bloat or base64 inlining:
+
 - The D1 database size remained healthy at 3.13 MB total.
 - Article `content` rows remained between 10 KB and 25 KB.
 - The `featured_image` column stores only ~300 bytes of JSON metadata; the image binaries reside in R2.
@@ -177,13 +178,14 @@ Unlike the 2026-09-11 outage, this was not caused by database row bloat or base6
    - **Suspicion Level:** **Medium-High (Plausible Multiplier / Baseline Elevation)**
    - **Mechanism:** Previously, only 3 articles had a `featured_image`; the other 6 rendered static fallback `<div>` boxes. After the migration, all 9 articles had thumbnails, causing the homepage to render **16 `<Image />` components** at once.
    - Because thumbnails were uploaded as 1920×1080 images, Astro's responsive image service (`layout="constrained"`) evaluated up to 12 responsive breakpoints (`widths`) per thumbnail, running URL string generation and regex checks ~192 times per render. Concurrently, `ArticleCard.astro` was invoking `getReadingTime()` twice per card (42 Portable Text AST traversals per homepage request).
-   - *Measurement distinction:* The unoptimized warm cost was extrapolated to ~60–80 ms based on component density and AST traversals over the historical 17–35 ms baseline. It could not be measured directly during the outage because the runtime truncated execution at exactly 10 ms (`outcome: exceededCpu`).
+   - _Measurement distinction:_ The unoptimized warm cost was extrapolated to ~60–80 ms based on component density and AST traversals over the historical 17–35 ms baseline. It could not be measured directly during the outage because the runtime truncated execution at exactly 10 ms (`outcome: exceededCpu`).
 
 3. **Factor C: Compound Interaction**
    - **Suspicion Level:** **Highest (Most Probable Reality)**
    - The rapid admin edits flipped the script into Enforced Mode, while the heavier thumbnail SSR baseline prevented the frontend from squeaking under 10 ms until the isolate supervisor cooled down.
 
 #### Mitigations Applied
+
 - **Commit `1a0e8ca` (`perf(reading-time)`):** Precomputed reading times once per unique article in `index.astro` (reducing AST traversals on the homepage from 42 to 9) and consumed precomputed strings in `ArticleCard.astro`.
 - **Commit `42ffd8e` (`perf(thumbnail)`):** Bypassed Astro's runtime image service on small 60px/78px thumbnails (secondary, compact, and related article cards) in favor of direct `<img>` tags pointing to `/_emdash/api/media/file/<storageKey>`, reserving full responsive `<Image />` for lead hero cards and main article banners.
 
@@ -191,11 +193,11 @@ Unlike the 2026-09-11 outage, this was not caused by database row bloat or base6
 
 Measured live via `wrangler tail` under Tolerated Mode once isolates cooled down:
 
-| Route | Outcome | `cpuTime` (warm) | `wallTime` | Status |
-| :--- | :--- | :--- | :--- | :--- |
-| `/` (Homepage) | `ok` | **37 ms – 49 ms** | 202 ms – 245 ms | All 9 articles rendered with thumbnails |
-| `/<article-slug>` | `ok` | **53 ms – 56 ms** | 207 ms – 258 ms | Related cards using direct `<img>` |
-| `/penulis` | `ok` | **30 ms** | 203 ms | 100-article byline aggregation |
+| Route             | Outcome | `cpuTime` (warm)  | `wallTime`      | Status                                  |
+| :---------------- | :------ | :---------------- | :-------------- | :-------------------------------------- |
+| `/` (Homepage)    | `ok`    | **37 ms – 49 ms** | 202 ms – 245 ms | All 9 articles rendered with thumbnails |
+| `/<article-slug>` | `ok`    | **53 ms – 56 ms** | 207 ms – 258 ms | Related cards using direct `<img>`      |
+| `/penulis`        | `ok`    | **30 ms**         | 203 ms          | 100-article byline aggregation          |
 
 ---
 
@@ -204,6 +206,7 @@ Measured live via `wrangler tail` under Tolerated Mode once isolates cooled down
 To permanently resolve the threat of Enforced Mode supervisor lockouts, native Cloudflare Workers Cache was implemented across the Astro SSR and EmDash stack.
 
 #### Architectural Implementation
+
 1. **Cache Provider (`astro.config.mjs`):** Integrated `cacheCloudflare()` from `@astrojs/cloudflare/cache`, activating `Astro.cache` route-level caching.
 2. **Worker Cache Layer (`wrangler.jsonc`):** Configured `"cache": { "enabled": true }` to position Cloudflare's tiered edge cache directly in front of the Worker fetch handler.
 3. **Automated Purging on Publish:** EmDash's `invalidatePublishedTags` hook binds to `provider.invalidate({ tags })`, issuing programmatic edge purges via `cache.purge({ tags })` immediately upon content publication or scheduled task execution.
@@ -215,11 +218,11 @@ To permanently resolve the threat of Enforced Mode supervisor lockouts, native C
 
 Requests tested against production edge (`SIN` colo):
 
-| Route | `cf-cache-status` | Worker Invocation? | Recorded `cpuTime` | Wall Latency |
-| :--- | :--- | :--- | :--- | :--- |
-| `/` (Homepage) | `HIT` (age: 1717s) | **None (Worker did not execute)** | **0 ms** | 117 ms |
-| `/tentang` (Static page) | `HIT` (age: 459s) | **None (Worker did not execute)** | **0 ms** | 105 ms |
-| `/search?q=...` (Dynamic query) | `DYNAMIC` | **1 invocation** | **43 ms** | 269 ms |
+| Route                           | `cf-cache-status`  | Worker Invocation?                | Recorded `cpuTime` | Wall Latency |
+| :------------------------------ | :----------------- | :-------------------------------- | :----------------- | :----------- |
+| `/` (Homepage)                  | `HIT` (age: 1717s) | **None (Worker did not execute)** | **0 ms**           | 117 ms       |
+| `/tentang` (Static page)        | `HIT` (age: 459s)  | **None (Worker did not execute)** | **0 ms**           | 105 ms       |
+| `/search?q=...` (Dynamic query) | `DYNAMIC`          | **1 invocation**                  | **43 ms**          | 269 ms       |
 
 **Result:** Edge cache hits consume zero isolate CPU time, completely eliminating repeated overruns on public visits and reducing end-to-end response times to ~105–117 ms.
 
@@ -353,9 +356,9 @@ for r in rows:
 
 `outcome` is the field that matters:
 
-| Outcome          | Meaning                                              |
-| ---------------- | ---------------------------------------------------- |
-| `ok`             | Completed.                                           |
+| Outcome          | Meaning                                               |
+| ---------------- | ----------------------------------------------------- |
+| `ok`             | Completed.                                            |
 | `exceededCpu`    | Hit the CPU limit. Client sees `error code: 1102`.    |
 | `exceededMemory` | Hit the 128 MB isolate limit. Also `1102`.            |
 | `exception`      | Threw. The `exceptions` array carries the real error. |
@@ -399,18 +402,18 @@ grep -q '</html>' /tmp/p && echo complete || echo TRUNCATED
 
 ## Limits that bind this site
 
-| Limit                     | Free            | Paid          | Our position                                       |
-| ------------------------- | --------------- | ------------- | -------------------------------------------------- |
-| **CPU per request**       | **10 ms**       | 30 s (max 5m) | **Over on every route.** The binding constraint.    |
-| CPU per Cron Trigger      | 10 ms           | 30 s          | `* * * * *` in `wrangler.jsonc`; watch it.          |
-| Requests/day              | 100,000         | unlimited     | Cron alone is 1,440/day. Fine while private.        |
-| Subrequests/request       | 50              | 10,000        | Every D1 query and R2 read counts. Not yet counted. |
-| Memory per isolate        | 128 MB          | 128 MB        | Fine now; the 3.2 MB row was a real risk.           |
-| Simultaneous connections  | 6               | 6             | Not a concern.                                      |
-| Worker size uncompressed  | 64 MiB          | 64 MiB        | Not a concern.                                      |
-| Worker startup time       | 1 s             | 1 s           | Not a concern.                                      |
-| Cache API calls/request   | 50              | 1,000         | Shares the subrequest quota.                        |
-| Cron Triggers per account | 5               | 250           | Using 1.                                            |
+| Limit                     | Free      | Paid          | Our position                                        |
+| ------------------------- | --------- | ------------- | --------------------------------------------------- |
+| **CPU per request**       | **10 ms** | 30 s (max 5m) | **Over on every route.** The binding constraint.    |
+| CPU per Cron Trigger      | 10 ms     | 30 s          | `* * * * *` in `wrangler.jsonc`; watch it.          |
+| Requests/day              | 100,000   | unlimited     | Cron alone is 1,440/day. Fine while private.        |
+| Subrequests/request       | 50        | 10,000        | Every D1 query and R2 read counts. Not yet counted. |
+| Memory per isolate        | 128 MB    | 128 MB        | Fine now; the 3.2 MB row was a real risk.           |
+| Simultaneous connections  | 6         | 6             | Not a concern.                                      |
+| Worker size uncompressed  | 64 MiB    | 64 MiB        | Not a concern.                                      |
+| Worker startup time       | 1 s       | 1 s           | Not a concern.                                      |
+| Cache API calls/request   | 50        | 1,000         | Shares the subrequest quota.                        |
+| Cron Triggers per account | 5         | 250           | Using 1.                                            |
 
 Notes on the ones that could bite later:
 
@@ -424,8 +427,8 @@ Notes on the ones that could bite later:
   breach on the same terms as a page request, with the same script-wide
   consequence.
 - **Daily requests (100k).** Not a concern while the site is private, but note
-  the failure mode is configurable per route: *fail open* bypasses the Worker,
-  *fail closed* serves a 1027 error page. Decide which you want before launch.
+  the failure mode is configurable per route: _fail open_ bypasses the Worker,
+  _fail closed_ serves a 1027 error page. Decide which you want before launch.
 
 ---
 
@@ -433,7 +436,7 @@ Notes on the ones that could bite later:
 
 Since compliance is not achievable (see
 [above](#getting-under-10-ms-is-probably-not-achievable-here)), all of these
-reduce how *often* we overrun rather than how much.
+reduce how _often_ we overrun rather than how much.
 
 1. **Enable Workers Cache -- IMPLEMENTED & VERIFIED (2026-09-24).**
    Enabled in `astro.config.mjs` (`cacheCloudflare()`) and `wrangler.jsonc` (`[cache] enabled = true`).
@@ -441,13 +444,12 @@ reduce how *often* we overrun rather than how much.
 
    Be precise about what it does. It does **not** make renders cheaper: a cache
    miss still costs 35-99 ms and still overruns. What it does is collapse the
-   *number of invocations*. A cache hit does not invoke the Worker cheaply --
+   _number of invocations_. A cache hit does not invoke the Worker cheaply --
    it does not invoke the Worker at all. A page served 1,000 times a day at a
    95% hit rate goes from 1,000 overruns to 50, which is exactly the difference
    between "consistently" and "infrequently".
 
    Residual risk after caching, because "cached" is not "safe":
-
    - The cache is **per-colo**. A geographically spread audience means many
      independent cold caches.
    - Every article, tag, and category is a **separate cache entry**. A crawler

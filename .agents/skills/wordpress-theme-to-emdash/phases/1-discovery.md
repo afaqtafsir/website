@@ -120,6 +120,7 @@ For themes on wordpress.org (e.g., `https://wordpress.org/themes/theme-name/`):
 
 1. **Demo/Preview**: Click "Preview" button or visit `https://wp-themes.com/theme-name/`
 2. **Source Download**: The "Download" button provides a ZIP, or use:
+
    ```bash
    curl -O https://downloads.wordpress.org/theme/theme-name.zip
    unzip theme-name.zip

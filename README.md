@@ -19,23 +19,23 @@ A clean, minimal blog built with [EmDash](https://github.com/emdash-cms/emdash) 
 
 ## Pages
 
-| Page | Route |
-|---|---|
-| Homepage | `/` |
-| All posts | `/posts` |
-| Single post | `/posts/:slug` |
+| Page             | Route             |
+| ---------------- | ----------------- |
+| Homepage         | `/`               |
+| All posts        | `/posts`          |
+| Single post      | `/posts/:slug`    |
 | Category archive | `/category/:slug` |
-| Tag archive | `/tag/:slug` |
-| Search | `/search` |
-| Static pages | `/pages/:slug` |
-| 404 | fallback |
+| Tag archive      | `/tag/:slug`      |
+| Search           | `/search`         |
+| Static pages     | `/pages/:slug`    |
+| 404              | fallback          |
 
 ## Screenshots
 
-| | Desktop | Mobile |
-|---|---|---|
+|       | Desktop                                                                                                                                     | Mobile                                                                                                                                    |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | Light | ![homepage light desktop](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/blog/latest/homepage-light-desktop.jpg) | ![homepage light mobile](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/blog/latest/homepage-light-mobile.jpg) |
-| Dark | ![homepage dark desktop](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/blog/latest/homepage-dark-desktop.jpg) | ![homepage dark mobile](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/blog/latest/homepage-dark-mobile.jpg) |
+| Dark  | ![homepage dark desktop](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/blog/latest/homepage-dark-desktop.jpg)   | ![homepage dark mobile](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/blog/latest/homepage-dark-mobile.jpg)   |
 
 ## Infrastructure
 
@@ -63,12 +63,12 @@ Or click the deploy button above to set up the project in your Cloudflare accoun
 ## TODO before going public
 
 - [ ] **Enable Workers Cache — required before launch, not optional.** Every
-      route on this site exceeds the 10 ms free-plan CPU limit and stays up only
-      on isolate tolerance, which is withdrawn once overruns become frequent.
-      Traffic is what drives frequency, so **going public is itself the most
+  route on this site exceeds the 10 ms free-plan CPU limit and stays up only
+  on isolate tolerance, which is withdrawn once overruns become frequent.
+  Traffic is what drives frequency, so **going public is itself the most
       likely trigger**. Caching does not make renders cheaper; it collapses how
-      many renders happen, which is the variable that matters. See
-      [Cloudflare Resource Limits and Monitoring](docs/CLOUDFLARE_RESOURCE_LIMITS_AND_MONITORING.md).
+  many renders happen, which is the variable that matters. See
+  [Cloudflare Resource Limits and Monitoring](docs/CLOUDFLARE_RESOURCE_LIMITS_AND_MONITORING.md).
 
       Nothing is cached at the edge today -- `server-timing` reports
       `cache.hit;dur=0`, so every request runs the Worker and re-renders the
@@ -97,7 +97,6 @@ Or click the deploy button above to set up the project in your Cloudflare accoun
       walking the URL space after launch hits mostly misses -- so this is a
       large mitigation, not a guarantee. Reference:
       [Workers Cache](https://docs.emdashcms.com/deployment/cloudflare/#workers-cache).
-
 ## Operations
 
 - [Cloudflare Resource Limits and Monitoring](docs/CLOUDFLARE_RESOURCE_LIMITS_AND_MONITORING.md)
