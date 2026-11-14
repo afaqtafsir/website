@@ -63,12 +63,12 @@ Or click the deploy button above to set up the project in your Cloudflare accoun
 ## TODO before going public
 
 - [ ] **Enable Workers Cache — required before launch, not optional.** Every
-  route on this site exceeds the 10 ms free-plan CPU limit and stays up only
-  on isolate tolerance, which is withdrawn once overruns become frequent.
-  Traffic is what drives frequency, so **going public is itself the most
+      route on this site exceeds the 10 ms free-plan CPU limit and stays up only
+      on isolate tolerance, which is withdrawn once overruns become frequent.
+      Traffic is what drives frequency, so **going public is itself the most
       likely trigger**. Caching does not make renders cheaper; it collapses how
-  many renders happen, which is the variable that matters. See
-  [Cloudflare Resource Limits and Monitoring](docs/CLOUDFLARE_RESOURCE_LIMITS_AND_MONITORING.md).
+      many renders happen, which is the variable that matters. See
+      [Cloudflare Resource Limits and Monitoring](docs/CLOUDFLARE_RESOURCE_LIMITS_AND_MONITORING.md).
 
       Nothing is cached at the edge today -- `server-timing` reports
       `cache.hit;dur=0`, so every request runs the Worker and re-renders the
