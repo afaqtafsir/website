@@ -1,5 +1,4 @@
 ---
-
 name: wordpress-theme-to-emdash
 description: Port a WordPress theme's design and template behavior to an EmDash-powered Astro site. Use for theme migrations, design matching, PHP-template conversion, and CMS wiring. Do not use for WordPress plugin behavior that does not affect the site theme.
 ---

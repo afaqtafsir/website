@@ -42,14 +42,15 @@ Collections define content types. Each collection becomes a database table (`ec_
 
 ### Collection Supports
 
-| Support      | Description               |
-| ------------ | ------------------------- |
-| `drafts`     | Draft/published workflow  |
-| `revisions`  | Revision history          |
-| `preview`    | Signed draft previews     |
-| `scheduling` | Scheduled publication     |
-| `search`     | Full-text search indexing |
-| `seo`        | SEO meta fields in admin  |
+| Support         | Description                                                                           |
+| --------------- | ------------------------------------------------------------------------------------- |
+| `drafts`        | Draft/published workflow                                                              |
+| `revisions`     | Revision history                                                                      |
+| `preview`       | Signed draft previews                                                                 |
+| `no-scheduling` | Disables creating or changing publication schedules; scheduling is enabled by default |
+| `scheduling`    | Deprecated no-op, accepted for compatibility                                          |
+| `search`        | Full-text search indexing                                                             |
+| `seo`           | SEO meta fields in admin                                                              |
 
 ### Slug Rules
 
@@ -152,12 +153,7 @@ Define `blockTypes` before collections that use a `blocks` field. Each type reta
 				{
 					"version": 1,
 					"fields": [
-						{
-							"slug": "heading",
-							"label": "Heading",
-							"type": "string",
-							"required": true
-						},
+						{ "slug": "heading", "label": "Heading", "type": "string", "required": true },
 						{ "slug": "image", "label": "Image", "type": "image" }
 					]
 				}
@@ -330,12 +326,7 @@ Reusable content blocks that editors can insert via `/section` slash command in 
 		{
 			"_type": "block",
 			"style": "normal",
-			"children": [
-				{
-					"_type": "span",
-					"text": "Get notified when new posts are published."
-				}
-			]
+			"children": [{ "_type": "span", "text": "Get notified when new posts are published." }]
 		}
 	]
 }

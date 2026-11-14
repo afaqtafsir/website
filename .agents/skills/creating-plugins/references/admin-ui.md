@@ -11,10 +11,10 @@ Declare navigation and widget cards in `emdash-plugin.jsonc`:
 	"admin": {
 		"pages": [
 			{ "path": "/settings", "label": "Settings", "icon": "settings" },
-			{ "path": "/reports", "label": "Reports", "icon": "chart" }
+			{ "path": "/reports", "label": "Reports", "icon": "chart" },
 		],
-		"widgets": [{ "id": "status", "title": "Plugin status", "size": "half" }]
-	}
+		"widgets": [{ "id": "status", "title": "Plugin status", "size": "half" }],
+	},
 }
 ```
 
@@ -53,12 +53,7 @@ function settingsForm(enabled: boolean): BlockResponse {
 				type: "form",
 				block_id: "settings",
 				fields: [
-					{
-						type: "toggle",
-						action_id: "enabled",
-						label: "Enabled",
-						initial_value: enabled,
-					},
+					{ type: "toggle", action_id: "enabled", label: "Enabled", initial_value: enabled },
 				],
 				submit: { action_id: "save", label: "Save" },
 			},
@@ -74,14 +69,8 @@ const plugin: SandboxedPlugin = {
 				const parsed = interactionSchema.safeParse(routeCtx.input);
 				if (!parsed.success) return { blocks: [] };
 				const interaction = parsed.data;
-				if (
-					interaction.type === "form_submit" &&
-					interaction.action_id === "save"
-				) {
-					await ctx.settings.set(
-						"enabled",
-						interaction.values.enabled === true,
-					);
+				if (interaction.type === "form_submit" && interaction.action_id === "save") {
+					await ctx.settings.set("enabled", interaction.values.enabled === true);
 					return {
 						...settingsForm(interaction.values.enabled === true),
 						toast: { type: "success", message: "Settings saved" },
@@ -119,9 +108,9 @@ Declare saved-entry panels and actions in `emdash-plugin.jsonc`:
 				"collections": ["posts"],
 				"draft": {
 					"read": { "translatable": true },
-					"patch": { "fields": ["title", "excerpt"] }
-				}
-			}
+					"patch": { "fields": ["title", "excerpt"] },
+				},
+			},
 		],
 		"editorActions": [
 			{
@@ -134,11 +123,11 @@ Declare saved-entry panels and actions in `emdash-plugin.jsonc`:
 					"title": "Repair?",
 					"text": "This changes the saved entry.",
 					"confirm": "Repair",
-					"deny": "Cancel"
-				}
-			}
-		]
-	}
+					"deny": "Cancel",
+				},
+			},
+		],
+	},
 }
 ```
 
@@ -164,11 +153,11 @@ Core and the admin contain a declarative field-widget path. Declare the widget i
 				"fieldTypes": ["json"],
 				"elements": [
 					{ "type": "text_input", "action_id": "eventId", "label": "Event ID" },
-					{ "type": "toggle", "action_id": "featured", "label": "Featured" }
-				]
-			}
-		]
-	}
+					{ "type": "toggle", "action_id": "featured", "label": "Featured" },
+				],
+			},
+		],
+	},
 }
 ```
 

@@ -139,12 +139,7 @@ routes: {
 {
 	"type": "stats",
 	"items": [
-		{
-			"label": "Total",
-			"value": "1,234",
-			"trend": "up",
-			"description": "+12% vs last week"
-		},
+		{ "label": "Total", "value": "1,234", "trend": "up", "description": "+12% vs last week" },
 		{ "label": "Active", "value": "567" }
 	]
 }
@@ -208,12 +203,7 @@ An `element` column holds a `button`, `link`, or `menu` per row, for row actions
 {
 	"type": "actions",
 	"elements": [
-		{
-			"type": "button",
-			"label": "Save",
-			"action_id": "save",
-			"style": "primary"
-		},
+		{ "type": "button", "label": "Save", "action_id": "save", "style": "primary" },
 		{ "type": "button", "label": "Cancel", "action_id": "cancel" }
 	]
 }
@@ -227,13 +217,7 @@ An `element` column holds a `button`, `link`, or `menu` per row, for row actions
 	"block_id": "settings",
 	"fields": [
 		{ "type": "text_input", "action_id": "name", "label": "Name" },
-		{
-			"type": "number_input",
-			"action_id": "count",
-			"label": "Count",
-			"min": 0,
-			"max": 100
-		},
+		{ "type": "number_input", "action_id": "count", "label": "Count", "min": 0, "max": 100 },
 		{
 			"type": "select",
 			"action_id": "theme",
@@ -243,12 +227,7 @@ An `element` column holds a `button`, `link`, or `menu` per row, for row actions
 				{ "label": "Dark", "value": "dark" }
 			]
 		},
-		{
-			"type": "toggle",
-			"action_id": "enabled",
-			"label": "Enabled",
-			"initial_value": true
-		},
+		{ "type": "toggle", "action_id": "enabled", "label": "Enabled", "initial_value": true },
 		{ "type": "secret_input", "action_id": "api_key", "label": "API Key" }
 	],
 	"submit": { "label": "Save", "action_id": "save_settings" }
@@ -285,12 +264,20 @@ An `element` column holds a `button`, `link`, or `menu` per row, for row actions
 		"series": [
 			{
 				"name": "Requests",
-				"data": [[1709596800000, 42], [1709600400000, 67], [1709604000000, 53]],
+				"data": [
+					[1709596800000, 42],
+					[1709600400000, 67],
+					[1709604000000, 53]
+				],
 				"color": "#086FFF"
 			},
 			{
 				"name": "Errors",
-				"data": [[1709596800000, 2], [1709600400000, 5], [1709604000000, 1]]
+				"data": [
+					[1709596800000, 2],
+					[1709600400000, 5],
+					[1709604000000, 1]
+				]
 			}
 		],
 		"x_axis_name": "Time",
@@ -621,12 +608,7 @@ Use a structured link target instead of returning an admin URL:
 {
 	"type": "link",
 	"label": "Edit article",
-	"target": {
-		"kind": "content",
-		"collection": "posts",
-		"id": "post-1",
-		"locale": "ar"
-	},
+	"target": { "kind": "content", "collection": "posts", "id": "post-1", "locale": "ar" },
 	"appearance": "primary"
 }
 ```

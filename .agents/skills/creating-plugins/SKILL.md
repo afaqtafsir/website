@@ -1,5 +1,4 @@
 ---
-
 name: creating-plugins
 description: Create EmDash CMS plugins with sandboxed hooks, routes, storage, content and media APIs, MCP tools, and declarative admin UI, or native React and Astro extensions. Use when scaffolding or implementing an EmDash plugin.
 ---

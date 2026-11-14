@@ -1,5 +1,4 @@
 ---
-
 name: upgrading-emdash
 description: Upgrade an existing EmDash project with upgrade-emdash, interpret .emdash/UPGRADE.md, apply required project changes, and verify the package, skill, and migration result. Use when asked to update or upgrade EmDash dependencies. Do not use for an unrelated schema change or a known database migration without a package upgrade.
 ---

@@ -48,11 +48,7 @@ interface SandboxedRouteContext {
 		ip: string | null;
 		userAgent: string | null;
 		referer: string | null;
-		geo: {
-			country: string | null;
-			region: string | null;
-			city: string | null;
-		} | null;
+		geo: { country: string | null; region: string | null; city: string | null } | null;
 	};
 	user?: UserInfo;
 }
