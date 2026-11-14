@@ -13,5 +13,8 @@ data.db
 
 .wrangler/
 
+# Local D1 recovery records
+.local/backups/d1/
+
 # data
 data/

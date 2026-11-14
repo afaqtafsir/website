@@ -99,6 +99,31 @@ Or click the deploy button above to set up the project in your Cloudflare accoun
       [Workers Cache](https://docs.emdashcms.com/deployment/cloudflare/#workers-cache).
 ## Operations
 
+### Record a D1 recovery bookmark
+
+After building an upgrade and before production migrations or deployment, run:
+
+```bash
+bun run db:bookmark
+```
+
+This requires Bun and authenticated Wrangler access. It reads the top-level `DB`
+binding from `wrangler.jsonc` and retrieves the remote database's current Time
+Travel bookmark. Each run writes a new, Git-ignored JSON file under
+`.local/backups/d1/` with the database name and ID, capture time, bookmark, and
+restore command. It does not migrate, restore, or deploy anything. Retrieval
+errors fail the command without saving a record.
+
+Keep the record accessible alongside the matching previous application version.
+The restore command assumes the `DB` binding still points to the recorded database
+ID; check that before using it. Recording a bookmark does not extend D1 retention
+(7 days on Workers Free, 30 days on Workers Paid), or back up media and secrets.
+See [D1 Time Travel](https://developers.cloudflare.com/d1/reference/time-travel/).
+
+If adding a bookmark saved manually before an earlier upgrade, create a separate
+JSON record using its original capture time and database identity. Do not replace
+a newly captured bookmark or label it as a pre-upgrade recovery point.
+
 - [Cloudflare Resource Limits and Monitoring](docs/CLOUDFLARE_RESOURCE_LIMITS_AND_MONITORING.md)
   -- which limits bind this site, the measured CPU baseline per route, content
   rules that keep it up, and how to triage a `1102` outage.
