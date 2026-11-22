@@ -19,9 +19,9 @@ Declare every collection and query index in the manifest:
 	"storage": {
 		"submissions": {
 			"indexes": ["formId", "status", "createdAt", ["formId", "createdAt"]],
-			"uniqueIndexes": ["externalId"]
-		}
-	}
+			"uniqueIndexes": ["externalId"],
+		},
+	},
 }
 ```
 
@@ -44,10 +44,7 @@ interface StorageCollection<T = unknown> {
 		expectedRevision: string | null,
 		data: T,
 	): Promise<{ applied: true; revision: string } | { applied: false }>;
-	compareAndDelete(
-		id: string,
-		expectedRevision: string,
-	): Promise<{ applied: boolean }>;
+	compareAndDelete(id: string, expectedRevision: string): Promise<{ applied: boolean }>;
 	updateIf(id: string, args: UpdateIfArgs<T>): Promise<UpdateIfResult<T>>;
 
 	getMany(ids: string[]): Promise<Map<string, T>>;
@@ -125,11 +122,7 @@ The versioned methods are also available on `ctx.kv`:
 ```typescript
 const current = await ctx.kv.getVersioned<number>("state:completed");
 const next = (current?.value ?? 0) + 1;
-const result = await ctx.kv.compareAndSet(
-	"state:completed",
-	current?.revision ?? null,
-	next,
-);
+const result = await ctx.kv.compareAndSet("state:completed", current?.revision ?? null, next);
 ```
 
 ## Predicate-guarded updates
@@ -200,10 +193,7 @@ interface KVAccess {
 		expectedRevision: string | null,
 		value: unknown,
 	): Promise<{ applied: true; revision: string } | { applied: false }>;
-	compareAndDelete(
-		key: string,
-		expectedRevision: string,
-	): Promise<{ applied: boolean }>;
+	compareAndDelete(key: string, expectedRevision: string): Promise<{ applied: boolean }>;
 }
 ```
 

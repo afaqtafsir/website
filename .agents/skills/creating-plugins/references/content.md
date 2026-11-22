@@ -17,10 +17,7 @@ Plugin content APIs are capability-gated and shared by native, Cloudflare Worker
 `content:write` adds create, update, and delete. Create a translation with:
 
 ```typescript
-await ctx.content!.create("posts", data, {
-	locale: "fr",
-	translationOf: sourceId,
-});
+await ctx.content!.create("posts", data, { locale: "fr", translationOf: sourceId });
 ```
 
 The source must be an active entry in the same collection. The new row joins its translation group and inherits non-translatable fields, byline credits, and taxonomy assignments. Validation and save hooks run, with re-entrancy fencing for the creating plugin. A group permits one active row per locale.

@@ -1,5 +1,4 @@
 ---
-
 name: emdash-cli
 description: Use the EmDash CLI to inspect and manage an EmDash instance from the command line, including content, schema, media, taxonomies, menus, search, authentication, seeds, migrations, generated types, and whole-site export and import.
 ---
