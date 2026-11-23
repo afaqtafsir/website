@@ -96,25 +96,28 @@ Requires a `wrangler.jsonc` with D1 and R2 bindings:
 	"d1_databases": [
 		{
 			"binding": "DB",
-			"database_name": "my-site",
-		},
+			"database_name": "my-site"
+		}
 	],
 	"r2_buckets": [
 		{
 			"binding": "MEDIA",
-			"bucket_name": "my-site-media",
-		},
+			"bucket_name": "my-site-media"
+		}
 	],
 	"triggers": {
-		"crons": ["* * * * *"],
-	},
+		"crons": ["* * * * *"]
+	}
 }
 ```
 
 Use the EmDash Worker entry point so scheduled publishing and maintenance run through the same deployment:
 
 ```typescript
-import handler, { createScheduledHandler, PluginBridge } from "@emdash-cms/cloudflare/worker";
+import handler, {
+	createScheduledHandler,
+	PluginBridge,
+} from "@emdash-cms/cloudflare/worker";
 
 export { PluginBridge };
 
@@ -160,7 +163,12 @@ Auto-generated at the project root when the dev server starts. Provides TypeScri
 ```typescript
 /// <reference types="emdash/locals" />
 
-import type { BylineSummary, ContentBylineCredit, TaxonomyTerm, PortableTextBlock } from "emdash";
+import type {
+	BylineSummary,
+	ContentBylineCredit,
+	TaxonomyTerm,
+	PortableTextBlock,
+} from "emdash";
 
 export interface Post {
 	id: string;

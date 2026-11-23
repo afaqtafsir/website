@@ -1,4 +1,5 @@
 ---
+
 name: building-emdash-site
 description: Build the site-facing parts of an EmDash CMS project on Astro, including schema and seeds, content queries, Portable Text rendering, menus, taxonomies, widgets, and deployment configuration. Use for EmDash site and theme work; use creating-plugins instead when the task is plugin authoring alone.
 ---
@@ -79,7 +80,10 @@ const { entries, nextCursor, cacheHint } = await getEmDashCollection("posts", {
 	cursor,
 	orderBy: { published_at: "desc" },
 });
-const { entry: post, cacheHint: entryCacheHint } = await getEmDashEntry("posts", slug);
+const { entry: post, cacheHint: entryCacheHint } = await getEmDashEntry(
+	"posts",
+	slug,
+);
 
 // Site features
 import {

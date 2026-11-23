@@ -153,7 +153,12 @@ Define `blockTypes` before collections that use a `blocks` field. Each type reta
 				{
 					"version": 1,
 					"fields": [
-						{ "slug": "heading", "label": "Heading", "type": "string", "required": true },
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string",
+							"required": true
+						},
 						{ "slug": "image", "label": "Image", "type": "image" }
 					]
 				}
@@ -326,7 +331,12 @@ Reusable content blocks that editors can insert via `/section` slash command in 
 		{
 			"_type": "block",
 			"style": "normal",
-			"children": [{ "_type": "span", "text": "Get notified when new posts are published." }]
+			"children": [
+				{
+					"_type": "span",
+					"text": "Get notified when new posts are published."
+				}
+			]
 		}
 	]
 }

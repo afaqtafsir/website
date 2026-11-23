@@ -3,7 +3,11 @@
 ## Site Settings
 
 ```typescript
-import { getSiteSettings, getSiteSettingsWithCacheHint, getSiteSetting } from "emdash";
+import {
+	getSiteSettings,
+	getSiteSettingsWithCacheHint,
+	getSiteSetting,
+} from "emdash";
 
 // All settings
 const settings = await getSiteSettings();
@@ -16,7 +20,8 @@ settings.favicon?.url;
 const title = await getSiteSetting("title");
 
 // Cached route: register invalidation for settings changes
-const { data: cachedSettings, cacheHint } = await getSiteSettingsWithCacheHint();
+const { data: cachedSettings, cacheHint } =
+	await getSiteSettingsWithCacheHint();
 if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 ```
 
@@ -103,9 +108,10 @@ const categories = await getTaxonomyTerms("category");
 const tags = await getTaxonomyTerms("tag");
 
 // Cached taxonomy archive or facet
-const { data: cachedCategories, cacheHint } = await getTaxonomyTermsWithCacheHint("category", {
-	includeCounts: false,
-});
+const { data: cachedCategories, cacheHint } =
+	await getTaxonomyTermsWithCacheHint("category", {
+		includeCounts: false,
+	});
 if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 
 // Single term by slug
